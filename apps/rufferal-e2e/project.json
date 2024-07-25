@@ -1,0 +1,10 @@
+{
+  "name": "rufferal-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/rufferal-e2e/src",
+  "projectType": "application",
+  "tags": [],
+  "implicitDependencies": ["rufferal"],
+  "// targets": "to see all targets run: nx show project rufferal-e2e --web",
+  "targets": {}
+}
