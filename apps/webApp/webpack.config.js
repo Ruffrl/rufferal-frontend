@@ -27,4 +27,9 @@ module.exports = {
       // svgr: false
     }),
   ],
+  resolve: {
+    alias: {
+      'react-native$': 'react-native-web',
+    },
+  },
 };
