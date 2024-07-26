@@ -157,15 +157,17 @@ cd rufferal-frontend
 
 ### Serve
 
+- Backend server required to interact with frontend app
+
+  - [Backend setup](https://github.com/Ruffrl/rufferal-backend?tab=readme-ov-file#install)
+
 - Launch desktop/mobile-web
 
   ```shell
   npx nx serve webApp
   ```
 
-  - Visit http://localhost:4200 to see test APP
-    - Backend server required to continue interacting/developing with APP
-    - See also [backend setup](https://github.com/Ruffrl/rufferal-backend?tab=readme-ov-file#install)
+  - Visit http://localhost:4200 to see test app
 
 - Launch android
 
