@@ -4,7 +4,7 @@
   "sourceRoot": "apps/webApp/src",
   "projectType": "application",
   "tags": [],
+  "implicitDependencies": ["webApp"],
   "// targets": "to see all targets run: nx show project webApp --web",
-  "targets": {},
-  "implicitDependencies": ["webApp"]
+  "targets": {}
 }
