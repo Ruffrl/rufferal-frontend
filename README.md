@@ -37,7 +37,8 @@ nx serve webApp
 
 Visit http://localhost:4200 to see test APP
 
-- Reminder that you should also have the [backend](https://github.com/Ruffrl/rufferal-backend?tab=readme-ov-file#serve) server running to continue interacting/developing with APP
+- See also [backend setup](https://github.com/Ruffrl/rufferal-backend?tab=readme-ov-file#install)
+  - Backend server required to continue interacting/developing with APP
 
 ---
 
