@@ -17,6 +17,7 @@ export const App = () => {
       <SafeAreaView />
       <View>
         <Text style={styles.textLg}>Welcome Mobile</Text>
+        <Text style={styles.textLg}>UPDATE</Text>
         <Text style={styles.textLg}>{'From shared module -> ' + store()}</Text>
       </View>
     </>

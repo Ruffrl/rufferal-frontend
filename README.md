@@ -4,22 +4,116 @@ blarg
 
 ## Install
 
+Setup assumes you have a MacOS
+
 ### Prereqs
 
 - [Homebrew](https://brew.sh/)
-  - ```shell
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    ```
+
+  ```shell
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  ```
+
 - npm and node
-  - ```shell
-    brew install node
-    node -v
-    npm -v
-    ```
+
+  ```shell
+  brew install node
+  node -v
+  npm -v
+  ```
+
+- watchman
+
+  ```shell
+  brew install watchman
+  ```
+
 - NX
-  - ```shell
-    npm install -g nx
+
+  ```shell
+  npm install -g nx
+  ```
+
+- Java Development Kit
+
+  ```shell
+  brew install --cask zulu@17
+  ```
+
+  - After the JDK installation, update `~/.zshrc` (or in `~/.bash_profile`)
+    - Get path to where cask was installed to double-click installer (probably located at `/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home`)
+    ```shell
+    brew info --cask zulu@17
     ```
+    - Add or update your JAVA_HOME environment variable to `.zshrc`
+    ```bash
+    # Update with appropriate path on your local
+    export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+    ```
+
+- [Android Studio](https://developer.android.com/studio)
+
+  - Download and setup
+  - While on Android Studio installation wizard, make sure the boxes next to all of the following items are checked:
+    - Android SDK
+    - Android SDK Platform
+    - Android Virtual Device
+
+- Android SDK
+
+  - Open Android Studio
+  - Click on "More Actions" button and select "SDK Manager"
+    - The SDK Manager can also be found within the Android Studio "Settings" dialog, under Languages & Frameworks → Android SDK
+  - Select the "SDK Platforms" tab from within the SDK Manager
+  - Check the box next to "Show Package Details" in the bottom right corner
+  - Look for and expand the Android 14 (UpsideDownCake) entry
+  - Make sure the following items are checked:
+    - Android SDK Platform 34
+    - Intel x86 Atom_64 System Image or Google APIs Intel x86 Atom System Image or (for Apple M1 Silicon) Google APIs ARM 64 v8a System Image
+  - Next, select the "SDK Tools" tab
+  - Check the box next to "Show Package Details" here as well
+  - Look for and expand the "Android SDK Build-Tools" entry
+  - Make sure that 34.0.0 is selected
+  - Finally, click "Apply" to download and install the Android SDK and related build tools
+
+- Android env variable
+
+  - Add the following lines to your `~/.zprofile` or `~/.zshrc` (if you are using bash, then `~/.bash_profile` or `~/.bashrc`) config file:
+
+  ```bash
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+  ```
+
+- Android [AVD](https://developer.android.com/studio/run/managing-avds.html)
+
+  - Open Android Studio
+  - Setup a virtual device
+    - Create a new AVD
+    - Select "Create Virtual Device..."
+    - Then pick any Phone from the list (I like to select the smallest phone to start with)
+    - Click "Next"
+    - Select the `UpsideDownCake API Level 34` image
+      - If it is not selectable, select the download icon
+    - Click "Next" then "Finish" to create your AVD
+    - At this point you should be able to click on the green triangle button next to your AVD to launch it (though we don't have a project yet)
+
+- [XCode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+
+  - Download and setup
+    - Select options for laptop/desktop and ios/iphone development
+  - Setup command line tools (do not use terminal commands - this can messup your setup)
+    - Open Xcode
+    - Choose Settings... (or Preferences...) from the Xcode menu
+    - Go to the Locations panel
+    - Install the tools by selecting the most recent version in the Command Line Tools dropdown
+
+- Pod
+
+  ```shell
+  gem install cocoapods
+  ```
 
 ### Clone the repository
 
@@ -30,15 +124,78 @@ cd rufferal-frontend
 
 ### Install dependencies
 
-```shell
-npm install
-nx serve webApp
-```
+- Desktop/mobile-web
 
-Visit http://localhost:4200 to see test APP
+  ```shell
+  npm install
+  nx run store:build
+  nx run webApp:build
+  ```
 
-- See also [backend setup](https://github.com/Ruffrl/rufferal-backend?tab=readme-ov-file#install)
-  - Backend server required to continue interacting/developing with APP
+- Android
+
+  ```shell
+  nx run rufferal:build-android
+  ```
+
+- Build ios
+
+  ```shell
+  nx run rufferal:build-ios
+  ```
+
+  If this fails, try:
+
+  ```shell
+  cd apps/rufferal
+  bundle
+  cd ios
+  pod install
+  cd ../..
+  nx run rufferal:build-ios
+  ```
+
+### Serve
+
+- Launch desktop/mobile-web
+
+  ```shell
+  npx nx serve webApp
+  ```
+
+  - Visit http://localhost:4200 to see test APP
+    - Backend server required to continue interacting/developing with APP
+    - See also [backend setup](https://github.com/Ruffrl/rufferal-backend?tab=readme-ov-file#install)
+
+- Launch android
+
+  - Open Android Studio
+  - Launch any virtual device (you can load the frontend project, or apps/rufferal or apps/rufferal/android - your choice)
+
+  ```shell
+  npx nx run rufferal:start
+
+  # In a seperate terminal
+  npx nx run rufferal:run-android
+  ```
+
+  - The Rufferal app should launch within the Android Studio virtual device!
+  - If this launched a separate Simulator, you can technically close Android Studio if you want
+
+- Launch ios
+
+  - Open Xcode
+  - Load apps/rufferal/ios
+
+  ```shell
+  npx nx run rufferal:start
+
+  # In a seperate terminal
+  npx nx run rufferal:run-ios
+  ```
+
+  - An Emulator should launch with ios and contain Rufferal app!
+  - If this launched a separate Simulator, you can technically close XCode if you want
 
 ---
 
