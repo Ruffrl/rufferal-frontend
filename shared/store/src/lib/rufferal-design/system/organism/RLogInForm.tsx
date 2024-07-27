@@ -1,15 +1,23 @@
 import * as React from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { View } from 'react-native';
-import { RButton } from '../atom';
+import { FormErrorProps, RButton, RFormError } from '../atom';
 import { RFormInput } from '../molecule';
 
 type LogInInputs = {
+  firstName: string;
   email: string;
   password: string;
 };
 
 export const RLogInForm = (): React.JSX.Element => {
+  /* STATE */
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>();
+  const [authToken, setAuthToken] = useState<null | string>('');
+  const url = 'http://localhost:3000/login';
+
   /* REACT HOOK FORM */
   const {
     control,
@@ -23,10 +31,47 @@ export const RLogInForm = (): React.JSX.Element => {
   });
 
   /* BEHAVIORS */
-  const onSubmit: SubmitHandler<LogInInputs> = (data) => {
+  const onSubmit = handleSubmit(async (data) => {
     // Handle form submission
-    console.log('BLARG SUBMISSION data', data);
-  };
+    setLoading(true);
+    setError('');
+
+    try {
+      //   const response = await fetch('http://localhost:3000/admin/users/1', {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user: {
+            email: data.email,
+            password: data.password,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const error: FormErrorProps = await response.json();
+        throw new Error(error.error);
+      }
+
+      const authHeader = response.headers.get('Authorization');
+      setAuthToken(authHeader);
+
+      console.log('BLARG response', response);
+      console.log('BLARG authHeader', authHeader);
+
+      const result = await response.json();
+
+      console.log('result is: ', JSON.stringify(result, null, 4));
+    } catch (err) {
+      setError(String(err));
+    } finally {
+      setLoading(false);
+    }
+  });
 
   return (
     <View style={{ width: '100%' }}>
@@ -46,6 +91,7 @@ export const RLogInForm = (): React.JSX.Element => {
             label="Email"
             placeholder="rufferer@rufferal.com"
             error={errors.email}
+            onSubmit={onSubmit}
           />
         )}
       />
@@ -66,11 +112,13 @@ export const RLogInForm = (): React.JSX.Element => {
             label="Password"
             placeholder="************"
             error={errors.password}
+            onSubmit={onSubmit}
           />
         )}
       />
 
-      <RButton title="Log In" onPress={handleSubmit(onSubmit)} />
+      {error && <RFormError error={error} />}
+      <RButton title="Log In" onPress={onSubmit} />
     </View>
   );
 };
