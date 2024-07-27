@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FieldError } from 'react-hook-form';
+import { FieldError, RefCallBack } from 'react-hook-form';
 import {
   DimensionValue,
   StyleSheet,
@@ -15,7 +15,7 @@ export type FieldSize = 'small' | 'medium' | 'large';
 
 interface Props extends TextInputProps {
   error?: FieldError | undefined;
-  inputRef: React.MutableRefObject<null>;
+  inputRef?: RefCallBack | React.MutableRefObject<null>;
   size?: FieldSize;
 }
 

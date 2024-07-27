@@ -1,7 +1,10 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, PressableProps, StyleSheet, Text } from 'react-native';
 
-export const RButton = (props: any) => {
-  const { onPress, title = 'Save' } = props;
+interface Props extends PressableProps {
+  title?: string;
+}
+
+export const RButton = ({ onPress, title = 'Save' }: Props) => {
   return (
     <Pressable style={styles.button} onPress={onPress}>
       <Text style={styles.text}>{title}</Text>
