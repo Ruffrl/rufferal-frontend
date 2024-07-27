@@ -17,12 +17,14 @@ interface Props extends TextInputProps {
   error?: FieldError | undefined;
   inputRef?: RefCallBack | React.MutableRefObject<null>;
   size?: FieldSize;
+  onSubmit?: () => void;
 }
 
 export const RInput = ({
   error,
   inputRef,
   size = 'large',
+  onSubmit,
   ...inputProps
 }: Props): React.JSX.Element => {
   const borderStyle = { borderColor: error ? '#fc6d47' : '#c0cbd3' };
@@ -42,6 +44,7 @@ export const RInput = ({
       autoCapitalize="none"
       ref={inputRef}
       style={[styles.input, borderStyle, sizeStyle]}
+      onSubmitEditing={onSubmit}
     />
   );
 };

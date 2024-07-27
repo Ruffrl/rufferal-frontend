@@ -9,6 +9,7 @@ interface Props extends TextInputProps {
   formRef?: RefCallBack;
   label: string;
   labelStyle?: TextStyle;
+  onSubmit: () => Promise<void>;
   placeholder?: string;
   size?: FieldSize;
 }
@@ -20,6 +21,7 @@ export const RFormInput = ({
   labelStyle,
   onBlur,
   onChange,
+  onSubmit,
   placeholder,
   size,
   value,
@@ -36,6 +38,7 @@ export const RFormInput = ({
         placeholder={placeholder || label}
         size={size}
         value={value}
+        onSubmit={onSubmit}
       />
       {error && <RInputError error={error} />}
     </View>
