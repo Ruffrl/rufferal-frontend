@@ -2,6 +2,18 @@
 
 blarg
 
+Things to think about
+- graphql
+- error handling
+- security handling
+- unit testing
+- integration testing
+- e2e testing
+- deployment
+- env vars and secrets
+- deployment
+- other developer nice to haves
+
 ## Install
 
 Setup assumes you have a MacOS
