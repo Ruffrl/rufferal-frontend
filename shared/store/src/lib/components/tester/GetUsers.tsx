@@ -10,13 +10,13 @@ export const GetUsers = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState<any>();
 
-  const url = 'http://localhost:3000/admin/users';
+  const url = 'http://localhost:5000/admin/users';
 
   const handleGetUsers = async () => {
     setLoading(true);
 
     try {
-      //   const response = await fetch('http://localhost:3000/admin/users/1', {
+      //   const response = await fetch('http://localhost:5000/admin/users/1', {
       const response = await fetch(url, {
         method: 'GET',
         headers: {

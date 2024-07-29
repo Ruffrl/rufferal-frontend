@@ -17,7 +17,7 @@ export const App = () => {
   //   setSingleUserLoading(true);
 
   //   try {
-  //     const userData = await fetch('http://localhost:3000/admin/users/1', {
+  //     const userData = await fetch('http://localhost:5000/admin/users/1', {
   //       method: 'GET',
   //       headers: {
   //         Accept: 'application/json',
@@ -46,7 +46,7 @@ export const App = () => {
   //   setSignUpLoading(true);
 
   //   try {
-  //     const userData = await fetch('http://localhost:3000/admin/users/1', {
+  //     const userData = await fetch('http://localhost:5000/admin/users/1', {
   //       method: 'GET',
   //       headers: {
   //         Accept: 'application/json',
@@ -72,7 +72,7 @@ export const App = () => {
   // console.log('signUpError', signUpError);
 
   // const signUp = () => {
-  //   fetch('http://localhost:3000/signup', {
+  //   fetch('http://localhost:5000/api/signup', {
   //     method: 'POST',
   //     headers: {
   //       Accept: 'application/json',
@@ -103,7 +103,7 @@ export const App = () => {
   // console.log('authToken', authToken);
 
   // const logIn = () => {
-  //   fetch('http://localhost:3000/login', {
+  //   fetch('http://localhost:5000/api/login', {
   //     method: 'POST',
   //     headers: {
   //       Accept: 'application/json',
@@ -156,7 +156,7 @@ export const App = () => {
   // };
 
   // const logOut = () => {
-  //   fetch('http://localhost:3000/logout', {
+  //   fetch('http://localhost:5000/api/logout', {
   //     method: 'POST',
   //     headers: {
   //       Accept: 'application/json',

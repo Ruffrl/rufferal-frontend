@@ -16,7 +16,7 @@ export const RLogInForm = (): React.JSX.Element => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const [authToken, setAuthToken] = useState<null | string>(null);
-  const url = 'http://localhost:3000/login';
+  const url = 'http://localhost:5000/api/login';
 
   /* REACT HOOK FORM */
   const {
@@ -37,7 +37,7 @@ export const RLogInForm = (): React.JSX.Element => {
     setError('');
 
     try {
-      //   const response = await fetch('http://localhost:3000/admin/users/1', {
+      //   const response = await fetch('http://localhost:5000/admin/users/1', {
       const response = await fetch(url, {
         method: 'POST',
         headers: {

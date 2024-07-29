@@ -15,13 +15,13 @@ export const GetUser = (): React.JSX.Element => {
   });
   const [error, setError] = useState<any>();
 
-  const url = 'http://localhost:3000/admin/users';
+  const url = 'http://localhost:5000/admin/users';
 
   const handleGetUser = async () => {
     setLoading(true);
 
     try {
-      //   const response = await fetch('http://localhost:3000/admin/users/1', {
+      //   const response = await fetch('http://localhost:5000/admin/users/1', {
       const response = await fetch(url, {
         method: 'GET',
         headers: {
