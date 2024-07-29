@@ -1,13 +1,24 @@
-import { Pressable, PressableProps, StyleSheet, Text } from 'react-native';
+import {
+  ActivityIndicator,
+  Pressable,
+  PressableProps,
+  StyleSheet,
+  Text,
+} from 'react-native';
 
 interface Props extends PressableProps {
+  loading?: boolean;
   title?: string;
 }
 
-export const RButton = ({ onPress, title = 'Save' }: Props) => {
+export const RButton = ({ loading, onPress, title = 'Save' }: Props) => {
   return (
     <Pressable style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>{title}</Text>
+      {loading ? (
+        <ActivityIndicator size="small" color="aqua" />
+      ) : (
+        <Text style={styles.text}>{title}</Text>
+      )}
     </Pressable>
   );
 };

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { FormErrorProps, RButton, RFormError } from '../atom';
 import { RFormInput } from '../molecule';
 
@@ -13,9 +13,9 @@ type LogInInputs = {
 
 export const RLogInForm = (): React.JSX.Element => {
   /* STATE */
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
-  const [authToken, setAuthToken] = useState<null | string>('');
+  const [authToken, setAuthToken] = useState<null | string>(null);
   const url = 'http://localhost:3000/login';
 
   /* REACT HOOK FORM */
@@ -75,6 +75,8 @@ export const RLogInForm = (): React.JSX.Element => {
 
   return (
     <View style={{ width: '100%' }}>
+      <Text>Logged In: {String(!!authToken)}</Text>
+
       <Controller
         name="email"
         control={control}
@@ -118,7 +120,7 @@ export const RLogInForm = (): React.JSX.Element => {
       />
 
       {error && <RFormError error={error} />}
-      <RButton title="Log In" onPress={onSubmit} />
+      <RButton title="Log In" onPress={onSubmit} loading={loading} />
     </View>
   );
 };
