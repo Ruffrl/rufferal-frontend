@@ -179,7 +179,7 @@ cd rufferal-frontend
   npx nx serve webApp
   ```
 
-  - Visit http://localhost:4200 to see test app
+  - Visit http://localhost:3000 to see test app
 
 - Launch android
 

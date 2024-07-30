@@ -15,7 +15,8 @@ export const RLogInForm = (): React.JSX.Element => {
   /* STATE */
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
-  const [authToken, setAuthToken] = useState<null | string>(null);
+  // const [authToken, setAuthToken] = useState<null | string>(null);
+  const [status, setStatus] = useState(false);
   const url = 'http://localhost:5000/api/login';
 
   /* REACT HOOK FORM */
@@ -57,11 +58,13 @@ export const RLogInForm = (): React.JSX.Element => {
         throw new Error(error.error);
       }
 
-      const authHeader = response.headers.get('Authorization');
-      setAuthToken(authHeader);
+      // const authHeader = response.headers.get('Authorization');
+      // setAuthToken(authHeader);
+      setStatus(response.ok);
 
       console.log('BLARG response', response);
-      console.log('BLARG authHeader', authHeader);
+      console.log('BLARG response.ok', response.ok);
+      // console.log('BLARG authHeader', authHeader);
 
       const result = await response.json();
 
@@ -75,7 +78,7 @@ export const RLogInForm = (): React.JSX.Element => {
 
   return (
     <View style={{ width: '100%' }}>
-      <Text>Logged In: {String(!!authToken)}</Text>
+      <Text>Logged In: {String(!!status)}</Text>
 
       <Controller
         name="email"
