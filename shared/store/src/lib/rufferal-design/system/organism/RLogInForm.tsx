@@ -38,7 +38,6 @@ export const RLogInForm = (): React.JSX.Element => {
     setError('');
 
     try {
-      //   const response = await fetch('http://localhost:5000/admin/users/1', {
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -75,6 +74,44 @@ export const RLogInForm = (): React.JSX.Element => {
       setLoading(false);
     }
   });
+
+  const handleAuth = async () => {
+    // Handle form submission
+    // setLoading(true);
+    // setError('');
+
+    try {
+      const response = await fetch('http://localhost:5000/create-account', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        const error: FormErrorProps = await response.json();
+        throw new Error(error.error);
+      }
+
+      // const authHeader = response.headers.get('Authorization');
+      // setAuthToken(authHeader);
+      setStatus(response.ok);
+
+      console.log('BLARG response', response);
+      console.log('BLARG response.ok', response.ok);
+      // console.log('BLARG authHeader', authHeader);
+
+      const result = await response.json();
+
+      console.log('result is: ', JSON.stringify(result, null, 4));
+    } catch (err) {
+      console.log('BLARG err', err);
+      setError(String(err));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={{ width: '100%' }}>
@@ -123,7 +160,9 @@ export const RLogInForm = (): React.JSX.Element => {
       />
 
       {error && <RFormError error={error} />}
-      <RButton title="Log In" onPress={onSubmit} loading={loading} />
+      {/* <RButton title="Log In" onPress={onSubmit} loading={loading} /> */}
+      <Text>{'\n'}</Text>
+      <RButton title="Testing RodAuth" onPress={handleAuth} loading={loading} />
     </View>
   );
 };
