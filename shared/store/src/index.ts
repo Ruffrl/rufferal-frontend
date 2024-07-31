@@ -1,6 +1,7 @@
 export * from './lib/App';
 export * from './lib/rufferal-design/system/index';
 export * from './lib/store';
+export * from './store';
 
 // import { GoogleSignin } from '@react-native-google-signin/google-signin';
 // import {
