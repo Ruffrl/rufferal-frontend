@@ -14,6 +14,17 @@
         "tsConfig": "shared/store/tsconfig.lib.json",
         "assets": ["shared/store/*.md"]
       }
+    },
+    "watch": {
+      "executor": "@nx/js:tsc",
+      "watch": true,
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/shared/store",
+        "main": "shared/store/src/index.ts",
+        "tsConfig": "shared/store/tsconfig.lib.json",
+        "assets": ["shared/store/*.md"]
+      }
     }
   }
 }
