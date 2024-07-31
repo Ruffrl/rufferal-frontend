@@ -14,7 +14,10 @@
     "tslib": "*",
     "@nx/webpack": "*",
     "@nx/react": "*",
-    "react-dom": "*"
+    "react-dom": "*",
+    "mobx-react-lite": "*",
+    "react-hook-form": "*",
+    "mobx": "*"
   },
   "devDependencies": {}
 }
