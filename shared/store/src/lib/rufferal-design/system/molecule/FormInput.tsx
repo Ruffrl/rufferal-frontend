@@ -14,7 +14,7 @@ interface Props extends TextInputProps {
   size?: FieldSize;
 }
 
-export const RFormInput = ({
+export const FormInput = ({
   error,
   formRef,
   label,

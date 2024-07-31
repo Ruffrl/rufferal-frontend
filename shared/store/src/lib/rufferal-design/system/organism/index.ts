@@ -10,4 +10,4 @@
  *
  */
 
-export { RLogInForm } from './RLogInForm';
+export { FormLogin } from './FormLogIn';

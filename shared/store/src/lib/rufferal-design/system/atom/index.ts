@@ -1,5 +1,7 @@
 /* [ATOMS] ATOMIC DESIGN
  *
+ * ⚠️ Please prefix all Atoms with 'R' to differentiate between native elements
+ *
  * Atoms are the most basic elements of a user interface
  *
  * These are the fundamental building blocks that cannot be broken down any further without losing their meaning

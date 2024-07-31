@@ -1,20 +1,13 @@
 import { observer } from 'mobx-react-lite';
-import { useContext } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { CounterStoreContext } from '../index';
+import { StyleSheet, Text, View } from 'react-native';
+import { Counter } from './components/store-testing/Counter';
 
 export const App = observer(() => {
-  const counterStore = useContext(CounterStoreContext);
-
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>Rufferal</Text>
       <Text style={styles.instructions}>Authentication Playground</Text>
-      <Text style={styles.instructions}>{counterStore.count}</Text>
-      <Button
-        title="increment with store"
-        onPress={() => counterStore.increaseCount()}
-      />
+      <Counter />
     </View>
   );
 });

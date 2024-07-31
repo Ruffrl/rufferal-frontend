@@ -10,4 +10,4 @@
  *
  */
 
-export { RFormInput } from './RFormInput';
+export { FormInput } from './FormInput';
