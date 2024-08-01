@@ -2,7 +2,12 @@
   "name": "@rufferal-frontend/store",
   "version": "0.0.1",
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "react": "*",
+    "react-native": "*",
+    "react-hook-form": "*",
+    "mobx-react-lite": "*",
+    "mobx": "*"
   },
   "type": "commonjs",
   "main": "./src/index.js",
