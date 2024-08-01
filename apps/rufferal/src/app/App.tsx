@@ -1,46 +1,26 @@
-// import { App } from '@rufferal-frontend/store';
-
-// export default App;
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Counter, PageOne, PageTwo } from '@rufferal-frontend/store';
+import { RHome } from '@rufferal-frontend/store';
 import { observer } from 'mobx-react-lite';
-import { Button, Text, View } from 'react-native';
+
+import { RAbout } from '@rufferal-frontend/store';
 
 const Stack = createNativeStackNavigator();
 
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Page One</Text>
-      <PageOne />
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-      <Counter />
-    </View>
-  );
-}
+const HomeScreen = ({ navigation }) => {
+  return <RHome mobile navigation={navigation} />;
+};
 
-// function DetailsScreen({ navigation }) {
-function DetailsScreen() {
-  return (
-    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Page Two</Text>
-      <PageTwo />
-      {/* <Button title="Go to Home" onPress={() => navigation.navigate('Home')} /> */}
-    </View>
-  );
-}
+const AboutScreen = ({ navigation }) => {
+  return <RAbout mobile navigation={navigation} />;
+};
 
 const App = observer(() => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="About" component={AboutScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

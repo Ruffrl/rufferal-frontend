@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
 import { FormErrorProps, RButton, RFormError } from '../atom';
-import { FormInput } from '../molecule';
+import { RFormInput } from '../molecule';
 
 type LogInInputs = {
   firstName: string;
@@ -11,7 +11,7 @@ type LogInInputs = {
   password: string;
 };
 
-export const FormLogin = (): React.ReactElement => {
+export const RFormLogIn = (): React.ReactElement => {
   /* STATE */
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
@@ -125,7 +125,7 @@ export const FormLogin = (): React.ReactElement => {
           maxLength: 320,
         }}
         render={({ field: { onBlur, onChange, value, ref } }) => (
-          <FormInput
+          <RFormInput
             onBlur={onBlur} // notify when input is touched
             onChange={onChange} // send value to hook form
             value={value}
@@ -146,7 +146,7 @@ export const FormLogin = (): React.ReactElement => {
           maxLength: 120,
         }}
         render={({ field: { onChange, onBlur, value, ref } }) => (
-          <FormInput
+          <RFormInput
             onBlur={onBlur} // notify when input is touched
             onChange={onChange} // send value to hook form
             value={value}

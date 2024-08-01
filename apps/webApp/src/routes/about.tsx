@@ -1,12 +1,5 @@
-import { PageOne } from '@rufferal-frontend/store';
-
-// import { Text, View } from 'react-native';
+import { RAbout } from "@rufferal-frontend/store";
 
 export const About = () => {
-  return <PageOne />;
-  // return (
-  //   <View>
-  //     <Text>Testing Route</Text>
-  //   </View>
-  // );
+  return <RAbout />
 };
