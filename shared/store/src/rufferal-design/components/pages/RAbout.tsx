@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { Button, View } from 'react-native';
 import { Link } from 'react-router-dom';
-import { Counter } from '../../../components/store-testing/Counter';
+import { RCounter } from '../organism';
 import { RAccessTemplate } from '../templates';
 
 export const RAbout = observer(
@@ -25,7 +25,7 @@ export const RAbout = observer(
 
     return (
       <RAccessTemplate mobile={mobile}>
-        <Counter />
+        <RCounter />
         <View style={{ margin: 10 }} />
         <Navs />
       </RAccessTemplate>

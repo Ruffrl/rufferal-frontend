@@ -1,5 +1,4 @@
-export { Counter } from './lib/components/store-testing/Counter';
-export * from './lib/rufferal-design/components';
+export * from './rufferal-design/components';
 export * from './store';
 
 // import { GoogleSignin } from '@react-native-google-signin/google-signin';

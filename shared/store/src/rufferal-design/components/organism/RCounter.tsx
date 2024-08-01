@@ -2,9 +2,9 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useContext } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { CounterStoreContext } from '../../../index';
+import { CounterStoreContext } from '../../../store';
 
-export const Counter = observer((): React.ReactElement => {
+export const RCounter = observer((): React.ReactElement => {
   const counterStore = useContext(CounterStoreContext || {});
 
   return (

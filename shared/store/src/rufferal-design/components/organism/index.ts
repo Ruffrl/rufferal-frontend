@@ -10,4 +10,6 @@
  *
  */
 
-export { RFormLogIn } from './RFormLogIn';
+export { RAdminAccounts } from './RAdminAccounts';
+export { RCounter } from './RCounter';
+export { RFormLogin } from './RFormLogin';

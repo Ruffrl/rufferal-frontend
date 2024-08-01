@@ -1,5 +1,6 @@
 import { Button } from 'react-native';
 import { Link } from 'react-router-dom';
+import { RFormLogin } from '../organism';
 import { RAccessTemplate } from '../templates';
 
 export const RHome = ({
@@ -22,6 +23,7 @@ export const RHome = ({
 
   return (
     <RAccessTemplate mobile={mobile}>
+      <RFormLogin />
       <Navs />
     </RAccessTemplate>
   );

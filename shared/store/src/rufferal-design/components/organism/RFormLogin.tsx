@@ -11,7 +11,7 @@ type LogInInputs = {
   password: string;
 };
 
-export const RFormLogIn = (): React.ReactElement => {
+export const RFormLogin = (): React.ReactElement => {
   /* STATE */
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
