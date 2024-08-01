@@ -2,7 +2,7 @@ import { PageOne } from '@rufferal-frontend/store';
 
 // import { Text, View } from 'react-native';
 
-export const Blarg = () => {
+export const About = () => {
   return <PageOne />;
   // return (
   //   <View>

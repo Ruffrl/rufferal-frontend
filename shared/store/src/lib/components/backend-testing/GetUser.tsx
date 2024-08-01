@@ -1,18 +1,23 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 // BLARG (TODO) - how do I update this so the design library can call itself with @ as well
-import { RButton } from '../../rufferal-design/system';
+import { RButton } from '../../rufferal-design/components';
 
-export const GetUsers = () => {
+export const GetUser = (): React.ReactElement => {
   const [pressed, setPressed] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({
+    id: '',
+    email: '',
+    forename: '',
+    surname: '',
+  });
   const [error, setError] = useState<any>();
 
   const url = 'http://localhost:5000/admin/users';
 
-  const handleGetUsers = async () => {
+  const handleGetUser = async () => {
     setLoading(true);
 
     try {
@@ -41,37 +46,34 @@ export const GetUsers = () => {
     }
   };
 
-  const DisplayUsers = () => {
+  const DisplayUser = () => {
     return loading ? (
       <Text>Loading...</Text>
     ) : (
-      data.map((user: any) => {
-        return (
-          <View key={user.id} style={styles.item}>
-            <Text style={styles.title}>{user.id}</Text>
-            <Text>{user.forename}</Text>
-            <Text>{user.surname}</Text>
-            <Text>{user.email}</Text>
-          </View>
-        );
-      })
+      <View key={data.id} style={styles.item}>
+        <Text style={styles.title}>{data.id}</Text>
+        <Text>{data.forename}</Text>
+        <Text>{data.surname}</Text>
+        <Text>{data.email}</Text>
+      </View>
     );
   };
 
   return (
     <View style={styles.container}>
+      <TextInput style={styles.input} value="dasd" placeholder="Enter ID" />
       <View style={styles.button}>
         <RButton
-          title={pressed ? 'Close Users' : 'Get All Users'}
+          title={pressed ? 'Close Users' : 'Get Users'}
           onPress={() => {
             setPressed((prev) => !prev);
-            !pressed && handleGetUsers();
+            !pressed && handleGetUser();
           }}
         />
       </View>
       {pressed && (
         <View style={styles.display}>
-          <DisplayUsers />
+          <DisplayUser />
         </View>
       )}
       {error && (
@@ -88,6 +90,12 @@ const styles = StyleSheet.create({
     padding: 10,
     width: '100%',
     alignItems: 'center',
+  },
+  input: {
+    marginTop: 10,
+    marginBottom: 10,
+    width: '60%',
+    borderColor: 'black',
   },
   button: {
     marginTop: 10,

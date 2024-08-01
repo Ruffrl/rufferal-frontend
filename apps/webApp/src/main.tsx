@@ -2,10 +2,8 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ErrorPage } from './components/ErrorPage';
-import { Blarg } from './routes/blarg';
+import { About } from './routes/about';
 import { Home } from './routes/home';
-
-// import App from './app/App';
 
 const router = createBrowserRouter([
   {
@@ -14,8 +12,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: 'blarg',
-    element: <Blarg />,
+    path: 'about',
+    element: <About />,
     errorElement: <ErrorPage />,
   },
 ]);
@@ -26,6 +24,5 @@ const root = ReactDOM.createRoot(
 root.render(
   <StrictMode>
     <RouterProvider router={router} />
-    {/* <App /> */}
   </StrictMode>
 );
