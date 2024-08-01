@@ -17,7 +17,11 @@
     "react-dom": "*",
     "mobx-react-lite": "*",
     "react-hook-form": "*",
-    "mobx": "*"
+    "mobx": "*",
+    "@react-navigation/native": "*",
+    "@react-navigation/native-stack": "*",
+    "react-native-safe-area-context": "*",
+    "react-native-screens": "*"
   },
   "devDependencies": {}
 }

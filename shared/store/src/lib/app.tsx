@@ -1,14 +1,15 @@
 import { observer } from 'mobx-react-lite';
-import { StyleSheet, Text, View } from 'react-native';
-import { Counter } from './components/store-testing/Counter';
+import { StyleSheet } from 'react-native';
+import { PageOne } from './components/navigation-testing/PageOne';
 
 export const App = observer(() => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>Rufferal</Text>
-      <Text style={styles.instructions}>Authentication Playground</Text>
-      <Counter />
-    </View>
+    // <View style={styles.container}>
+    //   <Text style={styles.welcome}>Rufferal</Text>
+    //   <Text style={styles.instructions}>Authentication Playground</Text>
+    //   <Counter />
+    // </View>
+    <PageOne />
   );
 });
 
