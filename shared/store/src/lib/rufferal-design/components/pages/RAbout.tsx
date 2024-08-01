@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import { Button, Text } from 'react-native';
+import { Button, View } from 'react-native';
 import { Link } from 'react-router-dom';
 import { Counter } from '../../../components/store-testing/Counter';
 import { RAccessTemplate } from '../templates';
@@ -10,6 +10,7 @@ export const RAbout = observer(
     navigation,
   }: {
     mobile?: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     navigation?: any;
   }): React.ReactElement => {
     const Navs = () =>
@@ -19,14 +20,13 @@ export const RAbout = observer(
           onPress={() => navigation.navigate('Home')}
         />
       ) : (
-          <Link to="/">Home</Link>
-          // <Text>About</Text>
+        <Link to="/">Home</Link>
       );
 
     return (
       <RAccessTemplate mobile={mobile}>
-        <Text>About</Text>
         <Counter />
+        <View style={{ margin: 10 }} />
         <Navs />
       </RAccessTemplate>
     );

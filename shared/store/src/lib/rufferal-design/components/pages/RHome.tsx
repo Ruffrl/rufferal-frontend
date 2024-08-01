@@ -1,12 +1,13 @@
-import { Button, Text } from 'react-native';
-import { RAccessTemplate } from '../templates';
+import { Button } from 'react-native';
 import { Link } from 'react-router-dom';
+import { RAccessTemplate } from '../templates';
 
 export const RHome = ({
   mobile = false,
   navigation,
 }: {
   mobile?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation?: any;
 }): React.ReactElement => {
   const Navs = () =>
@@ -17,12 +18,10 @@ export const RHome = ({
       />
     ) : (
       <Link to="/about">About</Link>
-      // <Text>About</Text>
     );
 
   return (
     <RAccessTemplate mobile={mobile}>
-      <Text>Home</Text>
       <Navs />
     </RAccessTemplate>
   );
