@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { RButton } from '../atom';
+import { RButton } from '../../atom';
 
-export const RAdminAccounts = () => {
+export const RAllAccounts = () => {
   const [pressed, setPressed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);

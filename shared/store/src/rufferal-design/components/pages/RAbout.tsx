@@ -1,30 +1,30 @@
 import { observer } from 'mobx-react-lite';
-import { Button, View } from 'react-native';
+import { Button, Platform, View } from 'react-native';
 import { Link } from 'react-router-dom';
 import { RCounter } from '../organism';
 import { RAccessTemplate } from '../templates';
 
 export const RAbout = observer(
   ({
-    mobile = false,
     navigation,
   }: {
-    mobile?: boolean;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     navigation?: any;
   }): React.ReactElement => {
+    const web = Platform.OS === 'web';
+
     const Navs = () =>
-      mobile ? (
+      web ? (
+        <Link to="/">Home</Link>
+      ) : (
         <Button
           title="Go to Home"
           onPress={() => navigation.navigate('Home')}
         />
-      ) : (
-        <Link to="/">Home</Link>
       );
 
     return (
-      <RAccessTemplate mobile={mobile}>
+      <RAccessTemplate>
         <RCounter />
         <View style={{ margin: 10 }} />
         <Navs />

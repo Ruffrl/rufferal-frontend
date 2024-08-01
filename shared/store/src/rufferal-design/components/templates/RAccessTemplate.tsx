@@ -1,15 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native';
-
-type TemplateProps = {
-  mobile: boolean;
-};
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 export const RAccessTemplate = ({
   children,
-  mobile = false,
-}: React.PropsWithChildren<TemplateProps>): React.ReactElement => {
+}: React.PropsWithChildren): React.ReactElement => {
+  const web = Platform.OS === 'web';
+
   return (
-    <View style={mobile ? styles.containerMobile : styles.containerWeb}>
+    <View style={web ? styles.containerWeb : styles.containerMobile}>
       <Text style={styles.welcome}>Rufferal</Text>
       <Text style={styles.instructions}>Access Playground</Text>
       {children}
