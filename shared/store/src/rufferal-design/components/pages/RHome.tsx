@@ -1,6 +1,6 @@
-import { Button } from 'react-native';
+import { Button, View } from 'react-native';
 import { Link } from 'react-router-dom';
-import { RFormLogin } from '../organism';
+import { RAdminAccounts, RFormLogin } from '../organism';
 import { RAccessTemplate } from '../templates';
 
 export const RHome = ({
@@ -23,6 +23,8 @@ export const RHome = ({
 
   return (
     <RAccessTemplate mobile={mobile}>
+      <RAdminAccounts />
+      <View style={{ margin: 10 }} />
       <RFormLogin />
       <Navs />
     </RAccessTemplate>
