@@ -7,6 +7,7 @@ module.exports = {
     path: join(__dirname, '../../dist/apps/webApp'),
   },
   devServer: {
+    historyApiFallback: true,
     port: 3000,
   },
   plugins: [
