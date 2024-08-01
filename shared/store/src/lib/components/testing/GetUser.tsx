@@ -4,7 +4,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 // BLARG (TODO) - how do I update this so the design library can call itself with @ as well
 import { RButton } from '../../rufferal-design/system';
 
-export const GetUser = (): React.JSX.Element => {
+export const GetUser = (): React.ReactElement => {
   const [pressed, setPressed] = useState(false);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({

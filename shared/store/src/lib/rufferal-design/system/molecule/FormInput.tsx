@@ -25,7 +25,7 @@ export const FormInput = ({
   placeholder,
   size,
   value,
-}: Props): React.JSX.Element => {
+}: Props): React.ReactElement => {
   const inputRef = formRef || useRef(null);
 
   return (

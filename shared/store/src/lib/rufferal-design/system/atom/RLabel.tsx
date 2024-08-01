@@ -12,7 +12,7 @@ interface Props extends TextInputProps {
   labelStyle?: TextStyle;
 }
 
-export const RLabel = ({ label, labelStyle }: Props): React.JSX.Element => {
+export const RLabel = ({ label, labelStyle }: Props): React.ReactElement => {
   return (
     <View>
       <Text style={[styles.label, labelStyle]}>{label}</Text>

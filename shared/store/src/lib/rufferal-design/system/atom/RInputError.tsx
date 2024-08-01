@@ -6,7 +6,7 @@ interface Props extends TextInputProps {
   error: FieldError;
 }
 
-export const RInputError = ({ error }: Props): React.JSX.Element => {
+export const RInputError = ({ error }: Props): React.ReactElement => {
   return <Text style={styles.textError}>{error.message}</Text>;
 };
 

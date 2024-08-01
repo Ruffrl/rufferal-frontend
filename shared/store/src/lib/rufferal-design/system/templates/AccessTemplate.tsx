@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-export const AccessTemplate = ({ children }): React.JSX.Element => {
+export const AccessTemplate = ({
+  children,
+}: {
+  children: any;
+}): React.ReactElement => {
   return <View style={styles.container}>{children}</View>;
 };
 

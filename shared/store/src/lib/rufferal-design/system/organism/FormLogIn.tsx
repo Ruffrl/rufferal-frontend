@@ -11,7 +11,7 @@ type LogInInputs = {
   password: string;
 };
 
-export const FormLogin = (): React.JSX.Element => {
+export const FormLogin = (): React.ReactElement => {
   /* STATE */
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();

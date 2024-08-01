@@ -26,7 +26,7 @@ export const RInput = ({
   size = 'large',
   onSubmit,
   ...inputProps
-}: Props): React.JSX.Element => {
+}: Props): React.ReactElement => {
   const borderStyle = { borderColor: error ? '#fc6d47' : '#c0cbd3' };
   let sizeStyle: ViewWidth = { width: '40%' };
   switch (size) {

@@ -4,8 +4,8 @@ import { useContext } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { CounterStoreContext } from '../../../index';
 
-export const Counter = observer((): React.JSX.Element => {
-  const counterStore = useContext(CounterStoreContext);
+export const Counter = observer((): React.ReactElement => {
+  const counterStore = useContext(CounterStoreContext || {});
 
   return (
     <View>

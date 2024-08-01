@@ -5,7 +5,7 @@ export interface FormErrorProps {
   error: string;
 }
 
-export const RFormError = ({ error }: FormErrorProps): React.JSX.Element => {
+export const RFormError = ({ error }: FormErrorProps): React.ReactElement => {
   return <Text style={styles.textError}>{error}</Text>;
 };
 
