@@ -1,6 +1,6 @@
-import { Button, Platform, View } from 'react-native';
+import { Button, Platform, Text } from 'react-native';
 import { Link } from 'react-router-dom';
-import { RAllAccounts, RFormLogin } from '../organism';
+import { RFormLogin } from '../organism';
 import { RAccessTemplate } from '../templates';
 
 export const RHome = ({
@@ -23,9 +23,18 @@ export const RHome = ({
 
   return (
     <RAccessTemplate>
-      <RAllAccounts />
-      <View style={{ margin: 10 }} />
+      <Text
+        style={{
+          marginTop: 30,
+          marginBottom: 30,
+        }}
+      >
+        Testing ReactHookForms and Backend Auth
+      </Text>
       <RFormLogin />
+      <Text style={{ marginTop: 30, marginBottom: 10 }}>
+        ⬇️ Protected Route ⬇️
+      </Text>
       <Navs />
     </RAccessTemplate>
   );

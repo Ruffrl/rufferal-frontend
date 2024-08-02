@@ -5,7 +5,7 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { CounterStoreContext } from '../../../store';
 
 export const RCounter = observer((): React.ReactElement => {
-  const counterStore = useContext(CounterStoreContext || {});
+  const counterStore = useContext(CounterStoreContext);
 
   return (
     <View>

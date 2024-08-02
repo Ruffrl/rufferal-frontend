@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
-import { Button, Platform, View } from 'react-native';
+import { Button, Platform, Text, View } from 'react-native';
 import { Link } from 'react-router-dom';
-import { RCounter } from '../organism';
+import { RAccount, RAllAccounts, RCounter } from '../organism';
 import { RAccessTemplate } from '../templates';
 
 export const RAbout = observer(
@@ -25,8 +25,43 @@ export const RAbout = observer(
 
     return (
       <RAccessTemplate>
-        <RCounter />
-        <View style={{ margin: 10 }} />
+        <View
+          style={{
+            marginBottom: 10,
+            borderColor: 'black',
+            borderWidth: 2,
+            width: '100%',
+          }}
+        >
+          <Text style={{ margin: 10 }}>Testing (Mobx) Store</Text>
+          <RCounter />
+        </View>
+        <View
+          style={{
+            marginBottom: 10,
+            borderColor: 'black',
+            borderWidth: 2,
+            width: '100%',
+          }}
+        >
+          <Text style={{ margin: 10 }}>
+            Testing get all users - authorization required
+          </Text>
+          <RAllAccounts />
+        </View>
+        <View
+          style={{
+            marginBottom: 10,
+            borderColor: 'black',
+            borderWidth: 2,
+            width: '100%',
+          }}
+        >
+          <Text style={{ margin: 10 }}>
+            Testing get single user - authorization required
+          </Text>
+          <RAccount userId={1} />
+        </View>
         <Navs />
       </RAccessTemplate>
     );

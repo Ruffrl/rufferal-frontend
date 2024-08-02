@@ -1,7 +1,11 @@
+import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
+// BLARG - navigate cannot happen in mobile, how do you want to handle navigation differences between web and mobile
+// import { useNavigate } from 'react-router-dom';
+import { AuthStoreContext, User } from '../../../store';
 import { FormErrorProps, RButton, RFormError } from '../atom';
 import { RFormInput } from '../molecule';
 
@@ -11,13 +15,23 @@ type LogInInputs = {
   password: string;
 };
 
-export const RFormLogin = (): React.ReactElement => {
+type LoginResponse = {
+  data: {
+    id: number;
+    type: 'user';
+    attributes: User;
+  };
+};
+
+export const RFormLogin = observer((): React.ReactElement => {
   /* STATE */
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
-  // const [authToken, setAuthToken] = useState<null | string>(null);
   const [status, setStatus] = useState(false);
-  const url = 'http://localhost:5000/api/login';
+
+  const userStore = useContext(AuthStoreContext);
+  // BLARG - navigate cannot happen in mobile, how do you want to handle navigation differences between web and mobile
+  // const navigate = useNavigate();
 
   /* REACT HOOK FORM */
   const {
@@ -34,6 +48,11 @@ export const RFormLogin = (): React.ReactElement => {
   /* BEHAVIORS */
   const onSubmit = handleSubmit(async (data) => {
     // Handle form submission
+    const url =
+      Platform.OS === 'android'
+        ? 'http://10.0.2.2:5000/login'
+        : 'http://localhost:5000/login';
+
     setLoading(true);
     setError('');
 
@@ -46,8 +65,10 @@ export const RFormLogin = (): React.ReactElement => {
         },
         body: JSON.stringify({
           user: {
-            email: data.email,
-            password: data.password,
+            email: 'rock@gmail.com',
+            password: 'password',
+            // email: data.email,
+            // password: data.password,
           },
         }),
       });
@@ -55,63 +76,45 @@ export const RFormLogin = (): React.ReactElement => {
       if (!response.ok) {
         const error: FormErrorProps = await response.json();
         throw new Error(error.error);
+      } else {
+        const authHeader = response.headers.get('Authorization') || undefined;
+        authHeader && userStore.setToken(authHeader);
+        // console.log('BLARG authHeader', authHeader);
+        setStatus(response.ok);
+
+        const result: LoginResponse = await response.json();
+        // result
+        // =>
+        // {
+        //   "data": {
+        //       "id": "1",
+        //       "type": "user",
+        //       "attributes": {
+        //           "id": 1,
+        //           "email": "rock@gmail.com",
+        //           "verified": true,
+        //           "forename": "Sam",
+        //           "surname": "Thomas",
+        //           "avatar": null,
+        //           "species": "OWNER"
+        //         }
+        //     }
+        // }
+
+        result.data.attributes && userStore.setUser(result.data.attributes);
+
+        console.log('result is: ', JSON.stringify(result, null, 4));
+
+        // BLARG NAVIGATE
+        // BLARG - navigate cannot happen in mobile, how do you want to handle navigation differences between web and mobile
+        // navigate('/about');
       }
-
-      // const authHeader = response.headers.get('Authorization');
-      // setAuthToken(authHeader);
-      setStatus(response.ok);
-
-      console.log('BLARG response', response);
-      console.log('BLARG response.ok', response.ok);
-      // console.log('BLARG authHeader', authHeader);
-
-      const result = await response.json();
-
-      console.log('result is: ', JSON.stringify(result, null, 4));
     } catch (err) {
       setError(String(err));
     } finally {
       setLoading(false);
     }
   });
-
-  const handleAuth = async () => {
-    // Handle form submission
-    // setLoading(true);
-    // setError('');
-
-    try {
-      const response = await fetch('http://localhost:5000/create-account', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        const error: FormErrorProps = await response.json();
-        throw new Error(error.error);
-      }
-
-      // const authHeader = response.headers.get('Authorization');
-      // setAuthToken(authHeader);
-      setStatus(response.ok);
-
-      console.log('BLARG response', response);
-      console.log('BLARG response.ok', response.ok);
-      // console.log('BLARG authHeader', authHeader);
-
-      const result = await response.json();
-
-      console.log('result is: ', JSON.stringify(result, null, 4));
-    } catch (err) {
-      console.log('BLARG err', err);
-      setError(String(err));
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <View style={{ width: '100%' }}>
@@ -160,9 +163,7 @@ export const RFormLogin = (): React.ReactElement => {
       />
 
       {error && <RFormError error={error} />}
-      {/* <RButton title="Log In" onPress={onSubmit} loading={loading} /> */}
-      <Text>{'\n'}</Text>
-      <RButton title="Testing RodAuth" onPress={handleAuth} loading={loading} />
+      <RButton title="Log In" onPress={onSubmit} loading={loading} />
     </View>
   );
-};
+});

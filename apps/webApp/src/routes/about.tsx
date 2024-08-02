@@ -1,5 +1,10 @@
-import { RAbout } from "@rufferal-frontend/store";
+import { RAbout } from '@rufferal-frontend/store';
+import { ProtectedRoute } from './ProtectedRoutes';
 
 export const About = () => {
-  return <RAbout />
+  return (
+    <ProtectedRoute>
+      <RAbout />
+    </ProtectedRoute>
+  );
 };

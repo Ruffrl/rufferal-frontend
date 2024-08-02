@@ -4,7 +4,7 @@ import { FieldError, RefCallBack } from 'react-hook-form';
 import { StyleSheet, TextInputProps, TextStyle, View } from 'react-native';
 import { FieldSize, RInput, RInputError, RLabel } from '../atom';
 
-interface Props extends TextInputProps {
+interface Props extends Omit<TextInputProps, 'onChange'> {
   error?: FieldError | undefined;
   formRef?: RefCallBack;
   label: string;
@@ -12,6 +12,8 @@ interface Props extends TextInputProps {
   onSubmit: () => Promise<void>;
   placeholder?: string;
   size?: FieldSize;
+  onChange: ((text: string) => void) | undefined;
+  // (e: NativeSyntheticEvent<TextInputChangeEventData>) => void) | undefined
 }
 
 export const RFormInput = ({

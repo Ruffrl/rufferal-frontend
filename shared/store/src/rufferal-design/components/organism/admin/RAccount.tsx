@@ -1,34 +1,30 @@
 import { useContext, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { AuthStoreContext } from '../../../../store';
+import { AuthStoreContext, User } from '../../../../store';
 import { RButton } from '../../atom';
 
-// type AllUsersResponse = {
-//   data: {
-//     id: number;
-//     type: 'user';
-//     attributes: User;
-//   };
-// };
+type AccountResponse = {
+  id: number;
+  type: 'user';
+  attributes: User;
+};
 
-export const RAllAccounts = () => {
-  /* STATE */
+export const RAccount = ({ userId }: { userId: number }) => {
   const [pressed, setPressed] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [account, setAccount] = useState<AccountResponse | undefined>(
+    undefined
+  );
   const [error, setError] = useState<string>();
 
   const userStore = useContext(AuthStoreContext);
-  // console.log(
-  //   'BLARG String(userStore.bearerToken)',
-  //   String(userStore.bearerToken)
-  // );
 
-  const handleGetAccounts = async () => {
-    const url =
-      Platform.OS === 'android'
-        ? 'http://10.0.2.2:5000/admin/users'
-        : 'http://localhost:5000/admin/users';
+  const url =
+    Platform.OS === 'android'
+      ? `http://10.0.2.2:5000/admin/users/${userId}`
+      : `http://localhost:5000/admin/users/${userId}`;
+
+  const handleAccount = async () => {
     setLoading(true);
 
     try {
@@ -45,11 +41,11 @@ export const RAllAccounts = () => {
         //   'BLARG inside throw: ',
         //   `Error! status: ${response.status}`
         // );
-        const error = await response.json();
-        throw new Error(error.message);
+        throw new Error(`Error! status: ${response.status}`);
       }
       const result = await response.json();
-      setData(result.data);
+      // console.log('BLARG result', result);
+      setAccount(result.data);
     } catch (err) {
       // console.log('BLARG err: ', err);
       setError(String(err));
@@ -58,24 +54,27 @@ export const RAllAccounts = () => {
     }
   };
 
-  const DisplayAccounts = () => {
+  const DisplayAccount = () => {
     return loading ? (
       <Text>Loading...</Text>
     ) : (
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      data.map((account: any) => {
-        return (
+      <View>
+        {account?.id && (
           <View key={account.id} style={styles.item}>
             <Text style={styles.title}>{account.id}</Text>
             <Text>{account.attributes.forename}</Text>
             <Text>{account.attributes.surname}</Text>
             <Text>{account.attributes.verified ? 'true' : 'false'}</Text>
-            <Text>{account.attributes.avatar}</Text>
+            <Text>
+              {account.attributes.avatar
+                ? account.attributes.avatar
+                : 'No avatar uploaded'}
+            </Text>
             <Text>{account.attributes.species}</Text>
             <Text>{account.attributes.email}</Text>
           </View>
-        );
-      })
+        )}
+      </View>
     );
   };
 
@@ -83,16 +82,16 @@ export const RAllAccounts = () => {
     <View style={styles.container}>
       <View style={styles.button}>
         <RButton
-          title={pressed ? 'Close all users' : 'Get all users'}
+          title={pressed ? 'Close Account' : 'Get Account'}
           onPress={() => {
             setPressed((prev) => !prev);
-            !pressed && handleGetAccounts();
+            !pressed && handleAccount();
           }}
         />
       </View>
       {!error && pressed && (
         <View style={styles.display}>
-          <DisplayAccounts />
+          <DisplayAccount />
         </View>
       )}
       {error && (

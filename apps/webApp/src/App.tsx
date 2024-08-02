@@ -2,8 +2,7 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ErrorPage } from './components/ErrorPage';
-import { About } from './routes/about';
-import { Home } from './routes/home';
+import { About, Home } from './routes';
 
 const router = createBrowserRouter([
   {

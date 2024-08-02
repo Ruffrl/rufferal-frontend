@@ -13,18 +13,20 @@ export type ViewWidth = {
 
 export type FieldSize = 'small' | 'medium' | 'large';
 
-interface Props extends TextInputProps {
+interface Props extends Omit<TextInputProps, 'onChange'> {
   error?: FieldError | undefined;
   inputRef?: RefCallBack | React.MutableRefObject<null>;
   size?: FieldSize;
   onSubmit?: () => void;
+  onChange: ((text: string) => void) | undefined;
 }
 
 export const RInput = ({
   error,
   inputRef,
-  size = 'large',
+  onChange,
   onSubmit,
+  size = 'large',
   ...inputProps
 }: Props): React.ReactElement => {
   const borderStyle = { borderColor: error ? '#fc6d47' : '#c0cbd3' };
@@ -43,6 +45,7 @@ export const RInput = ({
       {...inputProps}
       autoCapitalize="none"
       ref={inputRef}
+      onChangeText={onChange}
       style={[styles.input, borderStyle, sizeStyle]}
       onSubmitEditing={onSubmit}
     />
