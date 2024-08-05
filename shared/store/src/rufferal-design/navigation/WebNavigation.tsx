@@ -1,9 +1,12 @@
 import { Text, View } from 'react-native';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { observableAuthStore } from '../../store';
 import { RLogoutButton } from '../components';
 
 export const WebNavigation = () => {
+  const navigate = useNavigate();
+  const navigateAfterLogout = () => navigate('/');
+
   return (
     <View
       style={{
@@ -27,7 +30,7 @@ export const WebNavigation = () => {
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/profile">My Profile</Link>
           {observableAuthStore.isLoggedIn && observableAuthStore?.user?.id && (
-            <RLogoutButton id={observableAuthStore.user.id} />
+            <RLogoutButton id={observableAuthStore.user.id} navigateAfterLogout={navigateAfterLogout} />
           )}
         </>
       ) : (

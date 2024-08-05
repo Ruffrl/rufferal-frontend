@@ -6,7 +6,13 @@ import { observableAuthStore } from '../../../store';
 import { RButton, RFormError } from '../atom';
 
 export const RLogoutButton = observer(
-  ({ id }: { id: number }): React.ReactElement => {
+  ({
+    id,
+    navigateAfterLogout,
+  }: {
+    id: number;
+    navigateAfterLogout?: () => void;
+  }): React.ReactElement => {
     /* STATE */
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
@@ -18,8 +24,10 @@ export const RLogoutButton = observer(
       setError('');
       console.log(`Logging out user ${id}`);
       observableAuthStore.revokeAuth();
+      // Web navigation
+      navigateAfterLogout?.() && navigateAfterLogout();
       setLoading(false);
-      
+
       //  DELETE     /sessions/:id
       // BLARG - after I update backend with access and refresh tokens, a whitelist, and new behavior for how to handle login and logout - make changes
       // const url =
