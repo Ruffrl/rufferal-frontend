@@ -7,13 +7,14 @@ module.exports = {
     path: join(__dirname, '../../dist/apps/webApp'),
   },
   devServer: {
-    port: 4200,
+    historyApiFallback: true,
+    port: 3000,
   },
   plugins: [
     new NxAppWebpackPlugin({
       tsConfig: './tsconfig.app.json',
       compiler: 'babel',
-      main: './src/main.tsx',
+      main: './src/App.tsx',
       index: './src/index.html',
       baseHref: '/',
       assets: ['./src/favicon.ico', './src/assets'],

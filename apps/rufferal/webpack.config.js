@@ -9,7 +9,7 @@ module.exports = {
     extensions: ['.web.tsx', '.web.ts', '.web.jsx', '.web.js'],
   },
   devServer: {
-    port: 4200,
+    port: 3000,
   },
   plugins: [
     new NxAppWebpackPlugin({

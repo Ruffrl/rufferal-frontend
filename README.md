@@ -2,6 +2,18 @@
 
 blarg
 
+Things to think about
+- graphql
+- error handling
+- security handling
+- unit testing
+- integration testing
+- e2e testing
+- deployment
+- env vars and secrets
+- deployment
+- other developer nice to haves
+
 ## Install
 
 Setup assumes you have a MacOS
@@ -167,7 +179,7 @@ cd rufferal-frontend
   npx nx serve webApp
   ```
 
-  - Visit http://localhost:4200 to see test app
+  - Visit http://localhost:3000 to see test app
 
 - Launch android
 

@@ -14,7 +14,14 @@
     "tslib": "*",
     "@nx/webpack": "*",
     "@nx/react": "*",
-    "react-dom": "*"
+    "react-dom": "*",
+    "mobx-react-lite": "*",
+    "react-hook-form": "*",
+    "mobx": "*",
+    "@react-navigation/native": "*",
+    "@react-navigation/native-stack": "*",
+    "react-native-safe-area-context": "*",
+    "react-native-screens": "*"
   },
   "devDependencies": {}
 }
