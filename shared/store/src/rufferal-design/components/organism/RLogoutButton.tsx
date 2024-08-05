@@ -25,7 +25,7 @@ export const RLogoutButton = observer(
       console.log(`Logging out user ${id}`);
       observableAuthStore.revokeAuth();
       // Web navigation
-      navigateAfterLogout?.() && navigateAfterLogout();
+      navigateAfterLogout?.();
       setLoading(false);
 
       //  DELETE     /sessions/:id

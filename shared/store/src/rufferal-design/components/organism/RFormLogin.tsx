@@ -103,7 +103,7 @@ export const RFormLogin = observer(
           // Mobile navigation will automatically happen if token status changes
           authHeader && observableAuthStore.setAuth(authHeader);
           // Web navigation only
-          navigateAfterLogin?.() && navigateAfterLogin();
+          navigateAfterLogin?.();
         }
       } catch (err) {
         setError(String(err));
