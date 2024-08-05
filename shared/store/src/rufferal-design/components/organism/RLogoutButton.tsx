@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useState } from 'react';
-import { Platform, Text, View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { observableAuthStore } from '../../../store';
 import { FormErrorProps, RButton, RFormError } from '../atom';
 

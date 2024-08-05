@@ -7,7 +7,10 @@
     "react-native": "*",
     "react-hook-form": "*",
     "mobx-react-lite": "*",
-    "mobx": "*"
+    "mobx": "*",
+    "@react-navigation/native": "*",
+    "@react-navigation/native-stack": "*",
+    "react-router-dom": "*"
   },
   "type": "commonjs",
   "main": "./src/index.js",
