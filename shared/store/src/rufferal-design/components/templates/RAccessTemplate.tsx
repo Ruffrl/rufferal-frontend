@@ -1,14 +1,20 @@
 import { useContext } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { AuthStoreContext, ToastStoreContext } from '../../../store';
+import { ToastStoreContext } from '../../../store';
+import { MobileNavigation, WebNavigation } from '../../navigation';
 import { RFormError } from '../atom';
-import { RLogoutButton } from '../organism';
 
+type AccessTemplateProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  navigation: any;
+};
+
+// BLARG - update with this: https://reactnavigation.org/docs/navigating-without-navigation-prop and MobX
 export const RAccessTemplate = ({
+  navigation,
   children,
-}: React.PropsWithChildren): React.ReactElement => {
-  const web = Platform.OS === 'web';
-  const userStore = useContext(AuthStoreContext);
+}: React.PropsWithChildren<AccessTemplateProps>): React.ReactElement => {
+  const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   const toastStore = useContext(ToastStoreContext);
   // console.log('BLARG toastStore', toastStore);
   // console.log(
@@ -17,15 +23,18 @@ export const RAccessTemplate = ({
   // );
 
   return (
-    <View style={web ? styles.containerWeb : styles.containerMobile}>
+    <View style={isMobile ? styles.containerMobile : styles.containerWeb}>
       {toastStore.messages.length > 0 && (
         <RFormError error={toastStore.messages.toString()} />
       )}
       <Text style={styles.welcome}>Rufferal</Text>
       <Text style={styles.instructions}>Access Playground</Text>
       {children}
-      {userStore.bearerToken && userStore?.user?.id && (
-        <RLogoutButton id={userStore.user.id} />
+     
+      {isMobile ? (
+        <MobileNavigation navigation={navigation} />
+      ) : (
+        <WebNavigation />
       )}
     </View>
   );

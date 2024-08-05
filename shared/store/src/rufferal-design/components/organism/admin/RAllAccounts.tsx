@@ -18,10 +18,10 @@ export const RAllAccounts = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState<string>();
 
-  const userStore = useContext(AuthStoreContext);
+  const authStore = useContext(AuthStoreContext);
   // console.log(
-  //   'BLARG String(userStore.bearerToken)',
-  //   String(userStore.bearerToken)
+  //   'BLARG String(authStore.bearerToken)',
+  //   String(authStore.bearerToken)
   // );
 
   const handleGetAccounts = async () => {
@@ -36,7 +36,7 @@ export const RAllAccounts = () => {
         method: 'GET',
         headers: {
           Accept: 'application/json',
-          Authorization: String(userStore.bearerToken),
+          Authorization: String(authStore.bearerToken),
         },
       });
 

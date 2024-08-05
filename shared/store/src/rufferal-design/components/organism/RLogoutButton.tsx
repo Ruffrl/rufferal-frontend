@@ -11,7 +11,7 @@ export const RLogoutButton = observer(
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
 
-    const userStore = useContext(AuthStoreContext);
+    const authStore = useContext(AuthStoreContext);
 
     /* BEHAVIORS */
     const handleLogout = async () => {
@@ -31,7 +31,7 @@ export const RLogoutButton = observer(
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: String(userStore.bearerToken),
+            Authorization: String(authStore.bearerToken),
           },
         });
 
@@ -41,7 +41,7 @@ export const RLogoutButton = observer(
         }
 
         const result = await response.json();
-        userStore.revokeAuth();
+        authStore.revokeAuth();
         console.log('result is: ', JSON.stringify(result, null, 4));
         // BLARG NAVIGATE
       } catch (err) {

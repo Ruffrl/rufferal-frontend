@@ -12,4 +12,6 @@
  */
 
 export { RAbout } from './RAbout';
+export { RDashboard } from './RDashboard';
 export { RHome } from './RHome';
+export { RProfile } from './RProfile';

@@ -3,13 +3,14 @@ import { PropsWithChildren, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 
 export const ProtectedRoute = ({ children }: PropsWithChildren) => {
-  const userStore = useContext(AuthStoreContext);
+  const authStore = useContext(AuthStoreContext);
   const toastStore = useContext(ToastStoreContext);
 
-  if (!userStore.bearerToken) {
-    // user is not authenticated
+  // user is not authenticated
+  if (!authStore.isLoggedIn) {
     toastStore.addMessage('Not logged in.');
     return <Navigate to="/" />;
   }
+
   return children;
 };

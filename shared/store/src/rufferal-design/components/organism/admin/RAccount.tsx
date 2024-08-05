@@ -17,7 +17,7 @@ export const RAccount = ({ userId }: { userId: number }) => {
   );
   const [error, setError] = useState<string>();
 
-  const userStore = useContext(AuthStoreContext);
+  const authStore = useContext(AuthStoreContext);
 
   const url =
     Platform.OS === 'android'
@@ -32,7 +32,7 @@ export const RAccount = ({ userId }: { userId: number }) => {
         method: 'GET',
         headers: {
           Accept: 'application/json',
-          Authorization: String(userStore.bearerToken),
+          Authorization: String(authStore.bearerToken),
         },
       });
 

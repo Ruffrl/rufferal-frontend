@@ -29,7 +29,7 @@ export const RFormLogin = observer((): React.ReactElement => {
   const [error, setError] = useState<string>();
   const [status, setStatus] = useState(false);
 
-  const userStore = useContext(AuthStoreContext);
+  const authStore = useContext(AuthStoreContext);
   // BLARG - navigate cannot happen in mobile, how do you want to handle navigation differences between web and mobile
   // const navigate = useNavigate();
 
@@ -78,7 +78,7 @@ export const RFormLogin = observer((): React.ReactElement => {
         throw new Error(error.error);
       } else {
         const authHeader = response.headers.get('Authorization') || undefined;
-        authHeader && userStore.setToken(authHeader);
+        authHeader && authStore.setToken(authHeader);
         // console.log('BLARG authHeader', authHeader);
         setStatus(response.ok);
 
@@ -101,7 +101,7 @@ export const RFormLogin = observer((): React.ReactElement => {
         //     }
         // }
 
-        result.data.attributes && userStore.setUser(result.data.attributes);
+        result.data.attributes && authStore.setUser(result.data.attributes);
 
         console.log('result is: ', JSON.stringify(result, null, 4));
 

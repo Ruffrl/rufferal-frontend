@@ -19,22 +19,31 @@ export interface User {
 class AuthStore {
   bearerToken: string | undefined;
   user: User | undefined;
+  isLoggedIn: boolean | undefined;
 
   constructor() {
     makeAutoObservable(this);
+    this.isLoggedIn = !!this.bearerToken;
   }
 
+  // Manage authorization tokens and user account/identity data
   setToken(token: string) {
     this.bearerToken = token;
   }
-
   setUser(loginUser: User) {
     this.user = loginUser;
   }
-
   revokeAuth() {
     this.bearerToken = undefined;
     this.user = undefined;
+  }
+
+  // Manage login state
+  setLoginState() {
+    this.isLoggedIn = true;
+  }
+  revokeLoginState() {
+    this.isLoggedIn = false;
   }
 }
 
