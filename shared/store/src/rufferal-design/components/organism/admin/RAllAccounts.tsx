@@ -1,6 +1,6 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { AuthStoreContext } from '../../../../store';
+import { observableAuthStore } from '../../../../store';
 import { RButton } from '../../atom';
 
 // type AllUsersResponse = {
@@ -18,7 +18,6 @@ export const RAllAccounts = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState<string>();
 
-  const authStore = useContext(AuthStoreContext);
   // console.log(
   //   'BLARG String(authStore.bearerToken)',
   //   String(authStore.bearerToken)
@@ -36,7 +35,7 @@ export const RAllAccounts = () => {
         method: 'GET',
         headers: {
           Accept: 'application/json',
-          Authorization: String(authStore.bearerToken),
+          Authorization: String(observableAuthStore.bearerToken),
         },
       });
 

@@ -1,12 +1,9 @@
-import { useContext } from 'react';
 import { Text, View } from 'react-native';
 import { Link } from 'react-router-dom';
-import { AuthStoreContext } from '../../store';
+import { observableAuthStore } from '../../store';
 import { RLogoutButton } from '../components';
 
 export const WebNavigation = () => {
-  const authStore = useContext(AuthStoreContext);
-
   return (
     <View
       style={{
@@ -16,7 +13,7 @@ export const WebNavigation = () => {
       }}
     >
       <Text>WEB NAVIGATION</Text>
-      {authStore.isLoggedIn ? (
+      {observableAuthStore.isLoggedIn ? (
         <>
           <Text>🔑 Protected Routes 🔑</Text>
           {/* My Profile - Owner */}
@@ -29,8 +26,8 @@ export const WebNavigation = () => {
           {/* AuthedSearchGigs */}
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/profile">My Profile</Link>
-          {authStore.isLoggedIn && authStore?.user?.id && (
-            <RLogoutButton id={authStore.user.id} />
+          {observableAuthStore.isLoggedIn && observableAuthStore?.user?.id && (
+            <RLogoutButton id={observableAuthStore.user.id} />
           )}
         </>
       ) : (

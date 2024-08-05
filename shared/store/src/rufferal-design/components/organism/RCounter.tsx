@@ -1,18 +1,18 @@
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { CounterStoreContext } from '../../../store';
+// import { CounterStoreContext } from '../../../store';
+import { observableCounterStore } from '../../../store';
 
 export const RCounter = observer((): React.ReactElement => {
-  const counterStore = useContext(CounterStoreContext);
 
   return (
     <View>
-      <Text style={styles.instructions}>{counterStore.count}</Text>
+      <Text style={styles.instructions}>{observableCounterStore.count}</Text>
       <Button
         title="increment with store"
-        onPress={() => counterStore.increaseCount()}
+        onPress={() => observableCounterStore.increaseCount()}
       />
     </View>
   );

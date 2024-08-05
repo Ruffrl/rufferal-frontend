@@ -1,20 +1,12 @@
 import * as React from 'react';
-import { useContext } from 'react';
 import { Text, View } from 'react-native';
-import { AuthStoreContext } from '../../../store';
+import { observableAuthStore } from '../../../store';
 import { RAccount, RAllAccounts } from '../organism';
 import { RAccessTemplate } from '../templates';
 
-export const RDashboard = ({
-  navigation,
-}: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  navigation?: any;
-}): React.ReactElement => {
-  const authStore = useContext(AuthStoreContext);
-
+export const RDashboard = (): React.ReactElement => {
   return (
-    <RAccessTemplate navigation={navigation}>
+    <RAccessTemplate>
       <Text
         style={{
           marginTop: 30,
@@ -22,7 +14,8 @@ export const RDashboard = ({
         }}
       >
         {/* BLARG - what will ProfileStore hold? If it holds profile data then why save any of it in authStore - this can just be the store for handling tokens, login status, etc */}
-        CONGRATS {authStore.user?.forename.toUpperCase()}! - You are logged in
+        CONGRATS {observableAuthStore.user?.forename.toUpperCase()}! - You are
+        logged in
       </Text>
       <View
         style={{

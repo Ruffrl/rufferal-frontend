@@ -1,11 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
-// BLARG - navigate cannot happen in mobile, how do you want to handle navigation differences between web and mobile
-// import { useNavigate } from 'react-router-dom';
-import { AuthStoreContext, User } from '../../../store';
+import { observableAuthStore, User } from '../../../store';
 import { FormErrorProps, RButton, RFormError } from '../atom';
 import { RFormInput } from '../molecule';
 
@@ -27,16 +25,13 @@ export const RFormLogin = observer(
   ({
     navigateAfterLogin,
   }: {
-    navigateAfterLogin: () => void;
+    navigateAfterLogin?: () => void;
   }): React.ReactElement => {
     /* STATE */
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
-    const [status, setStatus] = useState(false);
 
-    const authStore = useContext(AuthStoreContext);
-    // BLARG - navigate cannot happen in mobile, how do you want to handle navigation differences between web and mobile
-    // const navigate = useNavigate();
+    // const authStore = useContext(AuthStoreContext);
 
     /* REACT HOOK FORM */
     const {
@@ -82,12 +77,6 @@ export const RFormLogin = observer(
           const error: FormErrorProps = await response.json();
           throw new Error(error.error);
         } else {
-          setStatus(response.ok);
-
-          const authHeader = response.headers.get('Authorization') || undefined;
-          authHeader && authStore.setToken(authHeader);
-          // console.log('BLARG authHeader', authHeader);
-
           const result: LoginResponse = await response.json();
           // result
           // =>
@@ -106,24 +95,26 @@ export const RFormLogin = observer(
           //         }
           //     }
           // }
-          result.data.attributes && authStore.setUser(result.data.attributes);
+          result.data.attributes &&
+            observableAuthStore.setUser(result.data.attributes);
           console.log('result is: ', JSON.stringify(result, null, 4));
 
-          // BLARG NAVIGATE
-          // BLARG - navigate cannot happen in mobile, how do you want to handle navigation differences between web and mobile
-          // navigate('/about');
+          const authHeader = response.headers.get('Authorization') || undefined;
+          // Mobile navigation will automatically happen if token status changes
+          authHeader && observableAuthStore.setAuth(authHeader);
+          // Web navigation only
+          navigateAfterLogin?.() && navigateAfterLogin();
         }
       } catch (err) {
         setError(String(err));
       } finally {
         setLoading(false);
-        navigateAfterLogin();
       }
     });
 
     return (
       <View style={{ width: '100%' }}>
-        <Text>Logged In: {String(!!status)}</Text>
+        <Text>Logged In: {String(observableAuthStore.isLoggedIn)}</Text>
 
         <Controller
           name="email"

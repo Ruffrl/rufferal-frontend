@@ -1,22 +1,24 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { AuthStoreContext } from '@rufferal-frontend/store';
-import { useContext } from 'react';
-import { AboutScreen } from '../screens/AboutScreen';
-import { DashboardScreen } from '../screens/DashboardScreen';
-import { HomeScreen } from '../screens/HomeScreen';
-import { ProfileScreen } from '../screens/ProfileScreen';
+// import { AuthStoreContext } from '@rufferal-frontend/store';
+import { observableAuthStore } from '@rufferal-frontend/store';
+import { observer } from 'mobx-react-lite';
+// import { useContext } from 'react';
+import { AboutScreen } from './onboarding/AboutScreen';
+import { HomeScreen } from './onboarding/HomeScreen';
+import { DashboardScreen } from './user-account/DashboardScreen';
+import { ProfileScreen } from './user-account/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
-export const Routes = () => {
-  const authStore = useContext(AuthStoreContext);
+export const Screens = observer(() => {
+  console.log('BLARG SCREENS', observableAuthStore.isLoggedIn);
 
   return (
     <NavigationContainer>
       {/* <Stack.Navigator screenOptions={{ headerShown: false }}> */}
       <Stack.Navigator>
-        {authStore.isLoggedIn ? (
+        {observableAuthStore.isLoggedIn ? (
           <>
             {/* My Profile - Owner */}
             {/* AuthedSearchServices */}
@@ -43,4 +45,4 @@ export const Routes = () => {
       </Stack.Navigator>
     </NavigationContainer>
   );
-};
+});

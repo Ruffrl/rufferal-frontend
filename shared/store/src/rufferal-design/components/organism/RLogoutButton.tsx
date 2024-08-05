@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Platform, Text, View } from 'react-native';
-import { AuthStoreContext } from '../../../store';
+import { observableAuthStore } from '../../../store';
 import { FormErrorProps, RButton, RFormError } from '../atom';
 
 export const RLogoutButton = observer(
@@ -10,8 +10,6 @@ export const RLogoutButton = observer(
     /* STATE */
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
-
-    const authStore = useContext(AuthStoreContext);
 
     /* BEHAVIORS */
     const handleLogout = async () => {
@@ -31,7 +29,7 @@ export const RLogoutButton = observer(
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            Authorization: String(authStore.bearerToken),
+            Authorization: String(observableAuthStore.bearerToken),
           },
         });
 
@@ -41,7 +39,7 @@ export const RLogoutButton = observer(
         }
 
         const result = await response.json();
-        authStore.revokeAuth();
+        observableAuthStore.revokeAuth();
         console.log('result is: ', JSON.stringify(result, null, 4));
         // BLARG NAVIGATE
       } catch (err) {
@@ -53,9 +51,7 @@ export const RLogoutButton = observer(
 
     return (
       <View style={{ width: '100%' }}>
-        <Text>{'\n'}</Text>
         {error && <RFormError error={error} />}
-        <Text>{'\n'}</Text>
         <RButton title="Log Out" onPress={handleLogout} loading={loading} />
       </View>
     );

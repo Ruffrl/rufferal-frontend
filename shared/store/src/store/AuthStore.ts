@@ -1,5 +1,5 @@
 import { action, makeAutoObservable, observable } from 'mobx';
-import { createContext } from 'react';
+// import { createContext } from 'react';
 
 type UserType = 'OWNER' | 'CARETAKER' | 'OWNER_AND_CARETAKER';
 
@@ -19,7 +19,7 @@ export interface User {
 class AuthStore {
   bearerToken: string | undefined;
   user: User | undefined;
-  isLoggedIn: boolean | undefined;
+  isLoggedIn = false;
 
   constructor() {
     makeAutoObservable(this, {
@@ -27,25 +27,29 @@ class AuthStore {
       user: observable,
       isLoggedIn: observable,
       setToken: action,
-      setUser: action,
-      revokeAuth: action,
+      revokeToken: action,
       setLoginState: action,
       revokeLoginState: action,
+      setAuth: action,
+      revokeAuth: action,
+      // BLARG - to be removed
+      setUser: action,
+      revokeUser: action,
     });
-    this.isLoggedIn = !!this.bearerToken;
+    // makeAutoObservable(this);
   }
 
   // Manage authorization tokens and user account/identity data
+  // setToken(token: string) {
+  //   this.bearerToken = token;
+  //   this.setLoginState();
+  // }
+  // Manage token state
   setToken(token: string) {
     this.bearerToken = token;
-    this.isLoggedIn = !!this.bearerToken;
   }
-  setUser(loginUser: User) {
-    this.user = loginUser;
-  }
-  revokeAuth() {
+  revokeToken() {
     this.bearerToken = undefined;
-    this.user = undefined;
   }
 
   // Manage login state
@@ -55,6 +59,26 @@ class AuthStore {
   revokeLoginState() {
     this.isLoggedIn = false;
   }
+
+  // Manage AUTH state
+  setAuth(token: string) {
+    this.setToken(token);
+    this.setLoginState();
+  }
+  revokeAuth() {
+    this.revokeToken();
+    this.revokeLoginState();
+  }
+
+  // BLARG - this should probably move to Profile
+  // Manage user state
+  setUser(loginUser: User) {
+    this.user = loginUser;
+  }
+  revokeUser() {
+    this.user = undefined;
+  }
 }
 
-export const AuthStoreContext = createContext(new AuthStore());
+// export const AuthStoreContext = createContext(new AuthStore());
+export const observableAuthStore = new AuthStore();

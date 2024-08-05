@@ -1,6 +1,6 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { AuthStoreContext, User } from '../../../../store';
+import { observableAuthStore, User } from '../../../../store';
 import { RButton } from '../../atom';
 
 type AccountResponse = {
@@ -17,8 +17,6 @@ export const RAccount = ({ userId }: { userId: number }) => {
   );
   const [error, setError] = useState<string>();
 
-  const authStore = useContext(AuthStoreContext);
-
   const url =
     Platform.OS === 'android'
       ? `http://10.0.2.2:5000/admin/users/${userId}`
@@ -32,7 +30,7 @@ export const RAccount = ({ userId }: { userId: number }) => {
         method: 'GET',
         headers: {
           Accept: 'application/json',
-          Authorization: String(authStore.bearerToken),
+          Authorization: String(observableAuthStore.bearerToken),
         },
       });
 

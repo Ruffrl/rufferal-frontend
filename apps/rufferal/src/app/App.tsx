@@ -1,7 +1,7 @@
-import { Routes } from './Routes';
+import { Screens } from '../screens';
 
 const App = () => {
-  return <Routes />;
+  return <Screens />;
 };
 
 export default App;

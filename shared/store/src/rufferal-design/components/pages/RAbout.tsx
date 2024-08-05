@@ -2,14 +2,9 @@ import { Text, View } from 'react-native';
 import { RCounter } from '../organism';
 import { RAccessTemplate } from '../templates';
 
-export const RAbout = ({
-  navigation,
-}: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  navigation?: any;
-}): React.ReactElement => {
+export const RAbout = (): React.ReactElement => {
   return (
-    <RAccessTemplate navigation={navigation}>
+    <RAccessTemplate>
       <View
         style={{
           marginBottom: 10,
