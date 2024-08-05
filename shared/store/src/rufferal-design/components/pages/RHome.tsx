@@ -4,9 +4,11 @@ import { RAccessTemplate } from '../templates';
 
 export const RHome = ({
   navigation,
+  navigateAfterLogin,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   navigation?: any;
+  navigateAfterLogin: () => void;
 }): React.ReactElement => {
   return (
     <RAccessTemplate navigation={navigation}>
@@ -18,7 +20,7 @@ export const RHome = ({
       >
         Testing Login (also testing ReactHookForms and Backend Auth)
       </Text>
-      <RFormLogin />
+      <RFormLogin navigateAfterLogin={navigateAfterLogin} />
     </RAccessTemplate>
   );
 };

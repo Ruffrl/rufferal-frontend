@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { action, makeAutoObservable, observable } from 'mobx';
 import { createContext } from 'react';
 
 type UserType = 'OWNER' | 'CARETAKER' | 'OWNER_AND_CARETAKER';
@@ -22,13 +22,23 @@ class AuthStore {
   isLoggedIn: boolean | undefined;
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      bearerToken: observable,
+      user: observable,
+      isLoggedIn: observable,
+      setToken: action,
+      setUser: action,
+      revokeAuth: action,
+      setLoginState: action,
+      revokeLoginState: action,
+    });
     this.isLoggedIn = !!this.bearerToken;
   }
 
   // Manage authorization tokens and user account/identity data
   setToken(token: string) {
     this.bearerToken = token;
+    this.isLoggedIn = !!this.bearerToken;
   }
   setUser(loginUser: User) {
     this.user = loginUser;
