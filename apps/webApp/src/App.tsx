@@ -2,9 +2,14 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ErrorPage } from './components/ErrorPage';
-import { About, Home, Dashboard, Profile } from './routes';
+import { About, Home, Dashboard, Profile, Onboarding } from './routes';
 
 const router = createBrowserRouter([
+  {
+    path: '/onboarding',
+    element: <Onboarding />,
+    errorElement: <ErrorPage />,
+  },
   {
     path: '/',
     element: <Home />,

@@ -1,9 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import { AuthStoreContext } from '@rufferal-frontend/store';
 import { observableAuthStore } from '@rufferal-frontend/store';
 import { observer } from 'mobx-react-lite';
-// import { useContext } from 'react';
+import { OnboardingScreen } from './access/OnboardingScreen';
 import { AboutScreen } from './onboarding/AboutScreen';
 import { HomeScreen } from './onboarding/HomeScreen';
 import { DashboardScreen } from './user-account/DashboardScreen';
@@ -36,6 +35,7 @@ export const Screens = observer(() => {
             {/* SearchServices */}
             {/* Sign Up */}
             {/* SearchGigs */}
+            <Stack.Screen name="Onboarding" component={OnboardingScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="About" component={AboutScreen} />
           </>
