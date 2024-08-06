@@ -20,7 +20,7 @@ export const RButton = ({ loading, onPress, title = 'Save' }: Props) => {
       {loading ? (
         <ActivityIndicator size="small" color="white" />
       ) : (
-        <Text style={tw`font-bold text-white tracking-wide`}>{title}</Text>
+        <Text style={tw`font-bold text-base text-white tracking-wide`}>{title}</Text>
       )}
     </Pressable>
   );
