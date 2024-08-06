@@ -1,5 +1,6 @@
 import { Text, View } from 'react-native';
 import { Link, useNavigate } from 'react-router-dom';
+import tw from 'twrnc';
 import { observableAuthStore } from '../../store';
 import { RLogoutButton } from '../components';
 
@@ -8,13 +9,7 @@ export const WebNavigation = () => {
   const navigateAfterLogout = () => navigate('/');
 
   return (
-    <View
-      style={{
-        marginTop: 30,
-        marginBottom: 30,
-        gap: 10,
-      }}
-    >
+    <View style={tw`gap-1 w-full`}>
       <Text>WEB NAVIGATION</Text>
       {observableAuthStore.isLoggedIn ? (
         <>
@@ -30,7 +25,10 @@ export const WebNavigation = () => {
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/profile">My Profile</Link>
           {observableAuthStore.isLoggedIn && observableAuthStore?.user?.id && (
-            <RLogoutButton id={observableAuthStore.user.id} navigateAfterLogout={navigateAfterLogout} />
+            <RLogoutButton
+              id={observableAuthStore.user.id}
+              navigateAfterLogout={navigateAfterLogout}
+            />
           )}
         </>
       ) : (

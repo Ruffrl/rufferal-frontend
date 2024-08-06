@@ -1,15 +1,14 @@
 import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';
 import { Platform, ScrollView, Text, View } from 'react-native';
-import tw, { useDeviceContext } from 'twrnc';
+import tw from 'twrnc';
+import { RFormError } from '..';
 import { ToastStoreContext } from '../../../store';
 import { MobileNavigation, WebNavigation } from '../../navigation';
-import { RFormError } from '../atom';
 
 export const RAccessTemplate = observer(
   ({ children }: React.PropsWithChildren): React.ReactElement => {
     const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
-    useDeviceContext(tw);
     const toastStore = useContext(ToastStoreContext);
     // console.log('BLARG toastStore', toastStore);
     // console.log(
@@ -20,16 +19,17 @@ export const RAccessTemplate = observer(
     return (
       <View
         style={tw.style(
-          'my-4 mx-2 flex-1 justify-center items-center',
+          'items-center mx-2 my-3 flex-1',
+          // isMobile ? tw`bg-amber-400 h-full w-full` : tw`bg-purple-400 flex-1`
           isMobile ? tw`bg-amber-400` : tw`bg-purple-400`
         )}
       >
+        <Text style={tw`text-2xl mb-4`}>Rufferal</Text>
+        <Text style={tw`text-xl mb-4`}>Access Playground</Text>
         {toastStore.messages.length > 0 && (
           <RFormError error={toastStore.messages.toString()} />
         )}
-        <Text style={tw`text-2xl mb-4`}>Rufferal</Text>
-        <Text style={tw`text-xl mb-4`}>Access Playground</Text>
-        <ScrollView>{children}</ScrollView>
+        <ScrollView style={tw`w-full`}>{children}</ScrollView>
         {isMobile ? <MobileNavigation /> : <WebNavigation />}
       </View>
     );

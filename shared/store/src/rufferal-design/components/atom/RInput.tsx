@@ -1,15 +1,7 @@
 import * as React from 'react';
 import { FieldError, RefCallBack } from 'react-hook-form';
-import {
-  DimensionValue,
-  StyleSheet,
-  TextInput,
-  TextInputProps,
-} from 'react-native';
-
-export type ViewWidth = {
-  width: DimensionValue;
-};
+import { TextInput, TextInputProps } from 'react-native';
+import tw from 'twrnc';
 
 export type FieldSize = 'small' | 'medium' | 'large';
 
@@ -21,6 +13,9 @@ interface Props extends Omit<TextInputProps, 'onChange'> {
   onChange: ((text: string) => void) | undefined;
 }
 
+const INPUT_STYLES =
+  'border border-solid rounded px-1 py-1 text-base h-10 text-black';
+
 export const RInput = ({
   error,
   inputRef,
@@ -29,14 +24,14 @@ export const RInput = ({
   size = 'large',
   ...inputProps
 }: Props): React.ReactElement => {
-  const borderStyle = { borderColor: error ? '#fc6d47' : '#c0cbd3' };
-  let sizeStyle: ViewWidth = { width: '40%' };
+  const borderStyle = error ? 'border-[#fc6d47]' : 'border-[#c0cbd3]';
+  let sizeStyle = 'w-2/5';
   switch (size) {
     case 'medium':
-      sizeStyle = { width: '60%' };
+      sizeStyle = 'w-3/5';
       break;
     case 'large':
-      sizeStyle = { width: '100%' };
+      sizeStyle = 'w-full';
       break;
   }
 
@@ -46,21 +41,8 @@ export const RInput = ({
       autoCapitalize="none"
       ref={inputRef}
       onChangeText={onChange}
-      style={[styles.input, borderStyle, sizeStyle]}
+      style={tw.style(INPUT_STYLES, borderStyle, sizeStyle)}
       onSubmitEditing={onSubmit}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingVertical: 5,
-    paddingLeft: 5,
-    fontSize: 16,
-    height: 40,
-    color: '#c0cbd3',
-  },
-});

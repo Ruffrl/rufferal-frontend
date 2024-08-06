@@ -113,7 +113,7 @@ export const RFormLogin = observer(
     });
 
     return (
-      <View style={{ width: '100%' }}>
+      <View>
         <Text>Logged In: {String(observableAuthStore.isLoggedIn)}</Text>
 
         <Controller

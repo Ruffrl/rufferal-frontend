@@ -1,8 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-// import { useContext } from 'react';
 import { Button, Text, View } from 'react-native';
-// import { AuthStoreContext } from '../../store';
+import tw from 'twrnc';
 import { observableAuthStore } from '../../store';
 import { RLogoutButton } from '../components';
 
@@ -30,18 +29,11 @@ export type ScreenProps = {
   // Profile: { userId: string};
 };
 
-// BLARG - update with this: https://reactnavigation.org/docs/navigating-without-navigation-prop and MobX
 export const MobileNavigation = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
 
   return (
-    <View
-      style={{
-        marginTop: 30,
-        marginBottom: 30,
-        gap: 4,
-      }}
-    >
+    <View style={tw`gap-1 w-full`}>
       <Text>MOBILE NAVIGATION</Text>
       {observableAuthStore.isLoggedIn ? (
         <>

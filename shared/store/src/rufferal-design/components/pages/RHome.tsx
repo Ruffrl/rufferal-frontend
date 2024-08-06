@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Text } from 'react-native';
 import { RFormLogin } from '../organism';
 import { RAccessTemplate } from '../templates';
+import tw from 'twrnc';
 
 export const RHome = observer(
   ({
@@ -70,12 +71,7 @@ export const RHome = observer(
 
     return (
       <RAccessTemplate>
-        <Text
-          style={{
-            marginTop: 30,
-            marginBottom: 30,
-          }}
-        >
+        <Text style={tw`mt-[30px] mb-[30px]`}>
           Testing Async Storage
         </Text>
         <Text>{data}</Text>
