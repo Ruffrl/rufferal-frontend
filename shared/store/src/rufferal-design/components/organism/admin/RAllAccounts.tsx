@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
+import tw from 'twrnc';
 import { observableAuthStore } from '../../../../store';
 import { RButton } from '../../atom';
 
@@ -64,8 +65,11 @@ export const RAllAccounts = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       data.map((account: any) => {
         return (
-          <View key={account.id} style={styles.item}>
-            <Text style={styles.title}>{account.id}</Text>
+          <View
+            key={account.id}
+            style={tw`w-full flex flex-row justify-between items-center p-[8px] bg-[#ff1493]`}
+          >
+            <Text style={tw`text-[30px] font-bold`}>{account.id}</Text>
             <Text>{account.attributes.forename}</Text>
             <Text>{account.attributes.surname}</Text>
             <Text>{account.attributes.verified ? 'true' : 'false'}</Text>
@@ -79,8 +83,8 @@ export const RAllAccounts = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.button}>
+    <View style={tw`flex p-3 w-full items-center`}>
+      <View style={tw`mt-[10px] mb-[10px] w-[60%]`}>
         <RButton
           title={pressed ? 'Close all users' : 'Get all users'}
           onPress={() => {
@@ -90,43 +94,15 @@ export const RAllAccounts = () => {
         />
       </View>
       {!error && pressed && (
-        <View style={styles.display}>
+        <View style={tw`w-full`}>
           <DisplayAccounts />
         </View>
       )}
       {error && (
-        <View style={styles.display}>
+        <View style={tw`w-full`}>
           <Text>{error}</Text>
         </View>
       )}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    width: '100%',
-    alignItems: 'center',
-  },
-  button: {
-    marginTop: 10,
-    marginBottom: 10,
-    width: '60%',
-  },
-  display: {
-    width: '100%',
-  },
-  item: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 8,
-    backgroundColor: 'deeppink',
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-});

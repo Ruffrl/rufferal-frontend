@@ -1,30 +1,18 @@
 import * as React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInputProps,
-  TextStyle,
-  View,
-} from 'react-native';
+import { Text, TextInputProps, View } from 'react-native';
+import tw from 'twrnc';
 
 interface Props extends TextInputProps {
   label: string;
-  labelStyle?: TextStyle;
+  labelStyle?: string;
 }
+
+const LABEL_STYLES = 'text-black font-bold py-[5px]';
 
 export const RLabel = ({ label, labelStyle }: Props): React.ReactElement => {
   return (
     <View>
-      <Text style={[styles.label, labelStyle]}>{label}</Text>
+      <Text style={tw.style(LABEL_STYLES, labelStyle)}>{label}</Text>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  label: {
-    color: '#c0cbd3',
-    fontSize: 16,
-    fontWeight: 'bold',
-    paddingVertical: 5,
-  },
-});

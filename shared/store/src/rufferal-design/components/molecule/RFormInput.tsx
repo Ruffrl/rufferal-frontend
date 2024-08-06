@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { useRef } from 'react';
 import { FieldError, RefCallBack } from 'react-hook-form';
-import { StyleSheet, TextInputProps, TextStyle, View } from 'react-native';
+import { TextInputProps, View } from 'react-native';
+import tw from 'twrnc';
 import { FieldSize, RInput, RInputError, RLabel } from '../atom';
 
 interface Props extends Omit<TextInputProps, 'onChange'> {
   error?: FieldError | undefined;
   formRef?: RefCallBack;
   label: string;
-  labelStyle?: TextStyle;
+  labelStyle?: string;
   onSubmit: () => Promise<void>;
   placeholder?: string;
   size?: FieldSize;
@@ -31,7 +32,7 @@ export const RFormInput = ({
   const inputRef = formRef || useRef(null);
 
   return (
-    <View style={styles.container}>
+    <View style={tw`my-2 w-full`}>
       <RLabel label={label} labelStyle={labelStyle} />
       <RInput
         inputRef={inputRef}
@@ -46,10 +47,3 @@ export const RFormInput = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginVertical: 8,
-    width: '100%',
-  },
-});

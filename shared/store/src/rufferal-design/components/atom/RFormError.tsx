@@ -1,18 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Text } from 'react-native';
+import tw from 'twrnc';
 
 export interface FormErrorProps {
   error: string;
 }
 
 export const RFormError = ({ error }: FormErrorProps): React.ReactElement => {
-  return <Text style={styles.textError}>{error}</Text>;
+  return (
+    <Text style={tw`text-red-600 font-semibold text-sm py-2`}>{error}</Text>
+  );
 };
-
-const styles = StyleSheet.create({
-  textError: {
-    color: '#fc6d47',
-    fontSize: 14,
-    paddingVertical: 10,
-  },
-});

@@ -12,8 +12,6 @@ import { ProfileScreen } from './user-account/ProfileScreen';
 const Stack = createNativeStackNavigator();
 
 export const Screens = observer(() => {
-  console.log('BLARG SCREENS', observableAuthStore.isLoggedIn);
-
   return (
     <NavigationContainer>
       {/* <Stack.Navigator screenOptions={{ headerShown: false }}> */}

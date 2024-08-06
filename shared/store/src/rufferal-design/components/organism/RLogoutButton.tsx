@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import { observableAuthStore } from '../../../store';
 import { RButton, RFormError } from '../atom';
+import tw from 'twrnc';
 
 export const RLogoutButton = observer(
   ({
@@ -61,7 +62,7 @@ export const RLogoutButton = observer(
     };
 
     return (
-      <View style={{ width: '100%' }}>
+      <View style={tw`w-full`}>
         {error && <RFormError error={error} />}
         <RButton title="Log Out" onPress={handleLogout} loading={loading} />
       </View>
