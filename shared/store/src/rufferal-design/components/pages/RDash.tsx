@@ -5,7 +5,7 @@ import { observableAuthStore } from '../../../store';
 import { RAccount, RAllAccounts } from '../organism';
 import { RAccessTemplate } from '../templates';
 
-export const RDashboard = (): React.ReactElement => {
+export const RDash = (): React.ReactElement => {
   return (
     <RAccessTemplate>
       <Text style={tw`mt-[30px] mb-[30px]`}>
