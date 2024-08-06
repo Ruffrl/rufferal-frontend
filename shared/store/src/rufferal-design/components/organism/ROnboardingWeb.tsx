@@ -1,13 +1,13 @@
+import { View } from 'react-native';
+import Swiper from 'react-native-web-swiper';
+import tw from 'twrnc';
 import {
   ROnboardingSlideOne,
   ROnboardingSlideThree,
   ROnboardingSlideTwo,
-} from '@rufferal-frontend/store';
-import { View } from 'react-native';
-import Swiper from 'react-native-web-swiper';
-import tw from 'twrnc';
+} from '..';
 
-export const Onboarding = () => (
+export const ROnboardingWeb = () => (
   <View style={tw`flex-1`}>
     <Swiper>
       <ROnboardingSlideOne />

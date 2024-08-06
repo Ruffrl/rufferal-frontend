@@ -11,3 +11,5 @@
  */
 
 export { RFormInput } from './RFormInput';
+export { ROnboardingSlideOne, ROnboardingSlideThree, ROnboardingSlideTwo } from './ROnboardingSlides';
+

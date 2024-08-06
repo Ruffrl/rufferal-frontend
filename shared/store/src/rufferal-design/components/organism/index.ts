@@ -15,3 +15,4 @@ export { RAllAccounts } from './admin/RAllAccounts';
 export { RCounter } from './RCounter';
 export { RFormLogin } from './RFormLogin';
 export { RLogoutButton } from './RLogoutButton';
+export { ROnboardingWeb } from './ROnboardingWeb';
