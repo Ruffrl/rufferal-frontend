@@ -28,6 +28,6 @@
 - [ ] Do we need to implement analytics?
 - [ ] Will this be part of a product update? If yes, please write one phrase about this update.
 
-## GIF/MEME/FLAVAFLAV
+## gif/meme/funzies
 
 <!-- The most important step in any PR -->
