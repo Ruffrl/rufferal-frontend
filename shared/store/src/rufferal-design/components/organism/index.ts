@@ -15,4 +15,5 @@ export { RAllAccounts } from './admin/RAllAccounts';
 export { RCounter } from './RCounter';
 export { RFormLogin } from './RFormLogin';
 export { RLogoutButton } from './RLogoutButton';
+export { ROnboardingButtons } from './ROnboardingButtons';
 export { ROnboardingWeb } from './ROnboardingWeb';

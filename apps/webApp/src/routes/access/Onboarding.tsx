@@ -1,14 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {
-  ROnboardingSlideOne,
-  ROnboardingSlideThree,
-  ROnboardingSlideTwo,
-} from '@rufferal-frontend/store';
+import { ROnboarding } from '@rufferal-frontend/store';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
-import Swiper from 'react-native-web-swiper';
 import { Navigate } from 'react-router-dom';
-import tw from 'twrnc';
+import { WebOnboarding } from '../../components/WebOnboarding';
 
 export const Onboarding = () => {
   // showOnboarding == true -> they have not interacted with Onboarding, do display
@@ -32,13 +26,5 @@ export const Onboarding = () => {
     return <Navigate to="/" replace />;
   }
 
-  return (
-    <View style={tw`flex-1`}>
-      <Swiper>
-        <ROnboardingSlideOne />
-        <ROnboardingSlideTwo />
-        <ROnboardingSlideThree />
-      </Swiper>
-    </View>
-  );
+  return <ROnboarding swiper={<WebOnboarding />} />;
 };

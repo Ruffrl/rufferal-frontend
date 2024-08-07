@@ -14,6 +14,7 @@
 export { RDashboard } from './access/RDashboard';
 export { REmailVerification } from './access/REmailVerification';
 export { RLogin } from './access/RLogin';
+export { ROnboarding } from './access/ROnboarding';
 export { RSignup } from './access/RSignup';
 
 export { RAbout } from './RAbout';
