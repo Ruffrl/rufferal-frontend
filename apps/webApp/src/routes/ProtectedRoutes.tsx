@@ -11,7 +11,7 @@ export const ProtectedRoute = observer(({ children }: PropsWithChildren) => {
 
   // user is not authenticated
   if (!observableAuthStore.isLoggedIn) {
-    toastStore.addMessage('Not logged in.');
+    toastStore.addMessage('Please log in');
     return <Navigate to="/" />;
   }
 
