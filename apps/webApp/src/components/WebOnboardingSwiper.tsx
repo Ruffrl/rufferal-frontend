@@ -5,6 +5,7 @@ import {
   SWIPER_CONTAINER_STYLES,
 } from '@rufferal-frontend/store';
 import Swiper from 'react-native-web-swiper';
+import tw from 'twrnc';
 
 /* 
  * DEPRECATION WARNING from react-native-web-swiper
@@ -30,7 +31,16 @@ index.js:24 focusable is deprecated.
 
 export const WebOnboardingSwiper = () => {
   return (
-    <Swiper containerStyle={SWIPER_CONTAINER_STYLES}>
+    <Swiper
+      containerStyle={SWIPER_CONTAINER_STYLES}
+      controlsProps={{
+        dotsTouchable: true,
+        prevTitleStyle: tw`text-gray-600 font-semibold`,
+        nextTitleStyle: tw`text-gray-600 font-semibold`,
+        dotActiveStyle: tw`bg-gray-600`,
+        dotProps: { badgeStyle: tw`bg-gray-300` },
+      }}
+    >
       <ROnboardingSlideOne />
       <ROnboardingSlideTwo />
       <ROnboardingSlideThree />

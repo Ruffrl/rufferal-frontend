@@ -19,6 +19,7 @@ export {
   SWIPER_ANDROID_IMAGE_STYLES,
   SWIPER_CONTAINER_STYLES,
   SWIPER_IMAGE_STYLES,
+  // SWIPER_INNER_CONTAINER_STYLES,
   SWIPER_SLIDE_STYLE,
 } from './access/ROnboarding';
 export type { OnboardingNavigationProps } from './access/ROnboarding';
