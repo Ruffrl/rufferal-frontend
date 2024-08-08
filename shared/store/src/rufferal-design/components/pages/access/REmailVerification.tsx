@@ -3,12 +3,15 @@ import * as React from 'react';
 import { Text } from 'react-native';
 import tw from 'twrnc';
 import { RAccessTemplate } from '../../templates';
+import { PageHeader } from '../../templates/RAccessTemplate';
 
 export const REmailVerification = (): React.ReactElement => {
   return (
     <RAccessTemplate>
+      {/* Navigation */}
+      <Text>⬅️</Text>
       {/* Header */}
-      <Text>Verify your account</Text>
+      <PageHeader header="Verify your account" />
       {/* Helper test */}
       <Text>Check your email for the verification link.</Text>
       <Text style={tw`font-bold`}>someemail@mailio.com</Text>

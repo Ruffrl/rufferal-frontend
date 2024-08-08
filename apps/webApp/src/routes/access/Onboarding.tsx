@@ -27,14 +27,14 @@ export const Onboarding = () => {
     return <Navigate to="/" replace />;
   }
 
-  const onSignup = () => navigate('/signup');
-  const onLogin = () => navigate('/login');
-  const onGuest = () => navigate('/');
+  const navigateSignup = () => navigate('/signup');
+  const navigateLogin = () => navigate('/login');
+  const navigateGuest = () => navigate('/');
 
   return (
     <ROnboarding
       swiper={<WebOnboardingSwiper />}
-      navigation={{ onSignup, onLogin, onGuest }}
+      navigation={{ navigateSignup, navigateLogin, navigateGuest }}
     />
   );
 };

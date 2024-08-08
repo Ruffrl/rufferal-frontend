@@ -4,11 +4,11 @@ import { RButton, RLinkButton } from '../atom';
 import { OnboardingNavigationProps } from '../pages';
 
 export const ROnboardingButtons = ({
-  onSignup,
-  onLogin,
-  onGuest,
+  navigateSignup,
+  navigateLogin,
+  navigateGuest,
 }: OnboardingNavigationProps) => {
-  const GuestText = () => (
+  const ContinueGuestLink = () => (
     <Text style={tw`text-xs tracking-wide text-gray-800`}>
       Continue as <Text style={tw`font-bold`}>Guest</Text>
     </Text>
@@ -17,11 +17,11 @@ export const ROnboardingButtons = ({
   return (
     <View style={tw`gap-2 items-center`}>
       {/* Takes you to /signup */}
-      <RButton title="Sign up" onPress={onSignup} />
+      <RButton title="Sign up" onPress={navigateSignup} />
       {/* Takes you to /login */}
-      <RButton title="Log in" onPress={onLogin} type="secondary" />
+      <RButton title="Log in" onPress={navigateLogin} type="secondary" />
       {/* Takes you to / */}
-      <RLinkButton text={<GuestText />} onPress={onGuest} />
+      <RLinkButton text={<ContinueGuestLink />} onPress={navigateGuest} />
     </View>
   );
 };

@@ -7,7 +7,7 @@ export const RCreateAccountAvatar = (): React.ReactElement => {
   return (
     <RAccessTemplate>
       {/* Navigation */}
-      <Text>🔙{'                                         '}Skip</Text>
+      <Text>⬅️{'                                         '}Skip</Text>
       {/* Navigation */}
       <Text>🌑️🌑️🌑️🌕🌕🌕🌑️🌑️🌑️</Text>
       {/* Header */}

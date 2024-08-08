@@ -7,7 +7,7 @@ export const RCreateAccountName = (): React.ReactElement => {
   return (
     <RAccessTemplate>
       {/* Navigation */}
-      <Text>🔙</Text>
+      <Text>⬅️</Text>
       {/* Navigation */}
       <Text>🌕🌕🌕🌑️🌑️🌑️🌑️🌑️🌑️</Text>
       {/* Header */}

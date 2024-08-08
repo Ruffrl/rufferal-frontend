@@ -2,34 +2,50 @@ import * as React from 'react';
 
 import { Text } from 'react-native';
 import tw from 'twrnc';
-import { RAccessTemplate } from '../../templates';
+import {
+  RAccessTemplate,
+  RButton,
+  RFormEmailPassword,
+  RLinkButton,
+} from '../..';
+import { PageHeader } from '../../templates/RAccessTemplate';
 
-export const RLogin = (): React.ReactElement => {
+type LoginProps = {
+  navigateForgotPassword: () => void;
+  navigateSignup: () => void;
+};
+
+export const RLogin = ({
+  navigateForgotPassword,
+  navigateSignup,
+}: LoginProps): React.ReactElement => {
+  const SignupLink = () => (
+    <Text style={tw`text-xs tracking-wide text-gray-800`}>
+      New to Rufferal? <Text style={tw`font-bold`}>Sign up</Text>
+    </Text>
+  );
+
   return (
     <RAccessTemplate>
       {/* Header */}
-      <Text>Log in</Text>
+      <PageHeader header="Log in" />
       {/* Apple interaction button */}
-      <Text>Log in with Apple</Text>
+      <RButton title="🍎 Log in with Apple" type="secondary" />
       {/* Google interaction button */}
-      <Text>Log in with Google</Text>
+      <RButton title="🇬 Log in with Google" type="secondary" />
       {/* Break */}
       <Text>------- or ---------</Text>
       {/* LOGIN FORM */}
-      {/* Email field */}
-      <Text>Email Address</Text>
-      {/* Password field - needs hidden input and toggleable visibility on text */}
-      <Text>Password</Text>
-      {/* Forgot password navigation link */}
-      <Text>Forgot password?</Text>
-      {/* Error handling */}
-      <Text>Conditional error display</Text>
-      {/* Submit button and handler */}
-      <Text>Continue</Text>
+      <RFormEmailPassword
+        optionalElement={
+          <RLinkButton
+            onPress={navigateForgotPassword}
+            text="Forgot password?"
+          />
+        }
+      />
       {/* Sign up navigation link */}
-      <Text>
-        New to Rufferal? <Text style={tw`font-bold`}>Sign up</Text>
-      </Text>
+      <RLinkButton onPress={navigateSignup} text={<SignupLink />} />
     </RAccessTemplate>
   );
 };

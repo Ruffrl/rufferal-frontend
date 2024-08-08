@@ -7,7 +7,7 @@ import { observableAuthStore, User } from '../../../store';
 import { FormErrorProps, RButton, RFormError } from '../atom';
 import { RFormInput } from '../molecule';
 
-type LogInInputs = {
+type LoginInputs = {
   firstName: string;
   email: string;
   password: string;
@@ -21,11 +21,26 @@ type LoginResponse = {
   };
 };
 
-export const RFormLogin = observer(
+/*
+ * BLARG - TODOs
+ * rename so we can share between login and sign up
+ * move submit handling to parent
+ * create an optional JSX Element under password field for additional things someone might want before submit button
+ * password field will have hidden input and a toggleable visibility
+ * [optional] submit button can have changeable text w/ default of 'Continue'
+ * [optional] can pass password validation boolean that will display helper for password requirements and error if invalid validations
+ */
+export const RFormEmailPassword = observer(
   ({
     navigateAfterLogin,
+    optionalElement,
+    passwordShouldValidate = false,
+    submitTitle = 'Continue',
   }: {
     navigateAfterLogin?: () => void;
+    optionalElement?: React.ReactNode;
+    passwordShouldValidate?: boolean;
+    submitTitle?: string;
   }): React.ReactElement => {
     /* STATE */
     const [loading, setLoading] = useState(false);
@@ -33,12 +48,13 @@ export const RFormLogin = observer(
 
     // const authStore = useContext(AuthStoreContext);
 
+    // BLARG - update with password validation if passwordShouldValidate prop is passed
     /* REACT HOOK FORM */
     const {
       control,
       handleSubmit,
       formState: { errors },
-    } = useForm<LogInInputs>({
+    } = useForm<LoginInputs>({
       defaultValues: {
         email: '',
         password: '',
@@ -114,8 +130,9 @@ export const RFormLogin = observer(
 
     return (
       <View>
-        <Text>Logged In: {String(observableAuthStore.isLoggedIn)}</Text>
+        {/* <Text>Logged In: {String(observableAuthStore.isLoggedIn)}</Text> */}
 
+        {/* Email field */}
         <Controller
           name="email"
           control={control}
@@ -137,6 +154,9 @@ export const RFormLogin = observer(
           )}
         />
 
+        {/* Password field */}
+        {/* BLARG - needs hidden input */}
+        {/* BLARG - needs toggle visibility */}
         <Controller
           name="password"
           control={control}
@@ -158,8 +178,22 @@ export const RFormLogin = observer(
           )}
         />
 
+        {/* For optional behaviors or features between password field and submit button */}
+        {optionalElement}
+
+        {/* Password validation helper - BLARG - should visibly error if invalid password */}
+        {passwordShouldValidate && (
+          <Text>
+            Your password needs to be at least 8 characters long and include a
+            number.
+          </Text>
+        )}
+
+        {/* Form level errors */}
         {error && <RFormError error={error} />}
-        <RButton title="Log In" onPress={onSubmit} loading={loading} />
+
+        {/* Submit button */}
+        <RButton title={submitTitle} onPress={onSubmit} loading={loading} />
       </View>
     );
   }

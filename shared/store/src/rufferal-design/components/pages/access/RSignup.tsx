@@ -2,43 +2,53 @@ import * as React from 'react';
 
 import { Text } from 'react-native';
 import tw from 'twrnc';
-import { RAccessTemplate } from '../../templates';
+import {
+  RAccessTemplate,
+  RButton,
+  RFormEmailPassword,
+  RLinkButton,
+} from '../..';
+import { PageHeader } from '../../templates/RAccessTemplate';
 
-export const RSignup = (): React.ReactElement => {
+type SignupProps = {
+  navigateAbout: () => void;
+  navigateLogin: () => void;
+};
+
+export const RSignup = ({
+  navigateAbout,
+  navigateLogin,
+}: SignupProps): React.ReactElement => {
+  const AboutLink = () => (
+    <Text style={tw`text-xs tracking-wide text-gray-800`}>
+      By clicking Sign up, you are agreeing to our{' '}
+      <Text style={tw`font-bold underline`}>Service Agreement</Text> and{' '}
+      <Text style={tw`font-bold underline`}>Privacy Policy</Text>
+    </Text>
+  );
+
+  const LoginLink = () => (
+    <Text style={tw`text-xs tracking-wide text-gray-800`}>
+      Already have an account? <Text style={tw`font-bold `}>Log in</Text>
+    </Text>
+  );
+
   return (
     <RAccessTemplate>
       {/* Header */}
-      <Text>Create an account</Text>
+      <PageHeader header="Create an account" />
       {/* Apple interaction button */}
-      <Text>Sign up with Apple</Text>
+      <RButton title="🍎 Log in with Apple" type="secondary" />
       {/* Google interaction button */}
-      <Text>Sign up with Google</Text>
+      <RButton title="🇬 Log in with Google" type="secondary" />
       {/* Break */}
       <Text>------- or ---------</Text>
       {/* SIGNUP FORM */}
-      {/* Email field */}
-      <Text>Email Address</Text>
-      {/* Password field - needs hidden input and toggleable visibility on text */}
-      <Text>Password</Text>
-      {/* Forgot password navigation link */}
-      <Text>
-        Your password needs to be at least 8 characters long and include a
-        number.
-      </Text>
-      {/* Error handling */}
-      <Text>Conditional error display</Text>
-      {/* Submit button and handler */}
-      <Text>Sign up</Text>
+      <RFormEmailPassword submitTitle="Sign up" passwordShouldValidate />
       {/* Sign up navigation link */}
-      <Text>
-        By clicking Sign up, you are agreeing to our{' '}
-        <Text style={tw`font-bold underline`}>Service Agreement</Text>{' '}and{' '}
-        <Text style={tw`font-bold underline`}>Privacy Policy</Text>
-      </Text>
+      <RLinkButton onPress={navigateAbout} text={<AboutLink />} />
       {/* Sign up navigation link */}
-      <Text>
-        Already have an account? <Text style={tw`font-bold `}>Log in</Text>
-      </Text>
+      <RLinkButton onPress={navigateLogin} text={<LoginLink />} />
     </RAccessTemplate>
   );
 };

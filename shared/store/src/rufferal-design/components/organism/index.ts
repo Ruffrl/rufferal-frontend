@@ -13,7 +13,7 @@
 export { RAccount } from './admin/RAccount';
 export { RAllAccounts } from './admin/RAllAccounts';
 export { RCounter } from './RCounter';
-export { RFormLogin } from './RFormLogin';
+export { RFormEmailPassword } from './RFormEmailPassword';
 export { RLogoutButton } from './RLogoutButton';
 export { ROnboardingButtons } from './ROnboardingButtons';
 export { ROnboardingWeb } from './ROnboardingWeb';

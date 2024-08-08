@@ -6,14 +6,14 @@ import { MobileOnboardingSwiper } from '../../components/MobileOnboardingSwiper'
 export const OnboardingScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
 
-  const onSignup = () => navigation.navigate('Signup');
-  const onLogin = () => navigation.navigate('Login');
-  const onGuest = () => navigation.navigate('Dashboard');
+  const navigateSignup = () => navigation.navigate('Signup');
+  const navigateLogin = () => navigation.navigate('Login');
+  const navigateGuest = () => navigation.navigate('Dashboard');
 
   return (
     <ROnboarding
       swiper={<MobileOnboardingSwiper />}
-      navigation={{ onSignup, onLogin, onGuest }}
+      navigation={{ navigateSignup, navigateLogin, navigateGuest }}
     />
   );
 };

@@ -1,11 +1,21 @@
 import { observableAuthStore, RLogin } from '@rufferal-frontend/store';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export const Login = () => {
+  const navigate = useNavigate();
+
   // user is authenticated, send them to dashboard
   if (observableAuthStore.isLoggedIn) {
     return <Navigate to="/" />;
   }
 
-  return <RLogin />;
+  const navigateSignup = () => navigate('/signup');
+  const navigateForgotPassword = () => navigate('/signup');
+
+  return (
+    <RLogin
+      navigateSignup={navigateSignup}
+      navigateForgotPassword={navigateForgotPassword}
+    />
+  );
 };

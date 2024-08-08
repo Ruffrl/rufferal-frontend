@@ -27,7 +27,11 @@ export const Screens = observer(() => {
   // If a user hasn't interacted with Onboarding, getItem("showOnboarding") should be null
   // If a user interacts with Onboarding, we setItem("showOnboarding", "true")
   // At the Screens level, we just get AsyncStorage
-  const [showOnboarding, setShowOnboarding] = useState<boolean>(true);
+
+  /* DEVELOPING/DEBUGGING */
+  const [showOnboarding, setShowOnboarding] = useState<boolean>(false);
+
+  // const [showOnboarding, setShowOnboarding] = useState<boolean>(true);
 
   useEffect(() => {
     AsyncStorage.getItem('showOnboarding').then((value) => {

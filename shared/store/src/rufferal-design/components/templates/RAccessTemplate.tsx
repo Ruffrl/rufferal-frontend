@@ -1,15 +1,27 @@
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { useContext } from 'react';
-import { View } from 'react-native';
+import { PropsWithChildren, useContext } from 'react';
+import { Text, View } from 'react-native';
 import tw from 'twrnc';
 import { RFormError } from '..';
 import { ToastStoreContext } from '../../../store';
 
 const TEMPLATE_PADDING = 'pt-16 pb-8 px-2';
 
+type AccessTemplateProps = {
+  header?: string;
+};
+
+// BLARG - new atom
+export const PageHeader = ({ header = 'Rufferal' }: { header?: string }) => (
+  <Text style={tw`text-xl font-bold text-gray-600`}>{header}</Text>
+);
+
 export const RAccessTemplate = observer(
-  ({ children }: React.PropsWithChildren): React.ReactElement => {
+  ({
+    children,
+    header,
+  }: PropsWithChildren<AccessTemplateProps>): React.ReactElement => {
     const toastStore = useContext(ToastStoreContext);
 
     return (
@@ -18,6 +30,7 @@ export const RAccessTemplate = observer(
           // PROBABLY NEED A NEW COMPONENT FOR GLOBAL ERRORS
           <RFormError error={toastStore.messages.toString()} />
         )}
+        {header && <PageHeader header={header} />}
         {/* TESTING GLOBAL ERROR */}
         {/* BLARG - how to force truncation on error string? */}
         {/* BLARG - how to force multiple errors display one on top of another? */}

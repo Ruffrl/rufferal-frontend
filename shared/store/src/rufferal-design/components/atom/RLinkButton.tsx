@@ -8,7 +8,7 @@ interface Props extends PressableProps {
   textStyle?: string;
 }
 
-const LINK_STYLES = tw`items-center justify-center`;
+const LINK_STYLES = tw`w-full items-center justify-center`;
 
 export const RLinkButton = ({
   onPress,
@@ -17,7 +17,8 @@ export const RLinkButton = ({
   textStyle,
 }: Props) => {
   // Primary && Default theme
-  let textColor = 'text-blue-500';
+  // let textColor = 'text-blue-500';
+  let textColor = 'text-gray-800';
 
   // Manage state themes
   if (state === 'error') {

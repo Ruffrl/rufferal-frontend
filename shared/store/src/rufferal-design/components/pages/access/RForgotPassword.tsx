@@ -2,14 +2,17 @@ import * as React from 'react';
 
 import { Text } from 'react-native';
 import { RAccessTemplate } from '../../templates';
+import { PageHeader } from '../../templates/RAccessTemplate';
 
 export const RForgotPassword = (): React.ReactElement => {
   // BLARG - this is based on if they clicked Continue
   const submittedRequest = false;
   return (
     <RAccessTemplate>
+      {/* Navigation */}
+      <Text>⬅️</Text>
       {/* Header */}
-      <Text>Reset your password</Text>
+      <PageHeader header="Reset your password" />
       {submittedRequest ? (
         <>
           {/* Password image? */}

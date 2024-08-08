@@ -5,9 +5,9 @@ import { ROnboardingButtons } from '../../organism';
 import { RAccessTemplate } from '../../templates';
 
 export type OnboardingNavigationProps = {
-  onSignup: () => void;
-  onLogin: () => void;
-  onGuest: () => void;
+  navigateSignup: () => void;
+  navigateLogin: () => void;
+  navigateGuest: () => void;
 };
 
 type OnboardingProps = {
