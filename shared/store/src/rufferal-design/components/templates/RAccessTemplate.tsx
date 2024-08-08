@@ -1,36 +1,32 @@
 import { observer } from 'mobx-react-lite';
+import * as React from 'react';
 import { useContext } from 'react';
-import { Platform, ScrollView, Text, View } from 'react-native';
+import { View } from 'react-native';
 import tw from 'twrnc';
 import { RFormError } from '..';
 import { ToastStoreContext } from '../../../store';
-import { MobileNavigation, WebNavigation } from '../../navigation';
+
+const TEMPLATE_PADDING = 'pt-16 pb-8 px-2';
 
 export const RAccessTemplate = observer(
   ({ children }: React.PropsWithChildren): React.ReactElement => {
-    const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
     const toastStore = useContext(ToastStoreContext);
-    // console.log('BLARG toastStore', toastStore);
-    // console.log(
-    //   'BLARG toastStore.messages.toString()',
-    //   toastStore.messages.toString()
-    // );
 
     return (
-      <View
-        style={tw.style(
-          'items-center mx-2 my-3 flex-1',
-          // isMobile ? tw`bg-amber-400 h-full w-full` : tw`bg-purple-400 flex-1`
-          isMobile ? tw`bg-amber-400` : tw`bg-purple-400`
-        )}
-      >
-        <Text style={tw`text-2xl mb-4`}>Rufferal</Text>
-        <Text style={tw`text-xl mb-4`}>Access Playground</Text>
+      <View style={tw.style(TEMPLATE_PADDING, 'flex-1')}>
         {toastStore.messages.length > 0 && (
+          // PROBABLY NEED A NEW COMPONENT FOR GLOBAL ERRORS
           <RFormError error={toastStore.messages.toString()} />
         )}
-        <ScrollView style={tw`w-full`}>{children}</ScrollView>
-        {isMobile ? <MobileNavigation /> : <WebNavigation />}
+        {/* TESTING GLOBAL ERROR */}
+        {/* BLARG - how to force truncation on error string? */}
+        {/* BLARG - how to force multiple errors display one on top of another? */}
+        {/* <View
+          style={tw`absolute bottom-20 right-0 z-10 bg-red-200 px-4 max-h-[100px]`}
+        >
+          <RFormError error="This is a test error that will display and then hopefully disappear and needs a dismissable button!" />
+        </View> */}
+        <View style={tw`w-full`}>{children}</View>
       </View>
     );
   }

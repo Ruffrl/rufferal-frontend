@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import tw from 'twrnc';
 import { ROnboardingButtons } from '../../organism';
+import { RAccessTemplate } from '../../templates';
 
 export type OnboardingNavigationProps = {
   onSignup: () => void;
@@ -22,12 +23,12 @@ export const SWIPER_ANDROID_IMAGE_STYLES = tw`h-3/5 w-3/5`;
 
 export const ROnboarding = ({ swiper, navigation }: OnboardingProps) => {
   return (
-    <View style={tw`flex-1 pt-16 pb-8 px-2`}>
+    <RAccessTemplate>
       <Text style={tw`text-3xl font-bold text-gray-600 text-center`}>
         Rufferal
       </Text>
       <View style={tw`flex-none w-full h-3/5 items-center my-6`}>{swiper}</View>
       <ROnboardingButtons {...navigation} />
-    </View>
+    </RAccessTemplate>
   );
 };

@@ -1,16 +1,25 @@
 import * as React from 'react';
 
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import tw from 'twrnc';
-import { observableAuthStore } from '../../../../store';
 import { RAccessTemplate } from '../../templates';
 
 export const REmailVerification = (): React.ReactElement => {
   return (
     <RAccessTemplate>
-      <View style={tw`mt-[30px] mb-[30px]`}>
-        <Text>{observableAuthStore.user?.id}</Text>
-      </View>
+      {/* Header */}
+      <Text>Verify your account</Text>
+      {/* Helper test */}
+      <Text>Check your email for the verification link.</Text>
+      <Text style={tw`font-bold`}>someemail@mailio.com</Text>
+      {/* Done should only show up if verification is successful? */}
+      <Text>Done</Text>
+      {/* Helper test */}
+      <Text>Didn't get a link? Wait a few minutes and try again.</Text>
+      {/* Log in navigation link */}
+      <Text>
+        Already have an account? <Text style={tw`font-bold`}>Log in</Text>
+      </Text>
     </RAccessTemplate>
   );
 };

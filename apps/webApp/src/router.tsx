@@ -1,6 +1,19 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { ErrorPage } from './components/ErrorPage';
-import { Dashboard, DevPlayground, Home, Onboarding, Profile } from './routes';
+import {
+  CreateAccountAvatar,
+  CreateAccountName,
+  CreateAccountType,
+  Dashboard,
+  DevPlayground,
+  EmailVerification,
+  ForgotPassword,
+  Login,
+  Onboarding,
+  Profile,
+  ResetPassword,
+  Signup,
+} from './routes';
 
 export const router = createBrowserRouter([
   {
@@ -10,22 +23,27 @@ export const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <Home />, // BLARG - This needs an update to convert to a <Login/> route component
+    element: <Login />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/signup',
-    element: <Home />, // BLARG - New component <Signup/>
+    element: <Signup />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/forgot-password',
+    element: <ForgotPassword />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/reset-password',
+    element: <ResetPassword />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/verification',
-    element: <Home />, // BLARG - New component <EmailVerification/>
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: '/create-account',
-    element: <Home />, // BLARG - New component <CreateAccount/>
+    element: <EmailVerification />,
     errorElement: <ErrorPage />,
   },
   {
@@ -34,6 +52,28 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   // BLARG - this starts AUTH
+  {
+    path: '/create-account',
+    element: <CreateAccountName />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/create-account/name',
+        element: <CreateAccountName />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/create-account/avatar',
+        element: <CreateAccountAvatar />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: '/create-account/type',
+        element: <CreateAccountType />,
+        errorElement: <ErrorPage />,
+      },
+    ],
+  },
   {
     path: '/',
     element: <Dashboard />, // Dashboard == search and browse; Manage guest search and browse vs logged in search and browse
@@ -65,8 +105,9 @@ export const router = createBrowserRouter([
     element: <Profile />, // BLARG - needs <PetProfile />
     errorElement: <ErrorPage />,
   },
+  /* GUARD AGAINST INVALID URLS */
   {
     path: '*',
-    element: <Navigate to="dashboard" replace />,
+    element: <Navigate to="/" replace />,
   },
 ]);

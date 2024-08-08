@@ -4,11 +4,19 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { observableAuthStore } from '@rufferal-frontend/store';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
-import { OnboardingScreen } from './access/OnboardingScreen';
-import { DevPlaygroundScreen } from './onboarding/DevPlaygroundScreen';
-import { HomeScreen } from './onboarding/HomeScreen';
-import { DashboardScreen } from './user-account/DashboardScreen';
-import { ProfileScreen } from './user-account/ProfileScreen';
+import {
+  CreateAccountAvatarScreen,
+  CreateAccountNameScreen,
+  CreateAccountTypeScreen,
+  DashboardScreen,
+  DevPlaygroundScreen,
+  ForgotPasswordScreen,
+  LoginScreen,
+  OnboardingScreen,
+  ProfileScreen,
+  ResetPasswordScreen,
+  SignupScreen,
+} from '.';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,38 +41,69 @@ export const Screens = observer(() => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {observableAuthStore.isLoggedIn ? (
-          <>
-            {/* My Profile - Owner */}
-            {/* AuthedSearchServices */}
+          /* USER SCREENS */
+          <Stack.Group>
+            {/* Create Account */}
             {/* Pet Profiles + Care Plans */}
+            {/* SearchServices [dashboard] */}
+            {/* My Profile - Owner */}
             {/* Bookings */}
             {/* Messaging */}
             {/* Account Settings */}
             {/* My Profile - Caretaker */}
-            {/* AuthedSearchGigs */}
+            {/* SearchGigs */}
+            {/* BLARG - convert this to authenticated only dashboard */}
             <Stack.Screen name="Dashboard" component={DashboardScreen} />
+            <Stack.Screen
+              name="Create Account Name"
+              component={CreateAccountNameScreen}
+            />
+            <Stack.Screen
+              name="Create Account Avatar"
+              component={CreateAccountAvatarScreen}
+            />
+            <Stack.Screen
+              name="Create Account Type"
+              component={CreateAccountTypeScreen}
+            />
             <Stack.Screen name="Profile" component={ProfileScreen} />
-          </>
+          </Stack.Group>
         ) : (
-          <>
+          /* GUEST SCREENS */
+          <Stack.Group>
             {/* Onboarding */}
             {/* Login + Social Login */}
-            {/* SearchServices */}
             {/* Sign Up */}
-            {/* SearchGigs */}
+            {/* Forgot Password */}
+            {/* SearchServices [guest dashboard] */}
             {showOnboarding && (
               <Stack.Screen name="Onboarding" component={OnboardingScreen} />
             )}
-            <Stack.Screen name="Home" component={HomeScreen} />
-            {/* BLARG - new Screen */}
-            <Stack.Screen name="Signup" component={HomeScreen} />
-            {/* BLARG - new Screen */}
-            <Stack.Screen name="Login" component={HomeScreen} />
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen
+              name="Forgot Password"
+              component={ForgotPasswordScreen}
+            />
+            <Stack.Screen
+              name="Reset Password"
+              component={ResetPasswordScreen}
+            />
+            <Stack.Screen name="Signup" component={SignupScreen} />
             {/* BLARG - guest version */}
+            {/* BLARG - convert this GuestDashboardScreen */}
             <Stack.Screen name="Dashboard" component={DashboardScreen} />
-            <Stack.Screen name="About" component={DevPlaygroundScreen} />
-          </>
+            {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+          </Stack.Group>
         )}
+        {/* SHARED SCREENS */}
+        <Stack.Group
+          navigationKey={observableAuthStore.isLoggedIn ? 'user' : 'guest'}
+        >
+          {/* BLARG - todo */}
+          <Stack.Screen name="About" component={DevPlaygroundScreen} />
+          {/* BLARG - todo */}
+          <Stack.Screen name="Help" component={DevPlaygroundScreen} />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );

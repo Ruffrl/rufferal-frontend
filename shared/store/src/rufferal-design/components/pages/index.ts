@@ -11,8 +11,14 @@
  *
  */
 
-export { RDashboard } from './access/RDashboard';
+// Accounts, Profiles, Settings
+export { RCreateAccountAvatar } from './account/RCreateAccountAvatar';
+export { RCreateAccountName } from './account/RCreateAccountName';
+export { RCreateAccountType } from './account/RCreateAccountType';
+
+// Onboarding and Auth
 export { REmailVerification } from './access/REmailVerification';
+export { RForgotPassword } from './access/RForgotPassword';
 export { RLogin } from './access/RLogin';
 export {
   ROnboarding,
@@ -23,9 +29,13 @@ export {
   SWIPER_SLIDE_STYLE,
 } from './access/ROnboarding';
 export type { OnboardingNavigationProps } from './access/ROnboarding';
+export { RResetPassword } from './access/RResetPassword';
 export { RSignup } from './access/RSignup';
 
+// Must be authenticated
 export { RDash } from './RDash';
+export { RProfile } from './RProfile';
+
+// Shared
 export { RDevPlayground } from './RDevPlayground';
 export { RHome } from './RHome';
-export { RProfile } from './RProfile';

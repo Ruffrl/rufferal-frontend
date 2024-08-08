@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { Text } from 'react-native';
 import { RFormLogin } from '../organism';
-import { RAccessTemplate } from '../templates';
+import { RAccessTemplateOLD } from '../templates';
 import tw from 'twrnc';
 
 export const RHome = observer(
@@ -70,14 +70,14 @@ export const RHome = observer(
     }, []);
 
     return (
-      <RAccessTemplate>
+      <RAccessTemplateOLD>
         <Text style={tw`mt-[30px] mb-[30px]`}>
           Testing Async Storage
         </Text>
         <Text>{data}</Text>
         <Text>{JSON.stringify(objectData)}</Text>
         <RFormLogin navigateAfterLogin={navigateAfterLogin} />
-      </RAccessTemplate>
+      </RAccessTemplateOLD>
     );
   }
 );
