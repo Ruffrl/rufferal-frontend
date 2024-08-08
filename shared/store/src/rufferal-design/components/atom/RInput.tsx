@@ -25,6 +25,7 @@ export const RInput = ({
   ...inputProps
 }: Props): React.ReactElement => {
   const borderStyle = error ? 'border-[#fc6d47]' : 'border-[#c0cbd3]';
+
   let sizeStyle = 'w-2/5';
   switch (size) {
     case 'medium':

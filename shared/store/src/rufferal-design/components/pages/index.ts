@@ -16,12 +16,15 @@ export { REmailVerification } from './access/REmailVerification';
 export { RLogin } from './access/RLogin';
 export {
   ROnboarding,
+  SWIPER_ANDROID_IMAGE_STYLES,
   SWIPER_CONTAINER_STYLES,
   SWIPER_IMAGE_STYLES,
+  SWIPER_SLIDE_STYLE,
 } from './access/ROnboarding';
+export type { OnboardingNavigationProps } from './access/ROnboarding';
 export { RSignup } from './access/RSignup';
 
-export { RAbout } from './RAbout';
 export { RDash } from './RDash';
+export { RDevPlayground } from './RDevPlayground';
 export { RHome } from './RHome';
 export { RProfile } from './RProfile';

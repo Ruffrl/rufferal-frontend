@@ -3,7 +3,7 @@ import tw from 'twrnc';
 import { RCounter } from '../organism';
 import { RAccessTemplate } from '../templates';
 
-export const RAbout = (): React.ReactElement => {
+export const RDevPlayground = (): React.ReactElement => {
   return (
     <RAccessTemplate>
       <View style={tw`mb-[10px] border-[2px] border-black`}>

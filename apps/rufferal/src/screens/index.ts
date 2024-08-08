@@ -1,4 +1,4 @@
-export { AboutScreen } from './onboarding/AboutScreen';
+export { AboutScreen } from './onboarding/DevPlaygroundScreen';
 export { HomeScreen } from './onboarding/HomeScreen';
 export { Screens } from './Screens';
 export { DashboardScreen } from './user-account/DashboardScreen';

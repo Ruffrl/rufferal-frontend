@@ -1,8 +1,6 @@
 import { Image, Platform, Text, View } from 'react-native';
 import tw from 'twrnc';
-import { SWIPER_IMAGE_STYLES } from '..';
-
-const CONTAINER_STYLE = 'flex-1 items-center justify-center h-1/2 w-full';
+import { SWIPER_IMAGE_STYLES, SWIPER_SLIDE_STYLE } from '..';
 
 export const ROnboardingSlideOne = ({
   image,
@@ -12,7 +10,7 @@ export const ROnboardingSlideOne = ({
   const isAndroid = Platform.OS === 'android';
 
   return (
-    <View style={tw.style(CONTAINER_STYLE)}>
+    <View style={tw.style(SWIPER_SLIDE_STYLE)}>
       {isAndroid ? (
         image
       ) : (
@@ -36,7 +34,7 @@ export const ROnboardingSlideTwo = ({
   const isAndroid = Platform.OS === 'android';
 
   return (
-    <View style={tw.style(CONTAINER_STYLE)}>
+    <View style={tw.style(SWIPER_SLIDE_STYLE)}>
       {isAndroid ? (
         image
       ) : (
@@ -60,7 +58,7 @@ export const ROnboardingSlideThree = ({
   const isAndroid = Platform.OS === 'android';
 
   return (
-    <View style={tw.style(CONTAINER_STYLE)}>
+    <View style={tw.style(SWIPER_SLIDE_STYLE)}>
       {isAndroid ? (
         image
       ) : (

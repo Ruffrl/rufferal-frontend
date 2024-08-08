@@ -26,6 +26,8 @@ export type ScreenProps = {
   About: undefined;
   Dashboard: undefined;
   Profile: undefined;
+  Signup: undefined;
+  Login: undefined;
   // Profile: { userId: string};
 };
 

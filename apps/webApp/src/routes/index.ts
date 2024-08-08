@@ -1,4 +1,4 @@
-export { About } from './About';
+export { DevPlayground } from './DevPlayground';
 export { Dashboard } from './Dashboard';
 export { Home } from './Home';
 export { Profile } from './Profile';

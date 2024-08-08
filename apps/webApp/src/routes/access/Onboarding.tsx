@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ROnboarding } from '@rufferal-frontend/store';
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { WebOnboarding } from '../../components/WebOnboarding';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { WebOnboardingSwiper } from '../../components/WebOnboardingSwiper';
 
 export const Onboarding = () => {
   // showOnboarding == true -> they have not interacted with Onboarding, do display
@@ -12,6 +12,7 @@ export const Onboarding = () => {
   // If a user interacts with Onboarding, we setItem("showOnboarding", "true")
   // At the Screens level, we just get AsyncStorage
   const [showOnboarding, setShowOnboarding] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     AsyncStorage.getItem('showOnboarding').then((value) => {
@@ -26,5 +27,14 @@ export const Onboarding = () => {
     return <Navigate to="/" replace />;
   }
 
-  return <ROnboarding swiper={<WebOnboarding />} />;
+  const onSignup = () => navigate('/signup');
+  const onLogin = () => navigate('/login');
+  const onGuest = () => navigate('/');
+
+  return (
+    <ROnboarding
+      swiper={<WebOnboardingSwiper />}
+      navigation={{ onSignup, onLogin, onGuest }}
+    />
+  );
 };

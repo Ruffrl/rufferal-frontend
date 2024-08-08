@@ -5,7 +5,7 @@ import { observableAuthStore } from '@rufferal-frontend/store';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { OnboardingScreen } from './access/OnboardingScreen';
-import { AboutScreen } from './onboarding/AboutScreen';
+import { DevPlaygroundScreen } from './onboarding/DevPlaygroundScreen';
 import { HomeScreen } from './onboarding/HomeScreen';
 import { DashboardScreen } from './user-account/DashboardScreen';
 import { ProfileScreen } from './user-account/ProfileScreen';
@@ -56,7 +56,13 @@ export const Screens = observer(() => {
               <Stack.Screen name="Onboarding" component={OnboardingScreen} />
             )}
             <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="About" component={AboutScreen} />
+            {/* BLARG - new Screen */}
+            <Stack.Screen name="Signup" component={HomeScreen} />
+            {/* BLARG - new Screen */}
+            <Stack.Screen name="Login" component={HomeScreen} />
+            {/* BLARG - guest version */}
+            <Stack.Screen name="Dashboard" component={DashboardScreen} />
+            <Stack.Screen name="About" component={DevPlaygroundScreen} />
           </>
         )}
       </Stack.Navigator>
