@@ -31,8 +31,7 @@ export const Screens = observer(() => {
 
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator screenOptions={{ headerShown: false }}> */}
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         {observableAuthStore.isLoggedIn ? (
           <>
             {/* My Profile - Owner */}
