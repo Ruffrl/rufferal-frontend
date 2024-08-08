@@ -23,7 +23,11 @@
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
     "@react-native-async-storage/async-storage": "*",
-    "twrnc": "*"
+    "twrnc": "*",
+    "mobx-persist-store": "*",
+    "react-native-swiper": "*",
+    "react-router-dom": "*",
+    "react-native-web-swiper": "*"
   },
   "devDependencies": {}
 }
