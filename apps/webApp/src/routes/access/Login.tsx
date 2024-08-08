@@ -10,7 +10,7 @@ export const Login = () => {
   }
 
   const navigateSignup = () => navigate('/signup');
-  const navigateForgotPassword = () => navigate('/signup');
+  const navigateForgotPassword = () => navigate('/forgot-password');
 
   return (
     <RLogin
