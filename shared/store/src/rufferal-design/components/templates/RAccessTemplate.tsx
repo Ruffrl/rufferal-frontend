@@ -1,16 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { PropsWithChildren, useContext } from 'react';
-import {
-  Image,
-  Platform,
-  Pressable,
-  StatusBar,
-  Text,
-  View,
-} from 'react-native';
+import { Platform, StatusBar, View } from 'react-native';
 import tw from 'twrnc';
-import { RFormError } from '..';
+import { RBackNavigation, RFormError, RPageHeader } from '..';
 import { ToastStoreContext } from '../../../store';
 
 const PAGE_STYLES = tw`flex-1 justify-between bg-white`;
@@ -38,42 +31,6 @@ type AccessTemplateProps = {
 //    #000: black --> `-black`
 //    #fff: white --> `-white`
 
-// BLARG - new atom
-/*
-  font-family: Inter;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 36px;
-  letter-spacing: -0.48px;
-*/
-export const PageHeader = ({ header = 'Rufferal' }: { header?: string }) => (
-  <Text style={tw`py-6 text-2xl font-bold text-gray-500`}>{header}</Text>
-);
-
-export const BackNavigation = ({
-  backNavigation,
-  mobileBackIcon,
-}: {
-  backNavigation: () => void;
-  mobileBackIcon?: React.JSX.Element;
-}) => {
-  return (
-    <View>
-      <Pressable onPress={backNavigation}>
-        {mobileBackIcon || (
-          <Image
-            source={require('../../../assets/icons-16/arrow-left.png')}
-            resizeMode="contain"
-            style={tw`w-[24px] h-[24px]`}
-            tintColor="#18181b"
-          />
-        )}
-      </Pressable>
-    </View>
-  );
-};
-
 export const RAccessTemplate = observer(
   ({
     backNavigation,
@@ -92,12 +49,12 @@ export const RAccessTemplate = observer(
         {/* <StatusBar backgroundColor={tw.style('bg-purple-200')} /> */}
         <StatusBar backgroundColor="#000" />
         {backNavigation && (
-          <BackNavigation
+          <RBackNavigation
             backNavigation={backNavigation}
             mobileBackIcon={mobileBackIcon}
           />
         )}
-        {header && <PageHeader header={header} />}
+        {header && <RPageHeader header={header} />}
         <View style={tw`flex-1`}>{children}</View>
         {/* TESTING GLOBAL ERROR */}
         {/* BLARG - how to force truncation on error string? */}

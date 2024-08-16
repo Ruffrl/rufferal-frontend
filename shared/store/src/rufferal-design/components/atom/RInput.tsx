@@ -25,19 +25,8 @@ interface Props extends Omit<TextInputProps, 'onChange'> {
 
 const CONTAINER_STYLES =
   'border border-solid border-gray-500 rounded h-12 flex-row w-full justify-center items-center px-2';
-/*
-  color: var(--Primary, #667080);
-  font-feature-settings: 'calt' off;
-  font-family: Inter;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: -0.32px;
-*/
 const INPUT_STYLES = 'text-base text-gray-500 h-full flex-1 px-0';
-// const INPUT_STYLES =
-//   'text-base text-gray-500 flex-1 h-full justify-center items-center bg-pink-500 border border-solid border-purple-700 p-0';
+
 // PRIMARY
 //    #667080: dark gray --> `-gray-500` [#6b7280]
 //      white text

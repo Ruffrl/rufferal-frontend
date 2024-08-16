@@ -10,6 +10,10 @@
  *
  */
 
+export { RBackNavigation } from './RBackNavigation';
 export { RFormInput } from './RFormInput';
-export { ROnboardingSlideOne, ROnboardingSlideThree, ROnboardingSlideTwo } from './ROnboardingSlides';
-
+export {
+  ROnboardingSlideOne,
+  ROnboardingSlideThree,
+  ROnboardingSlideTwo,
+} from './ROnboardingSlides';

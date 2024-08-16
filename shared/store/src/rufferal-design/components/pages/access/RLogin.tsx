@@ -35,17 +35,6 @@ export const RLogin = ({
   navigateSignup,
 }: LoginProps): React.ReactElement => {
   const SignupLink = () => (
-    /* 
-      color: #252529;
-      text-align: center;
-      font-feature-settings: 'calt' off;
-      font-family: Inter;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400; 700;
-      line-height: 20px;
-      letter-spacing: -0.28px;
-    */
     <Text style={tw`text-sm tracking-wide text-zinc-900`}>
       New to Rufferal? <Text style={tw`font-bold`}>Sign up</Text>
     </Text>
@@ -83,9 +72,7 @@ export const RLogin = ({
       backNavigation={() => console.log('GO BACK')}
       mobileBackIcon={mobileBackIcon}
     >
-      {/* Header */}
-      {/* <PageHeader header="Log in" /> */}
-      {/* BLARG - new Organism */}
+      {/* SOCIAL LOGIN */}
       <View style={tw`py-5 gap-3`}>
         {/* Apple interaction button */}
         <RButton
@@ -100,23 +87,7 @@ export const RLogin = ({
           type="secondary"
         />
       </View>
-      {/* Break */}
-      {/* 
-        color: var(--Primary, #667080);
-        text-align: center;
-        font-feature-settings: 'calt' off;
-        font-family: Inter;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 20px;
-        letter-spacing: -0.24px;
-       */}
-      {/* 
-        background: #D9D9D9;
-        width: 150px;
-        height: 1px;
-      */}
+      {/* DIVIDER */}
       <View style={tw`justify-evenly flex-row items-center py-4`}>
         <View style={tw`border-b border-gray-200 w-[150px]`} />
         <Text style={tw`text-gray-500 text-xs`}>OR</Text>
@@ -134,7 +105,7 @@ export const RLogin = ({
         mobileIconHide={mobileIconHide}
         mobileIconView={mobileIconView}
       />
-      {/* Sign up navigation link */}
+      {/* SIGN UP */}
       <RLinkButton onPress={navigateSignup} customText={<SignupLink />} />
     </RAccessTemplate>
   );

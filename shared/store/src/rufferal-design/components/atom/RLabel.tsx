@@ -7,15 +7,6 @@ interface Props extends TextInputProps {
   labelStyle?: string;
 }
 
-/* 
-font-feature-settings: 'calt' off;
-font-family: Inter;
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 22px;
-letter-spacing: -0.28px;
-*/
 const LABEL_STYLES = 'text-sm text-gray-500 font-bold py-[5px]';
 
 export const RLabel = ({ label, labelStyle }: Props): React.ReactElement => {

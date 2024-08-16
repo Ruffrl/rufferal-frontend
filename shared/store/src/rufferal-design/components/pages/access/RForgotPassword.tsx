@@ -1,8 +1,7 @@
 import * as React from 'react';
 
 import { Text } from 'react-native';
-import { RAccessTemplate } from '../../templates';
-import { PageHeader } from '../../templates/RAccessTemplate';
+import { RAccessTemplate, RPageHeader } from '../..';
 
 export const RForgotPassword = (): React.ReactElement => {
   // BLARG - this is based on if they clicked Continue
@@ -12,7 +11,7 @@ export const RForgotPassword = (): React.ReactElement => {
       {/* Navigation */}
       <Text>⬅️</Text>
       {/* Header */}
-      <PageHeader header="Reset your password" />
+      <RPageHeader header="Reset your password" />
       {submittedRequest ? (
         <>
           {/* Password image? */}

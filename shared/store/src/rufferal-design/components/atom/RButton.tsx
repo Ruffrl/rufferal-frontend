@@ -21,15 +21,6 @@ interface Props extends PressableProps {
 }
 
 const BUTTON_STYLES = tw`rounded-md elevation-3 py-3 px-8 border-2 h-12`;
-/* 
-  color: var(--Primary, #667080);
-  font-family: Inter;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22px;
-  letter-spacing: -0.32px;
-*/
 const BUTTON_TEXT_STYLES = tw`font-bold text-base tracking-wide justify-center items-center text-center`;
 // PRIMARY
 //    #667080: dark gray --> `-gray-500` [#6b7280]

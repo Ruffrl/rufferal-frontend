@@ -20,3 +20,4 @@ export type { FieldSize } from './RInput';
 export { RInputError } from './RInputError';
 export { RLabel } from './RLabel';
 export { RLinkButton } from './RLinkButton';
+export { RPageHeader } from './RPageHeader';

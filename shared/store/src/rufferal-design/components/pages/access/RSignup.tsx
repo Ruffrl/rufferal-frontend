@@ -7,8 +7,8 @@ import {
   RButton,
   RFormEmailPassword,
   RLinkButton,
+  RPageHeader
 } from '../..';
-import { PageHeader } from '../../templates/RAccessTemplate';
 
 type SignupProps = {
   androidGoogleImage?: React.ReactNode;
@@ -39,7 +39,7 @@ export const RSignup = ({
   return (
     <RAccessTemplate>
       {/* Header */}
-      <PageHeader header="Create an account" />
+      <RPageHeader header="Create an account" />
       {/* Apple interaction button */}
       {isAndroid ? (
         androidGoogleImage

@@ -36,17 +36,6 @@ export const RLinkButton = ({
       style={tw.style(LINK_STYLES, alignRight && tw`items-end`)}
       onPress={onPress}
     >
-      {/* 
-          color: #667080;
-          text-align: right;
-          font-feature-settings: 'calt' off;
-          font-family: Inter;
-          font-size: 14px;
-          font-style: normal;
-          font-weight: 700;
-          line-height: 20px;
-          letter-spacing: -0.28px;
-      */}
       {text && (
         <Text
           style={tw.style(
