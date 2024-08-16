@@ -14,13 +14,14 @@ type LoginProps = {
   navigateForgotPassword: () => void;
   navigateSignup: () => void;
   appleIcon?: React.JSX.Element;
-  // googleIcon: React.JSX.Element
+  googleIcon?: React.JSX.Element;
 };
 
 export const RLogin = ({
   navigateForgotPassword,
   navigateSignup,
   appleIcon,
+  googleIcon,
 }: LoginProps): React.ReactElement => {
   const SignupLink = () => (
     <Text style={tw`text-xs tracking-wide text-gray-800`}>
@@ -34,13 +35,22 @@ export const RLogin = ({
         <Image
           source={require('../../../../assets/empty-image.png')}
           resizeMode="contain"
-          style={tw`w-1/6 h-1/6`}
+          style={tw`w-[30px] h-[30px]`}
         />
       )
     );
-    // shared/store/src/rufferal-design/components/pages/access/RLogin.tsx
-    // apps/rufferal/android/app/src/main/res/empty-image.png
-    // shared/store/src/assets/empty-image.png
+  };
+
+  const GoogleIcon = () => {
+    return (
+      googleIcon || (
+        <Image
+          source={require('../../../../assets/empty-image.png')}
+          resizeMode="contain"
+          style={tw`w-[30px] h-[30px]`}
+        />
+      )
+    );
   };
 
   return (
@@ -48,12 +58,17 @@ export const RLogin = ({
       {/* Header */}
       <PageHeader header="Log in" />
       {/* Apple interaction button */}
-      <Text>BLARG</Text>
-      <AppleIcon />
-      <Text>BLARG</Text>
-      <RButton title="🍎 Log in with Apple" type="secondary" />
+      <RButton
+        titleIcon={<AppleIcon />}
+        title="Log in with Apple"
+        type="secondary"
+      />
       {/* Google interaction button */}
-      <RButton title="🇬 Log in with Google" type="secondary" />
+      <RButton
+        titleIcon={<GoogleIcon />}
+        title="Log in with Google"
+        type="secondary"
+      />
       {/* Break */}
       <Text>------- or ---------</Text>
       {/* LOGIN FORM */}

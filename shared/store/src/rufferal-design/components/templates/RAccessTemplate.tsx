@@ -12,6 +12,22 @@ type AccessTemplateProps = {
   header?: string;
 };
 
+// PRIMARY
+// #667080: dark gray --> `-gray-500`
+//    white text
+// SECONDARY
+// #EEF1F4: light gray --> `-slate-100`
+//    primary color text
+//    disable color text
+// TERTIARY
+// #252529: darkest gray --> `-zinc-900`
+//    white text
+// DISABLE TEXT COLOR
+// #C8C7CC: medium gray --> `-zinc-300`
+// NEUTRALS
+// #000: black --> `-black`
+// #fff: white --> `-white`
+
 // BLARG - new atom
 export const PageHeader = ({ header = 'Rufferal' }: { header?: string }) => (
   <Text style={tw`text-xl font-bold text-gray-600`}>{header}</Text>

@@ -9,10 +9,18 @@ export const LoginScreen = () => {
   const navigateSignup = () => navigation.navigate('Signup');
   const navigateForgotPassword = () => navigation.navigate('Forgot Password');
 
-  const AppleImage = () => {
+  const AppleIcon = () => {
     // BLARG - handle check if apple png exists
-    // apps/rufferal/android/app/src/main/res/empty-image.png
-    // apps/rufferal/src/screens/access/LoginScreen.tsx
+    return (
+      <Image
+        source={require('../../../android/app/src/main/res/empty-image.png')}
+        resizeMode="contain"
+      />
+    );
+  };
+
+  const GoogleIcon = () => {
+    // BLARG - handle check if apple png exists
     return (
       <Image
         source={require('../../../android/app/src/main/res/empty-image.png')}
@@ -25,8 +33,8 @@ export const LoginScreen = () => {
     <RLogin
       navigateSignup={navigateSignup}
       navigateForgotPassword={navigateForgotPassword}
-      appleIcon={<AppleImage />}
-      // googleIcon={GoogleImage}
+      appleIcon={<AppleIcon />}
+      googleIcon={<GoogleIcon />}
     />
   );
 };
