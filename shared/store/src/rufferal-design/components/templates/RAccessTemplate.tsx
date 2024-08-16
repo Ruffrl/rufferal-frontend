@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { PropsWithChildren, useContext } from 'react';
-import { Text, View } from 'react-native';
+import { StatusBar, Text, View } from 'react-native';
 import tw from 'twrnc';
 import { RFormError } from '..';
 import { ToastStoreContext } from '../../../store';
@@ -25,7 +25,9 @@ export const RAccessTemplate = observer(
     const toastStore = useContext(ToastStoreContext);
 
     return (
-      <View style={tw.style(TEMPLATE_PADDING, 'flex-1')}>
+      <View style={tw.style(TEMPLATE_PADDING, 'flex-1', 'bg-purple-200')}>
+        <StatusBar backgroundColor="#e9d5ff" />
+        {/* <StatusBar backgroundColor={tw.style('bg-purple-200')} /> */}
         {toastStore.messages.length > 0 && (
           // PROBABLY NEED A NEW COMPONENT FOR GLOBAL ERRORS
           <RFormError error={toastStore.messages.toString()} />
