@@ -11,4 +11,3 @@
  */
 
 export { RAccessTemplate } from './RAccessTemplate';
-export { RAccessTemplateOLD } from './RAccessTemplateOLD';

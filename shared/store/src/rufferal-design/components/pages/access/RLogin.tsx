@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-import { Image, Text, View } from 'react-native';
+import { observer } from 'mobx-react-lite';
+import { useContext } from 'react';
+import { Button, Image, Text, View } from 'react-native';
 import tw from 'twrnc';
 import {
   RAccessTemplate,
@@ -8,6 +10,7 @@ import {
   RFormEmailPassword,
   RLinkButton,
 } from '../..';
+import { ToastStoreContext } from '../../../..';
 
 type LoginProps = {
   appleIcon?: React.JSX.Element;
@@ -25,88 +28,126 @@ type LoginProps = {
   navigateSignup: () => void;
 };
 
-export const RLogin = ({
-  appleIcon,
-  googleIcon,
-  mobileBackIcon,
-  mobileIconHide,
-  mobileIconView,
-  navigateForgotPassword,
-  navigateSignup,
-}: LoginProps): React.ReactElement => {
-  const SignupLink = () => (
-    <Text style={tw`text-sm tracking-wide text-zinc-900`}>
-      New to Rufferal? <Text style={tw`font-bold`}>Sign up</Text>
-    </Text>
-  );
+export const RLogin = observer(
+  ({
+    appleIcon,
+    googleIcon,
+    mobileBackIcon,
+    mobileIconHide,
+    mobileIconView,
+    navigateForgotPassword,
+    navigateSignup,
+  }: LoginProps): React.ReactElement => {
+    const toastStore = useContext(ToastStoreContext);
 
-  const AppleIcon = () => {
-    return (
-      appleIcon || (
-        <Image
-          source={require('../../../../assets/empty-image.png')}
-          resizeMode="contain"
-          style={tw`w-[24px] h-[24px]`}
-          tintColor="#6b7280"
-        />
-      )
+    const SignupLink = () => (
+      <Text style={tw`text-sm tracking-wide text-zinc-900`}>
+        New to Rufferal? <Text style={tw`font-bold`}>Sign up</Text>
+      </Text>
     );
-  };
 
-  const GoogleIcon = () => {
-    return (
-      googleIcon || (
-        <Image
-          source={require('../../../../assets/empty-image.png')}
-          resizeMode="contain"
-          style={tw`w-[24px] h-[24px]`}
-          tintColor="#6b7280"
-        />
-      )
-    );
-  };
-
-  return (
-    <RAccessTemplate
-      header="Log in"
-      backNavigation={() => console.log('GO BACK')}
-      mobileBackIcon={mobileBackIcon}
-    >
-      {/* SOCIAL LOGIN */}
-      <View style={tw`py-5 gap-3`}>
-        {/* Apple interaction button */}
-        <RButton
-          titleIcon={<AppleIcon />}
-          title="Log in with Apple"
-          type="secondary"
-        />
-        {/* Google interaction button */}
-        <RButton
-          titleIcon={<GoogleIcon />}
-          title="Log in with Google"
-          type="secondary"
-        />
-      </View>
-      {/* DIVIDER */}
-      <View style={tw`justify-evenly flex-row items-center py-4`}>
-        <View style={tw`border-b border-gray-200 w-[150px]`} />
-        <Text style={tw`text-gray-500 text-xs`}>OR</Text>
-        <View style={tw`border-b border-gray-200 w-[150px]`} />
-      </View>
-      {/* LOGIN FORM */}
-      <RFormEmailPassword
-        optionalElement={
-          <RLinkButton
-            onPress={navigateForgotPassword}
-            text="Forgot password?"
-            alignRight
+    const AppleIcon = () => {
+      return (
+        appleIcon || (
+          <Image
+            source={require('../../../../assets/empty-image.png')}
+            resizeMode="contain"
+            style={tw`w-[24px] h-[24px]`}
+            tintColor="#6b7280"
           />
+        )
+      );
+    };
+
+    const GoogleIcon = () => {
+      return (
+        googleIcon || (
+          <Image
+            source={require('../../../../assets/empty-image.png')}
+            resizeMode="contain"
+            style={tw`w-[24px] h-[24px]`}
+            tintColor="#6b7280"
+          />
+        )
+      );
+    };
+
+    return (
+      <RAccessTemplate
+        header="Log in"
+        backNavigation={() =>
+          console.log(
+            'BLARG priya add navigation to appropriate page with mobile and web handled'
+          )
         }
-        mobileIconHide={mobileIconHide}
-        mobileIconView={mobileIconView}
-      />
-      {/* SIGN UP */}
-      <RLinkButton onPress={navigateSignup} customText={<SignupLink />} />
-    </RAccessTemplate>
-  );
-};
+        mobileBackIcon={mobileBackIcon}
+      >
+        <Button
+          title="error"
+          onPress={() =>
+            toastStore.addToast({
+              type: 'error',
+              status: 'pending',
+              message: 'This is an error',
+            })
+          }
+        />
+        <Button
+          title="warning"
+          onPress={() =>
+            toastStore.addToast({
+              type: 'warning',
+              status: 'pending',
+              message: 'This is a warning',
+            })
+          }
+        />
+        <Button
+          title="success"
+          onPress={() =>
+            toastStore.addToast({
+              type: 'success',
+              status: 'pending',
+              message: 'This is a success',
+            })
+          }
+        />
+        {/* SOCIAL LOGIN */}
+        <View style={tw`py-5 gap-3`}>
+          {/* Apple interaction button */}
+          <RButton
+            titleIcon={<AppleIcon />}
+            title="Log in with Apple"
+            type="secondary"
+          />
+          {/* Google interaction button */}
+          <RButton
+            titleIcon={<GoogleIcon />}
+            title="Log in with Google"
+            type="secondary"
+          />
+        </View>
+        {/* DIVIDER */}
+        <View style={tw`justify-evenly flex-row items-center py-4`}>
+          <View style={tw`border-b border-gray-200 w-[150px]`} />
+          <Text style={tw`text-gray-500 text-xs`}>OR</Text>
+          <View style={tw`border-b border-gray-200 w-[150px]`} />
+        </View>
+        {/* LOGIN FORM */}
+        <RFormEmailPassword
+          optionalElement={
+            <RLinkButton
+              onPress={navigateForgotPassword}
+              text="Forgot password?"
+              alignRight
+            />
+          }
+          mobileIconHide={mobileIconHide}
+          mobileIconView={mobileIconView}
+        />
+        {/* SIGN UP */}
+        <RLinkButton onPress={navigateSignup} customText={<SignupLink />} />
+      </RAccessTemplate>
+    );
+  }
+);

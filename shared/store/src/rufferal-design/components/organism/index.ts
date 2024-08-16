@@ -14,6 +14,7 @@ export { RAccount } from './admin/RAccount';
 export { RAllAccounts } from './admin/RAllAccounts';
 export { RCounter } from './RCounter';
 export { RFormEmailPassword } from './RFormEmailPassword';
+export { RGlobalError } from './RGlobalError';
 export { RLogoutButton } from './RLogoutButton';
 export { ROnboardingButtons } from './ROnboardingButtons';
 export { ROnboardingWeb } from './ROnboardingWeb';

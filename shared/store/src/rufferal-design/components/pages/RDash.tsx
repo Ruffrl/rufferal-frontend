@@ -3,11 +3,11 @@ import { Text, View } from 'react-native';
 import tw from 'twrnc';
 import { observableAuthStore } from '../../../store';
 import { RAccount, RAllAccounts } from '../organism';
-import { RAccessTemplateOLD } from '../templates';
+import { RAccessTemplate } from '../templates';
 
 export const RDash = (): React.ReactElement => {
   return (
-    <RAccessTemplateOLD>
+    <RAccessTemplate>
       <Text style={tw`mt-[30px] mb-[30px]`}>
         {/* BLARG - what will ProfileStore hold? If it holds profile data then why save any of it in authStore - this can just be the store for handling tokens, login status, etc */}
         CONGRATS {observableAuthStore.user?.forename.toUpperCase()}! - You are
@@ -25,6 +25,6 @@ export const RDash = (): React.ReactElement => {
         </Text>
         <RAccount userId={1} />
       </View>
-    </RAccessTemplateOLD>
+    </RAccessTemplate>
   );
 };

@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 import { Text, View } from 'react-native';
-import { observableAuthStore } from '../../../store';
-import { RAccessTemplateOLD } from '../templates';
 import tw from 'twrnc';
+import { observableAuthStore } from '../../../store';
+import { RAccessTemplate } from '../templates';
 
 export const RProfile = (): React.ReactElement => {
   return (
-    <RAccessTemplateOLD>
+    <RAccessTemplate>
       <View style={tw`mt-[30px] mb-[30px]`}>
         <Text>{observableAuthStore.user?.id}</Text>
         <Text>{observableAuthStore.user?.forename}</Text>
@@ -17,6 +17,6 @@ export const RProfile = (): React.ReactElement => {
         <Text>{observableAuthStore.user?.email}</Text>
         <Text>{observableAuthStore.user?.species}</Text>
       </View>
-    </RAccessTemplateOLD>
+    </RAccessTemplate>
   );
 };
