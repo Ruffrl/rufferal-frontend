@@ -25,8 +25,12 @@ export const RAccessTemplate = observer(
     const toastStore = useContext(ToastStoreContext);
 
     return (
-      <View style={tw.style(TEMPLATE_PADDING, 'flex-1', 'bg-purple-200')}>
-        <StatusBar backgroundColor="#e9d5ff" />
+      // BLARG - testing background color
+      // <View style={tw.style(TEMPLATE_PADDING, 'flex-1', 'bg-purple-200')}>
+      <View style={tw.style(TEMPLATE_PADDING, 'flex-1', 'bg-white')}>
+        {/* BLARG - status bar let's us style Android status (wifi, battery icon, time, etc) */}
+        <StatusBar backgroundColor="#000" />
+        {/* <StatusBar backgroundColor="#e9d5ff" /> */}
         {/* <StatusBar backgroundColor={tw.style('bg-purple-200')} /> */}
         {toastStore.messages.length > 0 && (
           // PROBABLY NEED A NEW COMPONENT FOR GLOBAL ERRORS
