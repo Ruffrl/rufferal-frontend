@@ -57,9 +57,9 @@ export const RSignup = ({
       {/* SIGNUP FORM */}
       <RFormEmailPassword submitTitle="Sign up" passwordShouldValidate />
       {/* Sign up navigation link */}
-      <RLinkButton onPress={navigateAbout} text={<AboutLink />} />
+      <RLinkButton onPress={navigateAbout} customText={<AboutLink />} />
       {/* Sign up navigation link */}
-      <RLinkButton onPress={navigateLogin} text={<LoginLink />} />
+      <RLinkButton onPress={navigateLogin} customText={<LoginLink />} />
     </RAccessTemplate>
   );
 };

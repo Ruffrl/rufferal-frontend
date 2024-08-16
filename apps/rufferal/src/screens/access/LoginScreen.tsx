@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RLogin, ScreenProps } from '@rufferal-frontend/store';
 import { Image } from 'react-native';
+import tw from 'twrnc';
 
 export const LoginScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
@@ -15,6 +16,8 @@ export const LoginScreen = () => {
       <Image
         source={require('../../../android/app/src/main/res/empty-image.png')}
         resizeMode="contain"
+        style={tw`w-[24px] h-[24px]`}
+        tintColor="#6b7280"
       />
     );
   };
@@ -25,9 +28,38 @@ export const LoginScreen = () => {
       <Image
         source={require('../../../android/app/src/main/res/empty-image.png')}
         resizeMode="contain"
+        style={tw`w-[24px] h-[24px]`}
+        tintColor="#6b7280"
       />
     );
   };
+
+  const MobileIconView = () => (
+    <Image
+      source={require('../../../android/app/src/main/res/icons-16/eye.png')}
+      resizeMode="contain"
+      style={tw`w-[24px] h-[24px]`}
+      tintColor="#6b7280"
+    />
+  );
+
+  const MobileIconHide = () => (
+    <Image
+      source={require('../../../android/app/src/main/res/icons-16/eye-close.png')}
+      resizeMode="contain"
+      style={tw`w-[24px] h-[24px]`}
+      tintColor="#6b7280"
+    />
+  );
+
+  const MobileBackIcon = () => (
+    <Image
+      source={require('../../../android/app/src/main/res/icons-16/arrow-left.png')}
+      resizeMode="contain"
+      style={tw`w-[24px] h-[24px]`}
+      tintColor="#18181b"
+    />
+  );
 
   return (
     <RLogin
@@ -35,6 +67,9 @@ export const LoginScreen = () => {
       navigateForgotPassword={navigateForgotPassword}
       appleIcon={<AppleIcon />}
       googleIcon={<GoogleIcon />}
+      mobileIconHide={<MobileIconHide />}
+      mobileIconView={<MobileIconView />}
+      mobileBackIcon={<MobileBackIcon />}
     />
   );
 };

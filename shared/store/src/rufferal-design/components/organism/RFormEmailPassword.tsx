@@ -3,6 +3,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
+import tw from 'twrnc';
 import { observableAuthStore, User } from '../../../store';
 import { FormErrorProps, RButton, RFormError } from '../atom';
 import { RFormInput } from '../molecule';
@@ -21,6 +22,15 @@ type LoginResponse = {
   };
 };
 
+type FormEmailPasswordProps = {
+  navigateAfterLogin?: () => void;
+  optionalElement?: React.ReactNode;
+  passwordShouldValidate?: boolean;
+  submitTitle?: string;
+  mobileIconHide?: React.JSX.Element;
+  mobileIconView?: React.JSX.Element;
+};
+
 /*
  * BLARG - TODOs
  * rename so we can share between login and sign up
@@ -36,12 +46,9 @@ export const RFormEmailPassword = observer(
     optionalElement,
     passwordShouldValidate = false,
     submitTitle = 'Continue',
-  }: {
-    navigateAfterLogin?: () => void;
-    optionalElement?: React.ReactNode;
-    passwordShouldValidate?: boolean;
-    submitTitle?: string;
-  }): React.ReactElement => {
+    mobileIconHide,
+    mobileIconView,
+  }: FormEmailPasswordProps): React.ReactElement => {
     /* STATE */
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
@@ -129,57 +136,57 @@ export const RFormEmailPassword = observer(
     });
 
     return (
-      <View>
-        {/* <Text>Logged In: {String(observableAuthStore.isLoggedIn)}</Text> */}
+      <View style={tw`justify-between flex-1`}>
+        <View style={tw`gap-3`}>
+          {/* Email field */}
+          <Controller
+            name="email"
+            control={control}
+            rules={{
+              required: 'Email is required',
+              maxLength: 320,
+            }}
+            render={({ field: { onBlur, onChange, value, ref } }) => (
+              <RFormInput
+                onBlur={onBlur} // notify when input is touched
+                onChange={onChange} // send value to hook form
+                value={value}
+                formRef={ref}
+                label="Email"
+                placeholder="rufferer@rufferal.com"
+                error={errors.email}
+                onSubmit={onSubmit}
+              />
+            )}
+          />
+          {/* Password field */}
+          <Controller
+            name="password"
+            control={control}
+            rules={{
+              required: 'Password is required',
+              maxLength: 120,
+            }}
+            render={({ field: { onChange, onBlur, value, ref } }) => (
+              <RFormInput
+                onBlur={onBlur} // notify when input is touched
+                onChange={onChange} // send value to hook form
+                value={value}
+                formRef={ref}
+                label="Password"
+                placeholder="••••••••"
+                error={errors.password}
+                onSubmit={onSubmit}
+                isPassword
+                mobileIconHide={mobileIconHide}
+                mobileIconView={mobileIconView}
+              />
+            )}
+          />
 
-        {/* Email field */}
-        <Controller
-          name="email"
-          control={control}
-          rules={{
-            required: 'Email is required',
-            maxLength: 320,
-          }}
-          render={({ field: { onBlur, onChange, value, ref } }) => (
-            <RFormInput
-              onBlur={onBlur} // notify when input is touched
-              onChange={onChange} // send value to hook form
-              value={value}
-              formRef={ref}
-              label="Email"
-              placeholder="rufferer@rufferal.com"
-              error={errors.email}
-              onSubmit={onSubmit}
-            />
-          )}
-        />
-
-        {/* Password field */}
-        {/* BLARG - needs hidden input */}
-        {/* BLARG - needs toggle visibility */}
-        <Controller
-          name="password"
-          control={control}
-          rules={{
-            required: 'Password is required',
-            maxLength: 120,
-          }}
-          render={({ field: { onChange, onBlur, value, ref } }) => (
-            <RFormInput
-              onBlur={onBlur} // notify when input is touched
-              onChange={onChange} // send value to hook form
-              value={value}
-              formRef={ref}
-              label="Password"
-              placeholder="************"
-              error={errors.password}
-              onSubmit={onSubmit}
-            />
-          )}
-        />
-
-        {/* For optional behaviors or features between password field and submit button */}
-        {optionalElement}
+          {/* For optional behaviors or features between password field and submit button */}
+          {optionalElement}
+        </View>
 
         {/* Password validation helper - BLARG - should visibly error if invalid password */}
         {passwordShouldValidate && (
@@ -193,7 +200,9 @@ export const RFormEmailPassword = observer(
         {error && <RFormError error={error} />}
 
         {/* Submit button */}
-        <RButton title={submitTitle} onPress={onSubmit} loading={loading} />
+        <View style={tw`mb-8`}>
+          <RButton title={submitTitle} onPress={onSubmit} loading={loading} />
+        </View>
       </View>
     );
   }

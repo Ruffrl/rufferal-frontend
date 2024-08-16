@@ -21,7 +21,7 @@ export const ROnboardingButtons = ({
       {/* Takes you to /login */}
       <RButton title="Log in" onPress={navigateLogin} type="secondary" />
       {/* Takes you to / */}
-      <RLinkButton text={<ContinueGuestLink />} onPress={navigateGuest} />
+      <RLinkButton customText={<ContinueGuestLink />} onPress={navigateGuest} />
     </View>
   );
 };

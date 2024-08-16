@@ -20,14 +20,32 @@ interface Props extends PressableProps {
   type?: ButtonType;
 }
 
-const BUTTON_STYLES = tw`rounded-md elevation-3 py-3 px-8 border-2`;
+const BUTTON_STYLES = tw`rounded-md elevation-3 py-3 px-8 border-2 h-12`;
+/* 
+  color: var(--Primary, #667080);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: -0.32px;
+*/
 const BUTTON_TEXT_STYLES = tw`font-bold text-base tracking-wide justify-center items-center text-center`;
-// #000: black --> `-black`
-// #252529: darkest gray --> `-zinc-900`
-// #667080: dark gray --> `-gray-500`
-// #C8C7CC: medium gray --> `-zinc-300`
-// #EEF1F4: light gray --> `-slate-100`
-// #fff: white --> `-white`
+// PRIMARY
+//    #667080: dark gray --> `-gray-500` [#6b7280]
+//      white text
+// SECONDARY
+//    #EEF1F4: light gray --> `-slate-200` [#cbd5e1]
+//      primary color text
+//      disable color text
+// TERTIARY
+//    #252529: darkest gray --> `-zinc-900` [#18181b]
+//      white text
+// DISABLE TEXT COLOR
+//    #C8C7CC: medium gray --> `-zinc-300` [#d4d4d8]
+// NEUTRALS
+//    #000: black --> `-black`
+//    #fff: white --> `-white`
 
 export const RButton = ({
   loading,
@@ -55,8 +73,8 @@ export const RButton = ({
 
   // Manage type themes
   if (type === 'secondary') {
-    borderStyle = 'border-slate-100';
-    colorStyle = 'bg-slate-100';
+    borderStyle = 'border-slate-200';
+    colorStyle = 'bg-slate-200';
     textColor = 'text-gray-500';
   } else if (type === 'tertiary') {
     borderStyle = 'border-zinc-900';
@@ -70,8 +88,8 @@ export const RButton = ({
     colorStyle = 'bg-red-600';
     textColor = 'text-red-100';
   } else if (state === 'disabled') {
-    borderStyle = 'border-slate-100';
-    colorStyle = 'bg-slate-100';
+    borderStyle = 'border-slate-200';
+    colorStyle = 'bg-slate-200';
     textColor = 'text-zinc-300';
   }
 
