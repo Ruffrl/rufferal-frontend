@@ -12,14 +12,16 @@ type AccessTemplateProps = {
   backNavigation?: () => void;
   header?: string;
   mobileBackIcon?: React.JSX.Element;
+  mobileCloseIcon?: React.JSX.Element
 };
-
+''
 export const RAccessTemplate = observer(
   ({
     backNavigation,
     children,
     header,
     mobileBackIcon,
+    mobileCloseIcon,
   }: PropsWithChildren<AccessTemplateProps>): React.ReactElement => {
     const isIos = Platform.OS === 'ios';
 
@@ -41,7 +43,7 @@ export const RAccessTemplate = observer(
           <View style={tw`flex-1`}>{children}</View>
         </View>
         {/* GLOBAL ERRORS */}
-        <RGlobalError />
+        <RGlobalError mobileCloseIcon={mobileCloseIcon} />
       </>
     );
   }

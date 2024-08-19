@@ -66,7 +66,7 @@ export const RInput = ({
       <Pressable onPress={toggleShowPassword}>
         {mobileIconView || (
           <Image
-            source={require('../../../assets/icons-16/eye.png')}
+            source={require('../../../assets/icons-512/eye.png')}
             resizeMode="contain"
             style={tw`w-[24px] h-[24px]`}
             tintColor="#6b7280"
@@ -81,7 +81,7 @@ export const RInput = ({
       <Pressable onPress={toggleShowPassword}>
         {mobileIconHide || (
           <Image
-            source={require('../../../assets/icons-16/eye-close.png')}
+            source={require('../../../assets/icons-512/eye-close.png')}
             resizeMode="contain"
             style={tw`w-[24px] h-[24px]`}
             tintColor="#6b7280"

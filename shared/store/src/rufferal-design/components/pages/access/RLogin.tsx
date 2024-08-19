@@ -22,6 +22,7 @@ type LoginProps = {
   // Fail -> you cannot import directly from apps/rufferal for shared
   // Not successful, but willing to try again -> bundling shared/assets folder directly from android
   mobileBackIcon?: React.JSX.Element;
+  mobileCloseIcon?: React.JSX.Element
   mobileIconHide?: React.JSX.Element;
   mobileIconView?: React.JSX.Element;
   navigateForgotPassword: () => void;
@@ -33,6 +34,7 @@ export const RLogin = observer(
     appleIcon,
     googleIcon,
     mobileBackIcon,
+    mobileCloseIcon,
     mobileIconHide,
     mobileIconView,
     navigateForgotPassword,
@@ -81,13 +83,13 @@ export const RLogin = observer(
           )
         }
         mobileBackIcon={mobileBackIcon}
+        mobileCloseIcon={mobileCloseIcon}
       >
         <Button
           title="error"
           onPress={() =>
             toastStore.addToast({
               type: 'error',
-              expiration: new Date(new Date().getTime() + 10000),
               message: 'This is an error',
             })
           }
@@ -97,7 +99,6 @@ export const RLogin = observer(
           onPress={() =>
             toastStore.addToast({
               type: 'warning',
-              expiration: new Date(new Date().getTime() + 10000),
               message: 'This is a warning',
             })
           }
@@ -107,7 +108,6 @@ export const RLogin = observer(
           onPress={() =>
             toastStore.addToast({
               type: 'success',
-              expiration: new Date(new Date().getTime() + 10000),
               message: 'This is a success',
             })
           }

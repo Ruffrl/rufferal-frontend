@@ -14,7 +14,7 @@ export const RBackNavigation = ({
       <Pressable onPress={backNavigation}>
         {mobileBackIcon || (
           <Image
-            source={require('../../../assets/icons-16/arrow-left.png')}
+            source={require('../../../assets/icons-512/arrow-left.png')}
             resizeMode="contain"
             style={tw`w-[24px] h-[24px]`}
             tintColor="#18181b"

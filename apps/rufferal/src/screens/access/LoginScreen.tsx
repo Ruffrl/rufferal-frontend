@@ -36,7 +36,7 @@ export const LoginScreen = () => {
 
   const MobileIconView = () => (
     <Image
-      source={require('../../../android/app/src/main/res/icons-16/eye.png')}
+      source={require('../../../android/app/src/main/res/icons-512/eye.png')}
       resizeMode="contain"
       style={tw`w-[24px] h-[24px]`}
       tintColor="#6b7280"
@@ -45,7 +45,7 @@ export const LoginScreen = () => {
 
   const MobileIconHide = () => (
     <Image
-      source={require('../../../android/app/src/main/res/icons-16/eye-close.png')}
+      source={require('../../../android/app/src/main/res/icons-512/eye-close.png')}
       resizeMode="contain"
       style={tw`w-[24px] h-[24px]`}
       tintColor="#6b7280"
@@ -54,7 +54,16 @@ export const LoginScreen = () => {
 
   const MobileBackIcon = () => (
     <Image
-      source={require('../../../android/app/src/main/res/icons-16/arrow-left.png')}
+      source={require('../../../android/app/src/main/res/icons-512/arrow-left.png')}
+      resizeMode="contain"
+      style={tw`w-[24px] h-[24px]`}
+      tintColor="#18181b"
+    />
+  );
+
+  const CloseIcon = () => (
+    <Image
+      source={require('../../../android/app/src/main/res/icons-512/close.png')}
       resizeMode="contain"
       style={tw`w-[24px] h-[24px]`}
       tintColor="#18181b"
@@ -70,6 +79,7 @@ export const LoginScreen = () => {
       mobileIconHide={<MobileIconHide />}
       mobileIconView={<MobileIconView />}
       mobileBackIcon={<MobileBackIcon />}
+      mobileCloseIcon={<CloseIcon/>}
     />
   );
 };

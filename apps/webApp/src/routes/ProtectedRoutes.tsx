@@ -13,7 +13,6 @@ export const ProtectedRoute = observer(({ children }: PropsWithChildren) => {
   if (!observableAuthStore.isLoggedIn) {
     toastStore.addToast({
       type: 'error',
-      expiration: new Date(new Date().getTime() + 10000),
       message: 'Please log in',
     });
     return <Navigate to="/" />;
