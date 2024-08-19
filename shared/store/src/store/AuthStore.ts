@@ -16,6 +16,35 @@ export interface User {
   // role: UserRole;
 }
 
+/*
+ * BLARG - update to handle
+ * 1. can return if account.loggedIn
+ * 2. can return an account object
+ *    - account id
+ *    - account role
+ *    - account email
+ *    - account social identities (may include avatar/profile photo from social identity...)
+ *    - account statuses (verification, banned/archived, etc)
+ * 3. can behave as such
+ *    - login
+ *    - loginGoogle
+ *    - loginApple
+ *    - signup
+ *    - sendVerification
+ *    - resendVerification
+ *    - sendPasswordReset
+ *    - resetPassword
+ * BLARG - ProfileStore
+ * 1. migrate User/Profile stuff to this store
+ * 2. can return a profile object
+ *    - profile id (should match account id)
+ *    - forename, surname
+ *    - avatar/profile photo (unless overridden by account avatar from social login)
+ *    - user type (species - owner, cartaker, both)
+ * 2. can behave as such
+ *    - getProfile
+ *    - updateProfile
+ */
 class AuthStore {
   bearerToken: string | undefined;
   user: User | undefined;
