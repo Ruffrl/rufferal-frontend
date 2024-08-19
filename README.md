@@ -15,6 +15,93 @@ Things to think about
 - deployment
 - other developer nice to haves
 
+## Device Support
+
+### List of devices
+
+### Mobile/Web mobile Viewport sizes
+
+- Designed for mobile displays from 320×568 through 430×1004
+- Primary test devices
+  - ANDROID
+    - Galaxy S8
+    - 360 x 740
+  - IOS
+    - iPhone X
+    - 375 x 812
+- Smallest test devices
+  - ANDROID
+    - Galaxy S7
+    - 360 x 640
+  - IOS
+    - iPhone 5/SE
+    - 320 x 568
+- Largest test devices
+  - ANDROID
+    - Galaxy Z Flip 5
+    - 412 x 1004
+  - IOS
+    - iPhone 15 Pro Max
+    - 430 x 932
+
+### Tablet Viewport sizes
+
+### Desktop Viewport sizes
+
+## Themse
+
+### Colors - Wireframes/Prototype
+
+- PRIMARY (dark gray)
+  - ORIGINAL
+    - #667080
+  - TAILWIND TRANSLATION (until custom colors are handled)
+    - #6b7280
+    - `bg-gray-500`
+      - `text-white` [pairing]
+    - `border-gray-500`
+    - `text-gray-500`
+- SECONDARY (light gray)
+  - ORIGINAL
+    - #EEF1F4
+  - TAILWIND TRANSLATION (until custom colors are handled)
+    - #cbd5e1
+    - `bg-slate-200`
+      - `text-gray-500` [pairing]
+      - `text-zinc-300` [pairing]
+    - `border-slate-200`
+    - `text-slate-200`
+- TERTIARY (gray-black)
+  - ORIGINAL
+    - #252529
+  - TAILWIND TRANSLATION (until custom colors are handled)
+    - #18181b
+    - `bg-zinc-900`
+      - `text-white` [pairing]
+    - `border-zinc-900`
+    - `text-zinc-900`
+- DISABLE (medium gray)
+  - ORIGINAL
+    - #C8C7CC
+  - TAILWIND TRANSLATION (until custom colors are handled)
+    - #d4d4d8
+    - `text-zinc-300`
+    - `bg-zinc-300`
+      - `text-white` [pairing]
+      - `text-gray-500` [pairing]
+    - `border-zinc-300`
+- NEUTRALS
+  - black
+    - #000
+    - `bg-black`
+    - `border-black`
+    - `text-black`
+  - white
+    - #fff
+    - `bg-white`
+    - `border-white`
+    - `text-white`
+
 ## Install
 
 Setup assumes you have a MacOS

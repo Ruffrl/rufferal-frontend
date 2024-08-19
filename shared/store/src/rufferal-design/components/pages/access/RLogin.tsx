@@ -87,7 +87,7 @@ export const RLogin = observer(
           onPress={() =>
             toastStore.addToast({
               type: 'error',
-              status: 'pending',
+              expiration: new Date(new Date().getTime() + 10000),
               message: 'This is an error',
             })
           }
@@ -97,7 +97,7 @@ export const RLogin = observer(
           onPress={() =>
             toastStore.addToast({
               type: 'warning',
-              status: 'pending',
+              expiration: new Date(new Date().getTime() + 10000),
               message: 'This is a warning',
             })
           }
@@ -107,7 +107,7 @@ export const RLogin = observer(
           onPress={() =>
             toastStore.addToast({
               type: 'success',
-              status: 'pending',
+              expiration: new Date(new Date().getTime() + 10000),
               message: 'This is a success',
             })
           }

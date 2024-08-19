@@ -14,22 +14,6 @@ type AccessTemplateProps = {
   mobileBackIcon?: React.JSX.Element;
 };
 
-// PRIMARY
-//    #667080: dark gray --> `-gray-500`
-//      white text
-// SECONDARY
-//    #EEF1F4: light gray --> `-slate-200`
-//      primary color text
-//      disable color text
-// TERTIARY
-//    #252529: darkest gray --> `-zinc-900`
-//      white text
-// DISABLE TEXT COLOR
-//    #C8C7CC: medium gray --> `-zinc-300`
-// NEUTRALS
-//    #000: black --> `-black`
-//    #fff: white --> `-white`
-
 export const RAccessTemplate = observer(
   ({
     backNavigation,
@@ -40,22 +24,31 @@ export const RAccessTemplate = observer(
     const isIos = Platform.OS === 'ios';
 
     return (
-      <View style={tw.style(PAGE_PADDING, PAGE_STYLES, isIos && tw`py-12`)}>
-        {/* BLARG - testing background color */}
-        {/* BLARG - status bar let's us style Android status (wifi, battery icon, time, etc) */}
-        {/* <StatusBar backgroundColor="#e9d5ff" /> */}
-        {/* <StatusBar backgroundColor={tw.style('bg-purple-200')} /> */}
-        <StatusBar backgroundColor="#000" />
-        {backNavigation && (
-          <RBackNavigation
-            backNavigation={backNavigation}
-            mobileBackIcon={mobileBackIcon}
-          />
-        )}
-        {header && <RPageHeader header={header} />}
-        <View style={tw`flex-1`}>{children}</View>
+      <>
+        <View style={tw.style(PAGE_PADDING, PAGE_STYLES, isIos && tw`py-12`)}>
+          {/* BLARG - testing background color */}
+          {/* BLARG - status bar let's us style Android status (wifi, battery icon, time, etc) */}
+          {/* <StatusBar backgroundColor="#e9d5ff" /> */}
+          {/* <StatusBar backgroundColor={tw.style('bg-purple-200')} /> */}
+          <StatusBar backgroundColor="#000" />
+          {backNavigation && (
+            <RBackNavigation
+              backNavigation={backNavigation}
+              mobileBackIcon={mobileBackIcon}
+            />
+          )}
+          {header && <RPageHeader header={header} />}
+          <View style={tw`flex-1`}>{children}</View>
+        </View>
+        {/* GLOBAL ERRORS
+         * React Native has default relative position
+         * This means, to use an absolute component we need to be outside a child of the base/highest level component
+         * Otherwise, an absolute component is only absolute relative to it's parent
+         */}
+        {/* <View style={tw.style(tw`absolute top-5 w-full left-4`)}> */}
         <RGlobalError />
-      </View>
+        {/* </View> */}
+      </>
     );
   }
 );

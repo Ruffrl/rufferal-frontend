@@ -22,21 +22,6 @@ interface Props extends PressableProps {
 
 const BUTTON_STYLES = tw`rounded-md elevation-3 py-3 px-8 border-2 h-12`;
 const BUTTON_TEXT_STYLES = tw`font-bold text-base tracking-wide justify-center items-center text-center`;
-// PRIMARY
-//    #667080: dark gray --> `-gray-500` [#6b7280]
-//      white text
-// SECONDARY
-//    #EEF1F4: light gray --> `-slate-200` [#cbd5e1]
-//      primary color text
-//      disable color text
-// TERTIARY
-//    #252529: darkest gray --> `-zinc-900` [#18181b]
-//      white text
-// DISABLE TEXT COLOR
-//    #C8C7CC: medium gray --> `-zinc-300` [#d4d4d8]
-// NEUTRALS
-//    #000: black --> `-black`
-//    #fff: white --> `-white`
 
 export const RButton = ({
   loading,
