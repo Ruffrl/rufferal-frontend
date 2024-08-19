@@ -12,9 +12,9 @@ type AccessTemplateProps = {
   backNavigation?: () => void;
   header?: string;
   mobileBackIcon?: React.JSX.Element;
-  mobileCloseIcon?: React.JSX.Element
+  mobileCloseIcon?: React.JSX.Element;
 };
-''
+('');
 export const RAccessTemplate = observer(
   ({
     backNavigation,

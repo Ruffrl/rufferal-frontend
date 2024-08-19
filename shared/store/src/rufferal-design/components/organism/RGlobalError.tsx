@@ -1,28 +1,34 @@
 import { observer } from 'mobx-react-lite';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Dimensions, Image, Pressable, Text, View } from 'react-native';
 import tw from 'twrnc';
 import { ToastStoreContext } from '../../..';
 
+/* BLARG - how to optimize later
+ * OPTION 1:
+ * Rather than poll (https://en.wikipedia.org/wiki/Polling_(computer_science)) for updates
+ * it would be more efficient to modify the server API to accept long-lasting connections
+ * and stream (https://developer.mozilla.org/en-US/docs/Web/API/Streams_API/Using_readable_streams)
+ * updates to the client. Even though ReadableStreams are now standardized, you'll probably
+ * find more discussion around WebSocket implementations at this point in time.
+ * OPTION 2:
+ * tbd
+ */
 export const RGlobalError = observer(
   ({ mobileCloseIcon }: { mobileCloseIcon?: React.JSX.Element }) => {
     const toastStore = useContext(ToastStoreContext);
     const windowWidth = Dimensions.get('window').width;
 
-    /* HANDLE TOAST REMOVAL
-     * This does not find and remove expired toasts as soon as expiration hits
-     * But instead look for any expired toasts every 10 seconds
-     * and remove all expired toasts as a block
-     */
-    setTimeout(() => {
-      // if any toasts exist, try to remove expired (any toast from more than 10 seconds ago)
-      if (toastStore.toasts.length > 0) {
-        console.log('HIT TIMEOUT');
-        console.log(toastStore.toasts.map((t) => t.message));
+    /* HANDLE TOAST REMOVAL */
+    useEffect(() => {
+      if (toastStore.toasts.length === 0) return;
+      const countdownInterval = setInterval(() => {
         toastStore.removeExpired();
-        console.log(toastStore.toasts.map((t) => t.message));
-      }
-    }, 10000);
+      }, 3000);
+
+      // Cleanup function to clear the interval when the component unmounts
+      return () => clearInterval(countdownInterval);
+    }, [toastStore.toasts.length]);
 
     /* HANDLE MANUAL TOAST REMOVAL */
     const handleToastRemoval = (message: string) => {
