@@ -40,14 +40,8 @@ export const RAccessTemplate = observer(
           {header && <RPageHeader header={header} />}
           <View style={tw`flex-1`}>{children}</View>
         </View>
-        {/* GLOBAL ERRORS
-         * React Native has default relative position
-         * This means, to use an absolute component we need to be outside a child of the base/highest level component
-         * Otherwise, an absolute component is only absolute relative to it's parent
-         */}
-        {/* <View style={tw.style(tw`absolute top-5 w-full left-4`)}> */}
+        {/* GLOBAL ERRORS */}
         <RGlobalError />
-        {/* </View> */}
       </>
     );
   }
