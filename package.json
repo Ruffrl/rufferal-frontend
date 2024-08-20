@@ -21,7 +21,8 @@
     "react-native-web-swiper": "^2.2.4",
     "react-router-dom": "^6.26.0",
     "tslib": "^2.3.0",
-    "twrnc": "^4.5.0"
+    "twrnc": "^4.5.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.5",
