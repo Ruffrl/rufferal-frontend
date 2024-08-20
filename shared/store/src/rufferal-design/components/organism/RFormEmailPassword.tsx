@@ -25,8 +25,9 @@ const accessSchema: yup.ObjectSchema<AccessForm> = yup
     email: yup
       .string()
       .trim()
+      .required('Email is a required field')
       .email('Email must be in format you@email.com')
-      .required('Email is a required field'),
+      .max(320, 'Password cannot exceed 320 characters'),
     password: yup
       .string()
       .trim()
@@ -106,10 +107,6 @@ export const RFormEmailPassword = observer(
           <Controller
             name="email"
             control={control}
-            rules={{
-              required: 'Email is required',
-              maxLength: 320,
-            }}
             render={({ field: { onBlur, onChange, value, ref } }) => (
               <RFormInput
                 onBlur={onBlur} // notify when input is touched
@@ -127,10 +124,6 @@ export const RFormEmailPassword = observer(
           <Controller
             name="password"
             control={control}
-            rules={{
-              required: 'Password is required',
-              maxLength: 120,
-            }}
             render={({ field: { onChange, onBlur, value, ref } }) => (
               <RFormInput
                 onBlur={onBlur} // notify when input is touched

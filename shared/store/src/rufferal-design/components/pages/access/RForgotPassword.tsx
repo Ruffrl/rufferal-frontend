@@ -4,7 +4,7 @@ import * as yup from 'yup';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
 
@@ -34,8 +34,9 @@ const requestPasswordSchema: yup.ObjectSchema<RequestPasswordForm> = yup
     email: yup
       .string()
       .trim()
+      .required('Email is a required field')
       .email('Email must be in format you@email.com')
-      .required('Email is a required field'),
+      .max(320, 'Password cannot exceed 320 characters'),
   })
   .required();
 
@@ -66,7 +67,7 @@ export const RForgotPassword = ({
     return null;
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getData();
   }, [email]);
 
@@ -97,8 +98,8 @@ export const RForgotPassword = ({
     } else {
       const url =
         Platform.OS === 'android'
-          ? 'http://10.0.2.2:5000/reset-password'
-          : 'http://localhost:5000/reset-password';
+          ? 'http://10.0.2.2:5000/request-password-reset'
+          : 'http://localhost:5000/request-password-reset';
 
       // Handle form submission
       setError('');
@@ -126,8 +127,8 @@ export const RForgotPassword = ({
     } else {
       const url =
         Platform.OS === 'android'
-          ? 'http://10.0.2.2:5000/reset-password'
-          : 'http://localhost:5000/reset-password';
+          ? 'http://10.0.2.2:5000/request-password-reset'
+          : 'http://localhost:5000/request-password-reset';
 
       // Handle form submission
       setLoading(true);
@@ -153,8 +154,7 @@ export const RForgotPassword = ({
     >
       <View style={tw`gap-${verticalScaleTW(16)}`}>
         <Text style={tw`text-${moderateScaleTW(14)} text-gray-500`}>
-          We need to confirm your email to send you instructions to reset your
-          password.
+          Create a new password
         </Text>
         <Controller
           name="email"

@@ -6,7 +6,6 @@ import { IconArrowBack, IconClose } from '../../assets';
 export const ForgotPasswordScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
 
-  // Service agreement and privacy policy
   const navigateBack = () => navigation.navigate('Login');
   // const navigateLogin = () => navigation.navigate('Login');
   const navigateResetPassword = () => navigation.navigate('Reset Password');
