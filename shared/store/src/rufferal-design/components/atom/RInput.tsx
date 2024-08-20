@@ -28,11 +28,11 @@ const CONTAINER_STYLES = tw`
   border 
   border-solid
 border-gray-500
-  rounded
   flex-row
   w-full
   justify-center
   items-center
+  rounded-${moderateScaleTW(4)}
   h-${moderateScaleTW(48)}
   px-${moderateScaleTW(8)}
 `;

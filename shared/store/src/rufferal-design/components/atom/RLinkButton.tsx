@@ -36,6 +36,8 @@ export const RLinkButton = ({
     <Pressable
       style={tw.style(LINK_STYLES, alignRight && tw`items-end`)}
       onPress={onPress}
+      // BLARG - should we do cursor not allowed?
+      disabled={state === 'disabled'}
     >
       {text && (
         <Text

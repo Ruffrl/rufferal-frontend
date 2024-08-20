@@ -22,13 +22,12 @@ interface Props extends PressableProps {
 }
 
 const BUTTON_STYLES = tw`
-  rounded-md
   border-2
-  h-${moderateScaleTW(48)}
   justify-center 
   items-center 
-  `;
-
+  h-${moderateScaleTW(48)}
+  rounded-${moderateScaleTW(6)}
+`;
 const BUTTON_TEXT_STYLES = tw`
   font-bold
   tracking-wide 

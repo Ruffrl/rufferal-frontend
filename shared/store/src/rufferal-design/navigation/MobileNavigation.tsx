@@ -31,6 +31,7 @@ export type ScreenProps = {
   Signup: undefined;
   Login: undefined;
   'Forgot Password': undefined;
+  'Reset Password': undefined;
   // Profile: { userId: string};
 };
 
