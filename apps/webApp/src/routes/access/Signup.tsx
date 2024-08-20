@@ -9,16 +9,18 @@ export const Signup = () => {
     return <Navigate to="/" />;
   }
 
-  const navigateBack = () => navigate('/onboarding');
-  const navigateLogin = () => navigate('/login');
   // Service agreement and privacy policy
   const navigateAbout = () => navigate('/about');
+  const navigateBack = () => navigate('/onboarding');
+  const navigateLogin = () => navigate('/login');
+  const navigateVerification = () => navigate('/verification');
 
   return (
     <RSignup
+      navigateAbout={navigateAbout}
       navigateBack={navigateBack}
       navigateLogin={navigateLogin}
-      navigateAbout={navigateAbout}
+      navigateVerification={navigateVerification}
     />
   );
 };

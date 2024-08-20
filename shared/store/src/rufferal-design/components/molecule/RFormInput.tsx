@@ -53,7 +53,14 @@ export const RFormInput = ({
         mobileIconView={mobileIconView}
         error={error}
       />
-      {error && <RInputError error={error} />}
+      {isPassword &&
+        error &&
+        error.message === 'Password is a required field' && (
+          <RInputError
+            error={{ type: 'error', message: 'Password is a required field' }}
+          />
+        )}
+      {!isPassword && error && <RInputError error={error} />}
     </View>
   );
 };

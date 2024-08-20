@@ -14,6 +14,7 @@ export const LoginScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
 
   const navigateBack = () => navigation.navigate('Onboarding');
+  const navigateDashboard = () => navigation.navigate('Dashboard');
   const navigateSignup = () => navigation.navigate('Signup');
   const navigateForgotPassword = () => navigation.navigate('Forgot Password');
 
@@ -26,6 +27,7 @@ export const LoginScreen = () => {
       mobileIconHide={<IconHide />}
       mobileIconView={<IconView />}
       navigateBack={navigateBack}
+      navigateDashboard={navigateDashboard}
       navigateForgotPassword={navigateForgotPassword}
       navigateSignup={navigateSignup}
     />

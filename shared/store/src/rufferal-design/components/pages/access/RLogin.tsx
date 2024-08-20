@@ -1,19 +1,29 @@
 import * as React from 'react';
 
 import { observer } from 'mobx-react-lite';
-import { useContext } from 'react';
-// import { Button, Image, Text, View } from 'react-native';
 import { Platform, Text } from 'react-native';
 import tw from 'twrnc';
 import {
+  AccessForm,
+  FormErrorProps,
+  moderateScaleTW,
+  observableAuthStore,
   RAccessTemplate,
   RFormEmailPassword,
   RLinkButton,
   ROrDivider,
   RSocialOnboarding,
-} from '../..';
-import { ToastStoreContext } from '../../../../store/ToastStore';
-import { moderateScaleTW, verticalScaleTW } from '../../../utils';
+  User,
+  verticalScaleTW,
+} from '../../../..';
+
+type LoginResponse = {
+  data: {
+    id: number;
+    type: 'user';
+    attributes: User;
+  };
+};
 
 // BLARG - URGENT TODO - how to handle image assets in shared way so android can handle and we can prevent prop passing
 // Current issue -> android assets exist in android folder (ios can use these too!), BUT andoid cannot hit shared assets the way web and ios can
@@ -29,6 +39,7 @@ type LoginProps = {
   mobileIconHide?: React.JSX.Element;
   mobileIconView?: React.JSX.Element;
   navigateBack: () => void;
+  navigateDashboard?: () => void;
   navigateForgotPassword: () => void;
   navigateSignup: () => void;
 };
@@ -42,11 +53,72 @@ export const RLogin = observer(
     mobileIconHide,
     mobileIconView,
     navigateBack,
+    navigateDashboard,
     navigateForgotPassword,
     navigateSignup,
   }: LoginProps): React.ReactElement => {
-    const toastStore = useContext(ToastStoreContext);
     const isIos = Platform.OS === 'ios';
+
+    const handleLogin = async (data: AccessForm) => {
+      if (process.env['NODE_ENV'] === 'development') {
+        console.log('BLARG Priya - handle login with your backend', data);
+        navigateDashboard?.();
+      } else {
+        const url =
+          Platform.OS === 'android'
+            ? 'http://10.0.2.2:5000/login'
+            : 'http://localhost:5000/login';
+
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user: {
+              // email: 'rock@gmail.com',
+              // password: 'password',
+              email: data.email,
+              password: data.password,
+            },
+          }),
+        });
+
+        if (!response.ok) {
+          const error: FormErrorProps = await response.json();
+          throw new Error(error.error);
+        } else {
+          const result: LoginResponse = await response.json();
+          // result
+          // =>
+          // {
+          //   "data": {
+          //       "id": "1",
+          //       "type": "user",
+          //       "attributes": {
+          //           "id": 1,
+          //           "email": "rock@gmail.com",
+          //           "verified": true,
+          //           "forename": "Sam",
+          //           "surname": "Thomas",
+          //           "avatar": null,
+          //           "species": "OWNER"
+          //         }
+          //     }
+          // }
+          result.data.attributes &&
+            observableAuthStore.setUser(result.data.attributes);
+          console.log('result is: ', JSON.stringify(result, null, 4));
+
+          const authHeader = response.headers.get('Authorization') || undefined;
+          // Mobile navigation will automatically happen if token status changes
+          authHeader && observableAuthStore.setAuth(authHeader);
+          // Web navigation only
+          navigateDashboard?.();
+        }
+      }
+    };
 
     const SignupLink = () => (
       <Text
@@ -69,39 +141,13 @@ export const RLogin = observer(
         mobileBackIcon={mobileBackIcon}
         mobileCloseIcon={mobileCloseIcon}
       >
-        {/* <Button
-          title="error"
-          onPress={() =>
-            toastStore.addToast({
-              type: 'error',
-              message: 'This is an error',
-            })
-          }
-        />
-        <Button
-          title="warning"
-          onPress={() =>
-            toastStore.addToast({
-              type: 'warning',
-              message: 'This is a warning',
-            })
-          }
-        />
-        <Button
-          title="success"
-          onPress={() =>
-            toastStore.addToast({
-              type: 'success',
-              message: 'This is a success',
-            })
-          }
-        /> */}
         {/* SOCIAL LOGIN */}
         <RSocialOnboarding appleIcon={appleIcon} googleIcon={googleIcon} />
         {/* DIVIDER */}
         <ROrDivider />
         {/* LOGIN FORM */}
         <RFormEmailPassword
+          handleLogin={(data) => handleLogin(data)}
           optionalElement={
             <RLinkButton
               onPress={navigateForgotPassword}

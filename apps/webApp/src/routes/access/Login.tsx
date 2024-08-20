@@ -10,12 +10,14 @@ export const Login = () => {
   }
 
   const navigateBack = () => navigate('/onboarding');
+  const navigateDashboard = () => navigate('/');
   const navigateSignup = () => navigate('/signup');
   const navigateForgotPassword = () => navigate('/forgot-password');
 
   return (
     <RLogin
       navigateBack={navigateBack}
+      navigateDashboard={navigateDashboard}
       navigateSignup={navigateSignup}
       navigateForgotPassword={navigateForgotPassword}
     />

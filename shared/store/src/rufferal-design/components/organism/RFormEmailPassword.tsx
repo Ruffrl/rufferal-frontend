@@ -1,130 +1,96 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Platform, Text, View } from 'react-native';
+import { View } from 'react-native';
 import tw from 'twrnc';
-import { observableAuthStore, User } from '../../../store';
-import { moderateScaleTW } from '../../utils';
-import { FormErrorProps, RButton, RFormError } from '../atom';
-import { RFormInput } from '../molecule';
+import * as yup from 'yup';
+import {
+  moderateScaleTW,
+  RButton,
+  RFormError,
+  RFormInput,
+  RPasswordValidator,
+} from '../../..';
 
-type LoginInputs = {
-  firstName: string;
+export type AccessForm = {
   email: string;
   password: string;
 };
 
-type LoginResponse = {
-  data: {
-    id: number;
-    type: 'user';
-    attributes: User;
-  };
-};
+const accessSchema: yup.ObjectSchema<AccessForm> = yup
+  .object({
+    email: yup
+      .string()
+      .trim()
+      .email('Email must be in format you@email.com')
+      .required('Email is a required field'),
+    password: yup
+      .string()
+      .trim()
+      .required('Password is a required field')
+      .min(8, 'Password must be at least 8 characters')
+      .matches(/[A-Z]/g, 'Password must contain at least 1 uppercase letter')
+      .matches(/[a-z]/g, 'Password must contain at least 1 lowercase letter')
+      .matches(/[0-9]/g, 'Password must contain at least 1 number')
+      .max(64, 'Password cannot exceed 64 characters'),
+  })
+  .required();
 
 type FormEmailPasswordProps = {
-  navigateAfterLogin?: () => void;
+  handleLogin?: (data: AccessForm) => void;
+  handleSignup?: (data: AccessForm) => void;
+  mobileIconHide?: React.JSX.Element;
+  mobileIconView?: React.JSX.Element;
   optionalElement?: React.ReactNode;
   passwordShouldValidate?: boolean;
   submitTitle?: string;
-  mobileIconHide?: React.JSX.Element;
-  mobileIconView?: React.JSX.Element;
 };
 
-/*
- * BLARG - TODOs
- * move submit handling to parent
- * [optional] can pass password validation boolean that will display helper for password requirements and error if invalid validations
- */
 export const RFormEmailPassword = observer(
   ({
-    navigateAfterLogin,
+    handleLogin,
+    handleSignup,
+    mobileIconHide,
+    mobileIconView,
     optionalElement,
     passwordShouldValidate = false,
     submitTitle = 'Continue',
-    mobileIconHide,
-    mobileIconView,
   }: FormEmailPasswordProps): React.ReactElement => {
     /* STATE */
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
 
-    // const authStore = useContext(AuthStoreContext);
-
-    // BLARG - update with password validation if passwordShouldValidate prop is passed
     /* REACT HOOK FORM */
     const {
       control,
       handleSubmit,
+      getValues,
       formState: { errors },
-    } = useForm<LoginInputs>({
+    } = useForm<AccessForm>({
+      resolver: yupResolver(accessSchema),
       defaultValues: {
         email: '',
         password: '',
       },
+      /* Using onChange sparingly
+       * Validation is triggered on the changeevent for each input,
+       * leading to multiple re-renders.
+       * Warning: this often comes with a significant impact on performance.
+       */
+      mode: 'onChange',
     });
 
     /* BEHAVIORS */
     const onSubmit = handleSubmit(async (data) => {
       // Handle form submission
-      const url =
-        Platform.OS === 'android'
-          ? 'http://10.0.2.2:5000/login'
-          : 'http://localhost:5000/login';
-
       setLoading(true);
       setError('');
 
       try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            user: {
-              // email: 'rock@gmail.com',
-              // password: 'password',
-              email: data.email,
-              password: data.password,
-            },
-          }),
-        });
-
-        if (!response.ok) {
-          const error: FormErrorProps = await response.json();
-          throw new Error(error.error);
-        } else {
-          const result: LoginResponse = await response.json();
-          // result
-          // =>
-          // {
-          //   "data": {
-          //       "id": "1",
-          //       "type": "user",
-          //       "attributes": {
-          //           "id": 1,
-          //           "email": "rock@gmail.com",
-          //           "verified": true,
-          //           "forename": "Sam",
-          //           "surname": "Thomas",
-          //           "avatar": null,
-          //           "species": "OWNER"
-          //         }
-          //     }
-          // }
-          result.data.attributes &&
-            observableAuthStore.setUser(result.data.attributes);
-          console.log('result is: ', JSON.stringify(result, null, 4));
-
-          const authHeader = response.headers.get('Authorization') || undefined;
-          // Mobile navigation will automatically happen if token status changes
-          authHeader && observableAuthStore.setAuth(authHeader);
-          // Web navigation only
-          navigateAfterLogin?.();
-        }
+        handleLogin?.(data) && handleLogin(data);
+        handleSignup?.(data) && handleSignup(data);
       } catch (err) {
         setError(String(err));
       } finally {
@@ -180,28 +146,10 @@ export const RFormEmailPassword = observer(
               />
             )}
           />
-
-          {/* Password validation helper - BLARG - should visibly error if invalid password */}
-          {/* SOCIAL PASSWORD REQUIREMENTS
-           * Google:
-           *   8 characters or more
-           *   Cannot be particularly weak (like password123)
-           *   Must contain some mix of letters, numbers, and/or symbols
-           *   Cannot start or end with a blank space
-           * Apple:
-           *   Must be at least 8 characters long
-           *   Must contain both upper and lowercase letters
-           *   Must contain at least one number
-           */}
+          {/* PASSWORD VALIDATION */}
           {passwordShouldValidate && (
-            <View>
-              <Text>Your password needs to be:</Text>
-              <Text> • at least 8 characters long</Text>
-              <Text> • contain upper and lowercase letters</Text>
-              <Text> • contain number(s)</Text>
-            </View>
+            <RPasswordValidator password={getValues('password')} />
           )}
-
           {/* For optional behaviors or features between password field and submit button */}
           {optionalElement}
         </View>

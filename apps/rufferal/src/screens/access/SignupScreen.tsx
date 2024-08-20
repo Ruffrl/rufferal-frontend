@@ -13,10 +13,11 @@ import {
 export const SignupScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
 
-  const navigateBack = () => navigation.navigate('Onboarding');
-  const navigateLogin = () => navigation.navigate('Login');
   // Service agreement and privacy policy
   const navigateAbout = () => navigation.navigate('About');
+  const navigateBack = () => navigation.navigate('Onboarding');
+  const navigateLogin = () => navigation.navigate('Login');
+  const navigateVerification = () => navigation.navigate('Verification');
 
   return (
     <RSignup
@@ -29,6 +30,7 @@ export const SignupScreen = () => {
       navigateAbout={navigateAbout}
       navigateBack={navigateBack}
       navigateLogin={navigateLogin}
+      navigateVerification={navigateVerification}
     />
   );
 };

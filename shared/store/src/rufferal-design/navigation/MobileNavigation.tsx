@@ -23,6 +23,7 @@ import { RLogoutButton } from '../components';
 
 export type ScreenProps = {
   Onboarding: undefined;
+  Verification: undefined;
   Home: undefined;
   About: undefined;
   Dashboard: undefined;
