@@ -1,18 +1,18 @@
 import * as React from 'react';
 
-import { Image, Platform, Text } from 'react-native';
+import { Platform, Text } from 'react-native';
 import tw from 'twrnc';
 import {
   RAccessTemplate,
-  RButton,
   RFormEmailPassword,
   RLinkButton,
-  RPageHeader,
+  ROrDivider,
+  RSocialOnboarding,
 } from '../..';
 
 type SignupProps = {
   appleIcon?: React.JSX.Element;
-  googleIcon?: React.ReactNode;
+  googleIcon?: React.JSX.Element;
   mobileBackIcon?: React.JSX.Element;
   mobileCloseIcon?: React.JSX.Element;
   mobileIconHide?: React.JSX.Element;
@@ -55,24 +55,21 @@ export const RSignup = ({
       mobileBackIcon={mobileBackIcon}
       mobileCloseIcon={mobileCloseIcon}
     >
-      {/* Header */}
-      <RPageHeader header="Create an account" />
-      {/* Apple interaction button */}
-      {isAndroid ? (
-        googleIcon
-      ) : (
-        <Image
-          style={tw`w-1/5 h-1/5`}
-          source={require('../../../../assets/google-assets/Web/png@4x/neutral/web_neutral_rd_na@4x.png')}
-        />
-      )}
-      <RButton title="🍎 Log in with Apple" type="secondary" />
-      {/* Google interaction button */}
-      <RButton title="🇬 Log in with Google" type="secondary" />
-      {/* Break */}
-      <Text>------- or ---------</Text>
+      {/* SOCIAL LOGIN */}
+      <RSocialOnboarding
+        isSigningUp
+        appleIcon={appleIcon}
+        googleIcon={googleIcon}
+      />
+      {/* DIVIDER */}
+      <ROrDivider />
       {/* SIGNUP FORM */}
-      <RFormEmailPassword submitTitle="Sign up" passwordShouldValidate />
+      <RFormEmailPassword
+        submitTitle="Sign up"
+        passwordShouldValidate
+        mobileIconHide={mobileIconHide}
+        mobileIconView={mobileIconView}
+      />
       {/* Sign up navigation link */}
       <RLinkButton onPress={navigateAbout} customText={<AboutLink />} />
       {/* Sign up navigation link */}

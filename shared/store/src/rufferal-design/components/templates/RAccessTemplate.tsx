@@ -41,13 +41,13 @@ export const RAccessTemplate = observer(
           style={tw.style(
             PAGE_PADDING,
             PAGE_STYLES,
-            isIos && tw`pb-${horizontalScaleTW(GLOBAL_Y_PADDING * 2)}`
+            isIos && tw`pt-${horizontalScaleTW(GLOBAL_Y_PADDING * 2)}`
           )}
         >
           {/* STATUS BAR
-            * let's us style Android status
-            * (wifi, battery icon, time, etc)
-            */}
+           * let's us style Android status
+           * (wifi, battery icon, time, etc)
+           */}
           <StatusBar backgroundColor="#000" />
           {backNavigation && (
             <RBackNavigation

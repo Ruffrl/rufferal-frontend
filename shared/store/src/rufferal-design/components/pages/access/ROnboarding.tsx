@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import tw from 'twrnc';
 import {
   horizontalScaleTW,
@@ -47,26 +47,22 @@ export const SWIPER_NAVIGATION_STYLES = tw`
 `;
 
 export const ROnboarding = ({ swiper, navigation }: OnboardingProps) => {
-  const isIos = Platform.OS === 'ios';
-
   return (
     <RAccessTemplate>
-      <View style={tw`justify-between h-full`}>
-        <Text
-          style={tw.style(
-            `text-center
+      <Text
+        style={tw.style(
+          `text-center
           font-bold
           text-gray-600
           text-${moderateScaleTW(48)}
-          mt-${verticalScaleTW(96)}`,
-            isIos && `mt-${verticalScaleTW(120)}`
-          )}
-        >
-          Rufferal
-        </Text>
-        <View style={tw.style(SWIPER_CONTAINER_STYLES)}>{swiper}</View>
-        <ROnboardingButtons {...navigation} />
-      </View>
+          mt-${verticalScaleTW(96)}`
+        )}
+      >
+        Rufferal
+      </Text>
+      <View style={tw.style(SWIPER_CONTAINER_STYLES)}>{swiper}</View>
+      <ROnboardingButtons {...navigation} />
+      {/* <View style={tw`justify-between h-full`}></View> */}
     </RAccessTemplate>
   );
 };

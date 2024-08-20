@@ -181,17 +181,30 @@ export const RFormEmailPassword = observer(
             )}
           />
 
+          {/* Password validation helper - BLARG - should visibly error if invalid password */}
+          {/* SOCIAL PASSWORD REQUIREMENTS
+           * Google:
+           *   8 characters or more
+           *   Cannot be particularly weak (like password123)
+           *   Must contain some mix of letters, numbers, and/or symbols
+           *   Cannot start or end with a blank space
+           * Apple:
+           *   Must be at least 8 characters long
+           *   Must contain both upper and lowercase letters
+           *   Must contain at least one number
+           */}
+          {passwordShouldValidate && (
+            <View>
+              <Text>Your password needs to be:</Text>
+              <Text> • at least 8 characters long</Text>
+              <Text> • contain upper and lowercase letters</Text>
+              <Text> • contain number(s)</Text>
+            </View>
+          )}
+
           {/* For optional behaviors or features between password field and submit button */}
           {optionalElement}
         </View>
-
-        {/* Password validation helper - BLARG - should visibly error if invalid password */}
-        {passwordShouldValidate && (
-          <Text>
-            Your password needs to be at least 8 characters long and include a
-            number.
-          </Text>
-        )}
 
         {/* Submit button */}
         <View>

@@ -13,6 +13,7 @@
  */
 
 export { RAppleIcon } from './RAppleIcon';
+export { RDivider } from './RDivider';
 export { RButton } from './RButton';
 export { RFormError } from './RFormError';
 export type { FormErrorProps } from './RFormError';

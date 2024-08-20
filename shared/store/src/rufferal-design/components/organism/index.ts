@@ -18,3 +18,4 @@ export { RGlobalError } from './RGlobalError';
 export { RLogoutButton } from './RLogoutButton';
 export { ROnboardingButtons } from './ROnboardingButtons';
 export { ROnboardingWeb } from './ROnboardingWeb';
+export { RSocialOnboarding } from './RSocialOnboarding';

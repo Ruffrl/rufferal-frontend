@@ -11,6 +11,7 @@
  */
 
 export { RBackNavigation } from './RBackNavigation';
+export { ROrDivider } from './ROrDivider';
 export { RFormInput } from './RFormInput';
 export {
   ROnboardingSlideOne,

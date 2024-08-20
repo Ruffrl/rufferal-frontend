@@ -3,17 +3,17 @@ import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 import { useContext } from 'react';
 // import { Button, Image, Text, View } from 'react-native';
-import { Text, View } from 'react-native';
+import { Platform, Text } from 'react-native';
 import tw from 'twrnc';
 import {
   RAccessTemplate,
-  RAppleIcon,
-  RButton,
   RFormEmailPassword,
-  RGoogleIcon,
   RLinkButton,
+  ROrDivider,
+  RSocialOnboarding,
 } from '../..';
 import { ToastStoreContext } from '../../../../store/ToastStore';
+import { moderateScaleTW, verticalScaleTW } from '../../../utils';
 
 // BLARG - URGENT TODO - how to handle image assets in shared way so android can handle and we can prevent prop passing
 // Current issue -> android assets exist in android folder (ios can use these too!), BUT andoid cannot hit shared assets the way web and ios can
@@ -46,20 +46,21 @@ export const RLogin = observer(
     navigateSignup,
   }: LoginProps): React.ReactElement => {
     const toastStore = useContext(ToastStoreContext);
+    const isIos = Platform.OS === 'ios';
 
     const SignupLink = () => (
-      <Text style={tw`text-sm tracking-wide text-zinc-900`}>
+      <Text
+        style={tw.style(
+          `tracking-wide
+          text-zinc-900
+          mt-${verticalScaleTW(16)}
+          text-${moderateScaleTW(12)}`,
+          isIos && tw`mb-${verticalScaleTW(16)}`
+        )}
+      >
         New to Rufferal? <Text style={tw`font-bold`}>Sign up</Text>
       </Text>
     );
-
-    const AppleIcon = () => {
-      return appleIcon || <RAppleIcon />;
-    };
-
-    const GoogleIcon = () => {
-      return googleIcon || <RGoogleIcon />;
-    };
 
     return (
       <RAccessTemplate
@@ -96,26 +97,9 @@ export const RLogin = observer(
           }
         /> */}
         {/* SOCIAL LOGIN */}
-        <View style={tw`py-5 gap-3`}>
-          {/* Apple interaction button */}
-          <RButton
-            titleIcon={<AppleIcon />}
-            title="Log in with Apple"
-            type="secondary"
-          />
-          {/* Google interaction button */}
-          <RButton
-            titleIcon={<GoogleIcon />}
-            title="Log in with Google"
-            type="secondary"
-          />
-        </View>
+        <RSocialOnboarding appleIcon={appleIcon} googleIcon={googleIcon} />
         {/* DIVIDER */}
-        <View style={tw`justify-evenly flex-row items-center py-4`}>
-          <View style={tw`border-b border-gray-200 w-[150px]`} />
-          <Text style={tw`text-gray-500 text-xs`}>OR</Text>
-          <View style={tw`border-b border-gray-200 w-[150px]`} />
-        </View>
+        <ROrDivider />
         {/* LOGIN FORM */}
         <RFormEmailPassword
           optionalElement={
