@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import tw from 'twrnc';
+import { GLOBAL_COLORS, GLOBAL_ICON_SIZE, moderateScaleTW } from '../../utils';
 
 export type FieldSize = 'small' | 'medium' | 'large';
 
@@ -23,9 +24,24 @@ interface Props extends Omit<TextInputProps, 'onChange'> {
   size?: FieldSize;
 }
 
-const CONTAINER_STYLES =
-  'border border-solid border-gray-500 rounded h-12 flex-row w-full justify-center items-center px-2';
-const INPUT_STYLES = 'text-base text-gray-500 h-full flex-1 px-0';
+const CONTAINER_STYLES = tw`
+  border 
+  border-solid
+border-gray-500
+  rounded
+  flex-row
+  w-full
+  justify-center
+  items-center
+  h-${moderateScaleTW(48)}
+  px-${moderateScaleTW(8)}
+`;
+const INPUT_STYLES = tw`
+  text-gray-500
+  h-full
+  flex-1
+  text-${moderateScaleTW(16)}
+`;
 
 export const RInput = ({
   error,
@@ -38,8 +54,6 @@ export const RInput = ({
   size = 'large',
   ...inputProps
 }: Props): React.ReactElement => {
-  const borderStyle = error && 'border-red-800';
-
   let sizeStyle = 'w-2/5';
   switch (size) {
     case 'medium':
@@ -49,9 +63,6 @@ export const RInput = ({
       sizeStyle = 'w-full';
       break;
   }
-
-  // State variable to hold the password
-  // const [password, setPassword] = useState('');
 
   // State variable to track password visibility
   const [showPassword, setShowPassword] = useState(false);
@@ -68,8 +79,8 @@ export const RInput = ({
           <Image
             source={require('../../../assets/icons-512/eye.png')}
             resizeMode="contain"
-            style={tw`w-[24px] h-[24px]`}
-            tintColor="#6b7280"
+            style={tw.style(GLOBAL_ICON_SIZE)}
+            tintColor={GLOBAL_COLORS.primary.hex}
           />
         )}
       </Pressable>
@@ -83,8 +94,8 @@ export const RInput = ({
           <Image
             source={require('../../../assets/icons-512/eye-close.png')}
             resizeMode="contain"
-            style={tw`w-[24px] h-[24px]`}
-            tintColor="#6b7280"
+            style={tw.style(GLOBAL_ICON_SIZE)}
+            tintColor={GLOBAL_COLORS.primary.hex}
           />
         )}
       </Pressable>
@@ -92,7 +103,9 @@ export const RInput = ({
   };
 
   return (
-    <View style={tw.style(CONTAINER_STYLES, borderStyle, sizeStyle)}>
+    <View
+      style={tw.style(CONTAINER_STYLES, sizeStyle, error && tw`border-red-500`)}
+    >
       <TextInput
         {...inputProps}
         // Set secureTextEntry prop to hide
@@ -101,7 +114,7 @@ export const RInput = ({
         autoCapitalize="none"
         ref={inputRef}
         onChangeText={onChange}
-        placeholderTextColor="#d4d4d8"
+        placeholderTextColor={GLOBAL_COLORS.disabled.hex}
         style={tw.style(INPUT_STYLES, { outlineStyle: 'none' })}
         onSubmitEditing={onSubmit}
       />

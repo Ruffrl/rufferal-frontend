@@ -1,6 +1,10 @@
 import { Image, Platform, Text, View } from 'react-native';
 import tw from 'twrnc';
-import { SWIPER_IMAGE_STYLES, SWIPER_SLIDE_STYLE } from '..';
+import {
+  SWIPER_IMAGE_STYLES,
+  SWIPER_SLIDE_STYLE,
+  SWIPER_TEXT_STYLES,
+} from '..';
 
 export const ROnboardingSlideOne = ({
   image,
@@ -17,10 +21,10 @@ export const ROnboardingSlideOne = ({
         <Image
           style={SWIPER_IMAGE_STYLES}
           source={require('../../../assets/pikisuperstar/onboarding-community/onboarding-community.jpg')}
-          resizeMode="contain"
+          resizeMode="center"
         />
       )}
-      <Text style={tw`mt-8 text-center`}>
+      <Text style={tw.style(SWIPER_TEXT_STYLES)}>
         Pet care recommended{`\n`}by people near you
       </Text>
     </View>
@@ -41,10 +45,10 @@ export const ROnboardingSlideTwo = ({
         <Image
           style={SWIPER_IMAGE_STYLES}
           source={require('../../../assets/pikisuperstar/onboarding-booking/onboarding-booking.jpg')}
-          resizeMode="contain"
+          resizeMode="center"
         />
       )}
-      <Text style={tw`mt-8 text-center`}>
+      <Text style={tw.style(SWIPER_TEXT_STYLES)}>
         View frequently{`\n`}booked caregivers
       </Text>
     </View>
@@ -65,10 +69,10 @@ export const ROnboardingSlideThree = ({
         <Image
           style={SWIPER_IMAGE_STYLES}
           source={require('../../../assets/pikisuperstar/onboarding-messaging/onboarding-messaging.jpg')}
-          resizeMode="contain"
+          resizeMode="center"
         />
       )}
-      <Text style={tw`mt-8 text-center`}>
+      <Text style={tw.style(SWIPER_TEXT_STYLES)}>
         Connect with{`\n`}in-app messaging
       </Text>
     </View>

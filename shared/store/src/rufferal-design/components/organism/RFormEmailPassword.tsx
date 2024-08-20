@@ -5,6 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
 import tw from 'twrnc';
 import { observableAuthStore, User } from '../../../store';
+import { moderateScaleTW } from '../../utils';
 import { FormErrorProps, RButton, RFormError } from '../atom';
 import { RFormInput } from '../molecule';
 
@@ -33,11 +34,7 @@ type FormEmailPasswordProps = {
 
 /*
  * BLARG - TODOs
- * rename so we can share between login and sign up
  * move submit handling to parent
- * create an optional JSX Element under password field for additional things someone might want before submit button
- * password field will have hidden input and a toggleable visibility
- * [optional] submit button can have changeable text w/ default of 'Continue'
  * [optional] can pass password validation boolean that will display helper for password requirements and error if invalid validations
  */
 export const RFormEmailPassword = observer(
@@ -137,7 +134,7 @@ export const RFormEmailPassword = observer(
 
     return (
       <View style={tw`justify-between flex-1`}>
-        <View style={tw`gap-3`}>
+        <View style={tw`gap-${moderateScaleTW(12)}`}>
           {/* Email field */}
           <Controller
             name="email"
@@ -196,11 +193,11 @@ export const RFormEmailPassword = observer(
           </Text>
         )}
 
-        {/* Form level errors */}
-        {error && <RFormError error={error} />}
-
         {/* Submit button */}
-        <View style={tw`mb-8`}>
+        <View>
+          {/* Form level errors */}
+          {error && <RFormError error={error} />}
+
           <RButton title={submitTitle} onPress={onSubmit} loading={loading} />
         </View>
       </View>

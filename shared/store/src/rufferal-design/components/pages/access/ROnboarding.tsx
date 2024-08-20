@@ -1,6 +1,11 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import tw from 'twrnc';
+import {
+  horizontalScaleTW,
+  moderateScaleTW,
+  verticalScaleTW,
+} from '../../../utils';
 import { ROnboardingButtons } from '../../organism';
 import { RAccessTemplate } from '../../templates';
 
@@ -15,20 +20,53 @@ type OnboardingProps = {
   navigation: OnboardingNavigationProps;
 };
 
-export const SWIPER_CONTAINER_STYLES = tw`w-4/5 items-center justify-center flex`;
-export const SWIPER_SLIDE_STYLE = 'flex-1 justify-start items-center';
-export const SWIPER_IMAGE_STYLES = tw`h-3/5 w-full`;
-export const SWIPER_ANDROID_IMAGE_STYLES = tw`h-3/5 w-3/5`;
-// export const SWIPER_INNER_CONTAINER_STYLES = tw`bg-pink-500`;
+export const SWIPER_CONTAINER_STYLES = tw`
+  flex-none
+  items-center
+  justify-center
+  w-full
+  h-${verticalScaleTW(350)}
+  mt-${verticalScaleTW(44)}
+`;
+export const SWIPER_STYLES = tw`w-${horizontalScaleTW(225)}`;
+export const SWIPER_SLIDE_STYLE = tw`w-${horizontalScaleTW(225)}`;
+export const SWIPER_IMAGE_STYLES = tw`
+  h-${verticalScaleTW(225)}
+  w-${horizontalScaleTW(225)}
+`;
+export const SWIPER_TEXT_STYLES = tw`
+  text-center
+  font-semibold
+  mt-${moderateScaleTW(24)}
+  text-${moderateScaleTW(12)}
+`;
+export const SWIPER_NAVIGATION_STYLES = tw`
+  text-gray-500 
+  font-semibold
+  text-${moderateScaleTW(14)}
+`;
 
 export const ROnboarding = ({ swiper, navigation }: OnboardingProps) => {
+  const isIos = Platform.OS === 'ios';
+
   return (
     <RAccessTemplate>
-      <Text style={tw`text-3xl font-bold text-gray-600 text-center`}>
-        Rufferal
-      </Text>
-      <View style={tw`flex-none w-full h-3/5 items-center my-6`}>{swiper}</View>
-      <ROnboardingButtons {...navigation} />
+      <View style={tw`justify-between h-full`}>
+        <Text
+          style={tw.style(
+            `text-center
+          font-bold
+          text-gray-600
+          text-${moderateScaleTW(48)}
+          mt-${verticalScaleTW(96)}`,
+            isIos && `mt-${verticalScaleTW(120)}`
+          )}
+        >
+          Rufferal
+        </Text>
+        <View style={tw.style(SWIPER_CONTAINER_STYLES)}>{swiper}</View>
+        <ROnboardingButtons {...navigation} />
+      </View>
     </RAccessTemplate>
   );
 };

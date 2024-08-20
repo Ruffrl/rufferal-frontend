@@ -1,5 +1,6 @@
 import { Pressable, PressableProps, Text } from 'react-native';
 import tw from 'twrnc';
+import { moderateScaleTW } from '../../utils';
 import { FieldState } from './RButton';
 
 interface Props extends PressableProps {
@@ -41,7 +42,10 @@ export const RLinkButton = ({
           style={tw.style(
             textStyle
               ? textStyle
-              : ['text-sm font-bold tracking-wide', textColor]
+              : [
+                  `text-${moderateScaleTW(14)} font-bold tracking-wide`,
+                  textColor,
+                ]
           )}
         >
           {text}

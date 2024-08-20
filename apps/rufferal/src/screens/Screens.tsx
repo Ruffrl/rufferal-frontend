@@ -30,7 +30,7 @@ export const Screens = observer(() => {
 
   // const [showOnboarding, setShowOnboarding] = useState<boolean>(true);
   /* BLARG - DEVELOPING/DEBUGGING */
-  const [showOnboarding, setShowOnboarding] = useState<boolean>(false);
+  const [showOnboarding, setShowOnboarding] = useState<boolean>(true);
 
   useEffect(() => {
     AsyncStorage.getItem('showOnboarding').then((value) => {

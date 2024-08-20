@@ -17,7 +17,6 @@ interface Props extends Omit<TextInputProps, 'onChange'> {
   placeholder?: string;
   size?: FieldSize;
   onChange: ((text: string) => void) | undefined;
-  // (e: NativeSyntheticEvent<TextInputChangeEventData>) => void) | undefined
 }
 
 export const RFormInput = ({
@@ -52,6 +51,7 @@ export const RFormInput = ({
         isPassword={isPassword}
         mobileIconHide={mobileIconHide}
         mobileIconView={mobileIconView}
+        error={error}
       />
       {error && <RInputError error={error} />}
     </View>

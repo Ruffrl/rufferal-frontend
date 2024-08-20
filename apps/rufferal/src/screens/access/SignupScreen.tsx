@@ -22,7 +22,7 @@ export const SignupScreen = () => {
     <RSignup
       navigateLogin={navigateLogin}
       navigateAbout={navigateAbout}
-      androidGoogleImage={AndroidImageTwo}
+      googleIcon={AndroidImageTwo}
     />
   );
 };

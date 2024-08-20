@@ -22,11 +22,12 @@ export { RForgotPassword } from './access/RForgotPassword';
 export { RLogin } from './access/RLogin';
 export {
   ROnboarding,
-  SWIPER_ANDROID_IMAGE_STYLES,
   SWIPER_CONTAINER_STYLES,
   SWIPER_IMAGE_STYLES,
-  // SWIPER_INNER_CONTAINER_STYLES,
+  SWIPER_NAVIGATION_STYLES,
   SWIPER_SLIDE_STYLE,
+  SWIPER_STYLES,
+  SWIPER_TEXT_STYLES,
 } from './access/ROnboarding';
 export type { OnboardingNavigationProps } from './access/ROnboarding';
 export { RResetPassword } from './access/RResetPassword';

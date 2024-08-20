@@ -1,8 +1,42 @@
 import { observer } from 'mobx-react-lite';
 import { useContext, useEffect } from 'react';
-import { Dimensions, Image, Pressable, Text, View } from 'react-native';
+import {
+  Dimensions,
+  Image,
+  Platform,
+  Pressable,
+  Text,
+  View,
+} from 'react-native';
 import tw from 'twrnc';
 import { ToastStoreContext } from '../../..';
+import {
+  GLOBAL_ANDROID_SHADOW,
+  GLOBAL_COLORS,
+  GLOBAL_ICON_SIZE,
+  GLOBAL_IOS_SHADOW,
+  GLOBAL_MIN_PRESS_SIZE,
+  GLOBAL_WEB_SHADOW,
+  GLOBAL_X_PADDING,
+  horizontalScale,
+  horizontalScaleTW,
+  verticalScaleTW,
+} from '../../utils';
+
+const ERROR_CONTAINER_STYLES = tw`
+  absolute
+  border-2
+  z-10
+  rounded
+  flex-row
+  justify-between
+  items-center
+  top-${verticalScaleTW(20)}
+  left-${horizontalScaleTW(GLOBAL_X_PADDING)}
+  h-${verticalScaleTW(48)}
+  pl-${verticalScaleTW(16)}
+  py-${verticalScaleTW(8)}
+`;
 
 /* BLARG - how to optimize later
  * OPTION 1:
@@ -16,8 +50,13 @@ import { ToastStoreContext } from '../../..';
  */
 export const RGlobalError = observer(
   ({ mobileCloseIcon }: { mobileCloseIcon?: React.JSX.Element }) => {
-    const toastStore = useContext(ToastStoreContext);
+    /* DEVISE INFORMATION */
     const windowWidth = Dimensions.get('window').width;
+    const isIos = Platform.OS === 'ios';
+    const isAndroid = Platform.OS === 'android';
+
+    /* GLOBAL VALUES */
+    const toastStore = useContext(ToastStoreContext);
 
     /* HANDLE TOAST REMOVAL */
     useEffect(() => {
@@ -39,16 +78,19 @@ export const RGlobalError = observer(
       <>
         {toastStore.toasts.length > 0 &&
           toastStore.toasts.map((toast) => {
+            let statusPrefix = '';
             let backgroundColor = tw`bg-green-500`;
             let borderColor = tw`border-green-700`;
             switch (toast.type) {
               case 'error':
+                statusPrefix = 'ERROR: ';
                 backgroundColor = tw`bg-red-500`;
                 borderColor = tw`border-red-700`;
                 break;
               case 'warning':
+                statusPrefix = 'WARN: ';
                 backgroundColor = tw`bg-yellow-300`;
-                borderColor = tw`border-yellow-400`;
+                borderColor = tw`border-yellow-500`;
                 break;
             }
             return (
@@ -56,24 +98,40 @@ export const RGlobalError = observer(
                 key={`${Date.now().toString(36)}#
             ${Math.random().toString().slice(2, 11)}-${toast.message}`}
                 style={tw.style(
-                  tw`absolute top-5 left-4 border-2 elevation-3 h-12 z-10 rounded pl-4 py-2 flex-row justify-between items-center`,
-                  tw`w-[${windowWidth - 32}px]`,
+                  ERROR_CONTAINER_STYLES,
+                  // Absolute width size calculated by subtracting scaled Xpadding
+                  tw`w-[${
+                    windowWidth - horizontalScale(GLOBAL_X_PADDING) * 2
+                  }px]`,
                   backgroundColor,
                   borderColor,
-                  { boxShadow: '4px 4px 0px 0px #d4d4d8' }
+                  // IOS requires a taller top padding/margin due to status bar height
+                  isIos && tw`absolute top-${verticalScaleTW(40)}`,
+                  // Shadows
+                  isIos && GLOBAL_IOS_SHADOW,
+                  isAndroid && GLOBAL_ANDROID_SHADOW,
+                  !isIos && !isAndroid && GLOBAL_WEB_SHADOW
                 )}
               >
-                <Text>{toast.message}</Text>
+                <Text style={tw`text-zinc-900 font-semibold`}>
+                  {statusPrefix}
+                  {toast.message}
+                </Text>
                 {/* Dismiss an error manually */}
                 <Pressable
                   onPress={() => handleToastRemoval(toast.message)}
                   // ACCESIBILITY [TOUCH TARGETS] STANDARD - provide a minimum touch target sizes on mobile of 44×44px - we will do 48x48
-                  style={tw`h-12 w-12 items-center justify-center`}
+                  style={tw.style(
+                    GLOBAL_MIN_PRESS_SIZE,
+                    tw`items-center justify-center`
+                  )}
                 >
                   {mobileCloseIcon || (
                     <Image
                       source={require('../../../assets/icons-512/close.png')}
-                      style={tw`h-6 w-6`}
+                      style={tw.style(GLOBAL_ICON_SIZE)}
+                      resizeMode="contain"
+                      tintColor={GLOBAL_COLORS.tertiary.hex}
                     />
                   )}
                 </Pressable>

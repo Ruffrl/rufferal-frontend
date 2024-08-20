@@ -4,9 +4,18 @@ import { PropsWithChildren } from 'react';
 import { Platform, StatusBar, View } from 'react-native';
 import tw from 'twrnc';
 import { RBackNavigation, RGlobalError, RPageHeader } from '..';
+import {
+  GLOBAL_X_PADDING,
+  GLOBAL_Y_PADDING,
+  horizontalScaleTW,
+  verticalScaleTW,
+} from '../../utils';
 
-const PAGE_STYLES = tw`flex-1 justify-between bg-white`;
-const PAGE_PADDING = tw`py-6 px-4`;
+const PAGE_STYLES = tw`flex-1 bg-white`;
+const PAGE_PADDING = tw`
+  py-${verticalScaleTW(GLOBAL_Y_PADDING)} 
+  px-${horizontalScaleTW(GLOBAL_X_PADDING)}
+`;
 
 type AccessTemplateProps = {
   backNavigation?: () => void;
@@ -23,15 +32,22 @@ export const RAccessTemplate = observer(
     mobileBackIcon,
     mobileCloseIcon,
   }: PropsWithChildren<AccessTemplateProps>): React.ReactElement => {
+    /* DEVISE INFORMATION */
     const isIos = Platform.OS === 'ios';
 
     return (
       <>
-        <View style={tw.style(PAGE_PADDING, PAGE_STYLES, isIos && tw`py-12`)}>
-          {/* BLARG - testing background color */}
-          {/* BLARG - status bar let's us style Android status (wifi, battery icon, time, etc) */}
-          {/* <StatusBar backgroundColor="#e9d5ff" /> */}
-          {/* <StatusBar backgroundColor={tw.style('bg-purple-200')} /> */}
+        <View
+          style={tw.style(
+            PAGE_PADDING,
+            PAGE_STYLES,
+            isIos && tw`pb-${horizontalScaleTW(GLOBAL_Y_PADDING * 2)}`
+          )}
+        >
+          {/* STATUS BAR
+            * let's us style Android status
+            * (wifi, battery icon, time, etc)
+            */}
           <StatusBar backgroundColor="#000" />
           {backNavigation && (
             <RBackNavigation
@@ -39,7 +55,9 @@ export const RAccessTemplate = observer(
               mobileBackIcon={mobileBackIcon}
             />
           )}
-          {header && <RPageHeader header={header} />}
+          {header && (
+            <RPageHeader header={header} removeTopPadding={!!backNavigation} />
+          )}
           <View style={tw`flex-1`}>{children}</View>
         </View>
         {/* GLOBAL ERRORS */}

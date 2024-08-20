@@ -22,6 +22,7 @@ import { RLogoutButton } from '../components';
 // };
 
 export type ScreenProps = {
+  Onboarding: undefined;
   Home: undefined;
   About: undefined;
   Dashboard: undefined;

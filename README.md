@@ -48,11 +48,11 @@ Things to think about
 
 ### Desktop Viewport sizes
 
-## Themse
+## Themes
 
 ### Colors - Wireframes/Prototype
 
-- PRIMARY (dark gray)
+- PRIMARY (slate gray)
   - ORIGINAL
     - #667080
   - TAILWIND TRANSLATION (until custom colors are handled)
@@ -61,7 +61,7 @@ Things to think about
       - `text-white` [pairing]
     - `border-gray-500`
     - `text-gray-500`
-- SECONDARY (light gray)
+- SECONDARY (light slate gray)
   - ORIGINAL
     - #EEF1F4
   - TAILWIND TRANSLATION (until custom colors are handled)
@@ -71,7 +71,7 @@ Things to think about
       - `text-zinc-300` [pairing]
     - `border-slate-200`
     - `text-slate-200`
-- TERTIARY (gray-black)
+- TERTIARY (dark gray)
   - ORIGINAL
     - #252529
   - TAILWIND TRANSLATION (until custom colors are handled)
@@ -80,10 +80,21 @@ Things to think about
       - `text-white` [pairing]
     - `border-zinc-900`
     - `text-zinc-900`
-- DISABLE (medium gray)
+- QUATERNARY (gray)
+  - ORIGINAL
+    - #8A8A8F
+  - TAILWIND TRANSLATION (until custom colors are handled)
+    - _used for icon tint_
+    - #71717a
+    - `bg-zinc-500`
+      - `text-zinc-900` [pairing]
+    - `border-zinc-500`
+    - `text-zinc-500`
+- DISABLED (light gray)
   - ORIGINAL
     - #C8C7CC
   - TAILWIND TRANSLATION (until custom colors are handled)
+    - _used for text color_
     - #d4d4d8
     - `text-zinc-300`
     - `bg-zinc-300`

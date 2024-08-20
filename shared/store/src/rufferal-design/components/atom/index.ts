@@ -12,9 +12,11 @@
  *
  */
 
+export { RAppleIcon } from './RAppleIcon';
 export { RButton } from './RButton';
 export { RFormError } from './RFormError';
 export type { FormErrorProps } from './RFormError';
+export { RGoogleIcon } from './RGoogleIcon';
 export { RInput } from './RInput';
 export type { FieldSize } from './RInput';
 export { RInputError } from './RInputError';

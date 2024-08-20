@@ -7,18 +7,30 @@ import {
   RButton,
   RFormEmailPassword,
   RLinkButton,
-  RPageHeader
+  RPageHeader,
 } from '../..';
 
 type SignupProps = {
-  androidGoogleImage?: React.ReactNode;
+  appleIcon?: React.JSX.Element;
+  googleIcon?: React.ReactNode;
+  mobileBackIcon?: React.JSX.Element;
+  mobileCloseIcon?: React.JSX.Element;
+  mobileIconHide?: React.JSX.Element;
+  mobileIconView?: React.JSX.Element;
   navigateAbout: () => void;
+  navigateBack?: () => void;
   navigateLogin: () => void;
 };
 
 export const RSignup = ({
-  androidGoogleImage,
+  appleIcon,
+  googleIcon,
+  mobileBackIcon,
+  mobileCloseIcon,
+  mobileIconHide,
+  mobileIconView,
   navigateAbout,
+  navigateBack,
   navigateLogin,
 }: SignupProps): React.ReactElement => {
   const isAndroid = Platform.OS === 'android';
@@ -37,12 +49,17 @@ export const RSignup = ({
   );
 
   return (
-    <RAccessTemplate>
+    <RAccessTemplate
+      header="Create an account"
+      backNavigation={navigateBack}
+      mobileBackIcon={mobileBackIcon}
+      mobileCloseIcon={mobileCloseIcon}
+    >
       {/* Header */}
       <RPageHeader header="Create an account" />
       {/* Apple interaction button */}
       {isAndroid ? (
-        androidGoogleImage
+        googleIcon
       ) : (
         <Image
           style={tw`w-1/5 h-1/5`}

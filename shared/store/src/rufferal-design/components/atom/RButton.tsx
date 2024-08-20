@@ -6,6 +6,7 @@ import {
   View,
 } from 'react-native';
 import tw from 'twrnc';
+import { horizontalScaleTW, moderateScaleTW } from '../../utils';
 import { FieldSize } from './RInput';
 
 export type FieldState = 'default' | 'error' | 'disabled';
@@ -20,8 +21,20 @@ interface Props extends PressableProps {
   type?: ButtonType;
 }
 
-const BUTTON_STYLES = tw`rounded-md elevation-3 py-3 px-8 border-2 h-12`;
-const BUTTON_TEXT_STYLES = tw`font-bold text-base tracking-wide justify-center items-center text-center`;
+const BUTTON_STYLES = tw`
+  rounded-md
+  border-2
+  h-${moderateScaleTW(48)}
+  justify-center 
+  items-center 
+  `;
+
+const BUTTON_TEXT_STYLES = tw`
+  font-bold
+  tracking-wide 
+  text-center
+  text-${moderateScaleTW(16)}
+`;
 
 export const RButton = ({
   loading,
@@ -60,9 +73,9 @@ export const RButton = ({
 
   // Manage state themes
   if (state === 'error') {
-    borderStyle = 'border-red-800';
-    colorStyle = 'bg-red-600';
-    textColor = 'text-red-100';
+    borderStyle = 'border-red-700';
+    colorStyle = 'bg-red-500';
+    textColor = 'text-zinc-900';
   } else if (state === 'disabled') {
     borderStyle = 'border-slate-200';
     colorStyle = 'bg-slate-200';
@@ -79,7 +92,13 @@ export const RButton = ({
       ) : (
         <>
           <View
-            style={tw`relative w-full flex-row gap-4 items-center justify-center`}
+            style={tw`
+              w-full
+              flex-row
+              items-center
+              justify-center
+              gap-${horizontalScaleTW(16)}
+            `}
           >
             {titleIcon && titleIcon}
             <Text style={tw.style(textColor, BUTTON_TEXT_STYLES)}>{title}</Text>
