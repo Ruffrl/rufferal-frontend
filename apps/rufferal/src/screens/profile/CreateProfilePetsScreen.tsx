@@ -11,9 +11,9 @@ export const CreateProfilePetsScreen = () => {
 
   return (
     <RCreateProfilePets
-      // navigateBack={navigateBack}
-      // navigateDashboard={navigateDashboard}
-      // navigateForward={navigateForward}
+      navigateBack={navigateBack}
+      navigateDashboard={navigateDashboard}
+      navigateForward={navigateForward}
     />
   );
 };

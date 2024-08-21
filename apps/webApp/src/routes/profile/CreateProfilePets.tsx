@@ -10,9 +10,9 @@ export const CreateProfilePets = () => {
 
   return (
     <RCreateProfilePets
-    // navigateBack={navigateBack}
-    // navigateDashboard={navigateDashboard}
-    // navigateForward={navigateForward}
+      navigateBack={navigateBack}
+      navigateDashboard={navigateDashboard}
+      navigateForward={navigateForward}
     />
   );
 };
