@@ -5,10 +5,12 @@ export const CreateProfileType = () => {
   const navigate = useNavigate();
 
   const navigateBack = () => navigate('/create-profile/avatar');
-  const navigateForward = () => navigate('/create-pet-profiles/avatar');
+  const navigateForward = () => navigate('/create-profile/pets');
 
-  return <RCreateProfileType
-    navigateBack={navigateBack}
-    navigateForward={navigateForward}
-  />;
+  return (
+    <RCreateProfileType
+      navigateBack={navigateBack}
+      navigateForward={navigateForward}
+    />
+  );
 };

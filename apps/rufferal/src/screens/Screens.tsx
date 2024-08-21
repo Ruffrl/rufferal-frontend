@@ -89,10 +89,6 @@ export const Screens = observer(() => {
             {/* SearchServices [guest dashboard] */}
             {/* ⬇️⬇️⬇️ BLARG - FOR DEVELOPMENT - REMOVE AFTER TESTING ⬇️⬇️⬇️ */}
             <Stack.Screen
-              name="Create Profile Type"
-              component={CreateProfileTypeScreen}
-            />
-            <Stack.Screen
               name="Create Profile Name"
               component={CreateProfileNameScreen}
             />
@@ -101,7 +97,11 @@ export const Screens = observer(() => {
               component={CreateProfileAvatarScreen}
             />
             <Stack.Screen
-              name="Create Profile Pet"
+              name="Create Profile Type"
+              component={CreateProfileTypeScreen}
+            />
+            <Stack.Screen
+              name="Create Profile Pets"
               component={CreateProfilePetsScreen}
             />
             <Stack.Screen name="Manage Pets" component={ManagePetsScreen} />

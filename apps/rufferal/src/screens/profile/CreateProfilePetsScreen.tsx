@@ -6,11 +6,13 @@ export const CreateProfilePetsScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
 
   const navigateBack = () => navigation.navigate('Create Profile Avatar');
-  const navigateForward = () => navigation.navigate('Pet Profile');
+  const navigateForward = () => navigation.navigate('Manage Pets');
+  const navigateDashboard = () => navigation.navigate('Dashboard');
 
   return (
     <RCreateProfilePets
       // navigateBack={navigateBack}
+      // navigateDashboard={navigateDashboard}
       // navigateForward={navigateForward}
     />
   );
