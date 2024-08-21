@@ -13,8 +13,8 @@
  */
 
 export { RAppleIcon } from './RAppleIcon';
-export { RDivider } from './RDivider';
 export { RButton } from './RButton';
+export { RDivider } from './RDivider';
 export { RFormError } from './RFormError';
 export type { FormErrorProps } from './RFormError';
 export { RGoogleIcon } from './RGoogleIcon';
@@ -24,3 +24,5 @@ export { RInputError } from './RInputError';
 export { RLabel } from './RLabel';
 export { RLinkButton } from './RLinkButton';
 export { RPageHeader } from './RPageHeader';
+export { RProgressBar } from './RProgressBar';
+export { RStepProgress } from './RStepProgress';

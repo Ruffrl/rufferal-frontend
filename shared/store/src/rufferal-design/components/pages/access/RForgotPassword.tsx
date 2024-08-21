@@ -155,8 +155,9 @@ export const RForgotPassword = observer(
               />
             )}
           />
+          {/* FORM ERRORS */}
           {error && <RFormError error={error} />}
-          {/* <RFormError error="test" /> */}
+          {/* FORM SUBMIT */}
           <RButton title="Continue" onPress={onSubmit} loading={loading} />
         </View>
         <View style={tw`mt-${verticalScaleTW(20)} gap-${verticalScaleTW(20)}`}>

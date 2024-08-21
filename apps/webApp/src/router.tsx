@@ -56,24 +56,45 @@ export const router = createBrowserRouter([
     path: '/create-profile',
     element: <CreateProfileName />,
     errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/create-profile/name',
-        element: <CreateProfileName />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: '/create-profile/avatar',
-        element: <CreateProfileAvatar />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: '/create-profile/type',
-        element: <CreateProfileType />,
-        errorElement: <ErrorPage />,
-      },
-    ],
   },
+  {
+    path: '/create-profile/name',
+    element: <CreateProfileName />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/create-profile/avatar',
+    element: <CreateProfileAvatar />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/create-profile/type',
+    element: <CreateProfileType />,
+    errorElement: <ErrorPage />,
+  },
+  // {
+  //   path: '/create-profile',
+  //   // element: <CreateProfileName />,
+  //   element: undefined,
+  //   errorElement: <ErrorPage />,
+  //   children: [
+  //     {
+  //       path: '/create-profile/name',
+  //       element: <CreateProfileName />,
+  //       errorElement: <ErrorPage />,
+  //     },
+  //     {
+  //       path: '/create-profile/avatar',
+  //       element: <CreateProfileAvatar />,
+  //       errorElement: <ErrorPage />,
+  //     },
+  //     {
+  //       path: '/create-profile/type',
+  //       element: <CreateProfileType />,
+  //       errorElement: <ErrorPage />,
+  //     },
+  //   ],
+  // },
   {
     path: '/',
     element: <Dashboard />, // Dashboard == search and browse; Manage guest search and browse vs logged in search and browse

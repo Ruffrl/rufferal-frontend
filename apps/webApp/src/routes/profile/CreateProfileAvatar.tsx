@@ -1,5 +1,5 @@
-import { RCreateAccountAvatar } from '@rufferal-frontend/store';
+import { RCreateProfileAvatar } from '@rufferal-frontend/store';
 
 export const CreateProfileAvatar = () => {
-  return <RCreateAccountAvatar />;
+  return <RCreateProfileAvatar />;
 };

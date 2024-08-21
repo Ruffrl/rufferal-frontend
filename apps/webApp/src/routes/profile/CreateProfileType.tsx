@@ -1,5 +1,5 @@
-import { RCreateAccountType } from '@rufferal-frontend/store';
+import { RCreateProfileType } from '@rufferal-frontend/store';
 
 export const CreateProfileType = () => {
-  return <RCreateAccountType />;
+  return <RCreateProfileType />;
 };
