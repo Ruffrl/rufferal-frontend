@@ -8,7 +8,7 @@ export const CreateProfileType = () => {
   const navigateForward = () => navigate('/create-pet-profiles/avatar');
 
   return <RCreateProfileType
-    // navigateBack={navigateBack}
-    // navigateForward={navigateForward}
+    navigateBack={navigateBack}
+    navigateForward={navigateForward}
   />;
 };

@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import tw from 'twrnc';
-import { horizontalScaleTW, moderateScaleTW } from '../../utils';
+import { horizontalScaleTW, moderateScale, moderateScaleTW } from '../../utils';
 import { FieldSize } from './RInput';
 
 export type FieldState = 'default' | 'error' | 'disabled';
@@ -22,9 +22,9 @@ interface Props extends PressableProps {
 }
 
 const BUTTON_STYLES = tw`
-  border-2
   justify-center 
   items-center 
+  border-${moderateScaleTW(2)}
   h-${moderateScaleTW(48)}
   rounded-${moderateScaleTW(6)}
 `;
@@ -100,7 +100,7 @@ export const RButton = ({
       disabled={state === 'disabled'}
     >
       {loading ? (
-        <ActivityIndicator size="small" color="white" />
+        <ActivityIndicator size={moderateScale(36)} color="white" />
       ) : (
         <>
           <View

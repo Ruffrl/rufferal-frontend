@@ -182,6 +182,7 @@ export const RFormImageInput = ({
             />
           )}
         </View>
+        {/* FIELD ERRORS */}
         {error && <RInputError error={error} />}
         {/* UPLOAD INTERACTIONS */}
         <View

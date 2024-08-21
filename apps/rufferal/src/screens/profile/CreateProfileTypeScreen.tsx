@@ -10,8 +10,8 @@ export const CreateProfileTypeScreen = () => {
 
   return (
     <RCreateProfileType
-    // navigateBack={navigateBack}
-    // navigateForward={navigateForward}
+    navigateBack={navigateBack}
+    navigateForward={navigateForward}
     />
   );
 };

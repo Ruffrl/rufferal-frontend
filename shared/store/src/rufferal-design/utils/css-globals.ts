@@ -1,18 +1,27 @@
 import tw from 'twrnc';
-import { moderateScaleTW } from '.';
+// import { moderateScaleTW, verticalScaleTW } from '.';
+import { verticalScaleTW } from '.';
 
 /* SIZES */
 export const GLOBAL_X_PADDING = 16;
 export const GLOBAL_Y_PADDING = 24;
 
 export const GLOBAL_MIN_PRESS_SIZE = tw`
-  h-${moderateScaleTW(48)} 
-  w-${moderateScaleTW(48)} 
+  h-${verticalScaleTW(48)} 
+  w-${verticalScaleTW(48)} 
 `;
+// export const GLOBAL_MIN_PRESS_SIZE = tw`
+//   h-${moderateScaleTW(48)}
+//   w-${moderateScaleTW(48)}
+// `;
 export const GLOBAL_ICON_SIZE = tw`
-  h-${moderateScaleTW(24)} 
-  w-${moderateScaleTW(24)} 
+  h-${verticalScaleTW(24)} 
+  w-${verticalScaleTW(24)} 
 `;
+// export const GLOBAL_ICON_SIZE = tw`
+//   h-${moderateScaleTW(24)}
+//   w-${moderateScaleTW(24)}
+// `;
 
 /* SHADOWS */
 // BLARG - consider package for easier management of shadows:https://github.com/879479119/react-native-shadow
@@ -27,6 +36,7 @@ export const GLOBAL_IOS_SHADOW = {
 
 export const GLOBAL_ANDROID_SHADOW = { elevation: 30, shadowColor: '#000' };
 
+// border: 1px solid #A8B3B8
 /* COLORS */
 export const GLOBAL_COLORS = {
   /* SLATE GRAY */

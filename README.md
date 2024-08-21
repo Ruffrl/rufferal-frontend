@@ -265,6 +265,11 @@ cd rufferal-frontend
   cd ../..
   nx run rufferal:build-ios
   ```
+  
+  ```shell
+  cd apps/rufferal && bundle && cd ios && pod install && cd ../../..
+  nx run rufferal:build-ios
+  ```
 
 ### Serve
 
