@@ -12,7 +12,14 @@ import {
 } from 'react-native';
 import { GLOBAL_COLORS, GLOBAL_ICON_SIZE, moderateScaleTW } from '../../utils';
 
-export type FieldSize = 'small' | 'medium' | 'large';
+export type FieldSize =
+  | 'extra-small'
+  | 'small'
+  | 'medium'
+  | 'padded-medium'
+  | 'large'
+  | 'half'
+  | 'full';
 
 interface Props extends Omit<TextInputProps, 'onChange'> {
   error?: FieldError | undefined;
@@ -52,16 +59,28 @@ export const RInput = ({
   mobileIconHide,
   onChange,
   onSubmit,
-  size = 'large',
+  size = 'full',
   ...inputProps
 }: Props): React.ReactElement => {
-  let sizeStyle = 'w-2/5';
+  let sizeStyle = 'w-full';
   switch (size) {
+    case 'extra-small':
+      sizeStyle = 'w-1/5';
+      break;
+    case 'small':
+      sizeStyle = 'w-2/5';
+      break;
+    case 'padded-medium':
+      sizeStyle = 'w-[45%]';
+      break;
     case 'medium':
       sizeStyle = 'w-3/5';
       break;
     case 'large':
-      sizeStyle = 'w-full';
+      sizeStyle = 'w-4/5';
+      break;
+    case 'half':
+      sizeStyle = 'w-1/2';
       break;
   }
 

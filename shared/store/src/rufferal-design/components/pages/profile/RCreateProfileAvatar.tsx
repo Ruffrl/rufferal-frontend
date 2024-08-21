@@ -7,13 +7,13 @@ import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
-import { ImagePickerResponse } from 'react-native-image-picker';
 
 import {
+  moderateScaleTW,
   RAccessTemplate,
   RButton,
-  RFormImageInput,
   RFormError,
+  RFormImageInput,
   RPageHeader,
   RStepProgress,
   verticalScaleTW,
@@ -44,13 +44,8 @@ export const RCreateProfileAvatar = observer(
     navigateForward,
   }: CreateProfileAvatarProps): React.ReactElement => {
     /* STATE */
-    const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
-    const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
-
-    // const result = await launchCamera(options ?)
-    // const result = await launchImageLibrary(options?);
 
     /* REACT HOOK FORM */
     const form = useForm<ProfileAvatarForm>({
@@ -62,7 +57,6 @@ export const RCreateProfileAvatar = observer(
     });
 
     const {
-      register,
       control,
       handleSubmit,
       formState: { errors },
@@ -77,7 +71,7 @@ export const RCreateProfileAvatar = observer(
           data
         );
         // observableAccountStore.setEmail(data.email);
-        // navigateForward?.();
+        navigateForward?.();
       } else {
         const url =
           Platform.OS === 'android'
@@ -91,6 +85,7 @@ export const RCreateProfileAvatar = observer(
           // BLARG - TODO
           // observableAccountStore.setEmail(data.email);
           console.log('BLARG todo', url);
+          navigateForward?.();
         } catch (err) {
           setError(String(err));
         } finally {
@@ -98,39 +93,6 @@ export const RCreateProfileAvatar = observer(
         }
       }
     });
-
-    // const handleChoosePhoto = () => {
-    //   launchImageLibrary({ mediaType: 'photo' }, (response) => {
-    //     console.log('BLARG response: ', response);
-    //     console.log('BLARG response.assets[0]: ', response.assets?.[0]);
-    //     console.log(
-    //       'BLARG response.assets?.[0].uri: ',
-    //       response.assets?.[0].uri
-    //     );
-    //     if (response) {
-    //       setPhoto(response);
-    //     }
-    //   });
-    // };
-
-    // const handleUploadPhoto = () => {
-    //   const url =
-    //     Platform.OS === 'android'
-    //       ? 'http://10.0.2.2:5000/create-profile'
-    //       : 'http://localhost:5000/create-profile';
-
-    //   fetch(url, {
-    //     method: 'POST',
-    //     body: createFormData(photo, { userId: '123' }),
-    //   })
-    //     .then((response) => response.json())
-    //     .then((response) => {
-    //       console.log('response', response);
-    //     })
-    //     .catch((error) => {
-    //       console.log('error', error);
-    //     });
-    // };
 
     return (
       <RAccessTemplate
@@ -146,7 +108,7 @@ export const RCreateProfileAvatar = observer(
               {/* HEADER */}
               <RPageHeader header="Upload your profile photo" />
               {/* Disclaimer */}
-              <Text>
+              <Text style={tw`text-${moderateScaleTW(14)} text-gray-500`}>
                 This helps identify who you are to the Rufferal pet caretakers
                 and community.
               </Text>
@@ -155,50 +117,17 @@ export const RCreateProfileAvatar = observer(
               <Controller
                 name="avatar"
                 control={control}
-                // render={({ field: { onBlur, onChange, value, ref } }) => {
-                render={({ field }) => {
-                  // const inputRef = ref || useRef(null);
-                  // const blarg = ref.current as HTMLInputElement
-                  // const inputRef = useRef(ref);
-                  // const bloof = inputRef.current;
-                  // console.log('BLARG bloof: ', bloof);
-                  return (
-                    // <RFormInput
-                    //   onBlur={onBlur} // notify when input is touched
-                    //   onChange={onChange} // send value to hook form
-                    //   value={value}
-                    //   formRef={ref}
-                    //   label="First name"
-                    //   placeholder="Anita"
-                    //   error={errors.avatar}
-                    //   onSubmit={onSubmit}
-                    // />
-                    <RFormImageInput field={field} />
-                  );
-                }}
+                render={({ field }) => (
+                  <RFormImageInput field={field} error={errors.avatar} />
+                )}
               />
-              {/* <RFileInput register={register} /> */}
-              {/* Image upload field */}
-              <Text>⭕️</Text>
-              {/* Error handling */}
-              <Text>Conditional error display</Text>
-              {/* Submit button and handler */}
-              <Text>Add from library</Text>
-              {/* Submit button and handler */}
-              <Text>Take photo</Text>
             </View>
           </FormProvider>
           <View style={tw`mb-${verticalScaleTW(96)}`}>
             {/* FORM ERRORS */}
             {error && <RFormError error={error} />}
-            <RFormError error="test" />
             {/* FORM SUBMIT */}
-            <RButton
-              title="Continue"
-              onPress={onSubmit}
-              loading={loading}
-              // state={isDirty ? 'default' : 'disabled'}
-            />
+            <RButton title="Continue" onPress={onSubmit} loading={loading} />
           </View>
         </View>
       </RAccessTemplate>

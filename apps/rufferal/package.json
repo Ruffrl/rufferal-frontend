@@ -29,7 +29,8 @@
     "react-router-dom": "*",
     "react-native-web-swiper": "*",
     "yup": "*",
-    "@hookform/resolvers": "*"
+    "@hookform/resolvers": "*",
+    "react-native-image-picker": "*"
   },
   "devDependencies": {}
 }
