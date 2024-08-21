@@ -1,13 +1,19 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { ErrorPage } from './components/ErrorPage';
 import {
+  CreatePetCareplan,
+  CreatePetDetails,
+  CreatePetPersonality,
   CreateProfileAvatar,
   CreateProfileName,
+  CreateProfilePets,
   CreateProfileType,
   Dashboard,
+  Dashboard2,
   DevPlayground,
   ForgotPassword,
   Login,
+  ManagePets,
   Onboarding,
   Profile,
   ResetPassword,
@@ -72,6 +78,41 @@ export const router = createBrowserRouter([
     element: <CreateProfileType />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: '/create-profile/pets',
+    element: <CreateProfilePets />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/my-pets',
+    element: <ManagePets />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/my-pets/create',
+    element: <CreatePetDetails />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/my-pets/create/details',
+    element: <CreatePetDetails />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/my-pets/create/personality',
+    element: <CreatePetPersonality />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/my-pets/create/careplan',
+    element: <CreatePetCareplan />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/',
+    element: <Dashboard />,
+    errorElement: <ErrorPage />,
+  },
   // {
   //   path: '/create-profile',
   //   // element: <CreateProfileName />,
@@ -96,8 +137,8 @@ export const router = createBrowserRouter([
   //   ],
   // },
   {
-    path: '/',
-    element: <Dashboard />, // Dashboard == search and browse; Manage guest search and browse vs logged in search and browse
+    path: '/dashboard2',
+    element: <Dashboard2 />, // Dashboard2 == search and browse; Manage guest search and browse vs logged in search and browse
     errorElement: <ErrorPage />,
   },
   {

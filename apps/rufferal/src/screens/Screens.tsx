@@ -5,13 +5,19 @@ import { observableAccountStore } from '@rufferal-frontend/store';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import {
+  CreatePetCareplanScreen,
+  CreatePetDetailsScreen,
+  CreatePetPersonalityScreen,
   CreateProfileAvatarScreen,
   CreateProfileNameScreen,
+  CreateProfilePetsScreen,
   CreateProfileTypeScreen,
+  Dashboard2,
   DashboardScreen,
   DevPlaygroundScreen,
   ForgotPasswordScreen,
   LoginScreen,
+  ManagePetsScreen,
   OnboardingScreen,
   ProfileScreen,
   ResetPasswordScreen,
@@ -58,6 +64,7 @@ export const Screens = observer(() => {
             {/* SearchGigs */}
             {/* BLARG - convert this to authenticated only dashboard */}
             <Stack.Screen name="Dashboard" component={DashboardScreen} />
+            <Stack.Screen name="Dashboard2" component={Dashboard2} />
             <Stack.Screen
               name="Create Profile Name"
               component={CreateProfileNameScreen}
@@ -93,6 +100,23 @@ export const Screens = observer(() => {
               name="Create Profile Type"
               component={CreateProfileTypeScreen}
             />
+            <Stack.Screen
+              name="Create Profile Pet"
+              component={CreateProfilePetsScreen}
+            />
+            <Stack.Screen name="Manage Pets" component={ManagePetsScreen} />
+            <Stack.Screen
+              name="Create Pet Details"
+              component={CreatePetDetailsScreen}
+            />
+            <Stack.Screen
+              name="Create Pet Personality"
+              component={CreatePetPersonalityScreen}
+            />
+            <Stack.Screen
+              name="Create Pet Careplan"
+              component={CreatePetCareplanScreen}
+            />
             {/* ⬆️⬆️⬆️ BLARG - FOR DEVELOPMENT - REMOVE AFTER TESTING ⬆️⬆️⬆️ */}
             {showOnboarding && (
               <Stack.Screen name="Onboarding" component={OnboardingScreen} />
@@ -109,8 +133,9 @@ export const Screens = observer(() => {
             />
             <Stack.Screen name="Signup" component={SignupScreen} />
             {/* BLARG - guest version */}
-            {/* BLARG - convert this GuestDashboardScreen */}
+            {/* BLARG - convert this GuestDashboard2 */}
             <Stack.Screen name="Dashboard" component={DashboardScreen} />
+            <Stack.Screen name="Dashboard2" component={Dashboard2} />
             {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
           </Stack.Group>
         )}

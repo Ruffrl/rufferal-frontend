@@ -1,17 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RCreateProfileType, ScreenProps } from '@rufferal-frontend/store';
+import { RCreateProfilePets, ScreenProps } from '@rufferal-frontend/store';
 
-export const CreateProfileTypeScreen = () => {
+export const CreateProfilePetsScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
 
   const navigateBack = () => navigation.navigate('Create Profile Avatar');
-  const navigateForward = () => navigation.navigate('Create Profile Pets');
+  const navigateForward = () => navigation.navigate('Pet Profile');
 
   return (
-    <RCreateProfileType
-    // navigateBack={navigateBack}
-    // navigateForward={navigateForward}
+    <RCreateProfilePets
+      // navigateBack={navigateBack}
+      // navigateForward={navigateForward}
     />
   );
 };

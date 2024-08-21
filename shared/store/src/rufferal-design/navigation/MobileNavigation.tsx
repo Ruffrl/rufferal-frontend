@@ -27,6 +27,7 @@ export type ScreenProps = {
   Home: undefined;
   About: undefined;
   Dashboard: undefined;
+  Dashboard2: undefined;
   Signup: undefined;
   Login: undefined;
   'Forgot Password': undefined;
@@ -35,6 +36,11 @@ export type ScreenProps = {
   'Create Profile Name': undefined;
   'Create Profile Avatar': undefined;
   'Create Profile Type': undefined;
+  'Create Profile Pets': undefined;
+  'Manage Pets': undefined;
+  'Create Pet Details': undefined;
+  'Create Pet Personality': undefined;
+  'Create Pet Careplan': undefined;
 };
 
 export const MobileNavigation = () => {

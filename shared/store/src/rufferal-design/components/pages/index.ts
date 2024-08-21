@@ -11,9 +11,16 @@
  *
  */
 
+export { RDashboard } from './features/RDashboard';
+
 // Accounts, Profiles, Settings
+export { RCreatePetCareplan } from './pets/RCreatePetCareplan';
+export { RCreatePetDetails } from './pets/RCreatePetDetails';
+export { RCreatePetPersonality } from './pets/RCreatePetPersonality';
+export { RManagePets } from './pets/RManagePets';
 export { RCreateProfileAvatar } from './profile/RCreateProfileAvatar';
 export { RCreateProfileName } from './profile/RCreateProfileName';
+export { RCreateProfilePets } from './profile/RCreateProfilePets';
 export { RCreateProfileType } from './profile/RCreateProfileType';
 
 // Onboarding and Auth

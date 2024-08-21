@@ -1,14 +1,16 @@
-import { RCreateProfileType } from '@rufferal-frontend/store';
+import { RCreatePetPersonality } from '@rufferal-frontend/store';
 import { useNavigate } from 'react-router-dom';
 
-export const CreateProfileType = () => {
+export const CreatePetPersonality = () => {
   const navigate = useNavigate();
 
   const navigateBack = () => navigate('/create-profile/avatar');
   const navigateForward = () => navigate('/create-pet-profiles/avatar');
 
-  return <RCreateProfileType
+  return (
+    <RCreatePetPersonality
     // navigateBack={navigateBack}
     // navigateForward={navigateForward}
-  />;
+    />
+  );
 };
