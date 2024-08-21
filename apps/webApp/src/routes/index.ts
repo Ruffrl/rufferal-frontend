@@ -4,7 +4,7 @@ export { Home } from './Home';
 export { Profile } from './Profile';
 export { ProtectedRoute } from './ProtectedRoutes';
 
-export { EmailVerification } from './access/EmailVerification';
+export { Verification } from './access/Verification';
 export { ForgotPassword } from './access/ForgotPassword';
 export { Login } from './access/Login';
 export { Onboarding } from './access/Onboarding';

@@ -1,13 +1,14 @@
 import * as React from 'react';
+import tw from 'twrnc';
 
 import { observer } from 'mobx-react-lite';
 import { Platform, Text } from 'react-native';
-import tw from 'twrnc';
+
 import {
   AccessForm,
   FormErrorProps,
   moderateScaleTW,
-  observableAuthStore,
+  observableAccountStore,
   RAccessTemplate,
   RFormEmailPassword,
   RLinkButton,
@@ -108,12 +109,12 @@ export const RLogin = observer(
           //     }
           // }
           result.data.attributes &&
-            observableAuthStore.setUser(result.data.attributes);
+            observableAccountStore.setUser(result.data.attributes);
           console.log('result is: ', JSON.stringify(result, null, 4));
 
           const authHeader = response.headers.get('Authorization') || undefined;
           // Mobile navigation will automatically happen if token status changes
-          authHeader && observableAuthStore.setAuth(authHeader);
+          authHeader && observableAccountStore.setAuth(authHeader);
           // Web navigation only
           navigateDashboard?.();
         }

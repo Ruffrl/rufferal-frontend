@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
 import tw from 'twrnc';
+
+import { Text, View } from 'react-native';
+
 import {
   horizontalScaleTW,
   moderateScaleTW,
+  RAccessTemplate,
+  ROnboardingButtons,
   verticalScaleTW,
-} from '../../../utils';
-import { ROnboardingButtons } from '../../organism';
-import { RAccessTemplate } from '../../templates';
+} from '../../../..';
 
 export type OnboardingNavigationProps = {
   navigateSignup: () => void;

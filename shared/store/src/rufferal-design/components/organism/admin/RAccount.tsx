@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Platform, Text, View } from 'react-native';
 import tw from 'twrnc';
-import { observableAuthStore, User } from '../../../../store';
+import { observableAccountStore, User } from '../../../../store';
 import { RButton } from '../../atom';
 
 type AccountResponse = {
@@ -31,7 +31,7 @@ export const RAccount = ({ userId }: { userId: number }) => {
         method: 'GET',
         headers: {
           Accept: 'application/json',
-          Authorization: String(observableAuthStore.bearerToken),
+          Authorization: String(observableAccountStore.bearerToken),
         },
       });
 

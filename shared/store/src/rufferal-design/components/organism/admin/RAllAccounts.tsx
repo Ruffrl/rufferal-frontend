@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Platform, Text, View } from 'react-native';
 import tw from 'twrnc';
-import { observableAuthStore } from '../../../../store';
+import { observableAccountStore } from '../../../../store';
 import { RButton } from '../../atom';
 
 // type AllUsersResponse = {
@@ -20,8 +20,8 @@ export const RAllAccounts = () => {
   const [error, setError] = useState<string>();
 
   // console.log(
-  //   'BLARG String(authStore.bearerToken)',
-  //   String(authStore.bearerToken)
+  //   'BLARG String(AccountStore.bearerToken)',
+  //   String(AccountStore.bearerToken)
   // );
 
   const handleGetAccounts = async () => {
@@ -36,7 +36,7 @@ export const RAllAccounts = () => {
         method: 'GET',
         headers: {
           Accept: 'application/json',
-          Authorization: String(observableAuthStore.bearerToken),
+          Authorization: String(observableAccountStore.bearerToken),
         },
       });
 

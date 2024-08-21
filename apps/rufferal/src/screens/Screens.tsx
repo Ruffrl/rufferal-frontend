@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { observableAuthStore } from '@rufferal-frontend/store';
+import { observableAccountStore } from '@rufferal-frontend/store';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import {
@@ -16,6 +16,7 @@ import {
   ProfileScreen,
   ResetPasswordScreen,
   SignupScreen,
+  VerificationScreen,
 } from '.';
 
 const Stack = createNativeStackNavigator();
@@ -43,7 +44,7 @@ export const Screens = observer(() => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {observableAuthStore.isLoggedIn ? (
+        {observableAccountStore.isLoggedIn ? (
           /* USER SCREENS */
           <Stack.Group>
             {/* Create Account */}
@@ -83,6 +84,7 @@ export const Screens = observer(() => {
               <Stack.Screen name="Onboarding" component={OnboardingScreen} />
             )}
             <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Verification" component={VerificationScreen} />
             <Stack.Screen
               name="Forgot Password"
               component={ForgotPasswordScreen}
@@ -100,7 +102,7 @@ export const Screens = observer(() => {
         )}
         {/* SHARED SCREENS */}
         <Stack.Group
-          navigationKey={observableAuthStore.isLoggedIn ? 'user' : 'guest'}
+          navigationKey={observableAccountStore.isLoggedIn ? 'user' : 'guest'}
         >
           {/* BLARG - todo */}
           <Stack.Screen name="About" component={DevPlaygroundScreen} />

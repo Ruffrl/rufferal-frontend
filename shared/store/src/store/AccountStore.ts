@@ -1,6 +1,7 @@
-import { action, makeAutoObservable, observable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 // import { createContext } from 'react';
 
+type PasswordResetStatusType = 'default' | 'requested' | 'reset';
 type UserType = 'OWNER' | 'CARETAKER' | 'OWNER_AND_CARETAKER';
 
 // type UserRole = 'SUPERADMIN' | 'ADMIN' | 'USER';
@@ -45,27 +46,62 @@ export interface User {
  *    - getProfile
  *    - updateProfile
  */
-class AuthStore {
+class AccountStore {
+  email: string | undefined;
   bearerToken: string | undefined;
+  refreshToken: string | undefined;
+  verified = false;
+  passwordState: PasswordResetStatusType = 'default';
+  // BLARG - remove user details -> this needs to be in profile store
   user: User | undefined;
   isLoggedIn = false;
 
   constructor() {
-    makeAutoObservable(this, {
-      bearerToken: observable,
-      user: observable,
-      isLoggedIn: observable,
-      setToken: action,
-      revokeToken: action,
-      setLoginState: action,
-      revokeLoginState: action,
-      setAuth: action,
-      revokeAuth: action,
-      // BLARG - to be removed
-      setUser: action,
-      revokeUser: action,
-    });
-    // makeAutoObservable(this);
+    // makeAutoObservable(this, {
+    //   email: observable,
+    //   bearerToken: observable,
+    //   refreshToken: observable,
+    //   verified: observable,
+    //   passwordState: observable,
+    //   user: observable,
+    //   isLoggedIn: observable,
+    //   setEmail: action,
+    //   setToken: action,
+    //   revokeEmail: action,
+    //   revokeToken: action,
+    //   setLoginState: action,
+    //   revokeLoginState: action,
+    //   setAuth: action,
+    //   revokeAuth: action,
+    //   // BLARG - to be removed
+    //   setUser: action,
+    //   revokeUser: action,
+    // });
+    makeAutoObservable(this);
+  }
+
+  // Manage account email
+  setEmail(email: string) {
+    this.email = email;
+  }
+  revokeEmail() {
+    this.email = undefined;
+  }
+
+  // Manage account email
+  setVerified() {
+    this.verified = true;
+  }
+  revokeVerified() {
+    this.verified = false;
+  }
+
+  // Manage password reset status
+  setPasswordState(passwordState: 'requested' | 'reset') {
+    this.passwordState = passwordState;
+  }
+  revokePasswordState() {
+    this.passwordState = 'default';
   }
 
   // Manage authorization tokens and user account/identity data
@@ -73,6 +109,7 @@ class AuthStore {
   //   this.bearerToken = token;
   //   this.setLoginState();
   // }
+
   // Manage token state
   setToken(token: string) {
     this.bearerToken = token;
@@ -109,5 +146,5 @@ class AuthStore {
   }
 }
 
-// export const AuthStoreContext = createContext(new AuthStore());
-export const observableAuthStore = new AuthStore();
+// export const AccountStoreContext = createContext(new AccountStore());
+export const observableAccountStore = new AccountStore();

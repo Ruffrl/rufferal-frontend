@@ -6,13 +6,13 @@ import {
   CreateAccountType,
   Dashboard,
   DevPlayground,
-  EmailVerification,
   ForgotPassword,
   Login,
   Onboarding,
   Profile,
   ResetPassword,
   Signup,
+  Verification,
 } from './routes';
 
 export const router = createBrowserRouter([
@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/verification',
-    element: <EmailVerification />,
+    element: <Verification />,
     errorElement: <ErrorPage />,
   },
   {
@@ -53,22 +53,22 @@ export const router = createBrowserRouter([
   },
   // BLARG - this starts AUTH
   {
-    path: '/create-account',
+    path: '/create-profile',
     element: <CreateAccountName />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/create-account/name',
+        path: '/create-profile/name',
         element: <CreateAccountName />,
         errorElement: <ErrorPage />,
       },
       {
-        path: '/create-account/avatar',
+        path: '/create-profile/avatar',
         element: <CreateAccountAvatar />,
         errorElement: <ErrorPage />,
       },
       {
-        path: '/create-account/type',
+        path: '/create-profile/type',
         element: <CreateAccountType />,
         errorElement: <ErrorPage />,
       },

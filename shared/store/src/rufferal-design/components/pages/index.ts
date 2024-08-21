@@ -17,7 +17,6 @@ export { RCreateAccountName } from './account/RCreateAccountName';
 export { RCreateAccountType } from './account/RCreateAccountType';
 
 // Onboarding and Auth
-export { REmailVerification } from './access/REmailVerification';
 export { RForgotPassword } from './access/RForgotPassword';
 export { RLogin } from './access/RLogin';
 export {
@@ -32,6 +31,7 @@ export {
 export type { OnboardingNavigationProps } from './access/ROnboarding';
 export { RResetPassword } from './access/RResetPassword';
 export { RSignup } from './access/RSignup';
+export { RVerification } from './access/RVerification';
 
 // Must be authenticated
 export { RDash } from './RDash';

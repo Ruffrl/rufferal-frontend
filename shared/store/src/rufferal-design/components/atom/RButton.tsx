@@ -85,6 +85,7 @@ export const RButton = ({
     <Pressable
       style={tw.style(BUTTON_STYLES, borderStyle, sizeStyle, colorStyle)}
       onPress={onPress}
+      disabled={state === 'disabled'}
     >
       {loading ? (
         <ActivityIndicator size="small" color="white" />

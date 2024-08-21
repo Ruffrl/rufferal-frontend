@@ -1,4 +1,4 @@
-import { Platform, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import tw from 'twrnc';
 import { moderateScaleTW, verticalScaleTW } from '../../utils';
 import { RButton, RLinkButton } from '../atom';
@@ -9,17 +9,12 @@ export const ROnboardingButtons = ({
   navigateLogin,
   navigateGuest,
 }: OnboardingNavigationProps) => {
-  const isIos = Platform.OS === 'ios';
-
   const ContinueGuestLink = () => (
     <Text
-      style={tw.style(
-        `tracking-wide
+      style={tw`tracking-wide
         text-zinc-900
         mt-${verticalScaleTW(16)}
-        text-${moderateScaleTW(12)}`,
-        isIos && tw`mb-${verticalScaleTW(16)}`
-      )}
+        text-${moderateScaleTW(12)}`}
     >
       Continue as <Text style={tw`font-bold`}>Guest</Text>
     </Text>
