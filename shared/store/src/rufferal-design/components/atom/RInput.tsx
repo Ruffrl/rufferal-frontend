@@ -1,4 +1,6 @@
 import * as React from 'react';
+import tw from 'twrnc';
+
 import { useState } from 'react';
 import { FieldError, RefCallBack } from 'react-hook-form';
 import {
@@ -8,7 +10,6 @@ import {
   TextInputProps,
   View,
 } from 'react-native';
-import tw from 'twrnc';
 import { GLOBAL_COLORS, GLOBAL_ICON_SIZE, moderateScaleTW } from '../../utils';
 
 export type FieldSize = 'small' | 'medium' | 'large';

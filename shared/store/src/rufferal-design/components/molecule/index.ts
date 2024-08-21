@@ -11,10 +11,11 @@
  */
 
 export { RBackNavigation } from './RBackNavigation';
-export { ROrDivider } from './ROrDivider';
+export { RFormImageInput } from './RFormImageInput';
 export { RFormInput } from './RFormInput';
 export {
   ROnboardingSlideOne,
   ROnboardingSlideThree,
   ROnboardingSlideTwo,
 } from './ROnboardingSlides';
+export { ROrDivider } from './ROrDivider';
