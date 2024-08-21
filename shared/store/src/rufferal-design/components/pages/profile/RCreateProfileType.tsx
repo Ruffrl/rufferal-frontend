@@ -22,6 +22,7 @@ import {
 type CreateProfileTypeProps = {
   mobileBackIcon?: React.JSX.Element;
   mobileCloseIcon?: React.JSX.Element;
+  mobileCheckIcon?: React.JSX.Element;
   navigateBack: () => void;
   navigateForward?: () => void;
 };
@@ -42,6 +43,7 @@ export const RCreateProfileType = observer(
   ({
     mobileBackIcon,
     mobileCloseIcon,
+    mobileCheckIcon,
     navigateBack,
     navigateForward,
   }: CreateProfileTypeProps): React.ReactElement => {
@@ -126,6 +128,7 @@ export const RCreateProfileType = observer(
                         field={field}
                         title={<>I'm looking{`\n`}for pet care</>}
                         error={errors.owner}
+                        mobileCheckIcon={mobileCheckIcon}
                       />
                     )}
                   />
@@ -138,6 +141,7 @@ export const RCreateProfileType = observer(
                         field={field}
                         title={<>I want to be{`\n`}a pet caretaker</>}
                         error={errors.caretaker}
+                        mobileCheckIcon={mobileCheckIcon}
                       />
                     )}
                   />

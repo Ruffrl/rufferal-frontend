@@ -7,7 +7,6 @@ export const ForgotPasswordScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
 
   const navigateBack = () => navigation.navigate('Login');
-  // const navigateLogin = () => navigation.navigate('Login');
   const navigateResetPassword = () => navigation.navigate('Reset Password');
 
   return (
@@ -15,7 +14,6 @@ export const ForgotPasswordScreen = () => {
       mobileBackIcon={<IconArrowBack />}
       mobileCloseIcon={<IconClose />}
       navigateBack={navigateBack}
-      // navigateLogin={navigateLogin}
       navigateResetPassword={navigateResetPassword}
     />
   );

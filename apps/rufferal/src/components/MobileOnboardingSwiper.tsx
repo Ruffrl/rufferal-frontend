@@ -16,21 +16,21 @@ export const MobileOnboardingSwiper = () => {
     <Image
       style={SWIPER_IMAGE_STYLES}
       source={require('../../android/app/src/main/res/pikisuperstar/onboarding-community/onboarding-community.jpg')}
-      resizeMode="contain"
+      resizeMode="cover"
     />
   );
   const AndroidImageTwo = (
     <Image
       style={SWIPER_IMAGE_STYLES}
       source={require('../../android/app/src/main/res/pikisuperstar/onboarding-booking/onboarding-booking.jpg')}
-      resizeMode="contain"
+      resizeMode="cover"
     />
   );
   const AndroidImageThree = (
     <Image
       style={SWIPER_IMAGE_STYLES}
       source={require('../../android/app/src/main/res/pikisuperstar/onboarding-messaging/onboarding-messaging.jpg')}
-      resizeMode="contain"
+      resizeMode="cover"
     />
   );
 

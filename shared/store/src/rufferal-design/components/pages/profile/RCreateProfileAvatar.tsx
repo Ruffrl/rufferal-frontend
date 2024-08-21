@@ -22,6 +22,7 @@ import {
 type CreateProfileAvatarProps = {
   mobileBackIcon?: React.JSX.Element;
   mobileCloseIcon?: React.JSX.Element;
+  mobilePlusIcon?: React.JSX.Element;
   navigateBack: () => void;
   navigateForward?: () => void;
 };
@@ -40,6 +41,7 @@ export const RCreateProfileAvatar = observer(
   ({
     mobileBackIcon,
     mobileCloseIcon,
+    mobilePlusIcon,
     navigateBack,
     navigateForward,
   }: CreateProfileAvatarProps): React.ReactElement => {
@@ -118,7 +120,11 @@ export const RCreateProfileAvatar = observer(
                 name="avatar"
                 control={control}
                 render={({ field }) => (
-                  <RFormImageInput field={field} error={errors.avatar} />
+                  <RFormImageInput
+                    field={field}
+                    error={errors.avatar}
+                    mobilePlusIcon={mobilePlusIcon}
+                  />
                 )}
               />
             </View>

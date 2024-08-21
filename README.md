@@ -298,6 +298,7 @@ cd rufferal-frontend
 
   # If Android needs a bundle/build reset
   cd apps/rufferal/android
+  ./gradlew clean
   ./gradlew bundleRelease
 
   # Manually bundle

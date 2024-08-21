@@ -5,17 +5,18 @@ import { observer } from 'mobx-react-lite';
 import { Image, Text, View } from 'react-native';
 
 import {
-  horizontalScaleTW,
   moderateScaleTW,
   RAccessTemplate,
   RButton,
   RStepProgress,
+  SWIPER_IMAGE_STYLES,
   verticalScaleTW,
 } from '../../../..';
 
 type CreateProfilePetsProps = {
   mobileBackIcon?: React.JSX.Element;
   mobileCloseIcon?: React.JSX.Element;
+  mobilePetsImage?: React.JSX.Element;
   navigateBack: () => void;
   navigateDashboard: () => void;
   navigateForward?: () => void;
@@ -25,6 +26,7 @@ export const RCreateProfilePets = observer(
   ({
     mobileBackIcon,
     mobileCloseIcon,
+    mobilePetsImage,
     navigateBack,
     navigateDashboard,
     navigateForward,
@@ -38,16 +40,13 @@ export const RCreateProfilePets = observer(
         {/* PROGRESS BAR */}
         <RStepProgress step={4} total={4} />
         <View style={tw`flex-1 justify-center items-center`}>
-          <Image
-            source={require('../../../../assets/pikisuperstar/profile-creation-pets/different-pets.jpg')}
-            resizeMode="contain"
-            style={tw`
-                border-gray-500
-                h-${verticalScaleTW(200)}
-                w-${horizontalScaleTW(200)}
-                border-${moderateScaleTW(3)} 
-              `}
-          />
+          {mobilePetsImage || (
+            <Image
+              source={require('../../../../assets/pikisuperstar/profile-creation-pets/different-pets.jpg')}
+              resizeMode="cover"
+              style={SWIPER_IMAGE_STYLES}
+            />
+          )}
           <Text
             style={tw.style(
               `font-bold

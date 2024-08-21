@@ -4,7 +4,6 @@ import tw from 'twrnc';
 import { Text, View } from 'react-native';
 
 import {
-  horizontalScaleTW,
   moderateScaleTW,
   RAccessTemplate,
   ROnboardingButtons,
@@ -30,11 +29,17 @@ export const SWIPER_CONTAINER_STYLES = tw`
   h-${verticalScaleTW(350)}
   mt-${verticalScaleTW(44)}
 `;
-export const SWIPER_STYLES = tw`w-${horizontalScaleTW(225)}`;
-export const SWIPER_SLIDE_STYLE = tw`w-${horizontalScaleTW(225)}`;
+export const SWIPER_STYLES = tw`w-${verticalScaleTW(225)}`;
+export const SWIPER_SLIDE_STYLE = tw`w-${verticalScaleTW(225)}`;
+// export const SWIPER_IMAGE_STYLES = tw`
+//   h-${verticalScaleTW(225)}
+//   w-${horizontalScaleTW(225)}
+// `;
 export const SWIPER_IMAGE_STYLES = tw`
   h-${verticalScaleTW(225)}
-  w-${horizontalScaleTW(225)}
+  w-${verticalScaleTW(225)}
+  border-gray-500
+  border-${moderateScaleTW(3)} 
 `;
 export const SWIPER_TEXT_STYLES = tw`
   text-center

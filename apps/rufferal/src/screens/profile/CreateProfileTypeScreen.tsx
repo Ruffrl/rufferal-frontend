@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RCreateProfileType, ScreenProps } from '@rufferal-frontend/store';
+import { IconArrowBack, IconCheckCircle, IconClose } from '../../assets';
 
 export const CreateProfileTypeScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
@@ -10,8 +11,11 @@ export const CreateProfileTypeScreen = () => {
 
   return (
     <RCreateProfileType
-    navigateBack={navigateBack}
-    navigateForward={navigateForward}
+      mobileBackIcon={<IconArrowBack />}
+      mobileCloseIcon={<IconClose />}
+      mobileCheckIcon={<IconCheckCircle />}
+      navigateBack={navigateBack}
+      navigateForward={navigateForward}
     />
   );
 };

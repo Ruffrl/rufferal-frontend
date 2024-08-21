@@ -22,10 +22,12 @@ import {
 export const RFormCardCheckbox = ({
   error,
   field,
+  mobileCheckIcon,
   title,
 }: {
   error?: FieldError | undefined;
   field: ControllerRenderProps;
+  mobileCheckIcon?: React.JSX.Element;
   title: string | React.JSX.Element;
 }) => {
   const [selected, setSelected] = useState(false);
@@ -66,12 +68,16 @@ export const RFormCardCheckbox = ({
         )}
       >
         {selected && (
-          <Image
-            source={require('../../../assets/icons-512/check-circle.png')}
-            resizeMode="center"
-            style={tw.style(GLOBAL_ICON_SIZE)}
-            tintColor={GLOBAL_COLORS.quaternary.hex}
-          />
+          <>
+            {mobileCheckIcon || (
+              <Image
+                source={require('../../../assets/icons-512/check-circle.png')}
+                resizeMode="center"
+                style={tw.style(GLOBAL_ICON_SIZE)}
+                tintColor={GLOBAL_COLORS.quaternary.hex}
+              />
+            )}
+          </>
         )}
         <Text
           style={tw`

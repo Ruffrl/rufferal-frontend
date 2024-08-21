@@ -28,9 +28,11 @@ import {
 export const RFormImageInput = ({
   error,
   field,
+  mobilePlusIcon,
 }: {
   error?: FieldError | undefined;
   field: ControllerRenderProps;
+  mobilePlusIcon?: React.JSX.Element;
 }) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
@@ -117,15 +119,17 @@ export const RFormImageInput = ({
                 w-${moderateScaleTW(96)}
               `}
             >
-              <Image
-                source={require('../../../assets/icons-512/camera.png')}
-                resizeMode="center"
-                style={tw.style(tw`
+              {mobilePlusIcon || (
+                <Image
+                  source={require('../../../assets/icons-512/camera.png')}
+                  resizeMode="center"
+                  style={tw.style(tw`
                     h-${moderateScaleTW(24)} 
                     w-${moderateScaleTW(24)} 
                   `)}
-                tintColor={GLOBAL_COLORS.secondary.hex}
-              />
+                  tintColor={GLOBAL_COLORS.secondary.hex}
+                />
+              )}
             </Pressable>
           </View>
         </View>
