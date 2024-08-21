@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
+
 import {
   moderateScaleTW,
   RAccessTemplate,
@@ -107,60 +108,65 @@ export const RCreateProfileName = observer(
         mobileBackIcon={mobileBackIcon}
         mobileCloseIcon={mobileCloseIcon}
       >
-        {/* PROGRESS BAR */}
-        <RStepProgress step={1} total={3} />
-        {/* HEADER */}
-        <RPageHeader header="What's your name?" />
-        <View style={tw`gap-${verticalScaleTW(16)}`}>
-          {/* DISCLAIMER */}
-          <Text style={tw`text-${moderateScaleTW(14)} text-gray-500`}>
-            Rufferal will only identify you by your first name and last initial.
-          </Text>
-          {/* FIRST NAME FORM */}
-          <Controller
-            name="forename"
-            control={control}
-            render={({ field: { onBlur, onChange, value, ref } }) => (
-              <RFormInput
-                onBlur={onBlur} // notify when input is touched
-                onChange={onChange} // send value to hook form
-                value={value}
-                formRef={ref}
-                label="First name"
-                placeholder="Anita"
-                error={errors.forename}
-                onSubmit={onSubmit}
+        <View style={tw`justify-between h-full`}>
+          <View>
+            {/* PROGRESS BAR */}
+            <RStepProgress step={1} total={3} />
+            {/* HEADER */}
+            <RPageHeader header="What's your name?" />
+            <View style={tw`gap-${verticalScaleTW(16)}`}>
+              {/* DISCLAIMER */}
+              <Text style={tw`text-${moderateScaleTW(14)} text-gray-500`}>
+                Rufferal will only identify you by your first name and last
+                initial.
+              </Text>
+              {/* FIRST NAME FORM */}
+              <Controller
+                name="forename"
+                control={control}
+                render={({ field: { onBlur, onChange, value, ref } }) => (
+                  <RFormInput
+                    onBlur={onBlur} // notify when input is touched
+                    onChange={onChange} // send value to hook form
+                    value={value}
+                    formRef={ref}
+                    label="First name"
+                    placeholder="Anita"
+                    error={errors.forename}
+                    onSubmit={onSubmit}
+                  />
+                )}
               />
-            )}
-          />
-          {/* LAST NAME FORM */}
-          <Controller
-            name="surname"
-            control={control}
-            render={({ field: { onBlur, onChange, value, ref } }) => (
-              <RFormInput
-                onBlur={onBlur} // notify when input is touched
-                onChange={onChange} // send value to hook form
-                value={value}
-                formRef={ref}
-                label="Last name"
-                placeholder="Radcliffe"
-                error={errors.surname}
-                onSubmit={onSubmit}
+              {/* LAST NAME FORM */}
+              <Controller
+                name="surname"
+                control={control}
+                render={({ field: { onBlur, onChange, value, ref } }) => (
+                  <RFormInput
+                    onBlur={onBlur} // notify when input is touched
+                    onChange={onChange} // send value to hook form
+                    value={value}
+                    formRef={ref}
+                    label="Last name"
+                    placeholder="Radcliffe"
+                    error={errors.surname}
+                    onSubmit={onSubmit}
+                  />
+                )}
               />
-            )}
-          />
-        </View>
-        <View style={tw`mt-${verticalScaleTW(48)}`}>
-          {/* FORM ERRORS */}
-          {error && <RFormError error={error} />}
-          {/* FORM SUBMIT */}
-          <RButton
-            title="Continue"
-            onPress={onSubmit}
-            loading={loading}
-            state={isDirty ? 'default' : 'disabled'}
-          />
+            </View>
+          </View>
+          <View style={tw`mb-${verticalScaleTW(96)}`}>
+            {/* FORM ERRORS */}
+            {error && <RFormError error={error} />}
+            {/* FORM SUBMIT */}
+            <RButton
+              title="Continue"
+              onPress={onSubmit}
+              loading={loading}
+              state={isDirty ? 'default' : 'disabled'}
+            />
+          </View>
         </View>
       </RAccessTemplate>
     );
