@@ -27,7 +27,9 @@
     "mobx-persist-store": "*",
     "react-native-swiper": "*",
     "react-router-dom": "*",
-    "react-native-web-swiper": "*"
+    "react-native-web-swiper": "*",
+    "yup": "*",
+    "@hookform/resolvers": "*"
   },
   "devDependencies": {}
 }
