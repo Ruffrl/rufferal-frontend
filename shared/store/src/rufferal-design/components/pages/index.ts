@@ -12,9 +12,9 @@
  */
 
 // Accounts, Profiles, Settings
-export { RCreateAccountAvatar } from './account/RCreateAccountAvatar';
-export { RCreateAccountName } from './account/RCreateAccountName';
-export { RCreateAccountType } from './account/RCreateAccountType';
+export { RCreateProfileAvatar } from './profile/RCreateProfileAvatar';
+export { RCreateProfileName } from './profile/RCreateProfileName';
+export { RCreateProfileType } from './profile/RCreateProfileType';
 
 // Onboarding and Auth
 export { RForgotPassword } from './access/RForgotPassword';

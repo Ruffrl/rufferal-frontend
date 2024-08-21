@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Text } from 'react-native';
 import { RAccessTemplate } from '../../templates';
 
-export const RCreateAccountName = (): React.ReactElement => {
+export const RCreateProfileName = (): React.ReactElement => {
   return (
     <RAccessTemplate>
       {/* Navigation */}

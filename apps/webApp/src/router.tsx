@@ -1,9 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { ErrorPage } from './components/ErrorPage';
 import {
-  CreateAccountAvatar,
-  CreateAccountName,
-  CreateAccountType,
+  CreateProfileAvatar,
+  CreateProfileName,
+  CreateProfileType,
   Dashboard,
   DevPlayground,
   ForgotPassword,
@@ -54,22 +54,22 @@ export const router = createBrowserRouter([
   // BLARG - this starts AUTH
   {
     path: '/create-profile',
-    element: <CreateAccountName />,
+    element: <CreateProfileName />,
     errorElement: <ErrorPage />,
     children: [
       {
         path: '/create-profile/name',
-        element: <CreateAccountName />,
+        element: <CreateProfileName />,
         errorElement: <ErrorPage />,
       },
       {
         path: '/create-profile/avatar',
-        element: <CreateAccountAvatar />,
+        element: <CreateProfileAvatar />,
         errorElement: <ErrorPage />,
       },
       {
         path: '/create-profile/type',
-        element: <CreateAccountType />,
+        element: <CreateProfileType />,
         errorElement: <ErrorPage />,
       },
     ],

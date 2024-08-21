@@ -5,9 +5,9 @@ import { observableAccountStore } from '@rufferal-frontend/store';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import {
-  CreateAccountAvatarScreen,
-  CreateAccountNameScreen,
-  CreateAccountTypeScreen,
+  CreateProfileAvatarScreen,
+  CreateProfileNameScreen,
+  CreateProfileTypeScreen,
   DashboardScreen,
   DevPlaygroundScreen,
   ForgotPasswordScreen,
@@ -59,16 +59,16 @@ export const Screens = observer(() => {
             {/* BLARG - convert this to authenticated only dashboard */}
             <Stack.Screen name="Dashboard" component={DashboardScreen} />
             <Stack.Screen
-              name="Create Account Name"
-              component={CreateAccountNameScreen}
+              name="Create Profile Name"
+              component={CreateProfileNameScreen}
             />
             <Stack.Screen
-              name="Create Account Avatar"
-              component={CreateAccountAvatarScreen}
+              name="Create Profile Avatar"
+              component={CreateProfileAvatarScreen}
             />
             <Stack.Screen
-              name="Create Account Type"
-              component={CreateAccountTypeScreen}
+              name="Create Profile Type"
+              component={CreateProfileTypeScreen}
             />
             <Stack.Screen name="Profile" component={ProfileScreen} />
           </Stack.Group>

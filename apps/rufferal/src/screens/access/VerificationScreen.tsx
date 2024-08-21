@@ -8,7 +8,8 @@ export const VerificationScreen = () => {
 
   const navigateBack = () => navigation.navigate('Signup');
   const navigateLogin = () => navigation.navigate('Login');
-  const navigateCreateProfile = () => navigation.navigate('Create Profile');
+  const navigateCreateProfile = () =>
+    navigation.navigate('Create Profile Name');
 
   return (
     <RVerification

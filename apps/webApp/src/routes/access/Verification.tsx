@@ -5,7 +5,7 @@ export const Verification = () => {
   const navigate = useNavigate();
 
   const navigateBack = () => navigate('/signup');
-  const navigateCreateProfile = () => navigate('/create-profile');
+  const navigateCreateProfile = () => navigate('/create-profile/name');
   const navigateLogin = () => navigate('/login');
 
   return <RVerification

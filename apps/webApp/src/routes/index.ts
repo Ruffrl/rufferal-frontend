@@ -11,6 +11,6 @@ export { Onboarding } from './access/Onboarding';
 export { ResetPassword } from './access/ResetPassword';
 export { Signup } from './access/Signup';
 
-export { CreateAccountAvatar } from './account/CreateAccountAvatar';
-export { CreateAccountName } from './account/CreateAccountName';
-export { CreateAccountType } from './account/CreateAccountType';
+export { CreateProfileAvatar } from './profile/CreateProfileAvatar';
+export { CreateProfileName } from './profile/CreateProfileName';
+export { CreateProfileType } from './profile/CreateProfileType';

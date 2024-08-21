@@ -1,5 +1,5 @@
 import { RCreateAccountType } from '@rufferal-frontend/store';
 
-export const CreateAccountTypeScreen = () => {
+export const CreateProfileType = () => {
   return <RCreateAccountType />;
 };

@@ -11,6 +11,6 @@ export { ResetPasswordScreen } from './access/ResetPasswordScreen';
 export { SignupScreen } from './access/SignupScreen';
 export { VerificationScreen } from './access/VerificationScreen';
 
-export { CreateAccountAvatarScreen } from './account/CreateAccountAvatarScreen';
-export { CreateAccountNameScreen } from './account/CreateAccountNameScreen';
-export { CreateAccountTypeScreen } from './account/CreateAccountTypeScreen';
+export { CreateProfileAvatarScreen } from './profile/CreateProfileAvatarScreen';
+export { CreateProfileNameScreen } from './profile/CreateProfileNameScreen';
+export { CreateProfileTypeScreen } from './profile/CreateProfileTypeScreen';

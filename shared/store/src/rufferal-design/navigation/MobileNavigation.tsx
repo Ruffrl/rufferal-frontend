@@ -32,7 +32,9 @@ export type ScreenProps = {
   'Forgot Password': undefined;
   'Reset Password': undefined;
   Profile: { userId: string };
-  'Create Profile': undefined;
+  'Create Profile Name': undefined;
+  'Create Profile Avatar': undefined;
+  'Create Profile Type': undefined;
 };
 
 export const MobileNavigation = () => {
@@ -52,10 +54,6 @@ export const MobileNavigation = () => {
           {/* Account Settings */}
           {/* My Profile - Caretaker */}
           {/* AuthedSearchGigs */}
-          <Button
-            title="Create Profile"
-            onPress={() => navigation.navigate('Create Profile')}
-          />
           <Button
             title="Dashboard"
             onPress={() => navigation.navigate('Dashboard')}

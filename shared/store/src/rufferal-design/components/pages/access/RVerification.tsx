@@ -2,9 +2,9 @@ import * as React from 'react';
 import tw from 'twrnc';
 
 import { observer } from 'mobx-react-lite';
+import { useEffect } from 'react';
 import { Text, View } from 'react-native';
 
-import { useEffect } from 'react';
 import {
   moderateScaleTW,
   observableAccountStore,
