@@ -170,17 +170,15 @@ export const RFormImageInput = ({
                 w-${moderateScaleTW(96)}
               `}
             >
-              {mobilePlusIcon || (
-                <Image
-                  source={require('../../../assets/icons-512/camera.png')}
-                  resizeMode="center"
-                  style={tw.style(tw`
+              <Image
+                source={require('../../../assets/icons-512/camera.png')}
+                resizeMode="center"
+                style={tw.style(tw`
                     h-${moderateScaleTW(24)} 
                     w-${moderateScaleTW(24)} 
                   `)}
-                  tintColor={GLOBAL_COLORS.secondary.hex}
-                />
-              )}
+                tintColor={GLOBAL_COLORS.secondary.hex}
+              />
             </Pressable>
           </View>
         </View>
@@ -193,7 +191,6 @@ export const RFormImageInput = ({
           value={field.value || ''}
           style={tw`hidden`}
         />
-
         {/* PREVIEW IMAGE */}
         <View
           style={tw`
@@ -226,15 +223,19 @@ export const RFormImageInput = ({
               )}
             </>
           ) : (
-            <Image
-              source={require('../../../assets/icons-512/plus.png')}
-              resizeMode="center"
-              style={tw.style(tw`
+            <>
+              {mobilePlusIcon || (
+                <Image
+                  source={require('../../../assets/icons-512/check.png')}
+                  resizeMode="center"
+                  style={tw.style(tw`
                 h-${moderateScaleTW(48)} 
                 w-${moderateScaleTW(48)} 
               `)}
-              tintColor={GLOBAL_COLORS.quaternary.hex}
-            />
+                  tintColor={GLOBAL_COLORS.quaternary.hex}
+                />
+              )}
+            </>
           )}
         </View>
         {/* FIELD ERRORS */}
