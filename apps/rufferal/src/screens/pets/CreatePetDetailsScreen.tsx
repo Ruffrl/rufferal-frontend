@@ -5,8 +5,6 @@ import { IconArrowBack, IconClose } from '../../assets';
 
 export const CreatePetDetailsScreen = ({ route }) => {
   const { petSpecies } = route.params;
-  console.log('BLARG MOBILE type: ', petSpecies);
-
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
 
   const navigateBack = () => navigation.navigate('Create Pet Details');

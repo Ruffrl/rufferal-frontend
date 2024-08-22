@@ -97,7 +97,6 @@ export const RForgotPassword = observer(
     });
 
     const handleResend = async () => {
-      console.log('BLARG dksfjlsdfkjl');
       if (process.env['NODE_ENV'] === 'development') {
         console.log(
           'BLARG Priya handle resend password reset with your backend',

@@ -58,13 +58,10 @@ export const RFormImageInput = ({
   };
 
   const handleCamera = () => {
-    console.log('BLARG handleCamera');
     if (isMobile) {
-      console.log('BLARG MOBILE camera');
       launchCamera({ mediaType: 'photo', saveToPhotos: true }, (response) => {
         if (response) {
           // BLARG - todo; determine and manage data conversion for server
-          console.log('BLARG response: ', response);
           setPhoto(response);
           setValue(field.name, response?.assets?.[0].uri);
         }
@@ -76,7 +73,6 @@ export const RFormImageInput = ({
 
   const handleWebCamera = () => {
     const response = camera.current?.getScreenshot();
-    console.log('BLARG response: ', response);
     // const response = camera.current?.takePhoto() as string;
     // BLARG - todo; determine and manage data conversion for server
     setWebPhoto(response);
@@ -253,7 +249,6 @@ export const RFormImageInput = ({
             onPress={handleChoosePhoto}
             size="padded-medium"
           />
-          {/* BLARG - todo - camera */}
           <RButton
             title="Take photo"
             type="secondary"

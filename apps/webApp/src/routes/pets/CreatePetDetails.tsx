@@ -6,7 +6,6 @@ export const CreatePetDetails = () => {
   const {
     state: { petSpecies },
   } = useLocation();
-  console.log('BLARG WEB petSpecies: ', petSpecies);
 
   const navigateBack = () => navigate('/my-pets');
   const navigateForward = () => navigate('/my-pets/create/personality');
