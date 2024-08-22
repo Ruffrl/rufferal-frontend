@@ -1,11 +1,15 @@
 import { PetSpecies, RCreatePetCareplan } from '@rufferal-frontend/store';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 export const CreatePetCareplan = () => {
+  let petSpecies;
   const navigate = useNavigate();
-  const {
-    state: { petSpecies },
-  } = useLocation();
+  const { state } = useLocation();
+  if (state?.petSpecies) {
+    petSpecies = state.petSpecies;
+  } else {
+    return <Navigate to="/my-pets" />;
+  }
 
   const navigateBack = (petSpecies: PetSpecies) =>
     navigate('/my-pets/create/personality', { state: { petSpecies } });
