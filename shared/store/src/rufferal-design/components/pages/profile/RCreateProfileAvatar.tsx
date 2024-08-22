@@ -10,11 +10,11 @@ import { Platform, Text, View } from 'react-native';
 
 import {
   moderateScaleTW,
-  RAccessTemplate,
   RButton,
   RFormError,
   RFormImageInput,
   RPageHeader,
+  RPrototypeTemplate,
   RStepProgress,
   verticalScaleTW,
 } from '../../../..';
@@ -97,7 +97,7 @@ export const RCreateProfileAvatar = observer(
     });
 
     return (
-      <RAccessTemplate
+      <RPrototypeTemplate
         backNavigation={navigateBack}
         mobileBackIcon={mobileBackIcon}
         mobileCloseIcon={mobileCloseIcon}
@@ -136,7 +136,7 @@ export const RCreateProfileAvatar = observer(
             <RButton title="Continue" onPress={onSubmit} loading={loading} />
           </View>
         </View>
-      </RAccessTemplate>
+      </RPrototypeTemplate>
     );
   }
 );

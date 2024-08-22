@@ -11,11 +11,11 @@ import { Platform, Text, View } from 'react-native';
 import {
   moderateScaleTW,
   observableAccountStore,
-  RAccessTemplate,
   RButton,
   RFormError,
   RFormInput,
   RLinkButton,
+  RPrototypeTemplate,
   verticalScaleTW,
 } from '../../../..';
 
@@ -125,7 +125,7 @@ export const RForgotPassword = observer(
     };
 
     return (
-      <RAccessTemplate
+      <RPrototypeTemplate
         header="Reset your password"
         backNavigation={navigateBack}
         mobileBackIcon={mobileBackIcon}
@@ -173,7 +173,7 @@ export const RForgotPassword = observer(
             Didn't get an email? Wait a few minutes and try again.
           </Text>
         </View>
-      </RAccessTemplate>
+      </RPrototypeTemplate>
     );
   }
 );

@@ -3,11 +3,11 @@ import { Text, View } from 'react-native';
 import tw from 'twrnc';
 import { observableAccountStore } from '../../../store';
 import { RAccount, RAllAccounts } from '../organism';
-import { RAccessTemplate } from '../templates';
+import { RPrototypeTemplate } from '../templates';
 
 export const RDash = (): React.ReactElement => {
   return (
-    <RAccessTemplate>
+    <RPrototypeTemplate>
       <Text style={tw`mt-[30px] mb-[30px]`}>
         {/* BLARG - what will ProfileStore hold? If it holds profile data then why save any of it in AccountStore - this can just be the store for handling tokens, login status, etc */}
         CONGRATS {observableAccountStore.user?.forename.toUpperCase()}! - You
@@ -25,6 +25,6 @@ export const RDash = (): React.ReactElement => {
         </Text>
         <RAccount userId={1} />
       </View>
-    </RAccessTemplate>
+    </RPrototypeTemplate>
   );
 };

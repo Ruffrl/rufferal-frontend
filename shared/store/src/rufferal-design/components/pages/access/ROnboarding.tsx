@@ -5,8 +5,8 @@ import { Text, View } from 'react-native';
 
 import {
   moderateScaleTW,
-  RAccessTemplate,
   ROnboardingButtons,
+  RPrototypeTemplate,
   verticalScaleTW,
 } from '../../../..';
 
@@ -55,7 +55,7 @@ export const SWIPER_NAVIGATION_STYLES = tw`
 
 export const ROnboarding = ({ swiper, navigation }: OnboardingProps) => {
   return (
-    <RAccessTemplate>
+    <RPrototypeTemplate>
       <Text
         style={tw.style(
           `text-center
@@ -70,6 +70,6 @@ export const ROnboarding = ({ swiper, navigation }: OnboardingProps) => {
       <View style={tw.style(SWIPER_CONTAINER_STYLES)}>{swiper}</View>
       <ROnboardingButtons {...navigation} />
       {/* <View style={tw`justify-between h-full`}></View> */}
-    </RAccessTemplate>
+    </RPrototypeTemplate>
   );
 };

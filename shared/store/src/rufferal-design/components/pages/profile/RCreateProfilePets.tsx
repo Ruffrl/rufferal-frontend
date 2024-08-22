@@ -6,8 +6,8 @@ import { Image, Text, View } from 'react-native';
 
 import {
   moderateScaleTW,
-  RAccessTemplate,
   RButton,
+  RPrototypeTemplate,
   RStepProgress,
   SWIPER_IMAGE_STYLES,
   verticalScaleTW,
@@ -31,7 +31,7 @@ export const RCreateProfilePets = observer(
     navigateDashboard,
     navigateForward,
   }: CreateProfilePetsProps): React.ReactElement => (
-    <RAccessTemplate
+    <RPrototypeTemplate
       backNavigation={navigateBack}
       mobileBackIcon={mobileBackIcon}
       mobileCloseIcon={mobileCloseIcon}
@@ -68,6 +68,6 @@ export const RCreateProfilePets = observer(
           />
         </View>
       </View>
-    </RAccessTemplate>
+    </RPrototypeTemplate>
   )
 );

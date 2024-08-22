@@ -24,7 +24,7 @@ type AccessTemplateProps = {
   mobileCloseIcon?: React.JSX.Element;
 };
 ('');
-export const RAccessTemplate = observer(
+export const RPrototypeTemplate = observer(
   ({
     backNavigation,
     children,

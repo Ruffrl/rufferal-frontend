@@ -10,11 +10,11 @@ import { Platform, Text, View } from 'react-native';
 
 import {
   moderateScaleTW,
-  RAccessTemplate,
   RButton,
   RFormError,
   RFormInput,
   RPageHeader,
+  RPrototypeTemplate,
   RStepProgress,
   verticalScaleTW,
 } from '../../../..';
@@ -103,7 +103,7 @@ export const RCreateProfileName = observer(
     });
 
     return (
-      <RAccessTemplate
+      <RPrototypeTemplate
         backNavigation={navigateBack}
         mobileBackIcon={mobileBackIcon}
         mobileCloseIcon={mobileCloseIcon}
@@ -168,7 +168,7 @@ export const RCreateProfileName = observer(
             />
           </View>
         </View>
-      </RAccessTemplate>
+      </RPrototypeTemplate>
     );
   }
 );

@@ -9,12 +9,12 @@ import { Controller, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
 
 import {
-  RAccessTemplate,
   RButton,
   RFormError,
   RFormInput,
   RLinkButton,
   RPasswordValidator,
+  RPrototypeTemplate,
   moderateScaleTW,
   observableAccountStore,
   verticalScaleTW,
@@ -130,7 +130,7 @@ export const RResetPassword = observer(
     if (!observableAccountStore.email) return <Text>Loading...</Text>;
 
     return (
-      <RAccessTemplate
+      <RPrototypeTemplate
         header="Reset your password"
         backNavigation={navigateBack}
         mobileBackIcon={mobileBackIcon}
@@ -164,7 +164,7 @@ export const RResetPassword = observer(
           <RButton title="Continue" onPress={onSubmit} loading={loading} />
         </View>
         <RLinkButton onPress={navigateSignup} customText={<SignupLink />} />
-      </RAccessTemplate>
+      </RPrototypeTemplate>
     );
   }
 );

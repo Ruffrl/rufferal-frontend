@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 import { Text } from 'react-native';
-import { RAccessTemplate } from '../../templates';
+import { RPrototypeTemplate } from '../../templates';
 
 export const RCreatePetCareplan = (): React.ReactElement => {
   return (
-    <RAccessTemplate>
+    <RPrototypeTemplate>
       {/* Navigation */}
       <Text>⬅️</Text>
       {/* Header */}
       <Text>Create pet careplan</Text>
-    </RAccessTemplate>
+    </RPrototypeTemplate>
   );
 };

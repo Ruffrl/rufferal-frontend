@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Text } from 'react-native';
 import tw from 'twrnc';
 // import { RFormEmailPassword } from '../organism';
-import { RAccessTemplate } from '../templates';
+import { RPrototypeTemplate } from '../templates';
 
 export const RHome = observer(
   ({
@@ -70,12 +70,12 @@ export const RHome = observer(
     }, []);
 
     return (
-      <RAccessTemplate>
+      <RPrototypeTemplate>
         <Text style={tw`mt-[30px] mb-[30px]`}>Testing Async Storage</Text>
         <Text>{data}</Text>
         <Text>{JSON.stringify(objectData)}</Text>
         {/* <RFormEmailPassword navigateAfterLogin={navigateAfterLogin} /> */}
-      </RAccessTemplate>
+      </RPrototypeTemplate>
     );
   }
 );

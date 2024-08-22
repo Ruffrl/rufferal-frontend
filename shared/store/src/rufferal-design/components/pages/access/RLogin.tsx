@@ -9,10 +9,10 @@ import {
   FormErrorProps,
   moderateScaleTW,
   observableAccountStore,
-  RAccessTemplate,
   RFormEmailPassword,
   RLinkButton,
   ROrDivider,
+  RPrototypeTemplate,
   RSocialOnboarding,
   User,
   verticalScaleTW,
@@ -136,7 +136,7 @@ export const RLogin = observer(
     );
 
     return (
-      <RAccessTemplate
+      <RPrototypeTemplate
         header="Log in"
         backNavigation={navigateBack}
         mobileBackIcon={mobileBackIcon}
@@ -161,7 +161,7 @@ export const RLogin = observer(
         />
         {/* SIGN UP */}
         <RLinkButton onPress={navigateSignup} customText={<SignupLink />} />
-      </RAccessTemplate>
+      </RPrototypeTemplate>
     );
   }
 );

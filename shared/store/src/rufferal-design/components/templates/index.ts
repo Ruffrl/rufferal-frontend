@@ -10,4 +10,4 @@
  *
  */
 
-export { RAccessTemplate } from './RAccessTemplate';
+export { RPrototypeTemplate } from './RPrototypeTemplate';
