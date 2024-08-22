@@ -247,13 +247,13 @@ export const RFormImageInput = ({
           <RButton
             title="Add from library"
             onPress={handleChoosePhoto}
-            size="padded-medium"
+            size="medium"
           />
           <RButton
             title="Take photo"
             type="secondary"
             onPress={handleCamera}
-            size="padded-medium"
+            size="medium"
           />
         </View>
       </View>

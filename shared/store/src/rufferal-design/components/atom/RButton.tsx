@@ -38,7 +38,7 @@ const BUTTON_TEXT_STYLES = tw`
 export const RButton = ({
   loading,
   onPress,
-  size = 'full',
+  size = 'fit',
   state = 'default',
   title = 'Save',
   titleIcon,
@@ -47,22 +47,19 @@ export const RButton = ({
   let sizeStyle = 'w-full';
   switch (size) {
     case 'extra-small':
-      sizeStyle = 'w-1/5';
+      sizeStyle = `w-${horizontalScaleTW(85)}`;
       break;
     case 'small':
-      sizeStyle = 'w-2/5';
-      break;
-    case 'padded-medium':
-      sizeStyle = 'w-[48%]';
+      sizeStyle = `w-${horizontalScaleTW(114)}`;
       break;
     case 'medium':
-      sizeStyle = 'w-3/5';
+      sizeStyle = `w-${horizontalScaleTW(171)}`;
       break;
     case 'large':
-      sizeStyle = 'w-4/5';
+      sizeStyle = `w-${horizontalScaleTW(343)}`;
       break;
     case 'half':
-      sizeStyle = 'w-1/2';
+      sizeStyle = `w-1/2`;
       break;
   }
 
