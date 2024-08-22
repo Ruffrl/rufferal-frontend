@@ -15,7 +15,7 @@ import {
 } from 'react-native-image-picker';
 
 // import { Camera, CameraType } from 'react-camera-pro';
-import Webcam from "react-webcam";
+import Webcam from 'react-webcam';
 import {
   GLOBAL_COLORS,
   horizontalScaleTW,
@@ -37,7 +37,9 @@ export const RFormImageInput = ({
 }) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
-  const [webPhoto, setWebPhoto] = useState<string | undefined>(undefined);
+  const [webPhoto, setWebPhoto] = useState<string | null | undefined>(
+    undefined
+  );
   const [webcam, setWebcam] = useState(false);
 
   // const camera = useRef<CameraType | null>(null);
@@ -69,17 +71,16 @@ export const RFormImageInput = ({
       });
     } else {
       setWebcam(true);
-      // const blarg = camera.current?.takePhoto();
-      const blarg = camera.current?.getScreenshot();
-      // console.log('BLARG blarg: ', blarg);
     }
   };
 
   const handleWebCamera = () => {
+    const response = camera.current?.getScreenshot();
+    console.log('BLARG response: ', response);
     // const response = camera.current?.takePhoto() as string;
     // BLARG - todo; determine and manage data conversion for server
-    // setWebPhoto(response);
-    // setValue(field.name, response);
+    setWebPhoto(response);
+    setValue(field.name, response);
     setWebcam(false);
   };
 
@@ -87,34 +88,73 @@ export const RFormImageInput = ({
     <>
       {/* MANAGE WEB CAMERA */}
       {!isMobile && webcam && (
+        // <View
+        //   style={tw`
+        //     absolute
+        //     top-0
+        //     z-50
+        //     w-${horizontalScaleTW(350)}
+        //     h-${verticalScaleTW(500)}
+        //   `}
+        // >
+        //   <Camera
+        //     ref={camera}
+        //     errorMessages={{
+        //       noCameraAccessible:
+        //         'No camera device accessible. Please connect your camera or try a different browser.',
+        //       permissionDenied:
+        //         'Permission denied. Please refresh and give camera permission.',
+        //       switchCamera:
+        //         'It is not possible to switch camera to different one because there is only one video device accessible.',
+        //       canvas: 'Canvas is not supported.',
+        //     }}
+        //   />
+        //   <View style={tw`absolute bottom-0 w-full items-center`}>
+        //     <Pressable
+        //       onPress={handleWebCamera}
+        //       style={tw`
+        //         bg-zinc-900
+        //         rounded-full
+        //         justify-center
+        //         items-center
+        //         border-${moderateScaleTW(2)}
+        //         border-slate-200
+        //         h-${moderateScaleTW(96)}
+        //         w-${moderateScaleTW(96)}
+        //       `}
+        //     >
+        //       {mobilePlusIcon || (
+        //         <Image
+        //           source={require('../../../assets/icons-512/camera.png')}
+        //           resizeMode="center"
+        //           style={tw.style(tw`
+        //             h-${moderateScaleTW(24)}
+        //             w-${moderateScaleTW(24)}
+        //           `)}
+        //           tintColor={GLOBAL_COLORS.secondary.hex}
+        //         />
+        //       )}
+        //     </Pressable>
+        //   </View>
+        // </View>
         <View
           style={tw`
             absolute
             top-0
             z-50
+            bg-zinc-900
+            justify-center
+            items-center
             w-${horizontalScaleTW(350)} 
             h-${verticalScaleTW(500)}
           `}
         >
-          {/* <Camera
-            ref={camera}
-            errorMessages={{
-              noCameraAccessible:
-                'No camera device accessible. Please connect your camera or try a different browser.',
-              permissionDenied:
-                'Permission denied. Please refresh and give camera permission.',
-              switchCamera:
-                'It is not possible to switch camera to different one because there is only one video device accessible.',
-              canvas: 'Canvas is not supported.',
-            }}
-          /> */}
           <Webcam
             audio={false}
-            height={720}
+            style={tw`w-${horizontalScaleTW(340)} h-${verticalScaleTW(490)}`}
             ref={camera}
             screenshotFormat="image/jpeg"
-            width={1280}
-            // videoConstraints={videoConstraints}
+            mirrored
           />
           <View style={tw`absolute bottom-0 w-full items-center`}>
             <Pressable
