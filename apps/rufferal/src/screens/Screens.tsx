@@ -53,41 +53,8 @@ export const Screens = observer(() => {
         {observableAccountStore.isLoggedIn ? (
           /* USER SCREENS */
           <Stack.Group>
-            {/* Create Account */}
-            {/* Pet Profiles + Care Plans */}
-            {/* SearchServices [dashboard] */}
-            {/* My Profile - Owner */}
-            {/* Bookings */}
-            {/* Messaging */}
-            {/* Account Settings */}
-            {/* My Profile - Caretaker */}
-            {/* SearchGigs */}
-            {/* BLARG - convert this to authenticated only dashboard */}
             <Stack.Screen name="Dashboard" component={DashboardScreen} />
-            <Stack.Screen name="Dashboard2" component={Dashboard2} />
-            <Stack.Screen
-              name="Create Profile Name"
-              component={CreateProfileNameScreen}
-            />
-            <Stack.Screen
-              name="Create Profile Avatar"
-              component={CreateProfileAvatarScreen}
-            />
-            <Stack.Screen
-              name="Create Profile Type"
-              component={CreateProfileTypeScreen}
-            />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
-          </Stack.Group>
-        ) : (
-          /* GUEST SCREENS */
-          <Stack.Group>
-            {/* Onboarding */}
-            {/* Login + Social Login */}
-            {/* Sign Up */}
-            {/* Forgot Password */}
-            {/* SearchServices [guest dashboard] */}
-            {/* ⬇️⬇️⬇️ BLARG - FOR DEVELOPMENT - REMOVE AFTER TESTING ⬇️⬇️⬇️ */}
+            {/* BLARG handle conditionally rendering create profile */}
             <Stack.Screen
               name="Create Profile Name"
               component={CreateProfileNameScreen}
@@ -117,6 +84,30 @@ export const Screens = observer(() => {
               name="Create Pet Careplan"
               component={CreatePetCareplanScreen}
             />
+            {/* BLARG - screens tbd */}
+            <Stack.Screen name="Dashboard2" component={Dashboard2} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
+            {/* <Stack.Screen name="Messaging" component={MessagingScreen} /> */}
+            {/* <Stack.Screen name="Bookings" component={BookingsScreen} /> */}
+            {/* <Stack.Screen name="AccountSettings" component={AccountSettingsScreen} /> */}
+          </Stack.Group>
+        ) : (
+          /* GUEST SCREENS */
+          <Stack.Group>
+            {/* ⬇️⬇️⬇️ BLARG - FOR DEVELOPMENT - REMOVE AFTER TESTING ⬇️⬇️⬇️ */}
+            <Stack.Screen name="Manage Pets" component={ManagePetsScreen} />
+            <Stack.Screen
+              name="Create Pet Details"
+              component={CreatePetDetailsScreen}
+            />
+            <Stack.Screen
+              name="Create Pet Personality"
+              component={CreatePetPersonalityScreen}
+            />
+            <Stack.Screen
+              name="Create Pet Careplan"
+              component={CreatePetCareplanScreen}
+            />
             {/* ⬆️⬆️⬆️ BLARG - FOR DEVELOPMENT - REMOVE AFTER TESTING ⬆️⬆️⬆️ */}
             {showOnboarding && (
               <Stack.Screen name="Onboarding" component={OnboardingScreen} />
@@ -132,11 +123,7 @@ export const Screens = observer(() => {
               component={ResetPasswordScreen}
             />
             <Stack.Screen name="Signup" component={SignupScreen} />
-            {/* BLARG - guest version */}
-            {/* BLARG - convert this GuestDashboard2 */}
             <Stack.Screen name="Dashboard" component={DashboardScreen} />
-            <Stack.Screen name="Dashboard2" component={Dashboard2} />
-            {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
           </Stack.Group>
         )}
         {/* SHARED SCREENS */}

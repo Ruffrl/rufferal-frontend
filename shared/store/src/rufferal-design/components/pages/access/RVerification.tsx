@@ -35,7 +35,7 @@ export const RVerification = observer(
     useEffect(() => {
       if (observableAccountStore.verified) return;
 
-      // BLARG DEV/DEMO
+      // // BLARG DEV/DEMO
       // const interval = setInterval(() => {
       //   // check if account verified
       //   observableAccountStore.setVerified();
