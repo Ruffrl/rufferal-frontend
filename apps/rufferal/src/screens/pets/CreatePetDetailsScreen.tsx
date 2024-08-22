@@ -1,17 +1,26 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RCreatePetDetails, ScreenProps } from '@rufferal-frontend/store';
+import { IconArrowBack, IconClose } from '../../assets';
 
-export const CreatePetDetailsScreen = () => {
+export const CreatePetDetailsScreen = ({ route }) => {
+  const { petSpecies } = route.params;
+  console.log('BLARG MOBILE type: ', petSpecies);
+
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
 
-  const navigateBack = () => navigation.navigate('Dashboard');
-  const navigateForward = () => navigation.navigate('Create Profile Avatar');
+  const navigateBack = () => navigation.navigate('Create Pet Details');
+  const navigateCancel = () => navigation.navigate('Manage Pets');
+  const navigateForward = () => navigation.navigate('Create Pet Personality');
 
   return (
     <RCreatePetDetails
-      // navigateBack={navigateBack}
-      // navigateForward={navigateForward}
+      mobileBackIcon={<IconArrowBack />}
+      mobileCloseIcon={<IconClose />}
+      navigateBack={navigateBack}
+      navigateCancel={navigateCancel}
+      navigateForward={navigateForward}
+      petSpecies={petSpecies}
     />
   );
 };

@@ -16,6 +16,7 @@ export { RDashboard } from './features/RDashboard';
 // Accounts, Profiles, Settings
 export { RCreatePetCareplan } from './pets/RCreatePetCareplan';
 export { RCreatePetDetails } from './pets/RCreatePetDetails';
+export type { PetSpecies } from './pets/RCreatePetDetails';
 export { RCreatePetPersonality } from './pets/RCreatePetPersonality';
 export { RManagePets } from './pets/RManagePets';
 export { RCreateProfileAvatar } from './profile/RCreateProfileAvatar';
