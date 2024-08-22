@@ -1,33 +1,16 @@
-// import * as React from 'react';
-
-// import { Text } from 'react-native';
-// import { RPrototypeTemplate } from '../../templates';
-
-// export const RCreatePetCareplan = (): React.ReactElement => {
-//   return (
-//     <RPrototypeTemplate>
-//       {/* Navigation */}
-//       <Text>⬅️</Text>
-//       {/* Header */}
-//       <Text>Create pet careplan</Text>
-//     </RPrototypeTemplate>
-//   );
-// };
-
 import * as React from 'react';
 // import tw from 'twrnc';
 
 import { Text } from 'react-native';
-import { RButton, RPrototypeTemplate } from '../..';
-
-export type PetSpecies = 'cat' | 'dog';
+import { PetSpecies, RButton, RPrototypeTemplate } from '../..';
 
 type CreatePetCareplanProps = {
   mobileBackIcon?: React.JSX.Element;
   mobileCloseIcon?: React.JSX.Element;
-  navigateBack: () => void;
+  navigateBack: (type: PetSpecies) => void;
   navigateCancel: () => void;
   navigateForward: () => void;
+  petSpecies: PetSpecies;
 };
 
 export const RCreatePetCareplan = ({
@@ -36,10 +19,11 @@ export const RCreatePetCareplan = ({
   navigateBack,
   navigateCancel,
   navigateForward,
+  petSpecies,
 }: CreatePetCareplanProps): React.ReactElement => {
   return (
     <RPrototypeTemplate
-      backNavigation={navigateBack}
+      backNavigation={() => navigateBack(petSpecies)}
       mobileBackIcon={mobileBackIcon}
       mobileCloseIcon={mobileCloseIcon}
     >

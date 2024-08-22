@@ -38,7 +38,9 @@ export const RCreateProfilePets = observer(
     >
       <View style={tw`justify-between h-full pb-${verticalScaleTW(16)}`}>
         {/* PROGRESS BAR */}
-        <RStepProgress step={4} total={4} />
+        <View style={tw`pt-${verticalScaleTW(12)}`}>
+          <RStepProgress step={4} total={4} />
+        </View>
         <View style={tw`flex-1 justify-center items-center`}>
           {mobilePetsImage || (
             <Image

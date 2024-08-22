@@ -39,8 +39,8 @@ export type ScreenProps = {
   'Create Profile Pets': undefined;
   'Manage Pets': undefined;
   'Create Pet Details': { petSpecies: PetSpecies };
-  'Create Pet Personality': undefined;
-  'Create Pet Careplan': undefined;
+  'Create Pet Personality': { petSpecies: PetSpecies };
+  'Create Pet Careplan': { petSpecies: PetSpecies };
 };
 
 export const MobileNavigation = () => {

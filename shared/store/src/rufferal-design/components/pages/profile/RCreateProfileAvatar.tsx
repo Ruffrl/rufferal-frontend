@@ -106,7 +106,9 @@ export const RCreateProfileAvatar = observer(
           <FormProvider {...form}>
             <View>
               {/* PROGRESS BAR */}
-              <RStepProgress step={2} total={4} />
+              <View style={tw`pt-${verticalScaleTW(12)}`}>
+                <RStepProgress step={2} total={4} />
+              </View>
               {/* HEADER */}
               <RPageHeader header="Upload your profile photo" />
               {/* Disclaimer */}

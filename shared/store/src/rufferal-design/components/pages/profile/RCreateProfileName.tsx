@@ -111,7 +111,9 @@ export const RCreateProfileName = observer(
         <View style={tw`justify-between h-full`}>
           <View>
             {/* PROGRESS BAR */}
-            <RStepProgress step={1} total={4} />
+            <View style={tw`pt-${verticalScaleTW(12)}`}>
+              <RStepProgress step={1} total={4} />
+            </View>
             {/* HEADER */}
             <RPageHeader header="What's your name?" />
             <View style={tw`gap-${verticalScaleTW(16)}`}>

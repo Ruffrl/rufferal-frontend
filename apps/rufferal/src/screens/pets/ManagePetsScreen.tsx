@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { PetSpecies, RManagePets, ScreenProps } from '@rufferal-frontend/store';
-import { IconArrowBack, IconClose } from '../../assets';
+import { IconArrowBack, IconClose, IconPlus } from '../../assets';
 
 export const ManagePetsScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
@@ -14,9 +14,9 @@ export const ManagePetsScreen = () => {
     <RManagePets
       mobileBackIcon={<IconArrowBack />}
       mobileCloseIcon={<IconClose />}
+      mobilePlusIcon={<IconPlus />}
       navigateBack={navigateBack}
       navigateCreatePet={navigateCreatePet}
-      // navigateForward={navigateForward}
     />
   );
 };

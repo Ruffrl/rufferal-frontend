@@ -2,16 +2,15 @@ import * as React from 'react';
 // import tw from 'twrnc';
 
 import { Text } from 'react-native';
-import { RButton, RPrototypeTemplate } from '../..';
-
-export type PetSpecies = 'cat' | 'dog';
+import { PetSpecies, RButton, RPrototypeTemplate } from '../..';
 
 type CreatePetPersonalityProps = {
   mobileBackIcon?: React.JSX.Element;
   mobileCloseIcon?: React.JSX.Element;
-  navigateBack: () => void;
+  navigateBack: (type: PetSpecies) => void;
   navigateCancel: () => void;
-  navigateForward: () => void;
+  navigateForward: (type: PetSpecies) => void;
+  petSpecies: PetSpecies;
 };
 
 export const RCreatePetPersonality = ({
@@ -20,10 +19,11 @@ export const RCreatePetPersonality = ({
   navigateBack,
   navigateCancel,
   navigateForward,
+  petSpecies,
 }: CreatePetPersonalityProps): React.ReactElement => {
   return (
     <RPrototypeTemplate
-      backNavigation={navigateBack}
+      backNavigation={() => navigateBack(petSpecies)}
       mobileBackIcon={mobileBackIcon}
       mobileCloseIcon={mobileCloseIcon}
     >
@@ -36,7 +36,10 @@ export const RCreatePetPersonality = ({
       <Text>Form 3</Text>
       <Text>Form etc...</Text>
       {/* BLARG - if form dirty "Next"; if form not dirty "Skip"  */}
-      <RButton title="Next (skip)" onPress={navigateForward} />
+      <RButton
+        title="Next (skip)"
+        onPress={() => navigateForward(petSpecies)}
+      />
       <RButton title="Cancel" type="secondary" onPress={navigateCancel} />
     </RPrototypeTemplate>
   );

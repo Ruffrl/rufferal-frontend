@@ -1,15 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RCreatePetDetails, ScreenProps } from '@rufferal-frontend/store';
+import { PetSpecies, RCreatePetDetails, ScreenProps } from '@rufferal-frontend/store';
 import { IconArrowBack, IconClose } from '../../assets';
 
 export const CreatePetDetailsScreen = ({ route }) => {
   const { petSpecies } = route.params;
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
 
-  const navigateBack = () => navigation.navigate('Create Pet Details');
+  const navigateBack = () => navigation.navigate('Manage Pets');
   const navigateCancel = () => navigation.navigate('Manage Pets');
-  const navigateForward = () => navigation.navigate('Create Pet Personality');
+  const navigateForward = (petSpecies: PetSpecies) =>
+    navigation.navigate('Create Pet Personality', { petSpecies });
 
   return (
     <RCreatePetDetails
