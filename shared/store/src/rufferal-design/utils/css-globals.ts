@@ -10,6 +10,7 @@ export const GLOBAL_MIN_PRESS_SIZE = tw`
   h-${verticalScaleTW(48)} 
   w-${verticalScaleTW(48)} 
 `;
+export const GLOBAL_MIN_PRESS_HEIGHT = tw`h-${verticalScaleTW(48)}`;
 // export const GLOBAL_MIN_PRESS_SIZE = tw`
 //   h-${moderateScaleTW(48)}
 //   w-${moderateScaleTW(48)}
