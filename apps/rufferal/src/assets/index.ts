@@ -7,3 +7,4 @@ export { IconGoogle } from './IconGoogle';
 export { IconHide } from './IconHide';
 export { IconPlus } from './IconPlus';
 export { IconView } from './IconView';
+export { Missing } from './Missing';
