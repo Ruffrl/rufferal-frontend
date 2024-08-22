@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Button, Text, View } from 'react-native';
 import tw from 'twrnc';
-import { observableAuthStore } from '../../store';
+import { observableAccountStore } from '../../store';
 import { RLogoutButton } from '../components';
 
 // import { useNavigation } from '@react-navigation/native';
@@ -22,11 +22,25 @@ import { RLogoutButton } from '../components';
 // };
 
 export type ScreenProps = {
+  Onboarding: undefined;
+  Verification: undefined;
   Home: undefined;
   About: undefined;
   Dashboard: undefined;
-  Profile: undefined;
-  // Profile: { userId: string};
+  Dashboard2: undefined;
+  Signup: undefined;
+  Login: undefined;
+  'Forgot Password': undefined;
+  'Reset Password': undefined;
+  Profile: { userId: string };
+  'Create Profile Name': undefined;
+  'Create Profile Avatar': undefined;
+  'Create Profile Type': undefined;
+  'Create Profile Pets': undefined;
+  'Manage Pets': undefined;
+  'Create Pet Details': undefined;
+  'Create Pet Personality': undefined;
+  'Create Pet Careplan': undefined;
 };
 
 export const MobileNavigation = () => {
@@ -35,7 +49,7 @@ export const MobileNavigation = () => {
   return (
     <View style={tw`gap-1 w-full`}>
       <Text>MOBILE NAVIGATION</Text>
-      {observableAuthStore.isLoggedIn ? (
+      {observableAccountStore.isLoggedIn ? (
         <>
           <Text>🔑 Protected Routes 🔑</Text>
           {/* My Profile - Owner */}
@@ -52,11 +66,13 @@ export const MobileNavigation = () => {
           />
           <Button
             title="My Profile"
-            onPress={() => navigation.navigate('Profile')}
+            // navigation.navigate('RouteName', { /* params go here */ })
+            onPress={() => navigation.navigate('Profile', { userId: '1' })}
           />
-          {observableAuthStore.isLoggedIn && observableAuthStore?.user?.id && (
-            <RLogoutButton id={observableAuthStore.user.id} />
-          )}
+          {observableAccountStore.isLoggedIn &&
+            observableAccountStore?.user?.id && (
+              <RLogoutButton id={observableAccountStore.user.id} />
+            )}
         </>
       ) : (
         <>

@@ -10,4 +10,13 @@
  *
  */
 
+export { RBackNavigation } from './RBackNavigation';
+export { RFormCardCheckbox } from './RFormCardCheckbox';
+export { RFormImageInput } from './RFormImageInput';
 export { RFormInput } from './RFormInput';
+export {
+  ROnboardingSlideOne,
+  ROnboardingSlideThree,
+  ROnboardingSlideTwo,
+} from './ROnboardingSlides';
+export { ROrDivider } from './ROrDivider';

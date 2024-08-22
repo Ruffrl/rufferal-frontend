@@ -3,6 +3,7 @@
 blarg
 
 Things to think about
+
 - graphql
 - error handling
 - security handling
@@ -13,6 +14,104 @@ Things to think about
 - env vars and secrets
 - deployment
 - other developer nice to haves
+
+## Device Support
+
+### List of devices
+
+### Mobile/Web mobile Viewport sizes
+
+- Designed for mobile displays from 320×568 through 430×1004
+- Primary test devices
+  - ANDROID
+    - Galaxy S8
+    - 360 x 740
+  - IOS
+    - iPhone X
+    - 375 x 812
+- Smallest test devices
+  - ANDROID
+    - Galaxy S7
+    - 360 x 640
+  - IOS
+    - iPhone 5/SE
+    - 320 x 568
+- Largest test devices
+  - ANDROID
+    - Galaxy Z Flip 5
+    - 412 x 1004
+  - IOS
+    - iPhone 15 Pro Max
+    - 430 x 932
+
+### Tablet Viewport sizes
+
+### Desktop Viewport sizes
+
+## Themes
+
+### Colors - Wireframes/Prototype
+
+- PRIMARY (slate gray)
+  - ORIGINAL
+    - #667080
+  - TAILWIND TRANSLATION (until custom colors are handled)
+    - #6b7280
+    - `bg-gray-500`
+      - `text-white` [pairing]
+    - `border-gray-500`
+    - `text-gray-500`
+- SECONDARY (light slate gray)
+  - ORIGINAL
+    - #EEF1F4
+  - TAILWIND TRANSLATION (until custom colors are handled)
+    - #cbd5e1
+    - `bg-slate-200`
+      - `text-gray-500` [pairing]
+      - `text-zinc-300` [pairing]
+    - `border-slate-200`
+    - `text-slate-200`
+- TERTIARY (dark gray)
+  - ORIGINAL
+    - #252529
+  - TAILWIND TRANSLATION (until custom colors are handled)
+    - #18181b
+    - `bg-zinc-900`
+      - `text-white` [pairing]
+    - `border-zinc-900`
+    - `text-zinc-900`
+- QUATERNARY (gray)
+  - ORIGINAL
+    - #8A8A8F
+  - TAILWIND TRANSLATION (until custom colors are handled)
+    - _used for icon tint_
+    - #71717a
+    - `bg-zinc-500`
+      - `text-zinc-900` [pairing]
+    - `border-zinc-500`
+    - `text-zinc-500`
+- DISABLED (light gray)
+  - ORIGINAL
+    - #C8C7CC
+  - TAILWIND TRANSLATION (until custom colors are handled)
+    - _used for text color_
+    - #d4d4d8
+    - `text-zinc-300`
+    - `bg-zinc-300`
+      - `text-white` [pairing]
+      - `text-gray-500` [pairing]
+    - `border-zinc-300`
+- NEUTRALS
+  - black
+    - #000
+    - `bg-black`
+    - `border-black`
+    - `text-black`
+  - white
+    - #fff
+    - `bg-white`
+    - `border-white`
+    - `text-white`
 
 ## Install
 
@@ -166,6 +265,11 @@ cd rufferal-frontend
   cd ../..
   nx run rufferal:build-ios
   ```
+  
+  ```shell
+  cd apps/rufferal && bundle && cd ios && pod install && cd ../../..
+  nx run rufferal:build-ios
+  ```
 
 ### Serve
 
@@ -191,6 +295,22 @@ cd rufferal-frontend
 
   # In a seperate terminal
   npx nx run rufferal:run-android
+
+  # If Android needs a bundle/build reset
+  cd apps/rufferal/android
+  ./gradlew clean
+  ./gradlew wrapper
+  ./gradlew bundleRelease
+
+  # Manually bundle
+  cd apps/rufferal
+  npx react-native bundle --platform android --dev false --reset-cache --entry-file src/main.tsx --bundle-output android/app/build/generated/assets/createBundleReleaseJsAndAssets/index.android.bundle
+
+  # With Assets
+  cd apps/rufferal
+  npx react-native bundle --platform android --dev false --reset-cache --entry-file src/main.tsx --bundle-output android/app/build/generated/assets/createBundleReleaseJsAndAssets/index.android.bundle --assets-dest android/app/src/main/res
+
+  cd apps/rufferal && npx react-native bundle --platform android --dev false --reset-cache --entry-file src/main.tsx --bundle-output android/app/build/generated/assets/createBundleReleaseJsAndAssets/index.android.bundle --assets-dest android/app/src/main/res && cd ../..
   ```
 
   - The Rufferal app should launch within the Android Studio virtual device!

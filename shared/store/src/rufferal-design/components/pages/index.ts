@@ -11,7 +11,39 @@
  *
  */
 
-export { RAbout } from './RAbout';
-export { RDashboard } from './RDashboard';
-export { RHome } from './RHome';
+export { RDashboard } from './features/RDashboard';
+
+// Accounts, Profiles, Settings
+export { RCreatePetCareplan } from './pets/RCreatePetCareplan';
+export { RCreatePetDetails } from './pets/RCreatePetDetails';
+export { RCreatePetPersonality } from './pets/RCreatePetPersonality';
+export { RManagePets } from './pets/RManagePets';
+export { RCreateProfileAvatar } from './profile/RCreateProfileAvatar';
+export { RCreateProfileName } from './profile/RCreateProfileName';
+export { RCreateProfilePets } from './profile/RCreateProfilePets';
+export { RCreateProfileType } from './profile/RCreateProfileType';
+
+// Onboarding and Auth
+export { RForgotPassword } from './access/RForgotPassword';
+export { RLogin } from './access/RLogin';
+export {
+  ROnboarding,
+  SWIPER_CONTAINER_STYLES,
+  SWIPER_IMAGE_STYLES,
+  SWIPER_NAVIGATION_STYLES,
+  SWIPER_SLIDE_STYLE,
+  SWIPER_STYLES,
+  SWIPER_TEXT_STYLES,
+} from './access/ROnboarding';
+export type { OnboardingNavigationProps } from './access/ROnboarding';
+export { RResetPassword } from './access/RResetPassword';
+export { RSignup } from './access/RSignup';
+export { RVerification } from './access/RVerification';
+
+// Must be authenticated
+export { RDash } from './RDash';
 export { RProfile } from './RProfile';
+
+// Shared
+export { RDevPlayground } from './RDevPlayground';
+export { RHome } from './RHome';

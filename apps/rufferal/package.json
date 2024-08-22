@@ -22,7 +22,15 @@
     "@react-navigation/native-stack": "*",
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
-    "@react-native-async-storage/async-storage": "*"
+    "@react-native-async-storage/async-storage": "*",
+    "twrnc": "*",
+    "mobx-persist-store": "*",
+    "react-native-swiper": "*",
+    "react-router-dom": "*",
+    "react-native-web-swiper": "*",
+    "yup": "*",
+    "@hookform/resolvers": "*",
+    "react-native-image-picker": "*"
   },
   "devDependencies": {}
 }

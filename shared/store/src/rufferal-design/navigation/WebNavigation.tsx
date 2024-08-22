@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native';
 import { Link, useNavigate } from 'react-router-dom';
 import tw from 'twrnc';
-import { observableAuthStore } from '../../store';
+import { observableAccountStore } from '../../store';
 import { RLogoutButton } from '../components';
 
 export const WebNavigation = () => {
@@ -11,7 +11,7 @@ export const WebNavigation = () => {
   return (
     <View style={tw`gap-1 w-full`}>
       <Text>WEB NAVIGATION</Text>
-      {observableAuthStore.isLoggedIn ? (
+      {observableAccountStore.isLoggedIn ? (
         <>
           <Text>🔑 Protected Routes 🔑</Text>
           {/* My Profile - Owner */}
@@ -24,12 +24,13 @@ export const WebNavigation = () => {
           {/* AuthedSearchGigs */}
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/profile">My Profile</Link>
-          {observableAuthStore.isLoggedIn && observableAuthStore?.user?.id && (
-            <RLogoutButton
-              id={observableAuthStore.user.id}
-              navigateAfterLogout={navigateAfterLogout}
-            />
-          )}
+          {observableAccountStore.isLoggedIn &&
+            observableAccountStore?.user?.id && (
+              <RLogoutButton
+                id={observableAccountStore.user.id}
+                navigateAfterLogout={navigateAfterLogout}
+              />
+            )}
         </>
       ) : (
         <>

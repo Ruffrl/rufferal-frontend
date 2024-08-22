@@ -2,9 +2,9 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { useState } from 'react';
 import { View } from 'react-native';
-import { observableAuthStore } from '../../../store';
-import { RButton, RFormError } from '../atom';
 import tw from 'twrnc';
+import { observableAccountStore } from '../../../store';
+import { RButton, RFormError } from '../atom';
 
 export const RLogoutButton = observer(
   ({
@@ -24,7 +24,7 @@ export const RLogoutButton = observer(
       setLoading(true);
       setError('');
       console.log(`Logging out user ${id}`);
-      observableAuthStore.revokeAuth();
+      observableAccountStore.revokeAuth();
       // Web navigation
       navigateAfterLogout?.();
       setLoading(false);
@@ -41,7 +41,7 @@ export const RLogoutButton = observer(
       //     headers: {
       //       Accept: 'application/json',
       //       'Content-Type': 'application/json',
-      //       Authorization: String(observableAuthStore.bearerToken),
+      //       Authorization: String(observableAccountStore.bearerToken),
       //     },
       //   });
 
@@ -51,7 +51,7 @@ export const RLogoutButton = observer(
       //   }
 
       //   const result = await response.json();
-      //   observableAuthStore.revokeAuth();
+      //   observableAccountStore.revokeAuth();
       //   console.log('result is: ', JSON.stringify(result, null, 4));
       //   // BLARG NAVIGATE
       // } catch (err) {

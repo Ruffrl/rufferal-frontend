@@ -2,9 +2,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { Text } from 'react-native';
-import { RFormLogin } from '../organism';
-import { RAccessTemplate } from '../templates';
 import tw from 'twrnc';
+// import { RFormEmailPassword } from '../organism';
+import { RAccessTemplate } from '../templates';
 
 export const RHome = observer(
   ({
@@ -71,12 +71,10 @@ export const RHome = observer(
 
     return (
       <RAccessTemplate>
-        <Text style={tw`mt-[30px] mb-[30px]`}>
-          Testing Async Storage
-        </Text>
+        <Text style={tw`mt-[30px] mb-[30px]`}>Testing Async Storage</Text>
         <Text>{data}</Text>
         <Text>{JSON.stringify(objectData)}</Text>
-        <RFormLogin navigateAfterLogin={navigateAfterLogin} />
+        {/* <RFormEmailPassword navigateAfterLogin={navigateAfterLogin} /> */}
       </RAccessTemplate>
     );
   }

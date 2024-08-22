@@ -12,10 +12,17 @@
  *
  */
 
+export { RAppleIcon } from './RAppleIcon';
 export { RButton } from './RButton';
+export { RDivider } from './RDivider';
 export { RFormError } from './RFormError';
 export type { FormErrorProps } from './RFormError';
+export { RGoogleIcon } from './RGoogleIcon';
 export { RInput } from './RInput';
 export type { FieldSize } from './RInput';
 export { RInputError } from './RInputError';
 export { RLabel } from './RLabel';
+export { RLinkButton } from './RLinkButton';
+export { RPageHeader } from './RPageHeader';
+export { RProgressBar } from './RProgressBar';
+export { RStepProgress } from './RStepProgress';
