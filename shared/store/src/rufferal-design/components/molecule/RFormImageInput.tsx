@@ -14,7 +14,8 @@ import {
   launchImageLibrary,
 } from 'react-native-image-picker';
 
-import { Camera, CameraType } from 'react-camera-pro';
+// import { Camera, CameraType } from 'react-camera-pro';
+import Webcam from "react-webcam";
 import {
   GLOBAL_COLORS,
   horizontalScaleTW,
@@ -39,7 +40,8 @@ export const RFormImageInput = ({
   const [webPhoto, setWebPhoto] = useState<string | undefined>(undefined);
   const [webcam, setWebcam] = useState(false);
 
-  const camera = useRef<CameraType | null>(null);
+  // const camera = useRef<CameraType | null>(null);
+  const camera = useRef<Webcam | null>(null);
   const { setValue } = useFormContext();
 
   const handleChoosePhoto = () => {
@@ -67,16 +69,17 @@ export const RFormImageInput = ({
       });
     } else {
       setWebcam(true);
-      const blarg = camera.current?.takePhoto();
-      console.log('BLARG blarg: ', blarg);
+      // const blarg = camera.current?.takePhoto();
+      const blarg = camera.current?.getScreenshot();
+      // console.log('BLARG blarg: ', blarg);
     }
   };
 
   const handleWebCamera = () => {
-    const response = camera.current?.takePhoto() as string;
+    // const response = camera.current?.takePhoto() as string;
     // BLARG - todo; determine and manage data conversion for server
-    setWebPhoto(response);
-    setValue(field.name, response);
+    // setWebPhoto(response);
+    // setValue(field.name, response);
     setWebcam(false);
   };
 
@@ -93,7 +96,7 @@ export const RFormImageInput = ({
             h-${verticalScaleTW(500)}
           `}
         >
-          <Camera
+          {/* <Camera
             ref={camera}
             errorMessages={{
               noCameraAccessible:
@@ -104,6 +107,14 @@ export const RFormImageInput = ({
                 'It is not possible to switch camera to different one because there is only one video device accessible.',
               canvas: 'Canvas is not supported.',
             }}
+          /> */}
+          <Webcam
+            audio={false}
+            height={720}
+            ref={camera}
+            screenshotFormat="image/jpeg"
+            width={1280}
+            // videoConstraints={videoConstraints}
           />
           <View style={tw`absolute bottom-0 w-full items-center`}>
             <Pressable

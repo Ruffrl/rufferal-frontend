@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export const CreateProfilePets = () => {
   const navigate = useNavigate();
 
-  const navigateBack = () => navigate('/create-profile/pets');
+  const navigateBack = () => navigate('/create-profile/type');
   const navigateForward = () => navigate('/my-pets');
   const navigateDashboard = () => navigate('/');
 

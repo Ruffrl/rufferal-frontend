@@ -11,7 +11,7 @@ import { IconArrowBack, IconClose } from '../../assets';
 export const CreateProfilePetsScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
 
-  const navigateBack = () => navigation.navigate('Create Profile Avatar');
+  const navigateBack = () => navigation.navigate('Create Profile Type');
   const navigateForward = () => navigation.navigate('Manage Pets');
   const navigateDashboard = () => navigation.navigate('Dashboard');
 
