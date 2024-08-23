@@ -161,17 +161,17 @@ export const RFormCreateDog = ({
             />
           )}
         />
-        {/* BLARG - Add `optional` param to rlabel and rforminput` */}
         {/* BREED */}
         <Controller
           name="breed"
           control={control}
           render={({ field }) => (
             <RFormSelect
-              label="Breed (optional)"
+              label="Breed"
               field={field}
               error={errors.breed}
               mobileChevronDownIcon={mobileChevronDownIcon}
+              optional
               options={dogBreedOptions}
             />
           )}
@@ -182,10 +182,11 @@ export const RFormCreateDog = ({
           control={control}
           render={({ field }) => (
             <RFormSelect
-              label="Coat length (optional)"
+              label="Coat length"
               field={field}
               error={errors.coatLength}
               mobileChevronDownIcon={mobileChevronDownIcon}
+              optional
               options={dogCoatOptions}
             />
           )}

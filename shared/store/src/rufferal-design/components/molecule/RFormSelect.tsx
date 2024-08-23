@@ -21,6 +21,7 @@ export const RFormSelect = ({
   field,
   label,
   mobileChevronDownIcon,
+  optional,
   options,
 }: {
   error?: FieldError | undefined;
@@ -28,6 +29,7 @@ export const RFormSelect = ({
   field: ControllerRenderProps<any>;
   label?: string;
   mobileChevronDownIcon?: React.JSX.Element;
+  optional?: boolean;
   options: PickerOption[];
 }) => {
   /* STATE */
@@ -46,7 +48,7 @@ export const RFormSelect = ({
   return (
     <View>
       {/* BLARG - add label state to turn Red on error */}
-      {label && <RLabel label={label} />}
+      {label && <RLabel label={label} optional={optional} />}
       {isMobile ? (
         <RMobileSelect
           options={options}

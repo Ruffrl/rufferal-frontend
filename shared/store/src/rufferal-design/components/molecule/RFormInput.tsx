@@ -13,10 +13,11 @@ interface Props extends Omit<TextInputProps, 'onChange'> {
   labelStyle?: string;
   mobileIconHide?: React.JSX.Element;
   mobileIconView?: React.JSX.Element;
+  onChange: ((text: string) => void);
   onSubmit: () => Promise<void>;
+  optional?: boolean;
   placeholder?: string;
   size?: FieldSize;
-  onChange: ((text: string) => void);
 }
 
 export const RFormInput = ({
@@ -30,6 +31,7 @@ export const RFormInput = ({
   onBlur,
   onChange,
   onSubmit,
+  optional,
   placeholder,
   size,
   value,
@@ -39,7 +41,7 @@ export const RFormInput = ({
 
   return (
     <View style={tw`gap-1`}>
-      <RLabel label={label} labelStyle={labelStyle} />
+      <RLabel label={label} labelStyle={labelStyle} optional={optional} />
       <RInput
         inputRef={inputRef}
         onBlur={onBlur}

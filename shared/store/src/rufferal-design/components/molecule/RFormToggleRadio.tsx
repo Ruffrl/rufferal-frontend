@@ -22,12 +22,14 @@ export const RFormToggleRadio = ({
   error,
   field,
   label,
+  optional,
   toggles,
 }: {
   error?: FieldError | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   field: ControllerRenderProps<any>;
-  label?: string;
+    label?: string;
+    optional?: boolean;
   toggles: string[];
 }) => {
   // const isAndroid = Platform.OS === 'android'
@@ -43,7 +45,7 @@ export const RFormToggleRadio = ({
   return (
     <View>
       {/* BLARG - add label state to turn Red on error */}
-      {label && <RLabel label={label} />}
+      {label && <RLabel label={label} optional={optional} />}
       <View style={tw`justify-center`}>
         {/* TOGGLES */}
         {toggles.map((toggle) => (
