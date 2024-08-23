@@ -6,8 +6,8 @@ import { Image, Text, View } from 'react-native';
 
 import {
   moderateScaleTW,
-  RAccessTemplate,
   RButton,
+  RPrototypeTemplate,
   RStepProgress,
   SWIPER_IMAGE_STYLES,
   verticalScaleTW,
@@ -31,14 +31,16 @@ export const RCreateProfilePets = observer(
     navigateDashboard,
     navigateForward,
   }: CreateProfilePetsProps): React.ReactElement => (
-    <RAccessTemplate
+    <RPrototypeTemplate
       backNavigation={navigateBack}
       mobileBackIcon={mobileBackIcon}
       mobileCloseIcon={mobileCloseIcon}
     >
       <View style={tw`justify-between h-full pb-${verticalScaleTW(16)}`}>
         {/* PROGRESS BAR */}
-        <RStepProgress step={4} total={4} />
+        <View style={tw`pt-${verticalScaleTW(12)}`}>
+          <RStepProgress step={4} total={4} />
+        </View>
         <View style={tw`flex-1 justify-center items-center`}>
           {mobilePetsImage || (
             <Image
@@ -68,6 +70,6 @@ export const RCreateProfilePets = observer(
           />
         </View>
       </View>
-    </RAccessTemplate>
+    </RPrototypeTemplate>
   )
 );

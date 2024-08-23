@@ -10,11 +10,11 @@ import { Platform, Text, View } from 'react-native';
 
 import {
   moderateScaleTW,
-  RAccessTemplate,
   RButton,
   RFormError,
   RFormInput,
   RPageHeader,
+  RPrototypeTemplate,
   RStepProgress,
   verticalScaleTW,
 } from '../../../..';
@@ -36,12 +36,12 @@ const profileNameSchema: yup.ObjectSchema<ProfileNameForm> = yup
     forename: yup
       .string()
       .trim()
-      .required('First name is a required field')
+      .required('Please provide your first name')
       .max(50, 'First name cannot exceed 50 characters'),
     surname: yup
       .string()
       .trim()
-      .required('Last name is a required field')
+      .required('Please provide your last name')
       .max(50, 'Last name cannot exceed 50 characters'),
   })
   .required();
@@ -103,7 +103,7 @@ export const RCreateProfileName = observer(
     });
 
     return (
-      <RAccessTemplate
+      <RPrototypeTemplate
         backNavigation={navigateBack}
         mobileBackIcon={mobileBackIcon}
         mobileCloseIcon={mobileCloseIcon}
@@ -111,7 +111,9 @@ export const RCreateProfileName = observer(
         <View style={tw`justify-between h-full`}>
           <View>
             {/* PROGRESS BAR */}
-            <RStepProgress step={1} total={4} />
+            <View style={tw`pt-${verticalScaleTW(12)}`}>
+              <RStepProgress step={1} total={4} />
+            </View>
             {/* HEADER */}
             <RPageHeader header="What's your name?" />
             <View style={tw`gap-${verticalScaleTW(16)}`}>
@@ -168,7 +170,7 @@ export const RCreateProfileName = observer(
             />
           </View>
         </View>
-      </RAccessTemplate>
+      </RPrototypeTemplate>
     );
   }
 );

@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Button, Text, View } from 'react-native';
 import tw from 'twrnc';
 import { observableAccountStore } from '../../store';
-import { RLogoutButton } from '../components';
+import { PetSpecies, RLogoutButton } from '../components';
 
 // import { useNavigation } from '@react-navigation/native';
 // import { ScreenProps } from '../Screens';
@@ -38,9 +38,9 @@ export type ScreenProps = {
   'Create Profile Type': undefined;
   'Create Profile Pets': undefined;
   'Manage Pets': undefined;
-  'Create Pet Details': undefined;
-  'Create Pet Personality': undefined;
-  'Create Pet Careplan': undefined;
+  'Create Pet Details': { petSpecies: PetSpecies };
+  'Create Pet Personality': { petSpecies: PetSpecies };
+  'Create Pet Careplan': { petSpecies: PetSpecies };
 };
 
 export const MobileNavigation = () => {

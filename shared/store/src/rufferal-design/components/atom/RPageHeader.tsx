@@ -4,10 +4,10 @@ import { moderateScaleTW, verticalScaleTW } from '../../utils';
 
 export const RPageHeader = ({
   header = 'Rufferal',
-  removeTopPadding = false,
+  removePadding = false,
 }: {
   header?: string;
-  removeTopPadding?: boolean;
+  removePadding?: boolean;
 }) => (
   <Text
     style={tw.style(
@@ -15,7 +15,7 @@ export const RPageHeader = ({
       text-gray-500
       py-${verticalScaleTW(24)}
       text-${moderateScaleTW(24)}`,
-      removeTopPadding && tw`pt-0`
+      removePadding && tw`py-0`
     )}
   >
     {header}

@@ -22,15 +22,17 @@ type AccessTemplateProps = {
   header?: string;
   mobileBackIcon?: React.JSX.Element;
   mobileCloseIcon?: React.JSX.Element;
+  navigationHeader?: string;
 };
 ('');
-export const RAccessTemplate = observer(
+export const RPrototypeTemplate = observer(
   ({
     backNavigation,
     children,
     header,
     mobileBackIcon,
     mobileCloseIcon,
+    navigationHeader,
   }: PropsWithChildren<AccessTemplateProps>): React.ReactElement => {
     /* DEVISE INFORMATION */
     const isIos = Platform.OS === 'ios';
@@ -53,11 +55,10 @@ export const RAccessTemplate = observer(
             <RBackNavigation
               backNavigation={backNavigation}
               mobileBackIcon={mobileBackIcon}
+              navigationHeader={navigationHeader}
             />
           )}
-          {header && (
-            <RPageHeader header={header} removeTopPadding={!!backNavigation} />
-          )}
+          {header && <RPageHeader header={header} />}
           <View style={tw`flex-1`}>{children}</View>
         </View>
         {/* GLOBAL ERRORS */}

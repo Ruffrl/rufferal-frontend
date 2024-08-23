@@ -6,19 +6,19 @@ import { moderateScaleTW, verticalScaleTW } from '../../utils';
 interface Props extends TextInputProps {
   label: string;
   labelStyle?: string;
+  optional?: boolean;
 }
 
 const LABEL_STYLES = tw`
   text-gray-500
-  font-bold
   text-${moderateScaleTW(14)}
   py-${verticalScaleTW(4)}
 `;
 
-export const RLabel = ({ label, labelStyle }: Props): React.ReactElement => {
+export const RLabel = ({ label, labelStyle, optional = false }: Props): React.ReactElement => {
   return (
     <View>
-      <Text style={tw.style(LABEL_STYLES, labelStyle)}>{label}</Text>
+      <Text style={tw.style(LABEL_STYLES, labelStyle)}>{label}{optional && ' (optional)'}</Text>
     </View>
   );
 };

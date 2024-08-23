@@ -48,9 +48,6 @@ export const RFormCardCheckbox = ({
         value={field.value || ''}
         style={tw`hidden`}
       />
-
-      {/* FIELD ERRORS */}
-      {error && <RInputError error={error} />}
       {/* CARD */}
       <Pressable
         onPress={handleSelection}
@@ -85,11 +82,13 @@ export const RFormCardCheckbox = ({
             text-gray-500
             mt-${verticalScaleTW(12)} 
             text-${verticalScaleTW(16)}
-          `}
+            `}
         >
           {title}
         </Text>
       </Pressable>
+      {/* FIELD ERRORS */}
+      {error && <RInputError error={error} />}
     </View>
   );
 };

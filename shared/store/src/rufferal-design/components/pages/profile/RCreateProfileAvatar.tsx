@@ -1,6 +1,6 @@
 import * as React from 'react';
-import tw from 'twrnc';
 import * as yup from 'yup';
+import tw from 'twrnc';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { observer } from 'mobx-react-lite';
@@ -10,11 +10,11 @@ import { Platform, Text, View } from 'react-native';
 
 import {
   moderateScaleTW,
-  RAccessTemplate,
   RButton,
   RFormError,
   RFormImageInput,
   RPageHeader,
+  RPrototypeTemplate,
   RStepProgress,
   verticalScaleTW,
 } from '../../../..';
@@ -97,7 +97,7 @@ export const RCreateProfileAvatar = observer(
     });
 
     return (
-      <RAccessTemplate
+      <RPrototypeTemplate
         backNavigation={navigateBack}
         mobileBackIcon={mobileBackIcon}
         mobileCloseIcon={mobileCloseIcon}
@@ -106,7 +106,9 @@ export const RCreateProfileAvatar = observer(
           <FormProvider {...form}>
             <View>
               {/* PROGRESS BAR */}
-              <RStepProgress step={2} total={4} />
+              <View style={tw`pt-${verticalScaleTW(12)}`}>
+                <RStepProgress step={2} total={4} />
+              </View>
               {/* HEADER */}
               <RPageHeader header="Upload your profile photo" />
               {/* Disclaimer */}
@@ -136,7 +138,7 @@ export const RCreateProfileAvatar = observer(
             <RButton title="Continue" onPress={onSubmit} loading={loading} />
           </View>
         </View>
-      </RAccessTemplate>
+      </RPrototypeTemplate>
     );
   }
 );

@@ -10,11 +10,11 @@ import { Platform, Text, View } from 'react-native';
 
 import {
   moderateScaleTW,
-  RAccessTemplate,
   RButton,
   RFormCardCheckbox,
   RFormError,
   RPageHeader,
+  RPrototypeTemplate,
   RStepProgress,
   verticalScaleTW,
 } from '../../../..';
@@ -99,7 +99,7 @@ export const RCreateProfileType = observer(
     });
 
     return (
-      <RAccessTemplate
+      <RPrototypeTemplate
         backNavigation={navigateBack}
         mobileBackIcon={mobileBackIcon}
         mobileCloseIcon={mobileCloseIcon}
@@ -107,7 +107,9 @@ export const RCreateProfileType = observer(
         <View style={tw`justify-between h-full`}>
           <View>
             {/* PROGRESS BAR */}
-            <RStepProgress step={3} total={4} />
+            <View style={tw`pt-${verticalScaleTW(12)}`}>
+              <RStepProgress step={3} total={4} />
+            </View>
             {/* HEADER */}
             <RPageHeader header="What interested you in Rufferal?" />
             <View style={tw`gap-${verticalScaleTW(16)}`}>
@@ -161,7 +163,7 @@ export const RCreateProfileType = observer(
             />
           </View>
         </View>
-      </RAccessTemplate>
+      </RPrototypeTemplate>
     );
   }
 );

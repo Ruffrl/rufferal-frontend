@@ -90,7 +90,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/my-pets/create',
-    element: <CreatePetDetails />,
+    element: <ManagePets />,
     errorElement: <ErrorPage />,
   },
   {

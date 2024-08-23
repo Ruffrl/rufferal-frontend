@@ -9,12 +9,12 @@ import { Controller, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
 
 import {
-  RAccessTemplate,
   RButton,
   RFormError,
   RFormInput,
   RLinkButton,
   RPasswordValidator,
+  RPrototypeTemplate,
   moderateScaleTW,
   observableAccountStore,
   verticalScaleTW,
@@ -39,7 +39,7 @@ const resetPasswordSchema: yup.ObjectSchema<ResetPasswordForm> = yup
     password: yup
       .string()
       .trim()
-      .required('Password is a required field')
+      .required('Please provide a password')
       .min(8, 'Password must be at least 8 characters')
       .matches(/[A-Z]/g, 'Password must contain at least 1 uppercase letter')
       .matches(/[a-z]/g, 'Password must contain at least 1 lowercase letter')
@@ -130,7 +130,7 @@ export const RResetPassword = observer(
     if (!observableAccountStore.email) return <Text>Loading...</Text>;
 
     return (
-      <RAccessTemplate
+      <RPrototypeTemplate
         header="Reset your password"
         backNavigation={navigateBack}
         mobileBackIcon={mobileBackIcon}
@@ -164,7 +164,7 @@ export const RResetPassword = observer(
           <RButton title="Continue" onPress={onSubmit} loading={loading} />
         </View>
         <RLinkButton onPress={navigateSignup} customText={<SignupLink />} />
-      </RAccessTemplate>
+      </RPrototypeTemplate>
     );
   }
 );

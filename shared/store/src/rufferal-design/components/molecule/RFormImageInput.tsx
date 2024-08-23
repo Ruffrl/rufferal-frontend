@@ -29,46 +29,58 @@ import {
 export const RFormImageInput = ({
   error,
   field,
+  mobileBackCamera = false,
   mobilePlusIcon,
 }: {
   error?: FieldError | undefined;
-  field: ControllerRenderProps;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  field: ControllerRenderProps<any>;
+  mobileBackCamera?: boolean;
   mobilePlusIcon?: React.JSX.Element;
 }) => {
+  /* STATE */
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
+
   const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
   const [webPhoto, setWebPhoto] = useState<string | null | undefined>(
     undefined
   );
   const [webcam, setWebcam] = useState(false);
 
+  /* HOOKS */
   // const camera = useRef<CameraType | null>(null);
   const camera = useRef<Webcam | null>(null);
   const { setValue } = useFormContext();
 
+  console.log('BLARG BLARG BLARG photo', photo);
+  /* HANDLERS */
   const handleChoosePhoto = () => {
     launchImageLibrary({ mediaType: 'photo' }, (response) => {
-      if (response) {
+      if (response?.assets) {
         // BLARG - todo; determine and manage data conversion for server
         // const urlImage = URL.createObjectURL(response.assets[0]);
         setPhoto(response);
-        setValue(field.name, response?.assets?.[0].uri);
+        setValue(field.name, response.assets?.[0].uri);
       }
     });
   };
 
   const handleCamera = () => {
-    console.log('BLARG handleCamera');
     if (isMobile) {
-      console.log('BLARG MOBILE camera');
-      launchCamera({ mediaType: 'photo', saveToPhotos: true }, (response) => {
-        if (response) {
-          // BLARG - todo; determine and manage data conversion for server
-          console.log('BLARG response: ', response);
-          setPhoto(response);
-          setValue(field.name, response?.assets?.[0].uri);
+      launchCamera(
+        {
+          cameraType: mobileBackCamera ? 'back' : 'front',
+          mediaType: 'photo',
+          saveToPhotos: true,
+        },
+        (response) => {
+          if (response?.assets) {
+            // BLARG - todo; determine and manage data conversion for server
+            setPhoto(response);
+            setValue(field.name, response.assets?.[0].uri);
+          }
         }
-      });
+      );
     } else {
       setWebcam(true);
     }
@@ -76,7 +88,6 @@ export const RFormImageInput = ({
 
   const handleWebCamera = () => {
     const response = camera.current?.getScreenshot();
-    console.log('BLARG response: ', response);
     // const response = camera.current?.takePhoto() as string;
     // BLARG - todo; determine and manage data conversion for server
     setWebPhoto(response);
@@ -226,7 +237,7 @@ export const RFormImageInput = ({
             <>
               {mobilePlusIcon || (
                 <Image
-                  source={require('../../../assets/icons-512/check.png')}
+                  source={require('../../../assets/icons-512/plus.png')}
                   resizeMode="center"
                   style={tw.style(tw`
                 h-${moderateScaleTW(48)} 
@@ -248,18 +259,21 @@ export const RFormImageInput = ({
           w-full
         `}
         >
-          <RButton
-            title="Add from library"
-            onPress={handleChoosePhoto}
-            size="padded-medium"
-          />
-          {/* BLARG - todo - camera */}
-          <RButton
-            title="Take photo"
-            type="secondary"
-            onPress={handleCamera}
-            size="padded-medium"
-          />
+          <View style={tw`w-[48%]`}>
+            <RButton
+              title="Add from library"
+              onPress={handleChoosePhoto}
+              size="fit"
+            />
+          </View>
+          <View style={tw`w-[48%]`}>
+            <RButton
+              title="Take photo"
+              type="secondary"
+              onPress={handleCamera}
+              size="fit"
+            />
+          </View>
         </View>
       </View>
     </>

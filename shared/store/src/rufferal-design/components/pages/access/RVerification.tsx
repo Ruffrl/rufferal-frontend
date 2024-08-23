@@ -8,9 +8,9 @@ import { Text, View } from 'react-native';
 import {
   moderateScaleTW,
   observableAccountStore,
-  RAccessTemplate,
   RButton,
   RLinkButton,
+  RPrototypeTemplate,
   verticalScaleTW,
 } from '../../../..';
 
@@ -35,7 +35,7 @@ export const RVerification = observer(
     useEffect(() => {
       if (observableAccountStore.verified) return;
 
-      // BLARG DEV/DEMO
+      // // BLARG DEV/DEMO
       // const interval = setInterval(() => {
       //   // check if account verified
       //   observableAccountStore.setVerified();
@@ -67,7 +67,7 @@ export const RVerification = observer(
     );
 
     return (
-      <RAccessTemplate
+      <RPrototypeTemplate
         header="Verify your account"
         backNavigation={navigateBack}
         mobileBackIcon={mobileBackIcon}
@@ -107,7 +107,7 @@ export const RVerification = observer(
             <RLinkButton onPress={navigateLogin} customText={<LoginLink />} />
           </View>
         </View>
-      </RAccessTemplate>
+      </RPrototypeTemplate>
     );
   }
 );
