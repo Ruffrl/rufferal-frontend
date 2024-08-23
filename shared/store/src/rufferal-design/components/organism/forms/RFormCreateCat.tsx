@@ -13,9 +13,11 @@ import {
   RFormError,
   RFormImageInput,
   RFormInput,
+  RFormSelect,
   RFormToggleRadio,
   verticalScaleTW,
 } from '../../../..';
+import { catColorOptions } from '../../pages/pets/form-options';
 
 type CreateCatForm = {
   photo: string;
@@ -46,9 +48,11 @@ const createCatSchema: yup.ObjectSchema<CreateCatForm> = yup
   .required();
 
 export const RFormCreateCat = ({
+  mobileChevronDownIcon,
   mobilePlusIcon,
   navigateForward,
 }: {
+  mobileChevronDownIcon?: React.JSX.Element;
   mobilePlusIcon?: React.JSX.Element;
   navigateForward: () => void;
 }): React.ReactElement => {
@@ -60,15 +64,15 @@ export const RFormCreateCat = ({
   const form = useForm<CreateCatForm>({
     resolver: yupResolver(createCatSchema),
     defaultValues: {
-      photo: '',
-      name: '',
+      photo: 'test',
+      name: 'test',
       color: '',
       breed: undefined,
       coatLength: undefined,
-      age: '',
-      size: '',
-      sex: '',
-      status: '',
+      age: 'test',
+      size: 'test',
+      sex: 'test',
+      status: 'test',
     },
     mode: 'onBlur',
   });
@@ -77,7 +81,6 @@ export const RFormCreateCat = ({
     handleSubmit,
     formState: { errors, isDirty },
   } = form;
-  console.log('BLARG isDirty', isDirty);
 
   const onSubmit = handleSubmit(async (data: CreateCatForm) => {
     setLoading(true);
@@ -139,20 +142,18 @@ export const RFormCreateCat = ({
           )}
         />
         {/* BLARG - Add a dropdown input */}
+        {/* BLARG - Convert to multi select */}
         {/* PET COLOR */}
         <Controller
           name="color"
           control={control}
-          render={({ field: { onBlur, onChange, value, ref } }) => (
-            <RFormInput
+          render={({ field }) => (
+            <RFormSelect
               label="Color"
-              onBlur={onBlur} // notify when input is touched
-              onChange={onChange} // send value to hook form
-              value={value}
-              formRef={ref}
-              placeholder="Select..."
+              field={field}
               error={errors.color}
-              onSubmit={onSubmit}
+              mobileChevronDownIcon={mobileChevronDownIcon}
+              options={catColorOptions}
             />
           )}
         />

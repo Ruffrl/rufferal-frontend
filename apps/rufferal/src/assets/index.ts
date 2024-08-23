@@ -2,6 +2,7 @@ export { IconApple } from './IconApple';
 export { IconArrowBack } from './IconArrowBack';
 export { IconCamera } from './IconCamera';
 export { IconCheckCircle } from './IconCheckCircle';
+export { IconChevronDown } from './IconChevronDown';
 export { IconClose } from './IconClose';
 export { IconGoogle } from './IconGoogle';
 export { IconHide } from './IconHide';

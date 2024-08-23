@@ -1,3 +1,4 @@
+// import * as React from 'react';
 import tw from 'twrnc';
 
 import { useState } from 'react';
@@ -55,6 +56,8 @@ export const RFormToggleRadio = ({
               py-${verticalScaleTW(2)}
             `}
           >
+            {/* BLARG - convert to atom RToggle */}
+            {/* BLARG - build a custom switch to handle our styles, focusability, etc */}
             <Switch
               style={tw.style(
                 Platform.OS === 'android' && {

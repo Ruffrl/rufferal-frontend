@@ -14,7 +14,10 @@ export {
   GLOBAL_IOS_SHADOW,
   GLOBAL_MIN_PRESS_HEIGHT,
   GLOBAL_MIN_PRESS_SIZE,
+  GLOBAL_SMALL_ICON_SIZE,
   GLOBAL_WEB_SHADOW,
   GLOBAL_X_PADDING,
   GLOBAL_Y_PADDING,
 } from './css-globals';
+
+export { capitalize } from './capitalize';

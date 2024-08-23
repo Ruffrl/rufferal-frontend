@@ -43,22 +43,31 @@ interface Props extends Omit<TextInputProps, 'onChange'> {
   size?: FieldSize;
 }
 
-const CONTAINER_STYLES = tw`
-  border 
+export const CONTAINER_STYLES = tw`
   border-solid
-border-gray-500
+  border-gray-500
   flex-row
   w-full
   justify-center
   items-center
+  border-${moderateScaleTW(1)}
   rounded-${moderateScaleTW(4)}
   h-${moderateScaleTW(48)}
   px-${moderateScaleTW(8)}
 `;
-const INPUT_STYLES = tw`
+export const FOCUSED_CONTAINER_STYLES = tw`
+  border-zinc-900
+  border-${moderateScaleTW(2)}
+`;
+export const ERROR_CONTAINER_STYLES = tw`
+  border-red-500
+  border-${moderateScaleTW(2)}
+`;
+export const INPUT_STYLES = tw`
   text-gray-500
   h-full
-  flex-1
+  w-full
+  border-0
   text-${moderateScaleTW(16)}
 `;
 
@@ -73,6 +82,12 @@ export const RInput = ({
   size = 'fit',
   ...inputProps
 }: Props): React.ReactElement => {
+  /* STATE */
+  // track container is focused
+  const [focused, setFocused] = useState(false);
+  // track password visibility
+  const [showPassword, setShowPassword] = useState(false);
+
   let sizeStyle = 'w-full';
   switch (size) {
     case 'extra-small':
@@ -91,9 +106,6 @@ export const RInput = ({
       sizeStyle = `w-1/2`;
       break;
   }
-
-  // State variable to track password visibility
-  const [showPassword, setShowPassword] = useState(false);
 
   // Function to toggle the password visibility state
   const toggleShowPassword = () => {
@@ -132,7 +144,13 @@ export const RInput = ({
 
   return (
     <View
-      style={tw.style(CONTAINER_STYLES, sizeStyle, error && tw`border-red-500`)}
+      accessible={true}
+      style={tw.style(
+        CONTAINER_STYLES,
+        sizeStyle,
+        error && ERROR_CONTAINER_STYLES,
+        focused && FOCUSED_CONTAINER_STYLES
+      )}
     >
       <TextInput
         {...inputProps}
@@ -144,6 +162,8 @@ export const RInput = ({
         onChangeText={onChange}
         placeholderTextColor={GLOBAL_COLORS.disabled.hex}
         style={tw.style(INPUT_STYLES, { outlineStyle: 'none' })}
+        onFocus={() => setFocused((prev) => !prev)}
+        onBlur={() => setFocused((prev) => !prev)}
         onSubmitEditing={onSubmit}
       />
       {isPassword && showPassword && <IconEyeOpen />}

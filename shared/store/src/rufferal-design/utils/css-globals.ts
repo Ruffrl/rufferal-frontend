@@ -19,6 +19,10 @@ export const GLOBAL_ICON_SIZE = tw`
   h-${verticalScaleTW(24)} 
   w-${verticalScaleTW(24)} 
 `;
+export const GLOBAL_SMALL_ICON_SIZE = tw`
+  h-${verticalScaleTW(16)} 
+  w-${verticalScaleTW(16)} 
+`;
 // export const GLOBAL_ICON_SIZE = tw`
 //   h-${moderateScaleTW(24)}
 //   w-${moderateScaleTW(24)}
@@ -62,5 +66,6 @@ export const GLOBAL_COLORS = {
   warningSecondary: { hex: '#eab308', tw: 'yellow-500' },
   /* NEUTRALS */
   white: { hex: '#fff', tw: 'white' },
+  blue: { hex: '#1d4ed8', tw: 'blue-700' },
   black: { hex: '#000', tw: 'black' },
 };

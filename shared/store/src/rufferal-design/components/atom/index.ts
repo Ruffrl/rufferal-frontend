@@ -18,11 +18,19 @@ export { RDivider } from './RDivider';
 export { RFormError } from './RFormError';
 export type { FormErrorProps } from './RFormError';
 export { RGoogleIcon } from './RGoogleIcon';
-export { RInput } from './RInput';
+export {
+  CONTAINER_STYLES,
+  ERROR_CONTAINER_STYLES,
+  FOCUSED_CONTAINER_STYLES,
+  INPUT_STYLES,
+  RInput,
+} from './RInput';
 export type { FieldSize } from './RInput';
 export { RInputError } from './RInputError';
 export { RLabel } from './RLabel';
 export { RLinkButton } from './RLinkButton';
+export { RMobileSelect } from './RMobileSelect';
 export { RPageHeader } from './RPageHeader';
 export { RProgressBar } from './RProgressBar';
 export { RStepProgress } from './RStepProgress';
+export { RWebSelect } from './RWebSelect';

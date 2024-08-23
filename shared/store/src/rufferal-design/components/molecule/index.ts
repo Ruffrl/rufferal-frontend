@@ -14,10 +14,13 @@ export { RBackNavigation } from './RBackNavigation';
 export { RFormCardCheckbox } from './RFormCardCheckbox';
 export { RFormImageInput } from './RFormImageInput';
 export { RFormInput } from './RFormInput';
+export { RFormSelect } from './RFormSelect';
+export type { PickerOption } from './RFormSelect';
 export { RFormToggleRadio } from './RFormToggleRadio';
 export {
   ROnboardingSlideOne,
   ROnboardingSlideThree,
-  ROnboardingSlideTwo,
+  ROnboardingSlideTwo
 } from './ROnboardingSlides';
 export { ROrDivider } from './ROrDivider';
+

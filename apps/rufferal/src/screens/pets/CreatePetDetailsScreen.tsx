@@ -5,7 +5,7 @@ import {
   RCreatePetDetails,
   ScreenProps,
 } from '@rufferal-frontend/store';
-import { IconArrowBack, IconClose, IconPlus } from '../../assets';
+import { IconArrowBack, IconClose, IconPlus, IconChevronDown } from '../../assets';
 
 export const CreatePetDetailsScreen = ({ route }) => {
   const { petSpecies } = route.params;
@@ -19,6 +19,7 @@ export const CreatePetDetailsScreen = ({ route }) => {
   return (
     <RCreatePetDetails
       mobileBackIcon={<IconArrowBack />}
+      mobileChevronDownIcon={<IconChevronDown />}
       mobileCloseIcon={<IconClose />}
       mobilePlusIcon={<IconPlus/>}
       navigateBack={navigateBack}

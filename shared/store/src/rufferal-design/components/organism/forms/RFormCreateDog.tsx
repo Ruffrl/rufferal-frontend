@@ -46,9 +46,11 @@ const createDogSchema: yup.ObjectSchema<CreateDogForm> = yup
   .required();
 
 export const RFormCreateDog = ({
+  mobileChevronDownIcon,
   mobilePlusIcon,
   navigateForward,
 }: {
+  mobileChevronDownIcon?: React.JSX.Element;
   mobilePlusIcon?: React.JSX.Element;
   navigateForward: () => void;
 }): React.ReactElement => {

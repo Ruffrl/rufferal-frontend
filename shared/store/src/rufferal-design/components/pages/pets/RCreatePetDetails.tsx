@@ -1,11 +1,9 @@
 import * as React from 'react';
 import tw from 'twrnc';
 
-import { Platform, ScrollView, Text, View } from 'react-native';
-import WheelPicker from 'react-native-wheely';
+import { ScrollView, FlatList, Text, View } from 'react-native';
 
 import {
-  moderateScaleTW,
   RButton,
   RFormCreateCat,
   RFormCreateDog,
@@ -15,10 +13,13 @@ import {
   verticalScaleTW,
 } from '../../../../';
 
+// const catColorOptions: 
+
 export type PetSpecies = 'cat' | 'dog';
 
 type CreatePetDetailsProps = {
   mobileBackIcon?: React.JSX.Element;
+  mobileChevronDownIcon?: React.JSX.Element;
   mobileCloseIcon?: React.JSX.Element;
   mobilePlusIcon?: React.JSX.Element;
   navigateBack: () => void;
@@ -29,6 +30,7 @@ type CreatePetDetailsProps = {
 
 export const RCreatePetDetails = ({
   mobileBackIcon,
+  mobileChevronDownIcon,
   mobileCloseIcon,
   mobilePlusIcon,
   navigateBack,
@@ -36,32 +38,6 @@ export const RCreatePetDetails = ({
   navigateForward,
   petSpecies,
 }: CreatePetDetailsProps): React.ReactElement => {
-  const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
-  const Dropdown = () => {
-    return (
-      <>
-        {isMobile ? (
-          <View
-            style={tw`border border-gray-500 rounded-${moderateScaleTW(4)}`}
-          >
-            <WheelPicker
-              selectedIndex={0}
-              options={['Berlin', 'London', 'Amsterdam']}
-              onChange={(value: any) => console.log(value)}
-            />
-          </View>
-        ) : (
-          <select name="cars" id="cars">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
-          </select>
-        )}
-      </>
-    );
-  };
-
   return (
     <RPrototypeTemplate
       backNavigation={navigateBack}
@@ -69,7 +45,6 @@ export const RCreatePetDetails = ({
       mobileCloseIcon={mobileCloseIcon}
     >
       {/* PROGRESS BAR */}
-      <Dropdown />
       <View style={tw`pt-${verticalScaleTW(12)}`}>
         <RStepProgress step={1} total={3} />
       </View>
@@ -81,12 +56,14 @@ export const RCreatePetDetails = ({
           <RFormCreateCat
             mobilePlusIcon={mobilePlusIcon}
             navigateForward={() => navigateForward(petSpecies)}
+            mobileChevronDownIcon={mobileChevronDownIcon}
           />
         )}
         {petSpecies === 'dog' && (
           <RFormCreateDog
             mobilePlusIcon={mobilePlusIcon}
             navigateForward={() => navigateForward(petSpecies)}
+            mobileChevronDownIcon={mobileChevronDownIcon}
           />
         )}
         <View style={tw`mt-${verticalScaleTW(8)}`}>
