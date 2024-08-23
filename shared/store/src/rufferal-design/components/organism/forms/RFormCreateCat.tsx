@@ -13,8 +13,7 @@ import {
   RFormError,
   RFormImageInput,
   RFormInput,
-  RFormToggle,
-  RLabel,
+  RFormToggleRadio,
   verticalScaleTW,
 } from '../../../..';
 
@@ -133,7 +132,7 @@ export const RFormCreateCat = ({
               onChange={onChange} // send value to hook form
               value={value}
               formRef={ref}
-              placeholder="Waffles"
+              placeholder="KitKat"
               error={errors.name}
               onSubmit={onSubmit}
             />
@@ -192,37 +191,74 @@ export const RFormCreateCat = ({
             />
           )}
         />
-        <View>
-          <RLabel label="Age" />
-          <RFormToggle label="Kitten (0–9 months)" />
-          <RFormToggle label="Young (9 months–2 years)" />
-          <RFormToggle label="Adult (2–8 years)" />
-          <RFormToggle label="Senior (8+ years)" />
-        </View>
-        <View>
-          <RLabel label="Size" />
-          <RFormToggle label="Small (0–6 lbs)" />
-          <RFormToggle label="Medium (7–11 lbs)" />
-          <RFormToggle label="Large (12–16 lbs)" />
-          <RFormToggle label="Extra large (16+ lbs)" />
-        </View>
-        <View>
-          <RLabel label="Sex" />
-          <RFormToggle label="Male" />
-          <RFormToggle label="Female" />
-        </View>
-        <View>
-          <RLabel label="Spayed/neutered?" />
-          <RFormToggle label="Yes" />
-          <RFormToggle label="No" />
-        </View>
+        {/* PET AGE */}
+        <Controller
+          name="age"
+          control={control}
+          render={({ field }) => (
+            <RFormToggleRadio
+              label="Age"
+              field={field}
+              error={errors.age}
+              toggles={[
+                'Kitten (0–9 months)',
+                'Young (9 months–2 years)',
+                'Adult (2–8 years)',
+                'Senior (8+ years)',
+              ]}
+            />
+          )}
+        />
+        {/* PET SIZE */}
+        <Controller
+          name="size"
+          control={control}
+          render={({ field }) => (
+            <RFormToggleRadio
+              label="Size"
+              field={field}
+              error={errors.size}
+              toggles={[
+                'Small (0–6 lbs)',
+                'Medium (7–11 lbs)',
+                'Large (12–16 lbs)',
+                'Extra large (16+ lbs)',
+              ]}
+            />
+          )}
+        />
+        {/* PET SEX */}
+        <Controller
+          name="sex"
+          control={control}
+          render={({ field }) => (
+            <RFormToggleRadio
+              label="Sex"
+              field={field}
+              error={errors.sex}
+              toggles={['Female', 'Male']}
+            />
+          )}
+        />
+        {/* PET STERILIZATION STATUS */}
+        <Controller
+          name="status"
+          control={control}
+          render={({ field }) => (
+            <RFormToggleRadio
+              label="Spayed/neutered?"
+              field={field}
+              error={errors.status}
+              toggles={['Yes', 'No']}
+            />
+          )}
+        />
         <View style={tw`mt-${verticalScaleTW(24)} gap-${moderateScaleTW(8)}`}>
           {error && <RFormError error="test error" />}
-          <RFormError error="test error" />
           {/* BLARG - disabled if form not dirty */}
           <RButton
             title="Next"
-            onPress={navigateForward}
+            onPress={onSubmit}
             loading={loading}
             state={isDirty ? 'default' : 'disabled'}
           />

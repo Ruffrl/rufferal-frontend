@@ -14,7 +14,7 @@ export { RBackNavigation } from './RBackNavigation';
 export { RFormCardCheckbox } from './RFormCardCheckbox';
 export { RFormImageInput } from './RFormImageInput';
 export { RFormInput } from './RFormInput';
-export { RFormToggle } from './RFormToggle';
+export { RFormToggleRadio } from './RFormToggleRadio';
 export {
   ROnboardingSlideOne,
   ROnboardingSlideThree,

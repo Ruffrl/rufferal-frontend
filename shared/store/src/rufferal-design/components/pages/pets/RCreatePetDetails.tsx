@@ -55,7 +55,10 @@ export const RCreatePetDetails = ({
           />
         )}
         {petSpecies === 'dog' && (
-          <RFormCreateDog mobilePlusIcon={mobilePlusIcon} />
+          <RFormCreateDog
+            mobilePlusIcon={mobilePlusIcon}
+            navigateForward={() => navigateForward(petSpecies)}
+          />
         )}
         <View style={tw`mt-${verticalScaleTW(8)}`}>
           <RButton title="Cancel" type="secondary" onPress={navigateCancel} />
