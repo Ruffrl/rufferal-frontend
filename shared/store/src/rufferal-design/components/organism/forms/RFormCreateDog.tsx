@@ -13,9 +13,15 @@ import {
   RFormError,
   RFormImageInput,
   RFormInput,
+  RFormSelect,
   RFormToggleRadio,
   verticalScaleTW,
 } from '../../../..';
+import {
+  dogBreedOptions,
+  dogCoatOptions,
+  dogColorOptions,
+} from './form-options';
 
 type CreateDogForm = {
   photo: string;
@@ -79,7 +85,6 @@ export const RFormCreateDog = ({
     handleSubmit,
     formState: { errors, isDirty },
   } = form;
-  console.log('BLARG isDirty', isDirty);
 
   const onSubmit = handleSubmit(async (data: CreateDogForm) => {
     setLoading(true);
@@ -111,7 +116,7 @@ export const RFormCreateDog = ({
   return (
     <View style={tw`gap-${moderateScaleTW(8)}`}>
       <FormProvider {...form}>
-        {/* PET PHOTO */}
+        {/* PHOTO */}
         <Controller
           name="photo"
           control={control}
@@ -119,11 +124,12 @@ export const RFormCreateDog = ({
             <RFormImageInput
               field={field}
               error={errors.photo}
+              mobileBackCamera
               mobilePlusIcon={mobilePlusIcon}
             />
           )}
         />
-        {/* PET NAME */}
+        {/* NAME */}
         <Controller
           name="name"
           control={control}
@@ -140,60 +146,51 @@ export const RFormCreateDog = ({
             />
           )}
         />
-        {/* BLARG - Add a dropdown input */}
-        {/* PET COLOR */}
+        {/* BLARG - Convert to multi select */}
+        {/* COLOR */}
         <Controller
           name="color"
           control={control}
-          render={({ field: { onBlur, onChange, value, ref } }) => (
-            <RFormInput
+          render={({ field }) => (
+            <RFormSelect
               label="Color"
-              onBlur={onBlur} // notify when input is touched
-              onChange={onChange} // send value to hook form
-              value={value}
-              formRef={ref}
-              placeholder="Select..."
+              field={field}
               error={errors.color}
-              onSubmit={onSubmit}
+              mobileChevronDownIcon={mobileChevronDownIcon}
+              options={dogColorOptions}
             />
           )}
         />
         {/* BLARG - Add `optional` param to rlabel and rforminput` */}
-        {/* PET BREED */}
+        {/* BREED */}
         <Controller
           name="breed"
           control={control}
-          render={({ field: { onBlur, onChange, value, ref } }) => (
-            <RFormInput
+          render={({ field }) => (
+            <RFormSelect
               label="Breed (optional)"
-              onBlur={onBlur} // notify when input is touched
-              onChange={onChange} // send value to hook form
-              value={value}
-              formRef={ref}
-              placeholder="Select..."
+              field={field}
               error={errors.breed}
-              onSubmit={onSubmit}
+              mobileChevronDownIcon={mobileChevronDownIcon}
+              options={dogBreedOptions}
             />
           )}
         />
-        {/* PET COAT LENGTH */}
+        {/* COAT LENGTH */}
         <Controller
           name="coatLength"
           control={control}
-          render={({ field: { onBlur, onChange, value, ref } }) => (
-            <RFormInput
+          render={({ field }) => (
+            <RFormSelect
               label="Coat length (optional)"
-              onBlur={onBlur} // notify when input is touched
-              onChange={onChange} // send value to hook form
-              value={value}
-              formRef={ref}
-              placeholder="Select..."
+              field={field}
               error={errors.coatLength}
-              onSubmit={onSubmit}
+              mobileChevronDownIcon={mobileChevronDownIcon}
+              options={dogCoatOptions}
             />
           )}
         />
-        {/* PET AGE */}
+        {/* AGE */}
         <Controller
           name="age"
           control={control}
@@ -211,7 +208,7 @@ export const RFormCreateDog = ({
             />
           )}
         />
-        {/* PET SIZE */}
+        {/* SIZE */}
         <Controller
           name="size"
           control={control}
@@ -229,7 +226,7 @@ export const RFormCreateDog = ({
             />
           )}
         />
-        {/* PET SEX */}
+        {/* SEX */}
         <Controller
           name="sex"
           control={control}
@@ -242,7 +239,7 @@ export const RFormCreateDog = ({
             />
           )}
         />
-        {/* PET STERILIZATION STATUS */}
+        {/* STERILIZATION STATUS */}
         <Controller
           name="status"
           control={control}
@@ -257,7 +254,6 @@ export const RFormCreateDog = ({
         />
         <View style={tw`mt-${verticalScaleTW(24)} gap-${moderateScaleTW(8)}`}>
           {error && <RFormError error="test error" />}
-          {/* BLARG - disabled if form not dirty */}
           <RButton
             title="Next"
             onPress={onSubmit}

@@ -80,7 +80,12 @@ const BREEDS = [
   'turkish van',
 ];
 
-const COAT_LENGTHS = ['long', 'medium', 'short', 'hairless'];
+const COAT_LENGTHS = [
+  'hairless',
+  'short',
+  'medium', 
+  'long',
+];
 
 const convertToPicker = (options: string[]): PickerOption[] =>
   options.map((option) => {
