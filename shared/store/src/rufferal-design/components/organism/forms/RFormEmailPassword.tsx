@@ -13,7 +13,7 @@ import {
   RFormError,
   RFormInput,
   RPasswordValidator,
-} from '../../..';
+} from '../../../..';
 
 export type AccessForm = {
   email: string;
