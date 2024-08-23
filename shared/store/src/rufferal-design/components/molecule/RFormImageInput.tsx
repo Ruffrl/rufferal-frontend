@@ -32,7 +32,8 @@ export const RFormImageInput = ({
   mobilePlusIcon,
 }: {
   error?: FieldError | undefined;
-  field: ControllerRenderProps;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  field: ControllerRenderProps<any>;
   mobilePlusIcon?: React.JSX.Element;
 }) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';

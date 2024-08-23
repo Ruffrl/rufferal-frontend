@@ -36,12 +36,12 @@ const profileNameSchema: yup.ObjectSchema<ProfileNameForm> = yup
     forename: yup
       .string()
       .trim()
-      .required('First name is a required field')
+      .required('Please provide your first name')
       .max(50, 'First name cannot exceed 50 characters'),
     surname: yup
       .string()
       .trim()
-      .required('Last name is a required field')
+      .required('Please provide your last name')
       .max(50, 'Last name cannot exceed 50 characters'),
   })
   .required();

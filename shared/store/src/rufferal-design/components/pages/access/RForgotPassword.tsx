@@ -35,7 +35,7 @@ const requestPasswordSchema: yup.ObjectSchema<RequestPasswordForm> = yup
     email: yup
       .string()
       .trim()
-      .required('Email is a required field')
+      .required('Please provide a valid email')
       .email('Email must be in format you@email.com')
       .max(320, 'Password cannot exceed 320 characters'),
   })

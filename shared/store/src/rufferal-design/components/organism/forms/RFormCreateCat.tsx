@@ -1,86 +1,233 @@
 import * as React from 'react';
 import tw from 'twrnc';
+import * as yup from 'yup';
 
-import { RefCallback } from 'react';
-import { ControllerRenderProps } from 'react-hook-form';
-import { View } from 'react-native';
+import { useState } from 'react';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { Platform, View } from 'react-native';
 
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   moderateScaleTW,
+  RButton,
+  RFormError,
   RFormImageInput,
   RFormInput,
   RFormToggle,
   RLabel,
+  verticalScaleTW,
 } from '../../../..';
+
+type CreateCatForm = {
+  photo: string;
+  name: string;
+  color: string;
+  breed?: string;
+  coatLength?: string;
+  age: string;
+  size: string;
+  sex: string;
+  status: string;
+};
+
+const createCatSchema: yup.ObjectSchema<CreateCatForm> = yup
+  .object({
+    photo: yup.string().required('Please provide a photo of your cat'),
+    name: yup.string().required('Please provide a name for your cat'),
+    color: yup.string().required("Please provide your cat's color"),
+    breed: yup.string(),
+    coatLength: yup.string(),
+    age: yup.string().required("Please provide your cat's age"),
+    size: yup.string().required("Please provide your cat's size"),
+    sex: yup.string().required("Please provide your cat's sex"),
+    status: yup
+      .string()
+      .required("Please provide your cat's sterilization status"),
+  })
+  .required();
 
 export const RFormCreateCat = ({
   mobilePlusIcon,
+  navigateForward,
 }: {
   mobilePlusIcon?: React.JSX.Element;
+  navigateForward: () => void;
 }): React.ReactElement => {
-  const onSubmit = async () => {
-    return undefined;
-  };
+  /* STATE */
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>();
 
-  const onChange = async () => {
-    return undefined;
-  };
+  /* REACT HOOK FORM */
+  const form = useForm<CreateCatForm>({
+    resolver: yupResolver(createCatSchema),
+    defaultValues: {
+      photo: '',
+      name: '',
+      color: '',
+      breed: undefined,
+      coatLength: undefined,
+      age: '',
+      size: '',
+      sex: '',
+      status: '',
+    },
+    mode: 'onBlur',
+  });
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, isDirty },
+  } = form;
+  console.log('BLARG isDirty', isDirty);
 
-  const onBlur = async () => {
-    return undefined;
-  };
+  const onSubmit = handleSubmit(async (data: CreateCatForm) => {
+    setLoading(true);
+    if (process.env['NODE_ENV'] === 'development') {
+      console.log('BLARG Priya handle create cat with your backend', data);
+      // observableAccountStore.setEmail(data.email);
+      navigateForward?.();
+    } else {
+      const url =
+        Platform.OS === 'android'
+          ? 'http://10.0.2.2:5000/create-profile'
+          : 'http://localhost:5000/create-profile';
 
-  const dummyRef: RefCallback<string> = () => 'undefined';
+      // Handle form submission
+      setError('');
 
-  const dummyField: ControllerRenderProps = {
-    onChange: onChange,
-    onBlur: onBlur,
-    value: undefined,
-    name: 'undefined',
-    ref: dummyRef,
-  };
+      try {
+        // BLARG - TODO
+        // observableAccountStore.setEmail(data.email);
+        console.log('BLARG todo', url);
+      } catch (err) {
+        setError(String(err));
+      } finally {
+        setLoading(false);
+      }
+    }
+  });
 
   return (
     <View style={tw`gap-${moderateScaleTW(8)}`}>
-      <RFormImageInput field={dummyField} mobilePlusIcon={mobilePlusIcon} />
-      <RFormInput label="Name" onSubmit={onSubmit} onChange={onChange} />
-      {/* BLARG - Add a dropdown input */}
-      <RFormInput label="Color" onSubmit={onSubmit} onChange={onChange} />
-      {/* BLARG - Add `optional` param to rlabel and rforminput` */}
-      <RFormInput
-        label="Breed (optional)"
-        onSubmit={onSubmit}
-        onChange={onChange}
-      />
-      <RFormInput
-        label="Coat length (optional)"
-        onSubmit={onSubmit}
-        onChange={onChange}
-      />
-      <View>
-        <RLabel label="Age" />
-        <RFormToggle label="Kitten (0–9 months)" />
-        <RFormToggle label="Young (9 months–2 years)" />
-        <RFormToggle label="Adult (2–8 years)" />
-        <RFormToggle label="Senior (8+ years)" />
-      </View>
-      <View>
-        <RLabel label="Size" />
-        <RFormToggle label="Small (0–6 lbs)" />
-        <RFormToggle label="Medium (7–11 lbs)" />
-        <RFormToggle label="Large (12–16 lbs)" />
-        <RFormToggle label="Extra large (16+ lbs)" />
-      </View>
-      <View>
-        <RLabel label="Sex" />
-        <RFormToggle label="Male" />
-        <RFormToggle label="Female" />
-      </View>
-      <View>
-        <RLabel label="Spayed/neutered?" />
-        <RFormToggle label="Yes" />
-        <RFormToggle label="No" />
-      </View>
+      <FormProvider {...form}>
+        {/* PET PHOTO */}
+        <Controller
+          name="photo"
+          control={control}
+          render={({ field }) => (
+            <RFormImageInput
+              field={field}
+              error={errors.photo}
+              mobilePlusIcon={mobilePlusIcon}
+            />
+          )}
+        />
+        {/* PET NAME */}
+        <Controller
+          name="name"
+          control={control}
+          render={({ field: { onBlur, onChange, value, ref } }) => (
+            <RFormInput
+              label="Name"
+              onBlur={onBlur} // notify when input is touched
+              onChange={onChange} // send value to hook form
+              value={value}
+              formRef={ref}
+              placeholder="Waffles"
+              error={errors.name}
+              onSubmit={onSubmit}
+            />
+          )}
+        />
+        {/* BLARG - Add a dropdown input */}
+        {/* PET COLOR */}
+        <Controller
+          name="color"
+          control={control}
+          render={({ field: { onBlur, onChange, value, ref } }) => (
+            <RFormInput
+              label="Color"
+              onBlur={onBlur} // notify when input is touched
+              onChange={onChange} // send value to hook form
+              value={value}
+              formRef={ref}
+              placeholder="Select..."
+              error={errors.color}
+              onSubmit={onSubmit}
+            />
+          )}
+        />
+        {/* BLARG - Add `optional` param to rlabel and rforminput` */}
+        {/* PET BREED */}
+        <Controller
+          name="breed"
+          control={control}
+          render={({ field: { onBlur, onChange, value, ref } }) => (
+            <RFormInput
+              label="Breed (optional)"
+              onBlur={onBlur} // notify when input is touched
+              onChange={onChange} // send value to hook form
+              value={value}
+              formRef={ref}
+              placeholder="Select..."
+              error={errors.breed}
+              onSubmit={onSubmit}
+            />
+          )}
+        />
+        {/* PET COAT LENGTH */}
+        <Controller
+          name="coatLength"
+          control={control}
+          render={({ field: { onBlur, onChange, value, ref } }) => (
+            <RFormInput
+              label="Coat length (optional)"
+              onBlur={onBlur} // notify when input is touched
+              onChange={onChange} // send value to hook form
+              value={value}
+              formRef={ref}
+              placeholder="Select..."
+              error={errors.coatLength}
+              onSubmit={onSubmit}
+            />
+          )}
+        />
+        <View>
+          <RLabel label="Age" />
+          <RFormToggle label="Kitten (0–9 months)" />
+          <RFormToggle label="Young (9 months–2 years)" />
+          <RFormToggle label="Adult (2–8 years)" />
+          <RFormToggle label="Senior (8+ years)" />
+        </View>
+        <View>
+          <RLabel label="Size" />
+          <RFormToggle label="Small (0–6 lbs)" />
+          <RFormToggle label="Medium (7–11 lbs)" />
+          <RFormToggle label="Large (12–16 lbs)" />
+          <RFormToggle label="Extra large (16+ lbs)" />
+        </View>
+        <View>
+          <RLabel label="Sex" />
+          <RFormToggle label="Male" />
+          <RFormToggle label="Female" />
+        </View>
+        <View>
+          <RLabel label="Spayed/neutered?" />
+          <RFormToggle label="Yes" />
+          <RFormToggle label="No" />
+        </View>
+        <View style={tw`mt-${verticalScaleTW(24)} gap-${moderateScaleTW(8)}`}>
+          {error && <RFormError error="test error" />}
+          <RFormError error="test error" />
+          {/* BLARG - disabled if form not dirty */}
+          <RButton
+            title="Next"
+            onPress={navigateForward}
+            loading={loading}
+            state={isDirty ? 'default' : 'disabled'}
+          />
+        </View>
+      </FormProvider>
     </View>
   );
 };

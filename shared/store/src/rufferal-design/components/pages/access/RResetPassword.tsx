@@ -39,7 +39,7 @@ const resetPasswordSchema: yup.ObjectSchema<ResetPasswordForm> = yup
     password: yup
       .string()
       .trim()
-      .required('Password is a required field')
+      .required('Please provide a password')
       .min(8, 'Password must be at least 8 characters')
       .matches(/[A-Z]/g, 'Password must contain at least 1 uppercase letter')
       .matches(/[a-z]/g, 'Password must contain at least 1 lowercase letter')

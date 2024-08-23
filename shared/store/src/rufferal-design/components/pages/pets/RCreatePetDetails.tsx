@@ -4,11 +4,9 @@ import tw from 'twrnc';
 import { ScrollView, Text, View } from 'react-native';
 
 import {
-  moderateScaleTW,
   RButton,
   RFormCreateCat,
   RFormCreateDog,
-  RFormError,
   RPageHeader,
   RPrototypeTemplate,
   RStepProgress,
@@ -51,15 +49,15 @@ export const RCreatePetDetails = ({
       <ScrollView>
         <Text style={tw`text-gray-500 font-semibold`}>Required</Text>
         {petSpecies === 'cat' && (
-          <RFormCreateCat mobilePlusIcon={mobilePlusIcon} />
+          <RFormCreateCat
+            mobilePlusIcon={mobilePlusIcon}
+            navigateForward={() => navigateForward(petSpecies)}
+          />
         )}
         {petSpecies === 'dog' && (
           <RFormCreateDog mobilePlusIcon={mobilePlusIcon} />
         )}
-        <View style={tw`mt-${verticalScaleTW(24)} gap-${moderateScaleTW(8)}`}>
-          <RFormError error="test error" />
-          {/* BLARG - disabled if form not dirty */}
-          <RButton title="Next" onPress={() => navigateForward(petSpecies)} />
+        <View style={tw`mt-${verticalScaleTW(8)}`}>
           <RButton title="Cancel" type="secondary" onPress={navigateCancel} />
         </View>
       </ScrollView>
