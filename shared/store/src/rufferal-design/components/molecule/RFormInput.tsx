@@ -16,7 +16,7 @@ interface Props extends Omit<TextInputProps, 'onChange'> {
   onSubmit: () => Promise<void>;
   placeholder?: string;
   size?: FieldSize;
-  onChange: ((text: string) => void) | undefined;
+  onChange: ((text: string) => void);
 }
 
 export const RFormInput = ({

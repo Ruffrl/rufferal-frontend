@@ -222,7 +222,7 @@ export const RFormImageInput = ({
             <>
               {mobilePlusIcon || (
                 <Image
-                  source={require('../../../assets/icons-512/check.png')}
+                  source={require('../../../assets/icons-512/plus.png')}
                   resizeMode="center"
                   style={tw.style(tw`
                 h-${moderateScaleTW(48)} 
@@ -244,17 +244,21 @@ export const RFormImageInput = ({
           w-full
         `}
         >
-          <RButton
-            title="Add from library"
-            onPress={handleChoosePhoto}
-            size="medium"
-          />
-          <RButton
-            title="Take photo"
-            type="secondary"
-            onPress={handleCamera}
-            size="medium"
-          />
+          <View style={tw`w-[48%]`}>
+            <RButton
+              title="Add from library"
+              onPress={handleChoosePhoto}
+              size="fit"
+            />
+          </View>
+          <View style={tw`w-[48%]`}>
+            <RButton
+              title="Take photo"
+              type="secondary"
+              onPress={handleCamera}
+              size="fit"
+            />
+          </View>
         </View>
       </View>
     </>

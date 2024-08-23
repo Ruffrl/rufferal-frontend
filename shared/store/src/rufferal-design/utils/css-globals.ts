@@ -56,6 +56,7 @@ export const GLOBAL_COLORS = {
   /* GREENS */
   success: { hex: '#22c55e', tw: 'green-500' },
   successSecondary: { hex: '#15803d', tw: 'green-700' },
+  successTertiary: { hex: '#a7f3d0', tw: 'emerald-200' },
   /* YELLOWS */
   warning: { hex: '#fde047', tw: 'yellow-300' },
   warningSecondary: { hex: '#eab308', tw: 'yellow-500' },

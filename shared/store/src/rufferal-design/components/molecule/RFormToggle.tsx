@@ -5,7 +5,12 @@ import { useState } from 'react';
 import { ControllerRenderProps, FieldError } from 'react-hook-form';
 import { Platform, Switch, Text, TextInput, View } from 'react-native';
 
-import { GLOBAL_COLORS, moderateScaleTW, RInputError } from '../../..';
+import {
+  GLOBAL_COLORS,
+  moderateScaleTW,
+  RInputError,
+  verticalScaleTW,
+} from '../../..';
 
 // ⚠️ Requires parent <FormProvider/> (react-hook-forms)
 export const RFormToggle = ({
@@ -28,7 +33,14 @@ export const RFormToggle = ({
   };
 
   return (
-    <View style={tw`flex-row gap-${moderateScaleTW(8)}`}>
+    <View
+      style={tw`
+      flex-row
+      gap-${moderateScaleTW(8)} 
+      py-${verticalScaleTW(2)}
+      items-center
+    `}
+    >
       {/* HIDDEN INPUT */}
       <TextInput
         tabIndex={0}

@@ -1,7 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { PetSpecies, RCreatePetDetails, ScreenProps } from '@rufferal-frontend/store';
-import { IconArrowBack, IconClose } from '../../assets';
+import {
+  PetSpecies,
+  RCreatePetDetails,
+  ScreenProps,
+} from '@rufferal-frontend/store';
+import { IconArrowBack, IconClose, IconPlus } from '../../assets';
 
 export const CreatePetDetailsScreen = ({ route }) => {
   const { petSpecies } = route.params;
@@ -16,6 +20,7 @@ export const CreatePetDetailsScreen = ({ route }) => {
     <RCreatePetDetails
       mobileBackIcon={<IconArrowBack />}
       mobileCloseIcon={<IconClose />}
+      mobilePlusIcon={<IconPlus/>}
       navigateBack={navigateBack}
       navigateCancel={navigateCancel}
       navigateForward={navigateForward}

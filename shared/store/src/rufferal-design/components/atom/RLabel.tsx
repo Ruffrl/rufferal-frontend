@@ -10,7 +10,6 @@ interface Props extends TextInputProps {
 
 const LABEL_STYLES = tw`
   text-gray-500
-  font-bold
   text-${moderateScaleTW(14)}
   py-${verticalScaleTW(4)}
 `;
