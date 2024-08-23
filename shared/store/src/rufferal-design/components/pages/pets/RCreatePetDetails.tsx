@@ -1,7 +1,7 @@
 import * as React from 'react';
 import tw from 'twrnc';
 
-import { ScrollView, FlatList, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 
 import {
   RButton,
@@ -12,8 +12,6 @@ import {
   RStepProgress,
   verticalScaleTW,
 } from '../../../../';
-
-// const catColorOptions: 
 
 export type PetSpecies = 'cat' | 'dog';
 

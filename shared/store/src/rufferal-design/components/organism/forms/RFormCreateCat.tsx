@@ -17,7 +17,11 @@ import {
   RFormToggleRadio,
   verticalScaleTW,
 } from '../../../..';
-import { catColorOptions } from '../../pages/pets/form-options';
+import {
+  catBreedOptions,
+  catCoatOptions,
+  catColorOptions,
+} from './form-options';
 
 type CreateCatForm = {
   photo: string;
@@ -64,15 +68,15 @@ export const RFormCreateCat = ({
   const form = useForm<CreateCatForm>({
     resolver: yupResolver(createCatSchema),
     defaultValues: {
-      photo: 'test',
-      name: 'test',
+      photo: '',
+      name: '',
       color: '',
       breed: undefined,
       coatLength: undefined,
-      age: 'test',
-      size: 'test',
-      sex: 'test',
-      status: 'test',
+      age: '',
+      size: '',
+      sex: '',
+      status: '',
     },
     mode: 'onBlur',
   });
@@ -112,7 +116,7 @@ export const RFormCreateCat = ({
   return (
     <View style={tw`gap-${moderateScaleTW(8)}`}>
       <FormProvider {...form}>
-        {/* PET PHOTO */}
+        {/* PHOTO */}
         <Controller
           name="photo"
           control={control}
@@ -120,11 +124,12 @@ export const RFormCreateCat = ({
             <RFormImageInput
               field={field}
               error={errors.photo}
+              mobileBackCamera
               mobilePlusIcon={mobilePlusIcon}
             />
           )}
         />
-        {/* PET NAME */}
+        {/* NAME */}
         <Controller
           name="name"
           control={control}
@@ -141,9 +146,8 @@ export const RFormCreateCat = ({
             />
           )}
         />
-        {/* BLARG - Add a dropdown input */}
         {/* BLARG - Convert to multi select */}
-        {/* PET COLOR */}
+        {/* COLOR */}
         <Controller
           name="color"
           control={control}
@@ -158,41 +162,35 @@ export const RFormCreateCat = ({
           )}
         />
         {/* BLARG - Add `optional` param to rlabel and rforminput` */}
-        {/* PET BREED */}
+        {/* BREED */}
         <Controller
           name="breed"
           control={control}
-          render={({ field: { onBlur, onChange, value, ref } }) => (
-            <RFormInput
+          render={({ field }) => (
+            <RFormSelect
               label="Breed (optional)"
-              onBlur={onBlur} // notify when input is touched
-              onChange={onChange} // send value to hook form
-              value={value}
-              formRef={ref}
-              placeholder="Select..."
+              field={field}
               error={errors.breed}
-              onSubmit={onSubmit}
+              mobileChevronDownIcon={mobileChevronDownIcon}
+              options={catBreedOptions}
             />
           )}
         />
-        {/* PET COAT LENGTH */}
+        {/* COAT LENGTH */}
         <Controller
           name="coatLength"
           control={control}
-          render={({ field: { onBlur, onChange, value, ref } }) => (
-            <RFormInput
+          render={({ field }) => (
+            <RFormSelect
               label="Coat length (optional)"
-              onBlur={onBlur} // notify when input is touched
-              onChange={onChange} // send value to hook form
-              value={value}
-              formRef={ref}
-              placeholder="Select..."
+              field={field}
               error={errors.coatLength}
-              onSubmit={onSubmit}
+              mobileChevronDownIcon={mobileChevronDownIcon}
+              options={catCoatOptions}
             />
           )}
         />
-        {/* PET AGE */}
+        {/* AGE */}
         <Controller
           name="age"
           control={control}
@@ -210,7 +208,7 @@ export const RFormCreateCat = ({
             />
           )}
         />
-        {/* PET SIZE */}
+        {/* SIZE */}
         <Controller
           name="size"
           control={control}
@@ -228,7 +226,7 @@ export const RFormCreateCat = ({
             />
           )}
         />
-        {/* PET SEX */}
+        {/* SEX */}
         <Controller
           name="sex"
           control={control}
@@ -241,7 +239,7 @@ export const RFormCreateCat = ({
             />
           )}
         />
-        {/* PET STERILIZATION STATUS */}
+        {/* STERILIZATION STATUS */}
         <Controller
           name="status"
           control={control}
@@ -256,7 +254,6 @@ export const RFormCreateCat = ({
         />
         <View style={tw`mt-${verticalScaleTW(24)} gap-${moderateScaleTW(8)}`}>
           {error && <RFormError error="test error" />}
-          {/* BLARG - disabled if form not dirty */}
           <RButton
             title="Next"
             onPress={onSubmit}

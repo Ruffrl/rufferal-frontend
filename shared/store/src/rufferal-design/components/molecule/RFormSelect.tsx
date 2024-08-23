@@ -30,12 +30,14 @@ export const RFormSelect = ({
   mobileChevronDownIcon?: React.JSX.Element;
   options: PickerOption[];
 }) => {
+  /* STATE */
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   const [selected, setSelected] = useState<string>();
-  console.log('BLARG selected', selected);
 
+  /* HOOKS */
   const { setValue } = useFormContext();
-
+  
+  /* HANDLERS */
   const handleSelection = (value: string) => {
     setSelected(value);
     setValue(field.name, value, { shouldDirty: true });

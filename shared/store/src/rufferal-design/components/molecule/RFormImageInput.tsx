@@ -29,44 +29,58 @@ import {
 export const RFormImageInput = ({
   error,
   field,
+  mobileBackCamera = false,
   mobilePlusIcon,
 }: {
   error?: FieldError | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   field: ControllerRenderProps<any>;
+  mobileBackCamera?: boolean;
   mobilePlusIcon?: React.JSX.Element;
 }) => {
+  /* STATE */
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
+
   const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
   const [webPhoto, setWebPhoto] = useState<string | null | undefined>(
     undefined
   );
   const [webcam, setWebcam] = useState(false);
 
+  /* HOOKS */
   // const camera = useRef<CameraType | null>(null);
   const camera = useRef<Webcam | null>(null);
   const { setValue } = useFormContext();
 
+  console.log('BLARG BLARG BLARG photo', photo);
+  /* HANDLERS */
   const handleChoosePhoto = () => {
     launchImageLibrary({ mediaType: 'photo' }, (response) => {
-      if (response) {
+      if (response?.assets) {
         // BLARG - todo; determine and manage data conversion for server
         // const urlImage = URL.createObjectURL(response.assets[0]);
         setPhoto(response);
-        setValue(field.name, response?.assets?.[0].uri);
+        setValue(field.name, response.assets?.[0].uri);
       }
     });
   };
 
   const handleCamera = () => {
     if (isMobile) {
-      launchCamera({ mediaType: 'photo', saveToPhotos: true }, (response) => {
-        if (response) {
-          // BLARG - todo; determine and manage data conversion for server
-          setPhoto(response);
-          setValue(field.name, response?.assets?.[0].uri);
+      launchCamera(
+        {
+          cameraType: mobileBackCamera ? 'back' : 'front',
+          mediaType: 'photo',
+          saveToPhotos: true,
+        },
+        (response) => {
+          if (response?.assets) {
+            // BLARG - todo; determine and manage data conversion for server
+            setPhoto(response);
+            setValue(field.name, response.assets?.[0].uri);
+          }
         }
-      });
+      );
     } else {
       setWebcam(true);
     }
