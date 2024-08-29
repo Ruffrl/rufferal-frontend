@@ -10,7 +10,7 @@ import {
 import { Platform, Switch, Text, View } from 'react-native';
 
 import {
-  GLOBAL_COLORS,
+  GLOBAL_PROTOTYPE_COLORS,
   moderateScaleTW,
   RInputError,
   RLabel,
@@ -28,8 +28,8 @@ export const RFormToggleRadio = ({
   error?: FieldError | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   field: ControllerRenderProps<any>;
-    label?: string;
-    optional?: boolean;
+  label?: string;
+  optional?: boolean;
   toggles: string[];
 }) => {
   // const isAndroid = Platform.OS === 'android'
@@ -68,14 +68,14 @@ export const RFormToggleRadio = ({
               )}
               thumbColor={
                 selected
-                  ? GLOBAL_COLORS.tertiary.hex
-                  : GLOBAL_COLORS.primary.hex
+                  ? GLOBAL_PROTOTYPE_COLORS.tertiary.hex
+                  : GLOBAL_PROTOTYPE_COLORS.primary.hex
               }
               trackColor={{
-                false: GLOBAL_COLORS.secondary.hex,
-                true: GLOBAL_COLORS.successTertiary.hex,
+                false: GLOBAL_PROTOTYPE_COLORS.secondary.hex,
+                true: GLOBAL_PROTOTYPE_COLORS.successTertiary.hex,
               }}
-              ios_backgroundColor={GLOBAL_COLORS.secondary.hex}
+              ios_backgroundColor={GLOBAL_PROTOTYPE_COLORS.secondary.hex}
               onValueChange={() => handleSelection(toggle)}
               value={selected === toggle}
             />

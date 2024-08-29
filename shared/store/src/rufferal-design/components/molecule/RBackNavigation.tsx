@@ -3,7 +3,7 @@ import tw from 'twrnc';
 
 import { Image, Pressable, Text, View } from 'react-native';
 import {
-  GLOBAL_COLORS,
+  GLOBAL_PROTOTYPE_COLORS,
   GLOBAL_ICON_SIZE,
   GLOBAL_MIN_PRESS_HEIGHT,
   GLOBAL_MIN_PRESS_SIZE,
@@ -33,7 +33,7 @@ export const RBackNavigation = ({
               source={require('../../../assets/icons-512/arrow-left.png')}
               resizeMode="contain"
               style={tw.style(GLOBAL_ICON_SIZE)}
-              tintColor={GLOBAL_COLORS.quaternary.hex}
+              tintColor={GLOBAL_PROTOTYPE_COLORS.quaternary.hex}
             />
           )}
         </Pressable>

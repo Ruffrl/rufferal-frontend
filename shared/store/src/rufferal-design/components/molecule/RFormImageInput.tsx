@@ -17,7 +17,7 @@ import {
 // import { Camera, CameraType } from 'react-camera-pro';
 import Webcam from 'react-webcam';
 import {
-  GLOBAL_COLORS,
+  GLOBAL_PROTOTYPE_COLORS,
   horizontalScaleTW,
   moderateScaleTW,
   RButton,
@@ -142,7 +142,7 @@ export const RFormImageInput = ({
         //             h-${moderateScaleTW(24)}
         //             w-${moderateScaleTW(24)}
         //           `)}
-        //           tintColor={GLOBAL_COLORS.secondary.hex}
+        //           tintColor={GLOBAL_PROTOTYPE_COLORS.secondary.hex}
         //         />
         //       )}
         //     </Pressable>
@@ -188,7 +188,7 @@ export const RFormImageInput = ({
                     h-${moderateScaleTW(24)} 
                     w-${moderateScaleTW(24)} 
                   `)}
-                tintColor={GLOBAL_COLORS.secondary.hex}
+                tintColor={GLOBAL_PROTOTYPE_COLORS.secondary.hex}
               />
             </Pressable>
           </View>
@@ -243,7 +243,7 @@ export const RFormImageInput = ({
                 h-${moderateScaleTW(48)} 
                 w-${moderateScaleTW(48)} 
               `)}
-                  tintColor={GLOBAL_COLORS.quaternary.hex}
+                  tintColor={GLOBAL_PROTOTYPE_COLORS.quaternary.hex}
                 />
               )}
             </>

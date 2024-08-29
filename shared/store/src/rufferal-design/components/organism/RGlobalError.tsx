@@ -12,7 +12,7 @@ import tw from 'twrnc';
 import { ToastStoreContext } from '../../..';
 import {
   GLOBAL_ANDROID_SHADOW,
-  GLOBAL_COLORS,
+  GLOBAL_PROTOTYPE_COLORS,
   GLOBAL_ICON_SIZE,
   GLOBAL_IOS_SHADOW,
   GLOBAL_MIN_PRESS_SIZE,
@@ -131,7 +131,7 @@ export const RGlobalError = observer(
                       source={require('../../../assets/icons-512/close.png')}
                       style={tw.style(GLOBAL_ICON_SIZE)}
                       resizeMode="contain"
-                      tintColor={GLOBAL_COLORS.tertiary.hex}
+                      tintColor={GLOBAL_PROTOTYPE_COLORS.tertiary.hex}
                     />
                   )}
                 </Pressable>

@@ -8,10 +8,10 @@ import {
   capitalize,
   CONTAINER_STYLES,
   ERROR_CONTAINER_STYLES,
-  GLOBAL_COLORS,
+  GLOBAL_PROTOTYPE_COLORS,
   GLOBAL_SMALL_ICON_SIZE,
   moderateScaleTW,
-  PickerOption
+  PickerOption,
 } from '../../..';
 
 // BLARG - deconstruct this package: @ouroboros/react-native-picker; build your own with
@@ -39,7 +39,7 @@ export const RMobileSelect = ({
           source={require('../../../assets/icons-512/chevron-down.png')}
           style={tw.style(GLOBAL_SMALL_ICON_SIZE)}
           resizeMode="contain"
-          tintColor={GLOBAL_COLORS.tertiary.hex}
+          tintColor={GLOBAL_PROTOTYPE_COLORS.tertiary.hex}
         />
       )}
     </>

@@ -10,7 +10,7 @@ import {
 import { Image, Pressable, Text, TextInput, View } from 'react-native';
 
 import {
-  GLOBAL_COLORS,
+  GLOBAL_PROTOTYPE_COLORS,
   GLOBAL_ICON_SIZE,
   horizontalScaleTW,
   moderateScaleTW,
@@ -71,7 +71,7 @@ export const RFormCardCheckbox = ({
                 source={require('../../../assets/icons-512/check-circle.png')}
                 resizeMode="center"
                 style={tw.style(GLOBAL_ICON_SIZE)}
-                tintColor={GLOBAL_COLORS.quaternary.hex}
+                tintColor={GLOBAL_PROTOTYPE_COLORS.quaternary.hex}
               />
             )}
           </>

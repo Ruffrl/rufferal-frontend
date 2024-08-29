@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import {
-  GLOBAL_COLORS,
+  GLOBAL_PROTOTYPE_COLORS,
   GLOBAL_ICON_SIZE,
   horizontalScaleTW,
   moderateScaleTW,
@@ -120,7 +120,7 @@ export const RInput = ({
             source={require('../../../assets/icons-512/eye.png')}
             resizeMode="contain"
             style={tw.style(GLOBAL_ICON_SIZE)}
-            tintColor={GLOBAL_COLORS.primary.hex}
+            tintColor={GLOBAL_PROTOTYPE_COLORS.primary.hex}
           />
         )}
       </Pressable>
@@ -135,7 +135,7 @@ export const RInput = ({
             source={require('../../../assets/icons-512/eye-close.png')}
             resizeMode="contain"
             style={tw.style(GLOBAL_ICON_SIZE)}
-            tintColor={GLOBAL_COLORS.primary.hex}
+            tintColor={GLOBAL_PROTOTYPE_COLORS.primary.hex}
           />
         )}
       </Pressable>
@@ -160,7 +160,7 @@ export const RInput = ({
         autoCapitalize="none"
         ref={inputRef}
         onChangeText={onChange}
-        placeholderTextColor={GLOBAL_COLORS.disabled.hex}
+        placeholderTextColor={GLOBAL_PROTOTYPE_COLORS.disabled.hex}
         style={tw.style(INPUT_STYLES, { outlineStyle: 'none' })}
         onFocus={() => setFocused((prev) => !prev)}
         onBlur={() => setFocused((prev) => !prev)}
