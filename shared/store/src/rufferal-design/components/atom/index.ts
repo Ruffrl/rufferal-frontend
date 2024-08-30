@@ -33,6 +33,7 @@ export { RMobileSelect } from './RMobileSelect';
 export { RPageHeader } from './RPageHeader';
 export { RProgressBar } from './RProgressBar';
 export { RRangeSlider } from './RRangeSlider';
+export { RSingleSlider } from './RSingleSlider';
 export { RStepProgress } from './RStepProgress';
 // BLARG rename to RSelectWeb
 export { RWebSelect } from './RWebSelect';

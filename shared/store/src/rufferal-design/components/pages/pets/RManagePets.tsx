@@ -159,13 +159,15 @@
 import * as React from 'react';
 import tw from 'twrnc';
 
-import { Platform, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Text, View } from 'react-native';
 
 import {
   PetSpecies,
   RButton,
   RPrototypeTemplate,
   RRangeSlider,
+  RSingleSlider,
   verticalScaleTW,
 } from '../../../../';
 
@@ -181,11 +183,21 @@ type ManagePetsProps = {
 export const RManagePets = ({
   mobileBackIcon,
   mobileCloseIcon,
-  mobileMissing,
-  mobilePlusIcon,
   navigateBack,
-  navigateCreatePet,
 }: ManagePetsProps): React.ReactElement => {
+  const [shy, setShy] = useState<number | undefined>(undefined);
+  const [priceRange, setPriceRange] = useState<[number, number] | undefined>(
+    undefined
+  );
+
+  const handleShy = (value: number) => {
+    setShy(value);
+  };
+
+  const handlePrice = (range: [number, number]) => {
+    setPriceRange(range);
+  };
+
   return (
     <RPrototypeTemplate
       backNavigation={navigateBack}
@@ -201,7 +213,26 @@ export const RManagePets = ({
         pb-${verticalScaleTW(8)}
       `}
       >
-        <RRangeSlider />
+        <View
+          style={tw`
+          h-full
+          gap-20
+        `}
+        >
+          <View>
+            <Text style={tw`font-bold text-lg`}>Single Slider</Text>
+            <Text>Current shy value: {shy ? shy : 'UNTOUCHED'}</Text>
+            <RSingleSlider value={shy} handleChange={handleShy} />
+          </View>
+          <View>
+            <Text style={tw`font-bold text-lg`}>Range Slider</Text>
+            <Text>
+              Current price range:{' '}
+              {priceRange ? JSON.stringify(priceRange) : 'UNTOUCHED'}
+            </Text>
+            <RRangeSlider range={priceRange} handleChange={handlePrice} />
+          </View>
+        </View>
         <RButton title="Back" type="secondary" onPress={navigateBack} />
       </View>
     </RPrototypeTemplate>
