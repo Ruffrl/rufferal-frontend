@@ -159,10 +159,12 @@
 import * as React from 'react';
 import tw from 'twrnc';
 
-import { Animated, Button, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Animated, Button, Modal, Platform, Text, View } from 'react-native';
 
 import { useRef } from 'react';
 import {
+  moderateScaleTW,
   PetSpecies,
   RButton,
   RPrototypeTemplate,
@@ -183,6 +185,8 @@ export const RManagePets = ({
   mobileCloseIcon,
   navigateBack,
 }: ManagePetsProps): React.ReactElement => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   // fadeAnim will be used as the value for opacity. Initial Value: 0
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -210,6 +214,8 @@ export const RManagePets = ({
       mobileBackIcon={mobileBackIcon}
       mobileCloseIcon={mobileCloseIcon}
       navigationHeader="Pet Profiles"
+      // pageColor={GLOBAL_COLORS.canary400.hex}
+      pageColor="#D2F049"
     >
       <View
         style={tw`
@@ -221,13 +227,11 @@ export const RManagePets = ({
       >
         <View
           style={tw`
-            flex-1
             items-center
-            bg-pink-500
             w-full
           `}
         >
-          <Text style={tw`font-bold text-lg`}>Bottom Sheet Modal</Text>
+          <Text style={tw`font-bold text-lg`}>Animation Testing</Text>
           <Animated.View
             style={[
               tw`bg-pink-300 p-5`,
@@ -241,6 +245,40 @@ export const RManagePets = ({
           </Animated.View>
           <Button onPress={fadeIn} title="Fade in" />
           <Button onPress={fadeOut} title="Fade out" />
+        </View>
+        <View
+          style={tw`
+            items-center
+            w-full
+          `}
+        >
+          <Text style={tw`font-bold text-lg`}>Modal Testing</Text>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+          >
+            <View style={tw`bg-[#6D6D6D]/60 flex-1`}>
+              <View
+                style={tw.style(
+                  tw`bg-white
+                  flex-1
+                  items-center
+                  justify-center
+                  rounded-t-${moderateScaleTW(10)}
+                  mt-${verticalScaleTW(32)}`,
+                  Platform.OS === 'ios' && tw`mt-${verticalScaleTW(60)}`
+                )}
+              >
+                <Text>I am a modal</Text>
+                <Button
+                  onPress={() => setModalVisible(false)}
+                  title="Close modal"
+                />
+              </View>
+            </View>
+          </Modal>
+          <Button onPress={() => setModalVisible(true)} title="Show modal" />
         </View>
         <RButton title="Back" type="secondary" onPress={navigateBack} />
       </View>

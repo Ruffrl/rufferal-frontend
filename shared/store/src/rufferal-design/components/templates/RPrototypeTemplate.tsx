@@ -1,21 +1,25 @@
-import { observer } from 'mobx-react-lite';
 import * as React from 'react';
-import { PropsWithChildren } from 'react';
-import { Platform, StatusBar, View } from 'react-native';
 import tw from 'twrnc';
-import { RBackNavigation, RGlobalError, RPageHeader } from '..';
+
+import { observer } from 'mobx-react-lite';
+import { PropsWithChildren } from 'react';
+import { SafeAreaView, StatusBar, View } from 'react-native';
+
+import { RBackNavigation, RPageHeader } from '..';
 import {
+  GLOBAL_COLORS,
   GLOBAL_X_PADDING,
   GLOBAL_Y_PADDING,
   horizontalScaleTW,
   verticalScaleTW,
 } from '../../utils';
 
-const PAGE_STYLES = tw`flex-1 bg-white`;
-const PAGE_PADDING = tw`
+const PAGE_STYLES = tw`
+  flex-1
   py-${verticalScaleTW(GLOBAL_Y_PADDING)} 
   px-${horizontalScaleTW(GLOBAL_X_PADDING)}
 `;
+// statusBarHeight
 
 type AccessTemplateProps = {
   backNavigation?: () => void;
@@ -23,6 +27,7 @@ type AccessTemplateProps = {
   mobileBackIcon?: React.JSX.Element;
   mobileCloseIcon?: React.JSX.Element;
   navigationHeader?: string;
+  pageColor?: string;
 };
 ('');
 export const RPrototypeTemplate = observer(
@@ -33,24 +38,17 @@ export const RPrototypeTemplate = observer(
     mobileBackIcon,
     mobileCloseIcon,
     navigationHeader,
+    pageColor = GLOBAL_COLORS.black.hex,
   }: PropsWithChildren<AccessTemplateProps>): React.ReactElement => {
     /* DEVISE INFORMATION */
-    const isIos = Platform.OS === 'ios';
-
     return (
-      <>
-        <View
-          style={tw.style(
-            PAGE_PADDING,
-            PAGE_STYLES,
-            isIos && tw`py-${horizontalScaleTW(GLOBAL_Y_PADDING * 2)}`
-          )}
-        >
+      <SafeAreaView style={tw`bg-[${pageColor}] flex-1`}>
+        <View style={tw.style(PAGE_STYLES, tw``)}>
           {/* STATUS BAR
            * let's us style Android status
            * (wifi, battery icon, time, etc)
            */}
-          <StatusBar backgroundColor="#000" />
+          <StatusBar backgroundColor={GLOBAL_COLORS.black.hex} />
           {backNavigation && (
             <RBackNavigation
               backNavigation={backNavigation}
@@ -61,9 +59,7 @@ export const RPrototypeTemplate = observer(
           {header && <RPageHeader header={header} />}
           <View style={tw`flex-1`}>{children}</View>
         </View>
-        {/* GLOBAL ERRORS */}
-        <RGlobalError mobileCloseIcon={mobileCloseIcon} />
-      </>
+      </SafeAreaView>
     );
   }
 );

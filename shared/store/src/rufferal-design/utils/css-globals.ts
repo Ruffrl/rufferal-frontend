@@ -4,7 +4,7 @@ import { verticalScaleTW } from '.';
 
 /* SIZES */
 export const GLOBAL_X_PADDING = 16;
-export const GLOBAL_Y_PADDING = 24;
+export const GLOBAL_Y_PADDING = 16;
 
 export const GLOBAL_MIN_PRESS_SIZE = tw`
   h-${verticalScaleTW(48)} 
