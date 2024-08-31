@@ -159,15 +159,9 @@
 import * as React from 'react';
 import tw from 'twrnc';
 
-// import { useState } from 'react';
-// import { Button, Text, View } from 'react-native';
-import { Text, View } from 'react-native';
-// import Animated, {
-//   useAnimatedStyle,
-//   useSharedValue,
-//   withSpring,
-// } from 'react-native-reanimated';
+import { Animated, Button, Text, View } from 'react-native';
 
+import { useRef } from 'react';
 import {
   PetSpecies,
   RButton,
@@ -189,14 +183,26 @@ export const RManagePets = ({
   mobileCloseIcon,
   navigateBack,
 }: ManagePetsProps): React.ReactElement => {
-  // const [shy, setShy] = useState<number | undefined>(undefined);
-  // const width = useSharedValue(100);
+  // fadeAnim will be used as the value for opacity. Initial Value: 0
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  // const animatedStyles = useAnimatedStyle(() => ({ width: width.value }));
+  const fadeIn = () => {
+    // Will change fadeAnim value to 1 in 5 seconds
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 5000,
+      useNativeDriver: true,
+    }).start();
+  };
 
-  // const handlePress = () => {
-  //   width.value = withSpring(width.value + 50);
-  // };
+  const fadeOut = () => {
+    // Will change fadeAnim value to 0 in 3 seconds
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 3000,
+      useNativeDriver: true,
+    }).start();
+  };
 
   return (
     <RPrototypeTemplate
@@ -222,19 +228,19 @@ export const RManagePets = ({
           `}
         >
           <Text style={tw`font-bold text-lg`}>Bottom Sheet Modal</Text>
-          {/* <BottomSheet snapPoints={[10]}>
-              <View style={tw`bg-pink-500`}>
-                <BottomSheetTextInput
-                  value="Awesome 🎉"
-                  style={tw`text-yellow-500`}
-                />
-              </View>
-            </BottomSheet> */}
-          {/* <Animated.View style={tw`bg-blue-500 h-[100px] w-[${width2}px]`} /> */}
-          {/* <Animated.View
-            style={[{ height: 100, backgroundColor: 'aqua' }, animatedStyles]}
-          /> */}
-          {/* <Button onPress={handlePress} title="Click me" /> */}
+          <Animated.View
+            style={[
+              tw`bg-pink-300 p-5`,
+              {
+                // Bind opacity to animated value
+                opacity: fadeAnim,
+              },
+            ]}
+          >
+            <Text>Show fade</Text>
+          </Animated.View>
+          <Button onPress={fadeIn} title="Fade in" />
+          <Button onPress={fadeOut} title="Fade out" />
         </View>
         <RButton title="Back" type="secondary" onPress={navigateBack} />
       </View>
