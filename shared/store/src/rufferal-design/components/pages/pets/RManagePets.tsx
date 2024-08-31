@@ -159,15 +159,19 @@
 import * as React from 'react';
 import tw from 'twrnc';
 
-import { useState } from 'react';
+// import { useState } from 'react';
+// import { Button, Text, View } from 'react-native';
 import { Text, View } from 'react-native';
+// import Animated, {
+//   useAnimatedStyle,
+//   useSharedValue,
+//   withSpring,
+// } from 'react-native-reanimated';
 
 import {
   PetSpecies,
   RButton,
   RPrototypeTemplate,
-  RRangeSlider,
-  RSingleSlider,
   verticalScaleTW,
 } from '../../../../';
 
@@ -185,18 +189,14 @@ export const RManagePets = ({
   mobileCloseIcon,
   navigateBack,
 }: ManagePetsProps): React.ReactElement => {
-  const [shy, setShy] = useState<number | undefined>(undefined);
-  const [priceRange, setPriceRange] = useState<[number, number] | undefined>(
-    undefined
-  );
+  // const [shy, setShy] = useState<number | undefined>(undefined);
+  // const width = useSharedValue(100);
 
-  const handleShy = (value: number) => {
-    setShy(value);
-  };
+  // const animatedStyles = useAnimatedStyle(() => ({ width: width.value }));
 
-  const handlePrice = (range: [number, number]) => {
-    setPriceRange(range);
-  };
+  // const handlePress = () => {
+  //   width.value = withSpring(width.value + 50);
+  // };
 
   return (
     <RPrototypeTemplate
@@ -215,23 +215,26 @@ export const RManagePets = ({
       >
         <View
           style={tw`
-          h-full
-          gap-20
-        `}
+            flex-1
+            items-center
+            bg-pink-500
+            w-full
+          `}
         >
-          <View>
-            <Text style={tw`font-bold text-lg`}>Single Slider</Text>
-            <Text>Current shy value: {shy ? shy : 'UNTOUCHED'}</Text>
-            <RSingleSlider value={shy} handleChange={handleShy} />
-          </View>
-          <View>
-            <Text style={tw`font-bold text-lg`}>Range Slider</Text>
-            <Text>
-              Current price range:{' '}
-              {priceRange ? JSON.stringify(priceRange) : 'UNTOUCHED'}
-            </Text>
-            <RRangeSlider range={priceRange} handleChange={handlePrice} />
-          </View>
+          <Text style={tw`font-bold text-lg`}>Bottom Sheet Modal</Text>
+          {/* <BottomSheet snapPoints={[10]}>
+              <View style={tw`bg-pink-500`}>
+                <BottomSheetTextInput
+                  value="Awesome 🎉"
+                  style={tw`text-yellow-500`}
+                />
+              </View>
+            </BottomSheet> */}
+          {/* <Animated.View style={tw`bg-blue-500 h-[100px] w-[${width2}px]`} /> */}
+          {/* <Animated.View
+            style={[{ height: 100, backgroundColor: 'aqua' }, animatedStyles]}
+          /> */}
+          {/* <Button onPress={handlePress} title="Click me" /> */}
         </View>
         <RButton title="Back" type="secondary" onPress={navigateBack} />
       </View>
