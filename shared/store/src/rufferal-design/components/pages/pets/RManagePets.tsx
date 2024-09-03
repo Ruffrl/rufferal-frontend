@@ -159,10 +159,19 @@
 import * as React from 'react';
 import tw from 'twrnc';
 
-import { useState } from 'react';
-import { Animated, Button, Modal, Platform, Text, View } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import {
+  Animated,
+  Button,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  Pressable,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 
-import { useRef } from 'react';
 import {
   moderateScaleTW,
   PetSpecies,
@@ -186,6 +195,33 @@ export const RManagePets = ({
   navigateBack,
 }: ManagePetsProps): React.ReactElement => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [keyboardStatus, setKeyboardStatus] = useState('');
+
+  const inputRef = useRef<TextInput>(null);
+
+  // useEffect(()=>{
+  //   // Use the textInput focus function
+  //   inputRef.current?.focus(); // opens keyboard
+  // },[])
+
+  // const TestKeyboard = forwardRef(
+  //   ({ props, ref }: { props: any; ref: RefObject<TextInput> }) => (
+  //     <TextInput ref={ref} style={tw`bg-pink-500`} />
+  //   )
+  // );
+  // useEffect(() => {
+  //   const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+  //     setKeyboardStatus('Keyboard Shown');
+  //   });
+  //   const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+  //     setKeyboardStatus('Keyboard Hidden');
+  //   });
+
+  //   return () => {
+  //     showSubscription.remove();
+  //     hideSubscription.remove();
+  //   };
+  // }, []);
 
   // fadeAnim will be used as the value for opacity. Initial Value: 0
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -257,8 +293,16 @@ export const RManagePets = ({
             animationType="slide"
             transparent={true}
             visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+            onShow={() => {
+              console.log(`BLARG MODAL VISIBLE platform: ${Platform.OS}`);
+              inputRef.current?.focus();
+            }}
           >
-            <View style={tw`bg-[#6D6D6D]/60 flex-1`}>
+            <KeyboardAvoidingView
+              style={tw`bg-[#6D6D6D]/60 flex-1`}
+              keyboardVerticalOffset={40}
+            >
               <View
                 style={tw.style(
                   tw`bg-white
@@ -266,19 +310,33 @@ export const RManagePets = ({
                   items-center
                   justify-center
                   rounded-t-${moderateScaleTW(10)}
-                  mt-${verticalScaleTW(32)}`,
+                  mt-${verticalScaleTW(32)}
+                  mb-${verticalScaleTW(350)}`,
                   Platform.OS === 'ios' && tw`mt-${verticalScaleTW(60)}`
                 )}
               >
                 <Text>I am a modal</Text>
+                <TextInput
+                  style={tw`bg-pink-500`}
+                  autoFocus={true}
+                  ref={inputRef}
+                  // blurOnSubmit={false}
+                />
                 <Button
                   onPress={() => setModalVisible(false)}
                   title="Close modal"
                 />
               </View>
-            </View>
+            </KeyboardAvoidingView>
           </Modal>
-          <Button onPress={() => setModalVisible(true)} title="Show modal" />
+          <Pressable
+            onPress={() => {
+              setModalVisible(true);
+            }}
+            style={tw`bg-pink-500 rounded-xl p-10`}
+          >
+            <Text>Show modal</Text>
+          </Pressable>
         </View>
         <RButton title="Back" type="secondary" onPress={navigateBack} />
       </View>
