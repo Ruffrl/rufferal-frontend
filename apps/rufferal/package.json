@@ -30,7 +30,10 @@
     "react-native-web-swiper": "*",
     "yup": "*",
     "@hookform/resolvers": "*",
-    "react-native-image-picker": "*"
+    "react-native-image-picker": "*",
+    "@ouroboros/react-native-picker": "*",
+    "@react-native-assets/slider": "*",
+    "react-webcam": "*"
   },
   "devDependencies": {}
 }

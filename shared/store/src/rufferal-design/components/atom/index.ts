@@ -13,6 +13,7 @@
  */
 
 export { RAppleIcon } from './RAppleIcon';
+export { RBottomSheet } from './RBottomSheet';
 export { RButton } from './RButton';
 export { RDivider } from './RDivider';
 export { RFormError } from './RFormError';

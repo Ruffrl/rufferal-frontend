@@ -1,4 +1,4 @@
-// import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import 'react-native-gesture-handler'
 
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
@@ -10,8 +10,6 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <StrictMode>
-    {/* <GestureHandlerRootView> */}
     <App />
-    {/* </GestureHandlerRootView> */}
   </StrictMode>
 );
