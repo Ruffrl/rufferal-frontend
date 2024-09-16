@@ -98,7 +98,7 @@ npx nx generate @nx/expo:lib lib/store
 <!-- Add your own directory setup here -->
 ```
 
-// Add stores
+// Add store component
 
 ```
 nx g @nx/expo:component account-store --directory lib/store/src/account-store --export
@@ -118,4 +118,16 @@ nx g @nx/expo:component create-pet-personality --directory lib/ui/src/components
 nx g @nx/expo:component create-pet-careplan --directory lib/ui/src/components/pages/pets/create-pet-careplan --nameAndDirectoryFormat=as-provided --export=false
 
  nx g @nx/expo:component manage-pets --directory lib/ui/src/components/pages/pets/manage-pets --nameAndDirectoryFormat=as-provided --export=false
+```
+
+// Add an "assets" library
+
+```
+npx nx generate @nx/expo:lib lib/assets
+<!-- Add your own directory setup here -->
+```
+
+// Install assets
+```
+npx expo install expo-asset
 ```
