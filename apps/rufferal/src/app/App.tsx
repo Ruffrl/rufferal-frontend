@@ -3,7 +3,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import { Screens } from './screens';
+import { Screens } from './screens/Screens';
 
 const App = () => {
   const Stack = createNativeStackNavigator();

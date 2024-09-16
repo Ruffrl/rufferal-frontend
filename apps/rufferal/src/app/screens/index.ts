@@ -23,8 +23,6 @@
 // export { CreatePetPersonalityScreen } from './pets/CreatePetPersonalityScreen';
 // export { ManagePetsScreen } from './pets/ManagePetsScreen';
 
-export { Screens } from './Screens';
-
 export { CreatePetCareplanScreen } from './pets/CreatePetCareplanScreen';
 export { CreatePetDetailsScreen } from './pets/CreatePetDetailsScreen';
 export { CreatePetOnboardingScreen } from './pets/CreatePetOnboardingScreen';

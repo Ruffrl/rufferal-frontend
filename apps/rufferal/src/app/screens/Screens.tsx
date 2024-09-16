@@ -151,9 +151,8 @@ import { observer } from 'mobx-react-lite';
 import {
   CreatePetCareplanScreen,
   CreatePetDetailsScreen,
-  CreatePetPersonalityScreen,
   CreatePetOnboardingScreen,
-  CreatePetPhotoScreen,
+  CreatePetPersonalityScreen,
   ManagePetsScreen,
 } from '.';
 
