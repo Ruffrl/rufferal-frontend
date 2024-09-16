@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@rufferal-frontend/ui": ["lib/ui/src/index.ts"]
+      "@rufferal/ui": ["lib/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
