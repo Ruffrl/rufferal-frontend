@@ -100,5 +100,5 @@ npx nx generate @nx/expo:lib lib/store
 
 // Add stores
 ```
-nx g @nx/expo:component account-store --directory lib/store/src --export
+nx g @nx/expo:component account-store --directory lib/store/src/account-store --export
 ```
