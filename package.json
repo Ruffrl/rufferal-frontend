@@ -42,7 +42,8 @@
     "tslib": "^2.3.0",
     "twrnc": "^4.5.1",
     "yup": "^1.4.0",
-    "expo-asset": "~10.0.10"
+    "expo-asset": "~10.0.10",
+    "expo-image": "~1.12.15"
   },
   "devDependencies": {
     "@expo/cli": "~0.18.13",

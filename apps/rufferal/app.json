@@ -39,7 +39,7 @@
       [
         "expo-asset",
         {
-          "assets": ["../../lib/assets"]
+          "assets": ["../../lib/assets/images"]
         }
       ]
     ]
