@@ -128,6 +128,15 @@ npx nx generate @nx/expo:lib lib/assets
 ```
 
 // Install assets
+
 ```
 npx expo install expo-asset
+
+<!-- Update app.json plugin -->
+[
+    "expo-asset",
+    {
+        "assets": ["../../lib/assets"]
+    }
+]
 ```
