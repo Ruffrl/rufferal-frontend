@@ -90,3 +90,15 @@ export * from './atoms';
 <!-- lib/ui/src/index.ts -->
 export * from './components';
 ```
+
+// Add a "store" library
+
+```
+npx nx generate @nx/expo:lib lib/store
+<!-- Add your own directory setup here -->
+```
+
+// Add stores
+```
+nx g @nx/expo:component account-store --directory lib/store/src --export
+```
