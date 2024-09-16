@@ -12,6 +12,7 @@
  *
  */
 
+export { RBottomsheet } from './rbottomsheet/rbottomsheet';
 // export { RAppleIcon } from './RAppleIcon';
 // export { RBottomSheet } from './RBottomSheet';
 // export { RButton } from './RButton';
