@@ -11,4 +11,4 @@ export * from './atoms';
 // export * from './templates';
 
 // Pages bring templates to life with actual content
-// export * from './pages';
+export * from './pages';

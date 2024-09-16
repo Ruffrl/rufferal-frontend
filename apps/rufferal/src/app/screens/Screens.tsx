@@ -152,7 +152,8 @@ import {
   CreatePetCareplanScreen,
   CreatePetDetailsScreen,
   CreatePetPersonalityScreen,
-  CreateProfilePetsScreen,
+  CreatePetOnboardingScreen,
+  CreatePetPhotoScreen,
   ManagePetsScreen,
 } from '.';
 
@@ -163,8 +164,8 @@ export const Screens = observer(() => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
-          name="Create Profile Pets"
-          component={CreateProfilePetsScreen}
+          name="Create Pets Onboarding"
+          component={CreatePetOnboardingScreen}
         />
         <Stack.Screen name="Manage Pets" component={ManagePetsScreen} />
         <Stack.Screen

@@ -30,8 +30,8 @@
 //   );
 // };
 
-import { CreatePetDetails } from '@rufferal/ui';
+import { CreatePetPhoto } from '@rufferal/ui';
 
-export const CreatePetDetailsScreen = () => {
-  return <CreatePetDetails />;
+export const CreatePetPhotoScreen = () => {
+  return <CreatePetPhoto />;
 };

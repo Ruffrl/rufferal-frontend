@@ -99,6 +99,23 @@ npx nx generate @nx/expo:lib lib/store
 ```
 
 // Add stores
+
 ```
 nx g @nx/expo:component account-store --directory lib/store/src/account-store --export
+```
+
+// Add pet profile UI components
+
+```
+nx g @nx/expo:component create-pet-onboarding --directory lib/ui/src/components/pages/pets/create-pet-onboarding  --nameAndDirectoryFormat=as-provided --export=false
+
+nx g @nx/expo:component create-pet-details --directory lib/ui/src/components/pages/pets/create-pet-details --nameAndDirectoryFormat=as-provided --export=false
+
+nx g @nx/expo:component create-pet-photo --directory lib/ui/src/components/pages/pets/create-pet-photo --nameAndDirectoryFormat=as-provided --export=false
+
+nx g @nx/expo:component create-pet-personality --directory lib/ui/src/components/pages/pets/create-pet-personality --nameAndDirectoryFormat=as-provided --export=false
+
+nx g @nx/expo:component create-pet-careplan --directory lib/ui/src/components/pages/pets/create-pet-careplan --nameAndDirectoryFormat=as-provided --export=false
+
+ nx g @nx/expo:component manage-pets --directory lib/ui/src/components/pages/pets/manage-pets --nameAndDirectoryFormat=as-provided --export=false
 ```
