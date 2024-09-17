@@ -2,7 +2,7 @@
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // import { observableAccountStore } from '@rufferal/store';
-// import { RBottomsheet } from '@rufferal/ui';
+// import { Bottomsheet } from '@rufferal/ui';
 // import { observer } from 'mobx-react-lite';
 // import { useEffect, useState } from 'react';
 // import {
@@ -27,7 +27,7 @@
 // } from '.';
 
 // function CatScreen() {
-//   return <RBottomsheet />;
+//   return <Bottomsheet />;
 // }
 
 // const Stack = createNativeStackNavigator();

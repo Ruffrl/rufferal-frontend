@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react-native';
 
-import { RBottomsheet } from './rbottomsheet';
+import { Bottomsheet } from './bottomsheet';
 
 describe('Bottomsheet', () => {
   it('should render successfully', () => {
-    const { root } = render(<RBottomsheet />);
+    const { root } = render(<Bottomsheet />);
     expect(root).toBeTruthy();
   });
 });

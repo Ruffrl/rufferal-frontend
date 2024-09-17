@@ -65,7 +65,7 @@ react-native-swiper
 // Test components Test shared library
 
 ```
-nx g @nx/expo:component rbottomsheet --directory lib/ui/src/components/atoms/rbottomsheet
+nx g @nx/expo:component Bottomsheet --directory lib/ui/src/components/atoms/Bottomsheet
 <!-- CONVERT COMPONENT TO ARROW FUNCTION SYNTAX -->
 // import React from 'react';
 import { Text, View } from 'react-native';
@@ -73,7 +73,7 @@ import { Text, View } from 'react-native';
 /* eslint-disable-next-line */
 export interface BottomsheetProps {}
 
-export const RBottomsheet = (props: BottomsheetProps) => {
+export const Bottomsheet = (props: BottomsheetProps) => {
   return (
     <View>
       <Text>Welcome to bottomsheet!</Text>
@@ -82,7 +82,7 @@ export const RBottomsheet = (props: BottomsheetProps) => {
 };
 
 <!-- lib/ui/src/components/atoms/index.ts -->
-export { RBottomsheet } from './rbottomsheet/bottomsheet';
+export { Bottomsheet } from './Bottomsheet/bottomsheet';
 
 <!-- lib/ui/src/components/index.ts -->
 export * from './atoms';

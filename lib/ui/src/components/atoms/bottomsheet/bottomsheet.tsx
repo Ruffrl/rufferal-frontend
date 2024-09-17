@@ -8,8 +8,8 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 /* eslint-disable-next-line */
 export interface BottomsheetProps {}
 
-// export const RBottomsheet = (props: BottomsheetProps) => {
-export const RBottomsheet = () => {
+// export const Bottomsheet = (props: BottomsheetProps) => {
+export const Bottomsheet = () => {
   // state
   const [email, onChangeEmail] = useState('');
   const [snapPoints2, setSnappoints2] = useState([480]);

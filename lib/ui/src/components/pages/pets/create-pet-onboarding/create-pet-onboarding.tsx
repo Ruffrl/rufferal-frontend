@@ -1,5 +1,4 @@
 // import React from 'react';
-// import tw from 'twrnc';
 // BLARG - is there a cleaner way to do this? Should I build an NX library/module for my tailwind customization? Then I can import as @rufferal/tailwind or something?
 import tw from '../../../../../tailwind';
 
@@ -11,7 +10,6 @@ export interface CreatePetOnboardingProps {}
 
 export const CreatePetOnboarding = (props: CreatePetOnboardingProps) => {
   return (
-    // <View style={tw`bg-[#A0EFFE]`}>
     <View style={tw`bg-blizzardBlue-200`}>
       <Text>Welcome to create-pet-onboarding!</Text>
       <expoImage.Image

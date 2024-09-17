@@ -12,9 +12,9 @@
  *
  */
 
-export { RBottomsheet } from './rbottomsheet/rbottomsheet';
+export { Bottomsheet } from './bottomsheet/bottomsheet';
 // export { RAppleIcon } from './RAppleIcon';
-// export { RBottomSheet } from './RBottomSheet';
+// export { Bottomsheet } from './Bottomsheet';
 // export { RButton } from './RButton';
 // export { RDivider } from './RDivider';
 // export { RFormError } from './RFormError';
