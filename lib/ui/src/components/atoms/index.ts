@@ -13,6 +13,7 @@
  */
 
 export { Bottomsheet } from './bottomsheet/bottomsheet';
+export { Button } from './button/button';
 export { H2 } from './h2/h2';
 // export { RAppleIcon } from './RAppleIcon';
 // export { Bottomsheet } from './Bottomsheet';

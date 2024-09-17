@@ -13,6 +13,7 @@ const App = () => {
     'Proxima Nova Extrabold': require('../../../../lib/assets/fonts/proxima-nova/proximanova_extrabold.otf'),
     'Inter Regular': require('../../../../lib/assets/fonts/inter/inter_regular.otf'),
     'Inter Regular Italic': require('../../../../lib/assets/fonts/inter/inter_regular_italic.otf'),
+    'Inter Medium': require('../../../../lib/assets/fonts/inter/inter_medium.otf'),
     'Inter Bold': require('../../../../lib/assets/fonts/inter/inter_bold.otf'),
     'Inter Semibold': require('../../../../lib/assets/fonts/inter/inter_semibold.otf'),
   });
