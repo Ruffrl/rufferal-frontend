@@ -25,7 +25,8 @@
 
 export { CreatePetCareplanScreen } from './pets/CreatePetCareplanScreen';
 export { CreatePetDetailsScreen } from './pets/CreatePetDetailsScreen';
-export { CreatePetOnboardingScreen } from './pets/CreatePetOnboardingScreen';
 export { CreatePetPersonalityScreen } from './pets/CreatePetPersonalityScreen';
 export { CreatePetPhotoScreen } from './pets/CreatePetPhotoScreen';
 export { ManagePetsScreen } from './pets/ManagePetsScreen';
+export { PetSplashScreen } from './profile/create/PetSplashScreen';
+export { SearchScreen } from './search/SearchScreen';

@@ -1,16 +1,23 @@
 // import React from 'react';
 // BLARG - is there a cleaner way to do this? Should I build an NX library/module for my tailwind customization? Then I can import as @rufferal/tailwind or something?
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
 
-import tailwind from '../../../../../tailwind';
-import { verticalScale, verticalScaleTW } from '../../../../utils';
-import { Bottomsheet, H2 } from '../../../atoms';
+import tailwind from '../../../../../../tailwind';
+import { verticalScale, verticalScaleTW } from '../../../../../utils';
+import { Bottomsheet, Button, H2 } from '../../../../atoms';
 
 /* eslint-disable-next-line */
-export interface CreatePetOnboardingProps {}
+export interface PetSplashProps {
+  navigation: NavigationProp<ParamListBase>;
+}
 
-const OnboardingModal = () => {
+const OnboardingModal = ({
+  navigation,
+}: {
+  navigation: NavigationProp<ParamListBase>;
+}) => {
   return (
     <View>
       <View style={tailwind`gap-3`}>
@@ -22,14 +29,21 @@ const OnboardingModal = () => {
           instructions for easy booking
         </Text>
       </View>
-      <View style={tailwind`mt-[45px]`}>
-      
+      <View style={tailwind`mt-[45px] gap-2`}>
+        <Button onPress={() => navigation.navigate('Manage Pets')} />
+        <Button
+          onPress={() => navigation.navigate('Search')}
+          title="Skip for now"
+          type="transparent"
+          size="standard-short"
+          rounded={false}
+        />
       </View>
     </View>
   );
 };
 
-export const CreatePetOnboarding = (props: CreatePetOnboardingProps) => {
+export const PetSplash = ({ navigation }: PetSplashProps) => {
   return (
     <View style={tailwind`flex-1 bg-blizzardBlue-200`}>
       <View style={tailwind`h-${verticalScaleTW(413)}`}>
@@ -41,7 +55,7 @@ export const CreatePetOnboarding = (props: CreatePetOnboardingProps) => {
       <Bottomsheet
         animateOnMount={false}
         height={verticalScale(399)}
-        content={<OnboardingModal />}
+        content={<OnboardingModal navigation={navigation} />}
         snapPoints={[verticalScale(399)]}
       />
     </View>

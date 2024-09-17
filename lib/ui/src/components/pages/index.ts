@@ -13,10 +13,11 @@
 
 export { CreatePetCareplan } from './pets/create-pet-careplan/create-pet-careplan';
 export { CreatePetDetails } from './pets/create-pet-details/create-pet-details';
-export { CreatePetOnboarding } from './pets/create-pet-onboarding/create-pet-onboarding';
 export { CreatePetPersonality } from './pets/create-pet-personality/create-pet-personality';
 export { CreatePetPhoto } from './pets/create-pet-photo/create-pet-photo';
 export { ManagePets } from './pets/manage-pets/manage-pets';
+export { PetSplash } from './profiles/create/pet-splash/pet-splash';
+export { Search } from './search/search/search';
 
 // export { RDashboard } from './features/RDashboard';
 

@@ -151,9 +151,10 @@ import { observer } from 'mobx-react-lite';
 import {
   CreatePetCareplanScreen,
   CreatePetDetailsScreen,
-  CreatePetOnboardingScreen,
   CreatePetPersonalityScreen,
   ManagePetsScreen,
+  PetSplashScreen,
+  SearchScreen,
 } from '.';
 
 const Stack = createNativeStackNavigator();
@@ -164,7 +165,7 @@ export const Screens = observer(() => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name="Create Pets Onboarding"
-          component={CreatePetOnboardingScreen}
+          component={PetSplashScreen}
         />
         <Stack.Screen name="Manage Pets" component={ManagePetsScreen} />
         <Stack.Screen
@@ -179,6 +180,7 @@ export const Screens = observer(() => {
           name="Create Pet Careplan"
           component={CreatePetCareplanScreen}
         />
+        <Stack.Screen name="Search" component={SearchScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
