@@ -1,22 +1,27 @@
-// import React from 'react';
-import tw from 'twrnc';
-
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
-import { useCallback, useMemo, useRef, useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { PropsWithChildren, useCallback, useRef } from 'react';
 
-/* eslint-disable-next-line */
-export interface BottomsheetProps {}
+import tailwind from '../../../../tailwind';
 
-// export const Bottomsheet = (props: BottomsheetProps) => {
-export const Bottomsheet = () => {
-  // state
-  const [email, onChangeEmail] = useState('');
-  const [snapPoints2, setSnappoints2] = useState([480]);
+export interface BottomsheetProps {
+  animateOnMount?: boolean;
+  backgroundColor?: string;
+  content: React.ReactNode;
+  height?: number;
+  padding?: string;
+  snapPoints?: number[];
+}
+
+export const Bottomsheet = ({
+  animateOnMount = true,
+  backgroundColor = 'bg-whitePointer-50',
+  content,
+  height = 406,
+  padding = 'p-5',
+  snapPoints = [406],
+}: PropsWithChildren<BottomsheetProps>) => {
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
-  // variables
-  const snapPoints = useMemo(() => ['55%'], []);
 
   // callbacks
   const handleSheetChanges = useCallback((index: number) => {
@@ -25,56 +30,19 @@ export const Bottomsheet = () => {
 
   // renders
   return (
-    // <View className="flex-1 padding-6 bg-[#D2F049]">
-    <View style={styles.container}>
-      <BottomSheet
-        ref={bottomSheetRef}
-        onChange={handleSheetChanges}
-        snapPoints={snapPoints2}
-      >
-        <BottomSheetView style={styles.contentContainer}>
-          <Text style={tw`bg-pink-500 h-12 w-12`}>KJHKJH</Text>
-          <Text style={styles.header}>Sign in or create{'\n'}an account</Text>
-          <TextInput
-            // This needs an update to onMobile && setSnappoints2
-            onFocus={() => setSnappoints2([750])}
-            style={styles.input}
-            onChangeText={onChangeEmail}
-            value={email}
-            placeholder="whiskers@rufferal.com"
-            // keyboardType="numeric"
-          />
-        </BottomSheetView>
-      </BottomSheet>
-    </View>
+    <BottomSheet
+      ref={bottomSheetRef}
+      onChange={handleSheetChanges}
+      snapPoints={snapPoints}
+      backgroundStyle={tailwind.style(backgroundColor)}
+      handleStyle={tailwind`h-[30px] justify-end p-0 mb-2.5`}
+      handleIndicatorStyle={tailwind`bg-iron-300 w-9 h-1`}
+      containerHeight={height}
+      animateOnMount={animateOnMount}
+    >
+      <BottomSheetView style={tailwind.style('flex-1 rounded-xl', padding)}>
+        {content}
+      </BottomSheetView>
+    </BottomSheet>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: '#D2F049',
-  },
-  contentContainer: {
-    flex: 1,
-    backgroundColor: '#FDFAFF',
-    borderRadius: 12,
-    padding: 24,
-  },
-  header: {
-    // fontFamily: 'Proxima Nova',
-    fontSize: 28,
-    lineHeight: 30,
-    color: '#9525CB',
-    fontWeight: '800',
-  },
-  input: {
-    height: 40,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 8,
-    backgroundColor: 'aqua',
-    width: '100%',
-  },
-});

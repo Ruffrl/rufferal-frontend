@@ -43,7 +43,8 @@
     "react-router-dom": "^6.26.2",
     "tslib": "^2.3.0",
     "twrnc": "^4.5.1",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "expo-font": "~12.0.10"
   },
   "devDependencies": {
     "@expo/cli": "~0.18.13",

@@ -27,6 +27,7 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
+    "userInterfaceStyle": "automatic",
     "plugins": [
       [
         "expo-camera",
@@ -40,6 +41,20 @@
         "expo-asset",
         {
           "assets": ["../../lib/assets/images"]
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "../../lib/assets/fonts/proxima-nova/proximanova_bold.otf",
+            "../../lib/assets/fonts/proxima-nova/proximanova_extrabold.otf",
+            "../../lib/assets/fonts/proxima-nova/proximanova_semibold.otf",
+            "../../lib/assets/fonts/inter/inter_bold.otf",
+            "../../lib/assets/fonts/inter/inter_regular_italic.otf",
+            "../../lib/assets/fonts/inter/inter_regular.otf",
+            "../../lib/assets/fonts/inter/inter_semibold.otf"
+          ]
         }
       ]
     ]

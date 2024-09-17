@@ -140,3 +140,12 @@ npx expo install expo-asset
     }
 ]
 ```
+
+// Install fonts
+
+// Components
+```
+nx g @nx/expo:component h2 --directory lib/ui/src/components/atoms/h2 --nameAndDirectoryFormat=as-provided --export=false
+
+nx g @nx/expo:component button --directory lib/ui/src/components/atoms/button --nameAndDirectoryFormat=as-provided --export=false
+```
