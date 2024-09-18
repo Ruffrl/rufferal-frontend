@@ -7,6 +7,9 @@ export interface ProgressBarProps {
   total: number;
 }
 
+// BLARG: TODO: Add animations as you progress from step to step
+// Starting example
+// OR.... find a package that can do this
 export const ProgressBar = ({ step, total }: ProgressBarProps) => {
   const calcWidth = Math.trunc((1 / total) * 100);
   const totalSteps = Array.from({ length: total }, (_, i) => i + 1);
@@ -17,8 +20,8 @@ export const ProgressBar = ({ step, total }: ProgressBarProps) => {
         <View
           key={num}
           style={ruffwind.style(
-            ruffwind`h-${verticalScaleTW(8)} w-[${calcWidth}%] bg-slate-200`,
-            step === num && ruffwind`bg-gray-500`,
+            ruffwind`h-${verticalScaleTW(8)} w-[${calcWidth}%] bg-lola-300`,
+            step === num && ruffwind`bg-electricViolet-600`,
             index === 0 && ruffwind`rounded-l-${moderateScaleTW(4)}`,
             index === total - 1 && ruffwind`rounded-r-${moderateScaleTW(4)}`
           )}
