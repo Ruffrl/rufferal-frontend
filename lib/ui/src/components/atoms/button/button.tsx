@@ -20,8 +20,9 @@ interface Props extends PressableProps {
   rounded?: boolean;
   size?: FieldSize;
   state?: FieldState;
-  title?: string;
-  titleIcon?: React.JSX.Element;
+  text?: string;
+  iconRight?: React.JSX.Element;
+  iconLeft?: React.JSX.Element;
   type?: ButtonType;
 }
 
@@ -40,8 +41,9 @@ export const Button = ({
   rounded = true,
   size = 'standard',
   state = 'default',
-  title = 'Continue',
-  titleIcon,
+  text = 'Continue',
+  iconRight,
+  iconLeft,
   type = 'primary',
 }: Props) => {
   // Primary && Default theme
@@ -125,15 +127,16 @@ export const Button = ({
               flex-row
               items-center
               justify-center
-              gap-${horizontalScaleTW(16)}
+              gap-${horizontalScaleTW(4)}
             `}
         >
-          {titleIcon && titleIcon}
+          {iconLeft && iconLeft}
           <Text
             style={tailwind.style(BUTTON_TEXT_STYLES, fontStyles, textColor)}
           >
-            {title}
+            {text}
           </Text>
+          {iconRight && iconRight}
         </View>
       )}
     </Pressable>

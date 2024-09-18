@@ -20,7 +20,10 @@ export const FeatureTemplate = ({
   return (
     <SafeAreaView style={tailwind.style(`flex-1`, bgColor)}>
       <View
-        style={tailwind.style(`flex-1 px-[18px]`, isAndroid ? 'pt-8' : 'pt-4')}
+        style={tailwind.style(
+          `flex-1 px-[18px]`,
+          isAndroid ? 'pt-8' : 'pt-4'
+        )}
       >
         {backNavigation && (
           <PageNavigation

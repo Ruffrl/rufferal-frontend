@@ -3,7 +3,7 @@ import tailwind from '../../../../tailwind';
 
 export interface H2Props {
   align?: string;
-  text: React.ReactElement;
+  text: string | React.ReactElement;
 }
 
 export const H2 = ({ align = 'text-center', text }: H2Props) => {

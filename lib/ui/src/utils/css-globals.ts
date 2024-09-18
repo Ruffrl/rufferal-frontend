@@ -19,7 +19,11 @@ export const GLOBAL_ICON_SIZE = tw`
   h-${verticalScaleTW(20)} 
   w-${verticalScaleTW(20)} 
 `;
-export const GLOBAL_SMALL_ICON_SIZE = tw`
+export const GLOBAL_ICON_SIZE_LARGE = tw`
+  h-${verticalScaleTW(24)} 
+  w-${verticalScaleTW(24)} 
+`;
+export const GLOBAL_ICON_SIZE_SMALL = tw`
   h-${verticalScaleTW(16)} 
   w-${verticalScaleTW(16)} 
 `;
@@ -31,6 +35,7 @@ export const GLOBAL_SMALL_ICON_SIZE = tw`
 /* SHADOWS */
 // BLARG - consider package for easier management of shadows:https://github.com/879479119/react-native-shadow
 export const GLOBAL_WEB_SHADOW = { boxShadow: '4px 4px 0px 0px #d4d4d8' };
+
 
 export const GLOBAL_IOS_SHADOW = {
   shadowColor: '#d4d4d8',

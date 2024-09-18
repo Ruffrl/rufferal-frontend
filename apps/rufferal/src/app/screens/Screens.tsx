@@ -163,10 +163,10 @@ export const Screens = observer(() => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Create Pets Onboarding"
           component={PetSplashScreen}
-        />
+        /> */}
         <Stack.Screen name="Manage Pets" component={ManagePetsScreen} />
         <Stack.Screen
           name="Create Pet Details"

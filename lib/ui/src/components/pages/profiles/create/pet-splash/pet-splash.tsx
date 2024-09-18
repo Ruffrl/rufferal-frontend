@@ -1,6 +1,5 @@
 // import React from 'react';
 // BLARG - is there a cleaner way to do this? Should I build an NX library/module for my tailwind customization? Then I can import as @rufferal/tailwind or something?
-import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { Platform, Text, View } from 'react-native';
 
@@ -8,16 +7,11 @@ import tailwind from '../../../../../../tailwind';
 import { verticalScale, verticalScaleTW } from '../../../../../utils';
 import { Bottomsheet, Button, H2 } from '../../../../atoms';
 import { SplashTemplate } from '../../../../templates';
+import { PageNavigation } from '../../../types/page-props';
 
-export interface PetSplashProps {
-  navigation: NavigationProp<ParamListBase>;
-}
+// interface PetSplashProps extends PageNavigation {}
 
-const OnboardingModal = ({
-  navigation,
-}: {
-  navigation: NavigationProp<ParamListBase>;
-}) => {
+const OnboardingModal = ({ navigation }: PageNavigation) => {
   return (
     <View>
       <View style={tailwind`gap-3`}>
@@ -33,7 +27,7 @@ const OnboardingModal = ({
         <Button onPress={() => navigation.navigate('Manage Pets')} />
         <Button
           onPress={() => navigation.navigate('Search')}
-          title="Skip for now"
+          text="Skip for now"
           type="transparent"
           size="standard-short"
           rounded={false}
@@ -43,7 +37,7 @@ const OnboardingModal = ({
   );
 };
 
-export const PetSplash = ({ navigation }: PetSplashProps) => {
+export const PetSplash = ({ navigation }: PageNavigation) => {
   const isIOS = Platform.OS === 'ios';
 
   return (
@@ -59,7 +53,6 @@ export const PetSplash = ({ navigation }: PetSplashProps) => {
         />
       </View>
       <Bottomsheet
-        animateOnMount={false}
         content={<OnboardingModal navigation={navigation} />}
         snapPoints={isIOS ? [verticalScale(389)] : [verticalScale(399)]}
       />

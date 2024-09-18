@@ -18,6 +18,7 @@ export { CreatePetPhoto } from './pets/create-pet-photo/create-pet-photo';
 export { ManagePets } from './pets/manage-pets/manage-pets';
 export { PetSplash } from './profiles/create/pet-splash/pet-splash';
 export { Search } from './search/search/search';
+export type { PageNavigation } from './types/page-props';
 
 // export { RDashboard } from './features/RDashboard';
 
