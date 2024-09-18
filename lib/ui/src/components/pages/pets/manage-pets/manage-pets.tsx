@@ -2,7 +2,13 @@ import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
 
 import tailwind from '../../../../../tailwind';
-import { GLOBAL_ICON_SIZE, GLOBAL_ICON_SIZE_LARGE } from '../../../../utils';
+import {
+  capitalize,
+  generateKey,
+  GLOBAL_ICON_SIZE,
+  GLOBAL_ICON_SIZE_LARGE,
+  titleCase,
+} from '../../../../utils';
 import {
   Button,
   Card,
@@ -26,15 +32,15 @@ export const ManagePets = ({ navigation }: PageNavigationProps) => {
   // const pets: Pet[] = [];
   const pets: Pet[] = [
     {
-      name: 'Gavin',
-      species: 'Cat',
-      breed: 'American Shorthair',
+      name: 'gavin',
+      species: 'cat',
+      breed: 'american shorthair',
       image: require('@rufferal/assets/images/cat-profile-stock-photo.jpeg'),
     },
     {
-      name: 'Maya',
-      species: 'Dog',
-      breed: 'German Shepard',
+      name: 'maya',
+      species: 'dog',
+      breed: 'german shepard',
       image: require('@rufferal/assets/images/dog-profile-stock-photo.jpeg'),
     },
   ];
@@ -87,11 +93,7 @@ const Pets = ({ pets }: { pets: Pet[] }) => (
   <View style={tailwind`gap-6`}>
     <View style={tailwind`gap-3`}>
       {pets.map((pet) => (
-        <PetCard
-          // BLARG - convert Math.random().toString(36).substring(2) into a util like `capitalize`
-          key={pet.name + Math.random().toString(36).substring(2)}
-          pet={pet}
-        />
+        <PetCard key={pet.name + generateKey()} pet={pet} />
       ))}
     </View>
     <HorizontalDivider />
@@ -110,15 +112,15 @@ const PetCard = ({ pet }: { pet: Pet }) => {
         </View>
         <View style={tailwind`flex-1`}>
           <Text style={tailwind`font-bodyBold text-b4 text-balticSea-950`}>
-            {pet.name}
+            {capitalize(pet.name)}
           </Text>
           <View style={tailwind`flex-row gap-1`}>
             <Text style={tailwind`font-body text-b2 text-saltBox-700`}>
-              {pet.species}
+              {capitalize(pet.species)}
             </Text>
             <VerticalDivider />
             <Text style={tailwind`font-body text-b2 text-saltBox-700`}>
-              {pet.breed}
+              {titleCase(pet.breed)}
             </Text>
           </View>
         </View>

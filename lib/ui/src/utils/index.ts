@@ -22,4 +22,6 @@ export {
   GLOBAL_Y_PADDING,
 } from './css-globals';
 
-export { capitalize } from './capitalize';
+export { capitalize, titleCase } from './text-manipulators';
+
+export { generateKey } from './generators';
