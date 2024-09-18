@@ -1,8 +1,8 @@
 import tailwind from '../../../../tailwind';
 
+import { GLOBAL_ICON_SIZE, GLOBAL_MIN_PRESS_SIZE } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { Pressable, Text, View } from 'react-native';
-import { GLOBAL_ICON_SIZE, GLOBAL_MIN_PRESS_SIZE } from '@rufferal/utils';
 
 export const PageNavigation = ({
   backNavigation,
@@ -16,7 +16,7 @@ export const PageNavigation = ({
       <Pressable style={tailwind`justify-center`} onPress={backNavigation}>
         <View style={tailwind`flex-row items-center gap-1`}>
           <Image
-            source={require('@rufferal/assets/src/icons/rufferal/chevron-left.png')}
+            source={require('@rufferal/assets/src/icons/chevron-left.png')}
             style={tailwind.style(
               GLOBAL_ICON_SIZE,
               'items-center justify-center'
@@ -44,7 +44,7 @@ export const PageNavigation = ({
               Skip
             </Text>
             <Image
-              source={require('@rufferal/assets/src/icons/rufferal/chevron-right.png')}
+              source={require('@rufferal/assets/src/icons/chevron-right.png')}
               style={tailwind.style(
                 GLOBAL_ICON_SIZE,
                 'items-center justify-center'

@@ -2,13 +2,13 @@ import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
 
 import { observablePetStore, Pet } from '@rufferal/store';
-import tailwind from '../../../../../tailwind';
 import {
   capitalize,
   GLOBAL_ICON_SIZE,
   GLOBAL_ICON_SIZE_LARGE,
   titleCase,
 } from '@rufferal/utils';
+import tailwind from '../../../../../tailwind';
 import {
   Button,
   Card,
@@ -37,7 +37,9 @@ export const ManagePets = ({ navigation }: PageNavigationProps) => {
   const pets = observablePetStore.activePets();
 
   return (
-    <FeatureTemplate backNavigation={() => navigation.navigate('Manage Pets')}>
+    <FeatureTemplate
+      backNavigation={() => navigation.navigate('Create Pets Onboarding')}
+    >
       <View style={tailwind`pt-6 gap-6`}>
         <H3 text="Pet profiles" />
         {pets.length > 0 ? <Pets pets={pets} /> : <EmptyPets />}
@@ -54,7 +56,7 @@ export const ManagePets = ({ navigation }: PageNavigationProps) => {
 const ArrowRight = () => (
   <Image
     style={tailwind.style(GLOBAL_ICON_SIZE, 'items-center justify-center')}
-    source={require('@rufferal/assets/src/icons/rufferal/arrow-circle-right.png')}
+    source={require('@rufferal/assets/src/icons/arrow-circle-right.png')}
   />
 );
 
@@ -65,7 +67,7 @@ const EmptyPets = () => (
         GLOBAL_ICON_SIZE_LARGE,
         'items-center justify-center mb-3'
       )}
-      source={require('@rufferal/assets/src/icons/rufferal/paw-print.png')}
+      source={require('@rufferal/assets/src/icons/paw-print.png')}
     />
     <Text
       style={tailwind`font-bodySemibold text-b3 text-center text-balticSea-950 mb-1`}
