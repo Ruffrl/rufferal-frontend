@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from 'react';
+import { tailwind } from '@rufferal/tailwind';
+import { PropsWithChildren } from 'react';
 import { SafeAreaView } from 'react-native';
-import tailwind from '../../../../tailwind';
 
 export interface SplashTemplateProps {
   bgColor?: string;

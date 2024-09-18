@@ -1,6 +1,6 @@
+import { tailwind } from '@rufferal/tailwind';
 import { PropsWithChildren } from 'react';
 import { Platform, SafeAreaView, View } from 'react-native';
-import tailwind from '../../../../tailwind';
 import { PageNavigation } from '../../organisms';
 
 export interface FeatureTemplateProps {

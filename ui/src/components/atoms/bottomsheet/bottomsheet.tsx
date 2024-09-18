@@ -1,7 +1,6 @@
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import { tailwind } from '@rufferal/tailwind';
 import React, { PropsWithChildren, useCallback, useRef } from 'react';
-
-import tailwind from '../../../../tailwind';
 
 interface BottomsheetProps {
   animateOnMount?: boolean;

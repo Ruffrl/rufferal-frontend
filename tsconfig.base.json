@@ -17,6 +17,7 @@
     "paths": {
       "@rufferal/assets/*": ["assets/*"],
       "@rufferal/store": ["store/src/index.ts"],
+      "@rufferal/tailwind": ["tailwind/src/index.ts"],
       "@rufferal/ui": ["ui/src/index.ts"],
       "@rufferal/utils": ["utils/src/index.ts"]
     }

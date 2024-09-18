@@ -1,5 +1,5 @@
+import { tailwind } from '@rufferal/tailwind';
 import { View } from 'react-native';
-import tailwind from '../../../../tailwind';
 
 /* eslint-disable-next-line @typescript-eslint/no-empty-interface*/
 interface HorizontalDividerProps {}

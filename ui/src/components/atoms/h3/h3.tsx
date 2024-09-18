@@ -1,6 +1,6 @@
+import { tailwind } from '@rufferal/tailwind';
 import React from 'react';
 import { Text } from 'react-native';
-import tailwind from '../../../../tailwind';
 
 interface H3Props {
   align?: string;

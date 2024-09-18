@@ -21,17 +21,12 @@ export const Screens = observer(() => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen
-          name="Create Pets Onboarding"
-          component={PetSplashScreen}
-        />
-        <Stack.Screen name="Manage Pets" component={ManagePetsScreen} /> */}
-        <Stack.Screen name="Cat Details" component={CatDetailsScreen} />
         <Stack.Screen
           name="Create Pets Onboarding"
           component={PetSplashScreen}
         />
         <Stack.Screen name="Manage Pets" component={ManagePetsScreen} />
+        <Stack.Screen name="Cat Details" component={CatDetailsScreen} />
         <Stack.Screen name="Cat Avatar" component={CatAvatarScreen} />
         <Stack.Screen name="Cat Personality" component={CatPersonalityScreen} />
         <Stack.Screen name="Cat Careplan" component={CatCareplanScreen} />

@@ -1,5 +1,4 @@
-import tailwind from '../../../../tailwind';
-
+import { tailwind } from '@rufferal/tailwind';
 import { GLOBAL_ICON_SIZE, GLOBAL_MIN_PRESS_SIZE } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { Pressable, Text, View } from 'react-native';

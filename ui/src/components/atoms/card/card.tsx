@@ -1,6 +1,6 @@
+import { tailwind } from '@rufferal/tailwind';
 import { PropsWithChildren } from 'react';
 import { Platform, View } from 'react-native';
-import tailwind from '../../../../tailwind';
 
 interface CardProps {
   height?: string;

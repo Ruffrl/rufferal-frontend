@@ -2,13 +2,13 @@ import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
 
 import { observablePetStore, Pet } from '@rufferal/store';
+import { tailwind } from '@rufferal/tailwind';
 import {
   capitalize,
   GLOBAL_ICON_SIZE,
   GLOBAL_ICON_SIZE_LARGE,
   titleCase,
 } from '@rufferal/utils';
-import tailwind from '../../../../../tailwind';
 import {
   Button,
   Card,

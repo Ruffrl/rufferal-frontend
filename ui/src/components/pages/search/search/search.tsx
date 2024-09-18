@@ -1,7 +1,5 @@
-// import React from 'react';
+import { tailwind } from '@rufferal/tailwind';
 import { Text, View } from 'react-native';
-
-import tailwind from '../../../../../tailwind';
 
 /* eslint-disable-next-line */
 export interface SearchProps {}

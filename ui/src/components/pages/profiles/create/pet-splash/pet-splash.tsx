@@ -2,9 +2,8 @@
 import { Image } from 'expo-image';
 import { Platform, Text, View } from 'react-native';
 
-// BLARG - is there a cleaner way to do this? Should I build an NX library/module for my tailwind customization? Then I can import as @rufferal/tailwind or something?
+import { tailwind } from '@rufferal/tailwind';
 import { verticalScale, verticalScaleTW } from '@rufferal/utils';
-import tailwind from '../../../../../../tailwind';
 import { Bottomsheet, Button, H2 } from '../../../../atoms';
 import { SplashTemplate } from '../../../../templates';
 import { PageNavigationProps } from '../../../types/page-props';

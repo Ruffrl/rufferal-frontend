@@ -1,4 +1,10 @@
 // import React from 'react';
+import { tailwind } from '@rufferal/tailwind';
+import {
+  horizontalScaleTW,
+  moderateScale,
+  moderateScaleTW,
+} from '@rufferal/utils';
 import {
   ActivityIndicator,
   Pressable,
@@ -6,13 +12,6 @@ import {
   Text,
   View,
 } from 'react-native';
-
-import tailwind from '../../../../tailwind';
-import {
-  horizontalScaleTW,
-  moderateScale,
-  moderateScaleTW,
-} from '@rufferal/utils';
 import { ButtonType, FieldSize, FieldState } from '../types/field-types';
 
 interface Props extends PressableProps {

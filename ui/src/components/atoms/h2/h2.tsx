@@ -1,5 +1,5 @@
+import { tailwind } from '@rufferal/tailwind';
 import { Text } from 'react-native';
-import tailwind from '../../../../tailwind';
 
 export interface H2Props {
   align?: string;
