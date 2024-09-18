@@ -8,7 +8,7 @@ import {
   GLOBAL_ICON_SIZE,
   GLOBAL_ICON_SIZE_LARGE,
   titleCase,
-} from '../../../../utils';
+} from '@rufferal/utils';
 import {
   Button,
   Card,

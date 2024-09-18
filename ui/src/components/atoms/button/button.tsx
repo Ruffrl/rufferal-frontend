@@ -12,7 +12,7 @@ import {
   horizontalScaleTW,
   moderateScale,
   moderateScaleTW,
-} from '../../../utils';
+} from '@rufferal/utils';
 import { ButtonType, FieldSize, FieldState } from '../types/field-types';
 
 interface Props extends PressableProps {

@@ -2,7 +2,7 @@ import tailwind from '../../../../tailwind';
 
 import { Image } from 'expo-image';
 import { Pressable, Text, View } from 'react-native';
-import { GLOBAL_ICON_SIZE, GLOBAL_MIN_PRESS_SIZE } from '../../../utils';
+import { GLOBAL_ICON_SIZE, GLOBAL_MIN_PRESS_SIZE } from '@rufferal/utils';
 
 export const PageNavigation = ({
   backNavigation,
