@@ -11,11 +11,16 @@
  *
  */
 
-export { CreatePetCareplan } from './pets/create-pet-careplan/create-pet-careplan';
-export { CreatePetDetails } from './pets/create-pet-details/create-pet-details';
-export { CreatePetPersonality } from './pets/create-pet-personality/create-pet-personality';
-export { CreatePetPhoto } from './pets/create-pet-photo/create-pet-photo';
+export type { PageNavigationProps } from './types/page-props';
+
+export { CatAvatar } from './pets/create/cats/cat-avatar/cat-avatar';
+export { CatCareplan } from './pets/create/cats/cat-careplan/cat-careplan';
+export { CatDetails } from './pets/create/cats/cat-details/cat-details';
+export { CatPersonality } from './pets/create/cats/cat-personality/cat-personality';
+export { DogAvatar } from './pets/create/dogs/dog-avatar/dog-avatar';
+export { DogCareplan } from './pets/create/dogs/dog-careplan/dog-careplan';
+export { DogDetails } from './pets/create/dogs/dog-details/dog-details';
+export { DogPersonality } from './pets/create/dogs/dog-personality/dog-personality';
 export { ManagePets } from './pets/manage-pets/manage-pets';
 export { PetSplash } from './profiles/create/pet-splash/pet-splash';
 export { Search } from './search/search/search';
-export type { PageNavigationProps } from './types/page-props';

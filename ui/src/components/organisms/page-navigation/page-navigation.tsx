@@ -44,7 +44,7 @@ export const PageNavigation = ({
               Skip
             </Text>
             <Image
-              source={require('@rufferal/assets/src/icons/chevron-right.png')}
+              source={require('@rufferal/assets/src/icons/chevron-left.png')}
               style={tailwind.style(
                 GLOBAL_ICON_SIZE,
                 'items-center justify-center'

@@ -1,10 +1,5 @@
-import { NavigationProp, ParamListBase } from '@react-navigation/native';
-import { PetSplash } from '@rufferal/ui';
+import { PageNavigationProps, PetSplash } from '@rufferal/ui';
 
-export const PetSplashScreen = ({
-  navigation,
-}: {
-  navigation: NavigationProp<ParamListBase>;
-}) => {
+export const PetSplashScreen = ({ navigation }: PageNavigationProps) => {
   return <PetSplash navigation={navigation} />;
 };

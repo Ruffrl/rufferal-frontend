@@ -43,8 +43,18 @@ export const ManagePets = ({ navigation }: PageNavigationProps) => {
       <View style={tailwind`pt-6 gap-6`}>
         <H3 text="Pet profiles" />
         {pets.length > 0 ? <Pets pets={pets} /> : <EmptyPets />}
-        <Button text="Add a cat" iconRight={<ArrowRight />} type="secondary" />
-        <Button text="Add a dog" iconRight={<ArrowRight />} type="secondary" />
+        <Button
+          onPress={() => navigation.navigate('Cat Details')}
+          text="Add a cat"
+          iconRight={<ArrowRight />}
+          type="secondary"
+        />
+        <Button
+          onPress={() => navigation.navigate('Dog Details')}
+          text="Add a dog"
+          iconRight={<ArrowRight />}
+          type="secondary"
+        />
       </View>
     </FeatureTemplate>
   );
