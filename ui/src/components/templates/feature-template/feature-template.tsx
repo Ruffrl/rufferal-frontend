@@ -1,4 +1,4 @@
-import { tailwind } from '@rufferal/tailwind';
+import { ruffwind } from '@rufferal/tailwind';
 import { PropsWithChildren } from 'react';
 import { Platform, SafeAreaView, View } from 'react-native';
 import { PageNavigation } from '../../organisms';
@@ -26,8 +26,8 @@ export const FeatureTemplate = ({
   }
 
   return (
-    <SafeAreaView style={tailwind.style(`flex-1`, bgColor)}>
-      <View style={tailwind.style(`flex-1 px-[18px]`, topPadding)}>
+    <SafeAreaView style={ruffwind.style(`flex-1`, bgColor)}>
+      <View style={ruffwind.style(`flex-1 px-[18px]`, topPadding)}>
         {backNavigation && (
           <PageNavigation
             backNavigation={backNavigation}

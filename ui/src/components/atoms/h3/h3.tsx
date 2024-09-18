@@ -1,4 +1,4 @@
-import { tailwind } from '@rufferal/tailwind';
+import { ruffwind } from '@rufferal/tailwind';
 import React from 'react';
 import { Text } from 'react-native';
 
@@ -10,7 +10,7 @@ interface H3Props {
 export const H3 = ({ align = 'text-left', text }: H3Props) => {
   return (
     <Text
-      style={tailwind.style(
+      style={ruffwind.style(
         `font-headerExtrabold text-h3 text-electricViolet-700`,
         align
       )}

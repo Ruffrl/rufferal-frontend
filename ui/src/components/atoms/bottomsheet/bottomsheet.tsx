@@ -1,5 +1,5 @@
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
-import { tailwind } from '@rufferal/tailwind';
+import { ruffwind } from '@rufferal/tailwind';
 import React, { PropsWithChildren, useCallback, useRef } from 'react';
 
 interface BottomsheetProps {
@@ -31,12 +31,12 @@ export const Bottomsheet = ({
       ref={bottomSheetRef}
       onChange={handleSheetChanges}
       snapPoints={snapPoints}
-      backgroundStyle={tailwind.style(backgroundColor)}
-      handleStyle={tailwind`h-[30px] justify-end p-0 mb-2.5`}
-      handleIndicatorStyle={tailwind`bg-iron-300 w-9 h-1`}
+      backgroundStyle={ruffwind.style(backgroundColor)}
+      handleStyle={ruffwind`h-[30px] justify-end p-0 mb-2.5`}
+      handleIndicatorStyle={ruffwind`bg-iron-300 w-9 h-1`}
       animateOnMount={animateOnMount}
     >
-      <BottomSheetView style={tailwind.style('flex-1 rounded-xl', padding)}>
+      <BottomSheetView style={ruffwind.style('flex-1 rounded-xl', padding)}>
         {content}
       </BottomSheetView>
     </BottomSheet>

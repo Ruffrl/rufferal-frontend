@@ -1,4 +1,4 @@
-import { tailwind } from '@rufferal/tailwind';
+import { ruffwind } from '@rufferal/tailwind';
 import { PropsWithChildren } from 'react';
 import { Platform, View } from 'react-native';
 
@@ -23,7 +23,7 @@ export const Card = ({
           shadowRadius: 3,
           elevation: 3,
         },
-        tailwind.style(`bg-white w-full p-3`, height),
+        ruffwind.style(`bg-white w-full p-3`, height),
       ]}
     >
       {children}

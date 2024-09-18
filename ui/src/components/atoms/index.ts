@@ -18,4 +18,5 @@ export { Card } from './card/card';
 export { H2 } from './h2/h2';
 export { H3 } from './h3/h3';
 export { HorizontalDivider } from './horizontal-divider/horizontal-divider';
+export { ProgressBar } from './progress-bar/progress-bar';
 export { VerticalDivider } from './vertical-divider/vertical-divider';

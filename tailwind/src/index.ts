@@ -1,2 +1,2 @@
-import tailwind from './tailwind';
-export { tailwind };
+import ruffwind from './tailwind';
+export { ruffwind };

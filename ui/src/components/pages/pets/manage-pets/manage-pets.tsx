@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
 
 import { observablePetStore, Pet } from '@rufferal/store';
-import { tailwind } from '@rufferal/tailwind';
+import { ruffwind } from '@rufferal/tailwind';
 import {
   capitalize,
   GLOBAL_ICON_SIZE,
@@ -40,7 +40,7 @@ export const ManagePets = ({ navigation }: PageNavigationProps) => {
     <FeatureTemplate
       backNavigation={() => navigation.navigate('Create Pets Onboarding')}
     >
-      <View style={tailwind`pt-6 gap-6`}>
+      <View style={ruffwind`pt-6 gap-6`}>
         <H3 text="Pet profiles" />
         {pets.length > 0 ? <Pets pets={pets} /> : <EmptyPets />}
         <Button
@@ -65,34 +65,34 @@ export const ManagePets = ({ navigation }: PageNavigationProps) => {
 /* ********** */
 const ArrowRight = () => (
   <Image
-    style={tailwind.style(GLOBAL_ICON_SIZE, 'items-center justify-center')}
+    style={ruffwind.style(GLOBAL_ICON_SIZE, 'items-center justify-center')}
     source={require('@rufferal/assets/src/icons/arrow-circle-right.png')}
   />
 );
 
 const EmptyPets = () => (
-  <View style={tailwind`py-7 items-center`}>
+  <View style={ruffwind`py-7 items-center`}>
     <Image
-      style={tailwind.style(
+      style={ruffwind.style(
         GLOBAL_ICON_SIZE_LARGE,
         'items-center justify-center mb-3'
       )}
       source={require('@rufferal/assets/src/icons/paw-print.png')}
     />
     <Text
-      style={tailwind`font-bodySemibold text-b3 text-center text-balticSea-950 mb-1`}
+      style={ruffwind`font-bodySemibold text-b3 text-center text-balticSea-950 mb-1`}
     >
       No saved profiles
     </Text>
-    <Text style={tailwind`font-body text-b3 text-center text-balticSea-950`}>
+    <Text style={ruffwind`font-body text-b3 text-center text-balticSea-950`}>
       After you save a profile for your pet,{`\n`}it will show up here
     </Text>
   </View>
 );
 
 const Pets = ({ pets }: { pets: Pet[] }) => (
-  <View style={tailwind`gap-6`}>
-    <View style={tailwind`gap-3`}>
+  <View style={ruffwind`gap-6`}>
+    <View style={ruffwind`gap-3`}>
       {pets.map((pet) => (
         <PetCard key={pet.id} pet={pet} />
       ))}
@@ -104,23 +104,23 @@ const Pets = ({ pets }: { pets: Pet[] }) => (
 const PetCard = ({ pet }: { pet: Pet }) => {
   return (
     <Card>
-      <View style={tailwind`flex-row h-full gap-2`}>
-        <View style={tailwind`justify-center`}>
+      <View style={ruffwind`flex-row h-full gap-2`}>
+        <View style={ruffwind`justify-center`}>
           <Image
-            style={tailwind`items-center justify-center h-[34px] w-[34px] rounded-full`}
+            style={ruffwind`items-center justify-center h-[34px] w-[34px] rounded-full`}
             source={pet.avatar}
           />
         </View>
-        <View style={tailwind`flex-1`}>
-          <Text style={tailwind`font-bodyBold text-b4 text-balticSea-950`}>
+        <View style={ruffwind`flex-1`}>
+          <Text style={ruffwind`font-bodyBold text-b4 text-balticSea-950`}>
             {capitalize(pet.name)}
           </Text>
-          <View style={tailwind`flex-row gap-1`}>
-            <Text style={tailwind`font-body text-b2 text-saltBox-700`}>
+          <View style={ruffwind`flex-row gap-1`}>
+            <Text style={ruffwind`font-body text-b2 text-saltBox-700`}>
               {capitalize(pet.species)}
             </Text>
             <VerticalDivider />
-            <Text style={tailwind`font-body text-b2 text-saltBox-700`}>
+            <Text style={ruffwind`font-body text-b2 text-saltBox-700`}>
               {titleCase(pet.breed)}
             </Text>
           </View>

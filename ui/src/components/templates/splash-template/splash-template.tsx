@@ -1,4 +1,4 @@
-import { tailwind } from '@rufferal/tailwind';
+import { ruffwind } from '@rufferal/tailwind';
 import { PropsWithChildren } from 'react';
 import { SafeAreaView } from 'react-native';
 
@@ -11,7 +11,7 @@ export const SplashTemplate = ({
   children,
 }: PropsWithChildren<SplashTemplateProps>) => {
   return (
-    <SafeAreaView style={tailwind.style(`flex-1`, bgColor)}>
+    <SafeAreaView style={ruffwind.style(`flex-1`, bgColor)}>
       {children}
     </SafeAreaView>
   );

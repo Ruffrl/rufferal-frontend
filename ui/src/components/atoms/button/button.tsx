@@ -1,5 +1,5 @@
 // import React from 'react';
-import { tailwind } from '@rufferal/tailwind';
+import { ruffwind } from '@rufferal/tailwind';
 import {
   horizontalScaleTW,
   moderateScale,
@@ -25,12 +25,12 @@ interface Props extends PressableProps {
   type?: ButtonType;
 }
 
-const BUTTON_STYLES = tailwind`
+const BUTTON_STYLES = ruffwind`
   w-full
   justify-center 
   items-center 
 `;
-const BUTTON_TEXT_STYLES = tailwind`
+const BUTTON_TEXT_STYLES = ruffwind`
   text-center
 `;
 
@@ -106,7 +106,7 @@ export const Button = ({
           shadowRadius: 3,
           elevation: 1,
         },
-        tailwind.style(
+        ruffwind.style(
           BUTTON_STYLES,
           colorStyle,
           height,
@@ -121,7 +121,7 @@ export const Button = ({
         <ActivityIndicator size={moderateScale(36)} color="white" />
       ) : (
         <View
-          style={tailwind`
+          style={ruffwind`
               w-full
               flex-row
               items-center
@@ -131,7 +131,7 @@ export const Button = ({
         >
           {iconLeft && iconLeft}
           <Text
-            style={tailwind.style(BUTTON_TEXT_STYLES, fontStyles, textColor)}
+            style={ruffwind.style(BUTTON_TEXT_STYLES, fontStyles, textColor)}
           >
             {text}
           </Text>
