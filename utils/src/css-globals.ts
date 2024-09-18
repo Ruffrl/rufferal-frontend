@@ -24,8 +24,8 @@ export const GLOBAL_ICON_SIZE_LARGE = tw`
   w-${verticalScaleTW(24)} 
 `;
 export const GLOBAL_ICON_SIZE_SMALL = tw`
-  h-${verticalScaleTW(16)} 
-  w-${verticalScaleTW(16)} 
+  h-${verticalScaleTW(14)} 
+  w-${verticalScaleTW(14)} 
 `;
 // export const GLOBAL_ICON_SIZE = tw`
 //   h-${moderateScaleTW(24)}

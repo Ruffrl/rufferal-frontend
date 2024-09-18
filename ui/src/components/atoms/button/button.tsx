@@ -88,9 +88,9 @@ export const Button = ({
   }
 
   // Manage state themes
-  if (state === 'error') {
-    colorStyle = 'bg-red-500';
-    textColor = 'text-zinc-900';
+  if (state === 'errored') {
+    colorStyle = 'bg-red-600';
+    textColor = 'text-red-900';
   } else if (state === 'disabled') {
     colorStyle = 'bg-iron-200';
     textColor = 'text-iron-500';
