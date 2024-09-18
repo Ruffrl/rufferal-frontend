@@ -16,8 +16,8 @@ export const GLOBAL_MIN_PRESS_HEIGHT = tw`h-${verticalScaleTW(48)}`;
 //   w-${moderateScaleTW(48)}
 // `;
 export const GLOBAL_ICON_SIZE = tw`
-  h-${verticalScaleTW(24)} 
-  w-${verticalScaleTW(24)} 
+  h-${verticalScaleTW(20)} 
+  w-${verticalScaleTW(20)} 
 `;
 export const GLOBAL_SMALL_ICON_SIZE = tw`
   h-${verticalScaleTW(16)} 

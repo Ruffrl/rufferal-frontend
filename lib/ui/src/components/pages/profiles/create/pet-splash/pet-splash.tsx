@@ -6,9 +6,9 @@ import { Text, View } from 'react-native';
 
 import tailwind from '../../../../../../tailwind';
 import { verticalScale, verticalScaleTW } from '../../../../../utils';
+import { FeatureTemplate } from '../../../..//templates';
 import { Bottomsheet, Button, H2 } from '../../../../atoms';
 
-/* eslint-disable-next-line */
 export interface PetSplashProps {
   navigation: NavigationProp<ParamListBase>;
 }
@@ -45,7 +45,7 @@ const OnboardingModal = ({
 
 export const PetSplash = ({ navigation }: PetSplashProps) => {
   return (
-    <View style={tailwind`flex-1 bg-blizzardBlue-200`}>
+    <FeatureTemplate bgColor="bg-blizzardBlue-200">
       <View style={tailwind`h-${verticalScaleTW(413)}`}>
         <Image
           style={tailwind`flex-1`}
@@ -58,6 +58,7 @@ export const PetSplash = ({ navigation }: PetSplashProps) => {
         content={<OnboardingModal navigation={navigation} />}
         snapPoints={[verticalScale(399)]}
       />
-    </View>
+      <Text>Testing</Text>
+    </FeatureTemplate>
   );
 };

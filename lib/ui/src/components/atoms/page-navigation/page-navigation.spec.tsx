@@ -1,10 +1,11 @@
 import { render } from '@testing-library/react-native';
+import React from 'react';
 
-import { H2 } from './h2';
+import { PageNavigation } from './page-navigation';
 
 describe('H2', () => {
   it('should render successfully', () => {
-    const { root } = render(<H2 />);
+    const { root } = render(<PageNavigation />);
     expect(root).toBeTruthy();
   });
 });

@@ -11,3 +11,4 @@
  */
 
 // export { RPrototypeTemplate } from './RPrototypeTemplate';
+export { FeatureTemplate } from './feature-template/feature-template';

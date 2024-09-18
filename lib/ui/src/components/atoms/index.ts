@@ -15,6 +15,8 @@
 export { Bottomsheet } from './bottomsheet/bottomsheet';
 export { Button } from './button/button';
 export { H2 } from './h2/h2';
+export { H3 } from './h3/h3';
+export { PageNavigation } from './page-navigation/page-navigation';
 // export { RAppleIcon } from './RAppleIcon';
 // export { Bottomsheet } from './Bottomsheet';
 // export { RButton } from './RButton';

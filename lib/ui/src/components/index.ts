@@ -8,7 +8,7 @@ export * from './atoms';
 // export * from './organism';
 
 // Templates guide the placement of components without detailing the actual content
-// export * from './templates';
+export * from './templates';
 
 // Pages bring templates to life with actual content
 export * from './pages';

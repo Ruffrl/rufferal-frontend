@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react-native';
 
-import { H2 } from './h2';
+import { FeatureTemplate } from './feature-template';
 
-describe('H2', () => {
+describe('FeatureTemplate', () => {
   it('should render successfully', () => {
-    const { root } = render(<H2 />);
+    const { root } = render(<FeatureTemplate />);
     expect(root).toBeTruthy();
   });
 });

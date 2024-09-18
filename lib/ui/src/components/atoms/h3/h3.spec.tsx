@@ -1,10 +1,11 @@
 import { render } from '@testing-library/react-native';
+import React from 'react';
 
-import { H2 } from './h2';
+import { H3 } from './h3';
 
-describe('H2', () => {
+describe('H3', () => {
   it('should render successfully', () => {
-    const { root } = render(<H2 />);
+    const { root } = render(<H3 />);
     expect(root).toBeTruthy();
   });
 });
