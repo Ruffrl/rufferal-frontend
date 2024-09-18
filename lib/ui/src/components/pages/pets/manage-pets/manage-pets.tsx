@@ -1,10 +1,10 @@
 import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
 
+import { observablePetStore, Pet } from '@rufferal/store';
 import tailwind from '../../../../../tailwind';
 import {
   capitalize,
-  generateKey,
   GLOBAL_ICON_SIZE,
   GLOBAL_ICON_SIZE_LARGE,
   titleCase,
@@ -21,38 +21,25 @@ import { PageNavigationProps } from '../../types/page-props';
 
 // interface ManagePetsProps extends PageNavigationProps {}
 
-type Pet = {
-  name: string;
-  species: string;
-  breed: string;
-  image: string;
-};
-
 export const ManagePets = ({ navigation }: PageNavigationProps) => {
-  // const pets: Pet[] = [];
-  const pets: Pet[] = [
-    {
-      name: 'gavin',
-      species: 'cat',
-      breed: 'american shorthair',
-      image: require('@rufferal/assets/images/cat-profile-stock-photo.jpeg'),
-    },
-    {
-      name: 'maya',
-      species: 'dog',
-      breed: 'german shepard',
-      image: require('@rufferal/assets/images/dog-profile-stock-photo.jpeg'),
-    },
-  ];
+  observablePetStore.addPet({
+    name: 'gavin',
+    species: 'cat',
+    breed: 'american shorthair',
+    avatar: require('@rufferal/assets/images/cat-profile-stock-photo.jpeg'),
+  });
+  observablePetStore.addPet({
+    name: 'maya',
+    species: 'dog',
+    breed: 'german shepard',
+    avatar: require('@rufferal/assets/images/dog-profile-stock-photo.jpeg'),
+  });
+  const pets = observablePetStore.activePets();
 
   return (
-    <FeatureTemplate
-      bgColor="bg-whitePointer-50"
-      backNavigation={() => navigation.navigate('Manage Pets')}
-    >
+    <FeatureTemplate backNavigation={() => navigation.navigate('Manage Pets')}>
       <View style={tailwind`pt-6 gap-6`}>
         <H3 text="Pet profiles" />
-        {/* BLARG - update this to handle pets from a new store (PetStore) */}
         {pets.length > 0 ? <Pets pets={pets} /> : <EmptyPets />}
         <Button text="Add a cat" iconRight={<ArrowRight />} type="secondary" />
         <Button text="Add a dog" iconRight={<ArrowRight />} type="secondary" />
@@ -61,7 +48,9 @@ export const ManagePets = ({ navigation }: PageNavigationProps) => {
   );
 };
 
+/* ********** */
 /* COMPONENTS */
+/* ********** */
 const ArrowRight = () => (
   <Image
     style={tailwind.style(GLOBAL_ICON_SIZE, 'items-center justify-center')}
@@ -93,7 +82,7 @@ const Pets = ({ pets }: { pets: Pet[] }) => (
   <View style={tailwind`gap-6`}>
     <View style={tailwind`gap-3`}>
       {pets.map((pet) => (
-        <PetCard key={pet.name + generateKey()} pet={pet} />
+        <PetCard key={pet.id} pet={pet} />
       ))}
     </View>
     <HorizontalDivider />
@@ -107,7 +96,7 @@ const PetCard = ({ pet }: { pet: Pet }) => {
         <View style={tailwind`justify-center`}>
           <Image
             style={tailwind`items-center justify-center h-[34px] w-[34px] rounded-full`}
-            source={pet.image}
+            source={pet.avatar}
           />
         </View>
         <View style={tailwind`flex-1`}>

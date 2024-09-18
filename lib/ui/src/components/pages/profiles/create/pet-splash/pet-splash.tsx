@@ -34,7 +34,9 @@ export const PetSplash = ({ navigation }: PageNavigationProps) => {
   );
 };
 
+/* ********** */
 /* COMPONENTS */
+/* ********** */
 const PetSplashSheet = ({ navigation }: PageNavigationProps) => {
   return (
     <View>
