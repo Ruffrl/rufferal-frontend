@@ -3,7 +3,7 @@ import React, { PropsWithChildren, useCallback, useRef } from 'react';
 
 import tailwind from '../../../../tailwind';
 
-export interface BottomsheetProps {
+interface BottomsheetProps {
   animateOnMount?: boolean;
   backgroundColor?: string;
   content: React.ReactNode;

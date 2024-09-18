@@ -7,11 +7,35 @@ import tailwind from '../../../../../../tailwind';
 import { verticalScale, verticalScaleTW } from '../../../../../utils';
 import { Bottomsheet, Button, H2 } from '../../../../atoms';
 import { SplashTemplate } from '../../../../templates';
-import { PageNavigation } from '../../../types/page-props';
+import { PageNavigationProps } from '../../../types/page-props';
 
-// interface PetSplashProps extends PageNavigation {}
+// interface PetSplashProps extends PageNavigationProps {}
 
-const OnboardingModal = ({ navigation }: PageNavigation) => {
+export const PetSplash = ({ navigation }: PageNavigationProps) => {
+  const isIOS = Platform.OS === 'ios';
+
+  return (
+    <SplashTemplate bgColor="bg-blizzardBlue-200">
+      <View
+        style={tailwind.style(
+          isIOS ? `h-${verticalScaleTW(378)}` : `h-${verticalScaleTW(412)}`
+        )}
+      >
+        <Image
+          style={tailwind`flex-1`}
+          source={require('@rufferal/assets/images/husky-and-orange-cat.png')}
+        />
+      </View>
+      <Bottomsheet
+        content={<PetSplashSheet navigation={navigation} />}
+        snapPoints={isIOS ? [verticalScale(389)] : [verticalScale(399)]}
+      />
+    </SplashTemplate>
+  );
+};
+
+/* COMPONENTS */
+const PetSplashSheet = ({ navigation }: PageNavigationProps) => {
   return (
     <View>
       <View style={tailwind`gap-3`}>
@@ -34,28 +58,5 @@ const OnboardingModal = ({ navigation }: PageNavigation) => {
         />
       </View>
     </View>
-  );
-};
-
-export const PetSplash = ({ navigation }: PageNavigation) => {
-  const isIOS = Platform.OS === 'ios';
-
-  return (
-    <SplashTemplate bgColor="bg-blizzardBlue-200">
-      <View
-        style={tailwind.style(
-          isIOS ? `h-${verticalScaleTW(378)}` : `h-${verticalScaleTW(412)}`
-        )}
-      >
-        <Image
-          style={tailwind`flex-1`}
-          source={require('@rufferal/assets/images/husky-and-orange-cat.png')}
-        />
-      </View>
-      <Bottomsheet
-        content={<OnboardingModal navigation={navigation} />}
-        snapPoints={isIOS ? [verticalScale(389)] : [verticalScale(399)]}
-      />
-    </SplashTemplate>
   );
 };

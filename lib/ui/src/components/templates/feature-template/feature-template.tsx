@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { Platform, SafeAreaView, View } from 'react-native';
 import tailwind from '../../../../tailwind';
-import { PageNavigation } from '../../atoms';
+import { PageNavigation } from '../../organisms';
 
 export interface FeatureTemplateProps {
   backNavigation?: () => void;
@@ -20,10 +20,7 @@ export const FeatureTemplate = ({
   return (
     <SafeAreaView style={tailwind.style(`flex-1`, bgColor)}>
       <View
-        style={tailwind.style(
-          `flex-1 px-[18px]`,
-          isAndroid ? 'pt-8' : 'pt-4'
-        )}
+        style={tailwind.style(`flex-1 px-[18px]`, isAndroid ? 'pt-8' : 'pt-4')}
       >
         {backNavigation && (
           <PageNavigation

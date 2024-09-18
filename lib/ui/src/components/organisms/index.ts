@@ -10,18 +10,4 @@
  *
  */
 
-// export { RAccount } from './admin/RAccount';
-// export { RAllAccounts } from './admin/RAllAccounts';
-
-// export { RFormCreateCat } from './forms/RFormCreateCat';
-// export { RFormCreateDog } from './forms/RFormCreateDog';
-// export { RFormEmailPassword } from './forms/RFormEmailPassword';
-// export type { AccessForm } from './forms/RFormEmailPassword';
-
-// export { RCounter } from './RCounter';
-// export { RGlobalError } from './RGlobalError';
-// export { RLogoutButton } from './RLogoutButton';
-// export { ROnboardingButtons } from './ROnboardingButtons';
-// export { ROnboardingWeb } from './ROnboardingWeb';
-// export { RPasswordValidator } from './RPasswordValidator';
-// export { RSocialOnboarding } from './RSocialOnboarding';
+export { PageNavigation } from './page-navigation/page-navigation';

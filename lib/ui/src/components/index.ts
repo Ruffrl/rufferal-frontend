@@ -5,7 +5,7 @@ export * from './atoms';
 // export * from './molecules';
 
 // Organisms define the structure and layout of a page
-// export * from './organism';
+export * from './organisms';
 
 // Templates guide the placement of components without detailing the actual content
 export * from './templates';
