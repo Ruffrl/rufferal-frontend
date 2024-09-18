@@ -3,7 +3,6 @@ import { Platform, SafeAreaView, View } from 'react-native';
 import tailwind from '../../../../tailwind';
 import { PageNavigation } from '../../atoms';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FeatureTemplateProps {
   backNavigation?: () => void;
   bgColor?: string;

@@ -7,7 +7,6 @@ export interface BottomsheetProps {
   animateOnMount?: boolean;
   backgroundColor?: string;
   content: React.ReactNode;
-  height?: number;
   padding?: string;
   snapPoints?: number[];
 }
@@ -16,7 +15,6 @@ export const Bottomsheet = ({
   animateOnMount = true,
   backgroundColor = 'bg-whitePointer-50',
   content,
-  height = 406,
   padding = 'p-5',
   snapPoints = [406],
 }: PropsWithChildren<BottomsheetProps>) => {
@@ -37,7 +35,6 @@ export const Bottomsheet = ({
       backgroundStyle={tailwind.style(backgroundColor)}
       handleStyle={tailwind`h-[30px] justify-end p-0 mb-2.5`}
       handleIndicatorStyle={tailwind`bg-iron-300 w-9 h-1`}
-      containerHeight={height}
       animateOnMount={animateOnMount}
     >
       <BottomSheetView style={tailwind.style('flex-1 rounded-xl', padding)}>

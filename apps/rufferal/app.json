@@ -4,11 +4,11 @@
     "slug": "rufferal",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/paw-print.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/paw-print.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FDF9FF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,7 +24,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png",
+      "favicon": "./assets/paw-print.png",
       "bundler": "metro"
     },
     "userInterfaceStyle": "automatic",

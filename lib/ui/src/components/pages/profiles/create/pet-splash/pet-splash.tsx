@@ -2,12 +2,12 @@
 // BLARG - is there a cleaner way to do this? Should I build an NX library/module for my tailwind customization? Then I can import as @rufferal/tailwind or something?
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { Image } from 'expo-image';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 
 import tailwind from '../../../../../../tailwind';
 import { verticalScale, verticalScaleTW } from '../../../../../utils';
-import { FeatureTemplate } from '../../../..//templates';
 import { Bottomsheet, Button, H2 } from '../../../../atoms';
+import { SplashTemplate } from '../../../../templates';
 
 export interface PetSplashProps {
   navigation: NavigationProp<ParamListBase>;
@@ -44,9 +44,15 @@ const OnboardingModal = ({
 };
 
 export const PetSplash = ({ navigation }: PetSplashProps) => {
+  const isIOS = Platform.OS === 'ios';
+
   return (
-    <FeatureTemplate bgColor="bg-blizzardBlue-200">
-      <View style={tailwind`h-${verticalScaleTW(413)}`}>
+    <SplashTemplate bgColor="bg-blizzardBlue-200">
+      <View
+        style={tailwind.style(
+          isIOS ? `h-${verticalScaleTW(378)}` : `h-${verticalScaleTW(412)}`
+        )}
+      >
         <Image
           style={tailwind`flex-1`}
           source={require('@rufferal/assets/images/husky-and-orange-cat.png')}
@@ -54,11 +60,9 @@ export const PetSplash = ({ navigation }: PetSplashProps) => {
       </View>
       <Bottomsheet
         animateOnMount={false}
-        height={verticalScale(399)}
         content={<OnboardingModal navigation={navigation} />}
-        snapPoints={[verticalScale(399)]}
+        snapPoints={isIOS ? [verticalScale(389)] : [verticalScale(399)]}
       />
-      <Text>Testing</Text>
-    </FeatureTemplate>
+    </SplashTemplate>
   );
 };
