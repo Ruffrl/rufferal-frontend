@@ -1,9 +1,10 @@
 import { Text, View } from 'react-native';
+import { PageNavigationProps } from '../../../..';
 
 /* eslint-disable-next-line */
-export interface CatDetailsProps {}
+export interface CatDetailsProps extends PageNavigationProps {}
 
-export const CatDetails = (props: CatDetailsProps) => {
+export const CatDetails = ({ navigation }: CatDetailsProps) => {
   return (
     <View>
       <Text>Welcome to cat - create details!</Text>

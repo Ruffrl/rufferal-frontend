@@ -1,5 +1,5 @@
-import { DogAvatar } from '@rufferal/ui';
+import { DogAvatar, PageNavigationProps } from '@rufferal/ui';
 
-export const DogAvatarScreen = () => {
-  return <DogAvatar />;
+export const DogAvatarScreen  = ({ navigation }: PageNavigationProps) => {
+  return <DogAvatar navigation={navigation} />;
 };

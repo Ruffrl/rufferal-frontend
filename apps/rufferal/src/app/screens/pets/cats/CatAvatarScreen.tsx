@@ -1,5 +1,5 @@
-import { CatAvatar } from '@rufferal/ui';
+import { CatAvatar, PageNavigationProps } from '@rufferal/ui';
 
-export const CatAvatarScreen = () => {
-  return <CatAvatar />;
+export const CatAvatarScreen  = ({ navigation }: PageNavigationProps) => {
+  return <CatAvatar navigation={navigation} />;
 };

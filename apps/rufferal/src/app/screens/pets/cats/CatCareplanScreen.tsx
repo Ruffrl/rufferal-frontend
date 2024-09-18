@@ -1,5 +1,5 @@
-import { CatCareplan } from '@rufferal/ui';
+import { CatCareplan, PageNavigationProps } from '@rufferal/ui';
 
-export const CatCareplanScreen = () => {
-  return <CatCareplan />;
+export const CatCareplanScreen  = ({ navigation }: PageNavigationProps) => {
+  return <CatCareplan navigation={navigation} />;
 };
