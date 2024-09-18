@@ -23,7 +23,7 @@ export const PetSplash = ({ navigation }: PageNavigationProps) => {
       >
         <Image
           style={tailwind`flex-1`}
-          source={require('@rufferal/assets/images/husky-and-orange-cat.png')}
+          source={require('@rufferal/assets/src/images/husky-and-orange-cat.png')}
         />
       </View>
       <Bottomsheet

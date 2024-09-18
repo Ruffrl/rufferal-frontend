@@ -26,13 +26,13 @@ export const ManagePets = ({ navigation }: PageNavigationProps) => {
     name: 'gavin',
     species: 'cat',
     breed: 'american shorthair',
-    avatar: require('@rufferal/assets/images/cat-profile-stock-photo.jpeg'),
+    avatar: require('@rufferal/assets/src/images/cat-profile-stock-photo.jpeg'),
   });
   observablePetStore.addPet({
     name: 'maya',
     species: 'dog',
     breed: 'german shepard',
-    avatar: require('@rufferal/assets/images/dog-profile-stock-photo.jpeg'),
+    avatar: require('@rufferal/assets/src/images/dog-profile-stock-photo.jpeg'),
   });
   const pets = observablePetStore.activePets();
 
@@ -54,7 +54,7 @@ export const ManagePets = ({ navigation }: PageNavigationProps) => {
 const ArrowRight = () => (
   <Image
     style={tailwind.style(GLOBAL_ICON_SIZE, 'items-center justify-center')}
-    source={require('@rufferal/assets/icons/rufferal/arrow-circle-right.png')}
+    source={require('@rufferal/assets/src/icons/rufferal/arrow-circle-right.png')}
   />
 );
 
@@ -65,7 +65,7 @@ const EmptyPets = () => (
         GLOBAL_ICON_SIZE_LARGE,
         'items-center justify-center mb-3'
       )}
-      source={require('@rufferal/assets/icons/rufferal/paw-print.png')}
+      source={require('@rufferal/assets/src/icons/rufferal/paw-print.png')}
     />
     <Text
       style={tailwind`font-bodySemibold text-b3 text-center text-balticSea-950 mb-1`}

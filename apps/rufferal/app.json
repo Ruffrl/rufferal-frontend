@@ -47,14 +47,14 @@
         "expo-font",
         {
           "fonts": [
-            "../../lib/assets/fonts/proxima-nova/proximanova_bold.otf",
-            "../../lib/assets/fonts/proxima-nova/proximanova_extrabold.otf",
-            "../../lib/assets/fonts/proxima-nova/proximanova_semibold.otf",
-            "../../lib/assets/fonts/inter/inter_bold.otf",
-            "../../lib/assets/fonts/inter/inter_regular_italic.otf",
-            "../../lib/assets/fonts/inter/inter_regular.otf",
-            "../../lib/assets/fonts/inter/inter_semibold.otf",
-            "../../lib/assets/fonts/inter/inter_medium.otf"
+            "../../assets/src/fonts/proxima-nova/proximanova_bold.otf",
+            "../../assets/src/fonts/proxima-nova/proximanova_extrabold.otf",
+            "../../assets/src/fonts/proxima-nova/proximanova_semibold.otf",
+            "../../assets/src/fonts/inter/inter_bold.otf",
+            "../../assets/src/fonts/inter/inter_regular_italic.otf",
+            "../../assets/src/fonts/inter/inter_regular.otf",
+            "../../assets/src/fonts/inter/inter_semibold.otf",
+            "../../assets/src/fonts/inter/inter_medium.otf"
           ]
         }
       ]

@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@rufferal/assets": ["assets/src/index.ts"],
       "@rufferal/store": ["store/src/index.ts"],
       "@rufferal/ui": ["ui/src/index.ts"],
       "@rufferal/utils": ["utils/src/index.ts"]
