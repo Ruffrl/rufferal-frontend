@@ -8,8 +8,10 @@ export interface ProgressBarProps {
 }
 
 // BLARG: TODO: Add animations as you progress from step to step
-// Starting example
-// OR.... find a package that can do this
+// Use Reanimated or Animated to generate
+//    - step 1 will animation fill from 0 to step boundary
+//    - step 2 will have step 1 already filled out and then animation fill to step 2 boundary while removing fill on step 1 simultanesouly
+//    - and so on
 export const ProgressBar = ({ step, total }: ProgressBarProps) => {
   const calcWidth = Math.trunc((1 / total) * 100);
   const totalSteps = Array.from({ length: total }, (_, i) => i + 1);
