@@ -51,7 +51,7 @@ export const FieldInput = ({
       <TextInput
         style={[
           !isMobile && { outlineStyle: 'none' },
-          ruffwind.style(`text-balticSea-950 h-full flex-1 border-0 text-b2`),
+          ruffwind.style(`font-body text-balticSea-950 h-full flex-1 text-b2`),
         ]}
         onChangeText={() => onChange}
         // BLARG: TODO: Convert tailwind colors into an exportable module so we can access hex values direct as needed

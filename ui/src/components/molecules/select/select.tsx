@@ -2,26 +2,41 @@ import { ruffwind } from '@rufferal/tailwind';
 import { View } from 'react-native';
 import {
   FieldHelper,
-  FieldInput,
-  FieldInputProps,
   FieldLabel,
+  FieldSelect,
+  FieldSelectProps,
+  Option,
 } from '../../atoms';
 
-export interface InputProps extends FieldInputProps {
+export interface SelectProps extends FieldSelectProps<Option> {
   errorMessage?: string;
   label: string;
 }
 
-export const Input = ({
+export const Select = ({
+  data,
   errorMessage,
   label,
+  labelField,
+  onChange,
+  placeholder = 'Select...',
+  searchField,
   size = 'standard',
   state = 'default',
-}: InputProps) => {
+  valueField,
+}: SelectProps) => {
   return (
     <View style={ruffwind`gap-1`}>
       <FieldLabel text={label} />
-      <FieldInput state={state} size={size} />
+      <FieldSelect
+        data={data}
+        labelField={labelField}
+        onChange={(item) => console.log(item)}
+        searchField={searchField}
+        valueField={valueField}
+        state={state}
+        size={size}
+      />
       {state === 'errored' ? (
         <FieldHelper text={errorMessage} />
       ) : (
