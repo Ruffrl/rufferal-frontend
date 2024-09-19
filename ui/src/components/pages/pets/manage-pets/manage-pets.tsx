@@ -11,9 +11,9 @@ import {
 } from '@rufferal/utils';
 import {
   Button,
-  Card,
   H3,
   HorizontalDivider,
+  Item,
   VerticalDivider,
 } from '../../../atoms';
 import { FeatureTemplate } from '../../../templates';
@@ -94,16 +94,16 @@ const Pets = ({ pets }: { pets: Pet[] }) => (
   <View style={ruffwind`gap-6`}>
     <View style={ruffwind`gap-3`}>
       {pets.map((pet) => (
-        <PetCard key={pet.id} pet={pet} />
+        <PetItem key={pet.id} pet={pet} />
       ))}
     </View>
     <HorizontalDivider />
   </View>
 );
 
-const PetCard = ({ pet }: { pet: Pet }) => {
+const PetItem = ({ pet }: { pet: Pet }) => {
   return (
-    <Card>
+    <Item>
       <View style={ruffwind`flex-row h-full gap-2`}>
         <View style={ruffwind`justify-center`}>
           <Image
@@ -126,6 +126,6 @@ const PetCard = ({ pet }: { pet: Pet }) => {
           </View>
         </View>
       </View>
-    </Card>
+    </Item>
   );
 };

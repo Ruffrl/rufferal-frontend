@@ -18,7 +18,6 @@ export type { FieldSize, FieldState } from './types/field-types';
 
 export { Bottomsheet } from './bottomsheet/bottomsheet';
 export { Button } from './button/button';
-export { Card } from './card/card';
 export { FieldHelper } from './field-helper/field-helper';
 export { FieldInput } from './field-input/field-input';
 export { FieldLabel } from './field-label/field-label';
@@ -26,5 +25,6 @@ export { FieldSelect } from './field-select/field-select';
 export { H2 } from './h2/h2';
 export { H3 } from './h3/h3';
 export { HorizontalDivider } from './horizontal-divider/horizontal-divider';
+export { Item } from './item/item';
 export { ProgressBar } from './progress-bar/progress-bar';
 export { VerticalDivider } from './vertical-divider/vertical-divider';

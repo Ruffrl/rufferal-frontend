@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react-native';
 
-import { Card } from './card';
+import { Item } from './item';
 
-describe('Card', () => {
+describe('Item', () => {
   it('should render successfully', () => {
-    const { root } = render(<Card />);
+    const { root } = render(<Item />);
     expect(root).toBeTruthy();
   });
 });

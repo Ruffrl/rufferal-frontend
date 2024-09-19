@@ -2,14 +2,14 @@ import { ruffwind } from '@rufferal/tailwind';
 import { PropsWithChildren } from 'react';
 import { Platform, View } from 'react-native';
 
-interface CardProps {
+interface ItemProps {
   height?: string;
 }
 
-export const Card = ({
+export const Item = ({
   height = 'h-16',
   children,
-}: PropsWithChildren<CardProps>) => {
+}: PropsWithChildren<ItemProps>) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
 
   return (
