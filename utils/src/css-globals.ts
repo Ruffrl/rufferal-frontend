@@ -15,13 +15,17 @@ export const GLOBAL_MIN_PRESS_HEIGHT = tw`h-${verticalScaleTW(48)}`;
 //   h-${moderateScaleTW(48)}
 //   w-${moderateScaleTW(48)}
 // `;
+export const GLOBAL_ICON_SIZE_LARGE = tw`
+  h-${verticalScaleTW(24)} 
+  w-${verticalScaleTW(24)} 
+`;
 export const GLOBAL_ICON_SIZE = tw`
   h-${verticalScaleTW(20)} 
   w-${verticalScaleTW(20)} 
 `;
-export const GLOBAL_ICON_SIZE_LARGE = tw`
-  h-${verticalScaleTW(24)} 
-  w-${verticalScaleTW(24)} 
+export const GLOBAL_ICON_SIZE_MEDIUM = tw`
+  h-${verticalScaleTW(18)} 
+  w-${verticalScaleTW(18)} 
 `;
 export const GLOBAL_ICON_SIZE_SMALL = tw`
   h-${verticalScaleTW(14)} 

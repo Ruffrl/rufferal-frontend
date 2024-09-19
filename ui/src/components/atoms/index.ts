@@ -14,6 +14,7 @@
 
 export type { FieldInputProps } from './field-input/field-input';
 export type { FieldSelectProps, Option } from './field-select/field-select';
+export type { RadioItem } from './radio/radio';
 export type { FieldSize, FieldState } from './types/field-types';
 
 export { Bottomsheet } from './bottomsheet/bottomsheet';
@@ -27,4 +28,5 @@ export { H3 } from './h3/h3';
 export { HorizontalDivider } from './horizontal-divider/horizontal-divider';
 export { Item } from './item/item';
 export { ProgressBar } from './progress-bar/progress-bar';
+export { Radio } from './radio/radio';
 export { VerticalDivider } from './vertical-divider/vertical-divider';

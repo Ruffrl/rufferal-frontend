@@ -1,9 +1,10 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { PageNavigationProps } from '../../../..';
-import { H3, ProgressBar } from '../../../../../atoms';
+import { H3, ProgressBar, RadioItem } from '../../../../../atoms';
 import { convertToOptions } from '../../../../../atoms/field-select/field-select';
-import { Input, Select } from '../../../../../molecules';
+import { Input, RadioGroup, Select } from '../../../../../molecules';
 import { FeatureTemplate } from '../../../../../templates';
 import { BREEDS, COLORS } from './cat-options';
 
@@ -11,6 +12,13 @@ import { BREEDS, COLORS } from './cat-options';
 export interface CatDetailsProps extends PageNavigationProps {}
 
 export const CatDetails = ({ navigation }: CatDetailsProps) => {
+  const [sex, setSex] = useState<RadioItem>();
+  
+  const handleSex = (item: RadioItem) => {
+    console.log("BLARG handleSex item:", item)
+    setSex(item)
+  }
+
   return (
     <FeatureTemplate backNavigation={() => navigation.navigate('Manage Pets')}>
       <ScrollView style={ruffwind`pt-6 gap-6`}>
@@ -45,6 +53,15 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
               />
             </View>
             <View>
+              <RadioGroup
+                value={sex}
+                onChange={handleSex}
+                label="Sex"
+                items={[
+                  { id: '1', label: 'Male', value: 'male' },
+                  { id: '2', label: 'Female', value: 'female' },
+                ]}
+              />
               <Text>Sex field</Text>
             </View>
             <View>
