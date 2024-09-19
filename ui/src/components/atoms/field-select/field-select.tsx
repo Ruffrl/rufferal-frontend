@@ -1,10 +1,10 @@
 import { ruffwind } from '@rufferal/tailwind';
 import {
-  capitalize,
   generateKey,
   GLOBAL_ICON_SIZE_SMALL,
   horizontalScaleTW,
   moderateScaleTW,
+  titleCase,
   verticalScale,
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
@@ -26,7 +26,11 @@ export interface FieldSelectProps<Option> {
 
 export const convertToOptions = (options: string[]): FieldOption[] => {
   return options.map((option) => {
-    return { id: generateKey(), label: capitalize(option) };
+    return {
+      id: generateKey(),
+      label: titleCase(option),
+      value: option.toLowerCase(),
+    };
   });
 };
 

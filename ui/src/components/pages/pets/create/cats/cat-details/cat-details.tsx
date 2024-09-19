@@ -3,19 +3,39 @@ import { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { PageNavigationProps } from '../../../..';
 import { FieldOption, H3, ProgressBar } from '../../../../../atoms';
-import { convertToOptions } from '../../../../../atoms/field-select/field-select';
 import { Input, RadioGroup, Select } from '../../../../../molecules';
 import { FeatureTemplate } from '../../../../../templates';
-import { BREEDS, COLORS } from './cat-options';
+import {
+  CAT_AGE_OPTIONS,
+  CAT_BREED_OPTIONS,
+  CAT_COLOR_OPTIONS,
+  CAT_SIZE_OPTIONS,
+  SEX_OPTIONS,
+  STATUS_OPTIONS,
+} from '../../pet-details-options';
 
 /* eslint-disable-next-line */
 export interface CatDetailsProps extends PageNavigationProps {}
 
 export const CatDetails = ({ navigation }: CatDetailsProps) => {
   const [sex, setSex] = useState<FieldOption>();
-
   const handleSex = (item: FieldOption) => {
     setSex(item);
+  };
+
+  const [age, setAge] = useState<FieldOption>();
+  const handleAge = (item: FieldOption) => {
+    setAge(item);
+  };
+
+  const [size, setSize] = useState<FieldOption>();
+  const handleSize = (item: FieldOption) => {
+    setSize(item);
+  };
+
+  const [status, setStatus] = useState<FieldOption>();
+  const handleStatus = (item: FieldOption) => {
+    setStatus(item);
   };
 
   return (
@@ -36,7 +56,7 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
               <Input label="Name" />
               <Select
                 label="Color"
-                data={convertToOptions(COLORS)}
+                data={CAT_COLOR_OPTIONS}
                 labelField="label"
                 onChange={(item) => console.log(item)}
                 searchField="label"
@@ -44,7 +64,7 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
               />
               <Select
                 label="Breed"
-                data={convertToOptions(BREEDS)}
+                data={CAT_BREED_OPTIONS}
                 labelField="label"
                 onChange={(item) => console.log(item)}
                 searchField="label"
@@ -56,21 +76,33 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
                 value={sex}
                 onChange={handleSex}
                 label="Sex"
-                items={[
-                  { id: '1', label: 'Male', value: 'male' },
-                  { id: '2', label: 'Female', value: 'female' },
-                ]}
+                items={SEX_OPTIONS}
               />
-              <Text>Sex field</Text>
             </View>
             <View>
-              <Text>Age field</Text>
+              <RadioGroup
+                value={age}
+                onChange={handleAge}
+                label="Age"
+                items={CAT_AGE_OPTIONS}
+              />
             </View>
             <View>
-              <Text>Size field</Text>
+              <RadioGroup
+                value={size}
+                onChange={handleSize}
+                label="Size"
+                items={CAT_SIZE_OPTIONS}
+              />
             </View>
             <View>
               <Text>Status field</Text>
+              <RadioGroup
+                value={status}
+                onChange={handleStatus}
+                label="Spayed/neutered?"
+                items={STATUS_OPTIONS}
+              />
             </View>
           </View>
         </View>
