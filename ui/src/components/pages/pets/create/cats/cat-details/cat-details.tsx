@@ -2,7 +2,7 @@ import { ruffwind } from '@rufferal/tailwind';
 import { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { PageNavigationProps } from '../../../..';
-import { H3, ProgressBar, RadioItem } from '../../../../../atoms';
+import { FieldOption, H3, ProgressBar } from '../../../../../atoms';
 import { convertToOptions } from '../../../../../atoms/field-select/field-select';
 import { Input, RadioGroup, Select } from '../../../../../molecules';
 import { FeatureTemplate } from '../../../../../templates';
@@ -12,12 +12,12 @@ import { BREEDS, COLORS } from './cat-options';
 export interface CatDetailsProps extends PageNavigationProps {}
 
 export const CatDetails = ({ navigation }: CatDetailsProps) => {
-  const [sex, setSex] = useState<RadioItem>();
-  
-  const handleSex = (item: RadioItem) => {
-    console.log("BLARG handleSex item:", item)
-    setSex(item)
-  }
+  const [sex, setSex] = useState<FieldOption>();
+
+  const handleSex = (item: FieldOption) => {
+    console.log('BLARG handleSex item:', item);
+    setSex(item);
+  };
 
   return (
     <FeatureTemplate backNavigation={() => navigation.navigate('Manage Pets')}>

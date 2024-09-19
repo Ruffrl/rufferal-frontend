@@ -5,16 +5,16 @@ import {
   FieldLabel,
   FieldState,
   Radio,
-  RadioItem,
+  FieldOption,
 } from '../../atoms';
 
 export interface RadioGroupProps {
   errorMessage?: string;
-  items: RadioItem[];
+  items: FieldOption[];
   label?: string;
-  onChange: (item: RadioItem) => void;
+  onChange: (item: FieldOption) => void;
   state?: FieldState;
-  value?: RadioItem;
+  value?: FieldOption;
 }
 
 export const RadioGroup = ({
@@ -25,7 +25,7 @@ export const RadioGroup = ({
   state = 'default',
   value,
 }: RadioGroupProps) => {
-  const handlePress = (item: RadioItem) => {
+  const handlePress = (item: FieldOption) => {
     if (item.id !== value?.id) {
       onChange(item);
     }

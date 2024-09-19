@@ -2,16 +2,11 @@ import { ruffwind } from '@rufferal/tailwind';
 import { GLOBAL_ICON_SIZE_MEDIUM } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { Pressable, Text } from 'react-native';
-
-export interface RadioItem {
-  id: string;
-  label: string;
-  value: string | number | boolean;
-}
+import { FieldOption } from '../../atoms';
 
 export interface RadioProps {
-  item: RadioItem;
-  onPress: (item: RadioItem) => void;
+  item: FieldOption;
+  onPress: (item: FieldOption) => void;
   selected?: boolean;
 }
 
