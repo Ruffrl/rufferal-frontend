@@ -13,9 +13,13 @@
  */
 
 export type { FieldInputProps } from './field-input/field-input';
-export type { FieldSelectProps, Option } from './field-select/field-select';
-export type { RadioItem } from './radio/radio';
-export type { FieldSize, FieldState } from './types/field-types';
+export type { FieldSelectProps } from './field-select/field-select';
+export type {
+  ButtonType,
+  FieldOption,
+  FieldSize,
+  FieldState,
+} from './types/field-types';
 
 export { Bottomsheet } from './bottomsheet/bottomsheet';
 export { Button } from './button/button';

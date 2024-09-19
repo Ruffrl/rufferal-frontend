@@ -11,7 +11,7 @@ import { Image } from 'expo-image';
 import { useState } from 'react';
 import { Platform, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import { FieldSize, FieldState } from '../types/field-types';
+import { FieldOption, FieldSize, FieldState } from '../types/field-types';
 
 export interface FieldSelectProps<Option> {
   data: Option[];
@@ -24,12 +24,7 @@ export interface FieldSelectProps<Option> {
   valueField: keyof Option;
 }
 
-export type Option = {
-  id: string;
-  label: string;
-};
-
-export const convertToOptions = (options: string[]): Option[] => {
+export const convertToOptions = (options: string[]): FieldOption[] => {
   return options.map((option) => {
     return { id: generateKey(), label: capitalize(option) };
   });
@@ -44,7 +39,7 @@ export const FieldSelect = ({
   size = 'standard',
   state = 'default',
   valueField,
-}: FieldSelectProps<Option>) => {
+}: FieldSelectProps<FieldOption>) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   // state
   const [selected, setSelected] = useState(false);
@@ -76,7 +71,7 @@ export const FieldSelect = ({
       />
     );
 
-  const renderItem = (item: Option) => (
+  const renderItem = (item: FieldOption) => (
     <View
       style={ruffwind`
         px-${moderateScaleTW(16)}

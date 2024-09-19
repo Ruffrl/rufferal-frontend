@@ -3,12 +3,12 @@ import { View } from 'react-native';
 import {
   FieldHelper,
   FieldLabel,
+  FieldOption,
   FieldSelect,
   FieldSelectProps,
-  Option,
 } from '../../atoms';
 
-export interface SelectProps extends FieldSelectProps<Option> {
+export interface SelectProps extends FieldSelectProps<FieldOption> {
   errorMessage?: string;
   label: string;
 }
