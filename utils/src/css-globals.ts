@@ -27,6 +27,10 @@ export const GLOBAL_ICON_SIZE_MEDIUM = tw`
   h-${verticalScaleTW(18)} 
   w-${verticalScaleTW(18)} 
 `;
+export const GLOBAL_ICON_SIZE_MEDIUM_SMALL = tw`
+  h-${verticalScaleTW(16)} 
+  w-${verticalScaleTW(16)} 
+`;
 export const GLOBAL_ICON_SIZE_SMALL = tw`
   h-${verticalScaleTW(14)} 
   w-${verticalScaleTW(14)} 

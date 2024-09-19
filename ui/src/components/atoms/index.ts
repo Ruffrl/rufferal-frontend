@@ -33,4 +33,5 @@ export { HorizontalDivider } from './horizontal-divider/horizontal-divider';
 export { Item } from './item/item';
 export { ProgressBar } from './progress-bar/progress-bar';
 export { Radio } from './radio/radio';
+export { Tag } from './tag/tag';
 export { VerticalDivider } from './vertical-divider/vertical-divider';
