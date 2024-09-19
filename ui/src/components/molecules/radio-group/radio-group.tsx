@@ -3,9 +3,9 @@ import { View } from 'react-native';
 import {
   FieldHelper,
   FieldLabel,
+  FieldOption,
   FieldState,
   Radio,
-  FieldOption,
 } from '../../atoms';
 
 export interface RadioGroupProps {
@@ -32,7 +32,7 @@ export const RadioGroup = ({
   };
 
   return (
-    <View style={ruffwind`gap-1`}>
+    <View style={ruffwind`gap-2`}>
       {label && <FieldLabel text={label} />}
       {items.map((item) => {
         return (
@@ -44,11 +44,7 @@ export const RadioGroup = ({
           />
         );
       })}
-      {state === 'errored' ? (
-        <FieldHelper text={errorMessage} />
-      ) : (
-        <View style={ruffwind`h-3`} />
-      )}
+      {state === 'errored' && <FieldHelper text={errorMessage} />}
     </View>
   );
 };

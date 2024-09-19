@@ -173,6 +173,19 @@ module.exports = {
           900: '#3D3D3D',
           950: '#080808', // PRIMARY
         },
+        amethystSmoke: {
+          50: '#F9F8FA',
+          100: '#F4F2F5',
+          200: '#EAE7ED',
+          300: '#D9D4DE',
+          400: '#C3BCC9',
+          500: '#AC9FB3',
+          600: '#9F90A5', // PRIMARY
+          700: '#86758C',
+          800: '#706275',
+          900: '#5D5161',
+          950: '#3D3540',
+        },
       },
       fontFamily: {
         body: ['Inter Regular'], // 400

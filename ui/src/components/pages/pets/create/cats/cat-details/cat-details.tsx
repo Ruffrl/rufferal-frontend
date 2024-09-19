@@ -2,7 +2,13 @@ import { ruffwind } from '@rufferal/tailwind';
 import { useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { PageNavigationProps } from '../../../..';
-import { FieldOption, H3, ProgressBar } from '../../../../../atoms';
+import {
+  Button,
+  FieldOption,
+  H3,
+  HorizontalDivider,
+  ProgressBar,
+} from '../../../../../atoms';
 import { Input, RadioGroup, Select } from '../../../../../molecules';
 import { FeatureTemplate } from '../../../../../templates';
 import {
@@ -40,9 +46,11 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
 
   return (
     <FeatureTemplate backNavigation={() => navigation.navigate('Manage Pets')}>
-      <ScrollView style={ruffwind`pt-6 gap-6`}>
-        <ProgressBar step={1} total={4} />
-        <View style={ruffwind`gap-5`}>
+      <ScrollView>
+        <View style={ruffwind`mt-6`}>
+          <ProgressBar step={1} total={4} />
+        </View>
+        <View style={ruffwind`mt-6 gap-5`}>
           <View style={ruffwind`gap-2`}>
             <H3 text="Add a cat" />
             <Text
@@ -96,7 +104,6 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
               />
             </View>
             <View>
-              <Text>Status field</Text>
               <RadioGroup
                 value={status}
                 onChange={handleStatus}
@@ -105,6 +112,11 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
               />
             </View>
           </View>
+        </View>
+        <View style={ruffwind`my-4 gap-2`}>
+          <HorizontalDivider type="secondary" />
+          <Button text="Next" />
+          <Button text="Cancel" type="transparent" size="standard-short" />
         </View>
       </ScrollView>
     </FeatureTemplate>
