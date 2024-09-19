@@ -115,8 +115,16 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
         </View>
         <View style={ruffwind`my-4 gap-2`}>
           <HorizontalDivider type="secondary" />
-          <Button text="Next" />
-          <Button text="Cancel" type="transparent" size="standard-short" />
+          <Button
+            text="Next"
+            onPress={() => navigation.navigate('Cat Avatar')}
+          />
+          <Button
+            text="Cancel"
+            type="transparent"
+            size="standard-short"
+            onPress={() => navigation.navigate('Manage Pets')}
+          />
         </View>
       </ScrollView>
     </FeatureTemplate>
