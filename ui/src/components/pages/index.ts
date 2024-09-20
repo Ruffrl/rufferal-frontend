@@ -10,6 +10,21 @@
  *   Article Page: Complete with actual articles, images, and related links
  *
  */
+export type ScreenProps = {
+  Camera: undefined;
+  'Cat Avatar': undefined;
+  'Cat Careplan': undefined;
+  'Cat Details': undefined;
+  'Cat Personality': undefined;
+  'Create Pets Onboarding': undefined;
+  'Dog Avatar': undefined;
+  'Dog Careplan': undefined;
+  'Dog Details': undefined;
+  'Dog Personality': undefined;
+  'Manage Pets': undefined;
+  Search: undefined;
+  // Profile: { userId: string };
+};
 
 export type { PageNavigationProps } from './types/page-props';
 
@@ -22,5 +37,6 @@ export { DogCareplan } from './pets/create/dogs/dog-careplan/dog-careplan';
 export { DogDetails } from './pets/create/dogs/dog-details/dog-details';
 export { DogPersonality } from './pets/create/dogs/dog-personality/dog-personality';
 export { ManagePets } from './pets/manage-pets/manage-pets';
+export { Camera } from './photo/camera/camera';
 export { PetSplash } from './profiles/create/pet-splash/pet-splash';
 export { Search } from './search/search/search';

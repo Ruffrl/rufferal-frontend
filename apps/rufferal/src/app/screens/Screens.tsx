@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { observer } from 'mobx-react-lite';
 import {
+  CameraScreen,
   CatAvatarScreen,
   CatCareplanScreen,
   CatDetailsScreen,
@@ -32,6 +33,7 @@ export const Screens = observer(() => {
         <Stack.Screen name="Manage Pets" component={ManagePetsScreen} />
         <Stack.Screen name="Cat Details" component={CatDetailsScreen} />
         {/* <Stack.Screen name="Cat Avatar" component={CatAvatarScreen} /> */}
+        <Stack.Screen name="Camera" component={CameraScreen} />
         <Stack.Screen name="Cat Personality" component={CatPersonalityScreen} />
         <Stack.Screen name="Cat Careplan" component={CatCareplanScreen} />
         <Stack.Screen name="Dog Details" component={DogDetailsScreen} />

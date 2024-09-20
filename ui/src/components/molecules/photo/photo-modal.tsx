@@ -4,16 +4,19 @@ import {
   BottomSheetModal,
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ruffwind } from '@rufferal/tailwind';
 import {
   moderateScaleTW,
   verticalScale,
   verticalScaleTW,
 } from '@rufferal/utils';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Button, Platform, Pressable, Text, View } from 'react-native';
-import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
+import { useCameraPermissions } from 'expo-camera';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { Platform, Pressable, Text } from 'react-native';
 import { HorizontalDivider } from '../../atoms';
+import { ScreenProps } from '../../pages';
 
 export interface PhotoModalProps {
   handleModalDismiss: () => void;
@@ -29,6 +32,8 @@ export const PhotoModal = ({
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   // variables
+  const [permission, requestPermission] = useCameraPermissions();
+  const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
   const isIOS = Platform.OS === 'ios';
   const snapPoints = useMemo(() => [verticalScale(1), verticalScale(194)], []);
   const buttonStyles = ruffwind`
@@ -55,64 +60,6 @@ export const PhotoModal = ({
     }
   }, [handlePresentModalPress, modalPresent]);
 
-  /*****************************************************************/
-  /************************ CAMERA HANDLING ************************/
-  /*****************************************************************/
-  // const [facing, setFacing] = useState<CameraType>('back');
-  // const [permission, requestPermission] = useCameraPermissions();
-
-  // if (!permission) {
-  //   // Camera permissions are still loading.
-  //   return <View />;
-  // }
-
-  // if (!permission.granted) {
-  //   // Camera permissions are not granted yet.
-  //   return (
-  //     <View style={styles.container}>
-  //       <Text style={styles.message}>We need your permission to show the camera</Text>
-  //       <Button onPress={requestPermission} title="grant permission" />
-  //     </View>
-  //   );
-  // }
-
-  // function toggleCameraFacing() {
-  //   setFacing(current => (current === 'back' ? 'front' : 'back'));
-  // }
-  // const handleCamera = useCallback(() => {
-  //   ImagePicker.openCamera({
-  //     width: 300,
-  //     height: 400,
-  //     cropping: true,
-  //   }).then((image) => {
-  //     console.log(image);
-  //   });
-  // }, []);
-  // const handleCropper = useCallback(() => {
-  //   ImagePicker.openCropper({
-  //     path: 'my-file-path.jpg',
-  //     width: 300,
-  //     height: 400,
-  //     mediaType: 'photo',
-  //   }).then((image) => {
-  //     console.log(image);
-  //   });
-  // }, []);
-
-
-  /******************************************************************/
-  /************************ GALLERY HANDLING ************************/
-  /******************************************************************/
-   // const handleImagePicker = useCallback(() => {
-  //   ImagePicker.openPicker({
-  //     width: 300,
-  //     height: 400,
-  //     cropping: true,
-  //   }).then((image) => {
-  //     console.log(image);
-  //   });
-  // }, []);
-
   // renders
   const renderBackdrop = useCallback(
     (props: BottomSheetBackdropProps) => (
@@ -126,7 +73,7 @@ export const PhotoModal = ({
     ),
     [handleModalDismiss]
   );
-  
+
   return (
     <BottomSheetModal
       backdropComponent={renderBackdrop}
@@ -165,6 +112,10 @@ export const PhotoModal = ({
           )}
           onPress={() => {
             // handleCamera()
+            if (!permission?.granted) {
+              requestPermission();
+            }
+            navigation.navigate('Camera');
             console.log('Camera');
           }}
         >
