@@ -186,6 +186,19 @@ module.exports = {
           900: '#5D5161',
           950: '#3D3540',
         },
+        azureRadiance: {
+          100: '#D6F2FF',
+          200: '#B5EAFF',
+          300: '#83DFFF',
+          400: '#48CBFF',
+          50: '#EDFAFF',
+          500: '#1EACFF',
+          600: '#068EFF',
+          700: '#007AFF', // PRIMARY
+          800: '#085DC5',
+          900: '#0D519B',
+          950: '#0E315D',
+        },
       },
       fontFamily: {
         body: ['Inter Regular'], // 400

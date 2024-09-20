@@ -47,9 +47,7 @@ export const FeatureTemplate = ({
 
   return overrideSafe ? (
     <View style={ruffwind.style(`flex-1`, bgColor)}>
-      {/* <View style={ruffwind`flex-1 pt-[44px] pb-[44px]`}> */}
       <FeatureBody />
-      {/* </View> */}
     </View>
   ) : (
     <SafeAreaView style={ruffwind.style(`flex-1`, bgColor)}>
