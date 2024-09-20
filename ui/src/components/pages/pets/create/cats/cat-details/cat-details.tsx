@@ -1,6 +1,6 @@
 import { ruffwind } from '@rufferal/tailwind';
 import { useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Platform, ScrollView, Text, View } from 'react-native';
 import { PageNavigationProps } from '../../../..';
 import {
   Button,
@@ -24,6 +24,8 @@ import {
 export interface CatDetailsProps extends PageNavigationProps {}
 
 export const CatDetails = ({ navigation }: CatDetailsProps) => {
+  const isIOS = Platform.OS === 'ios';
+
   const [sex, setSex] = useState<FieldOption>();
   const handleSex = (item: FieldOption) => {
     setSex(item);
@@ -113,7 +115,7 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
             </View>
           </View>
         </View>
-        <View style={ruffwind`my-4 gap-2`}>
+        <View style={ruffwind.style(`mt-4 gap-2`, !isIOS && `mb-4`)}>
           <HorizontalDivider type="secondary" />
           <Button
             text="Next"

@@ -11,5 +11,6 @@
  */
 
 export { Input } from './input/input';
+export { Photo } from './photo/photo';
 export { RadioGroup } from './radio-group/radio-group';
 export { Select } from './select/select';

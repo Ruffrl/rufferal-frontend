@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react-native';
 
-import { RadioGroup } from './radio-group';
+import { Photo } from './photo';
 
-describe('RadioGroup', () => {
+describe('Photo', () => {
   it('should render successfully', () => {
-    const { root } = render(<RadioGroup />);
+    const { root } = render(<Photo />);
     expect(root).toBeTruthy();
   });
 });
