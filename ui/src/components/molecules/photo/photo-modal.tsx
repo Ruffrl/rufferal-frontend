@@ -10,8 +10,9 @@ import {
   verticalScale,
   verticalScaleTW,
 } from '@rufferal/utils';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { Platform, Pressable, Text } from 'react-native';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Button, Platform, Pressable, Text, View } from 'react-native';
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { HorizontalDivider } from '../../atoms';
 
 export interface PhotoModalProps {
@@ -54,6 +55,65 @@ export const PhotoModal = ({
     }
   }, [handlePresentModalPress, modalPresent]);
 
+  /*****************************************************************/
+  /************************ CAMERA HANDLING ************************/
+  /*****************************************************************/
+  // const [facing, setFacing] = useState<CameraType>('back');
+  // const [permission, requestPermission] = useCameraPermissions();
+
+  // if (!permission) {
+  //   // Camera permissions are still loading.
+  //   return <View />;
+  // }
+
+  // if (!permission.granted) {
+  //   // Camera permissions are not granted yet.
+  //   return (
+  //     <View style={styles.container}>
+  //       <Text style={styles.message}>We need your permission to show the camera</Text>
+  //       <Button onPress={requestPermission} title="grant permission" />
+  //     </View>
+  //   );
+  // }
+
+  // function toggleCameraFacing() {
+  //   setFacing(current => (current === 'back' ? 'front' : 'back'));
+  // }
+  // const handleCamera = useCallback(() => {
+  //   ImagePicker.openCamera({
+  //     width: 300,
+  //     height: 400,
+  //     cropping: true,
+  //   }).then((image) => {
+  //     console.log(image);
+  //   });
+  // }, []);
+  // const handleCropper = useCallback(() => {
+  //   ImagePicker.openCropper({
+  //     path: 'my-file-path.jpg',
+  //     width: 300,
+  //     height: 400,
+  //     mediaType: 'photo',
+  //   }).then((image) => {
+  //     console.log(image);
+  //   });
+  // }, []);
+
+
+  /******************************************************************/
+  /************************ GALLERY HANDLING ************************/
+  /******************************************************************/
+   // const handleImagePicker = useCallback(() => {
+  //   ImagePicker.openPicker({
+  //     width: 300,
+  //     height: 400,
+  //     cropping: true,
+  //   }).then((image) => {
+  //     console.log(image);
+  //   });
+  // }, []);
+
+  // renders
   const renderBackdrop = useCallback(
     (props: BottomSheetBackdropProps) => (
       <BottomSheetBackdrop
@@ -66,8 +126,7 @@ export const PhotoModal = ({
     ),
     [handleModalDismiss]
   );
-
-  // renders
+  
   return (
     <BottomSheetModal
       backdropComponent={renderBackdrop}
@@ -89,7 +148,10 @@ export const PhotoModal = ({
             buttonStyles,
             `rounded-t-${moderateScaleTW(10)}`
           )}
-          onPress={() => console.log('Photo Gallery')}
+          onPress={() => {
+            // handleImagePicker()
+            console.log('Photo Gallery');
+          }}
         >
           <Text style={ruffwind.style(buttonTextStyles, `font-body`)}>
             Photo Gallery
@@ -101,7 +163,10 @@ export const PhotoModal = ({
             buttonStyles,
             `rounded-b-${moderateScaleTW(10)}`
           )}
-          onPress={() => console.log('Camera')}
+          onPress={() => {
+            // handleCamera()
+            console.log('Camera');
+          }}
         >
           <Text style={ruffwind.style(buttonTextStyles, `font-body`)}>
             Camera
