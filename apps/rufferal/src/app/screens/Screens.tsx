@@ -33,7 +33,6 @@ export const Screens = observer(() => {
         <Stack.Screen name="Manage Pets" component={ManagePetsScreen} />
         <Stack.Screen name="Cat Details" component={CatDetailsScreen} />
         {/* <Stack.Screen name="Cat Avatar" component={CatAvatarScreen} /> */}
-        <Stack.Screen name="Camera" component={CameraScreen} />
         <Stack.Screen name="Cat Personality" component={CatPersonalityScreen} />
         <Stack.Screen name="Cat Careplan" component={CatCareplanScreen} />
         <Stack.Screen name="Dog Details" component={DogDetailsScreen} />
@@ -41,6 +40,8 @@ export const Screens = observer(() => {
         <Stack.Screen name="Dog Personality" component={DogPersonalityScreen} />
         <Stack.Screen name="Dog Careplan" component={DogCareplanScreen} />
         <Stack.Screen name="Search" component={SearchScreen} />
+        
+        <Stack.Screen name="Camera" component={CameraScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
