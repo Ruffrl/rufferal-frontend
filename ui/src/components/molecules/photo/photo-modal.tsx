@@ -13,8 +13,10 @@ import {
   verticalScaleTW,
 } from '@rufferal/utils';
 import { useCameraPermissions } from 'expo-camera';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { launchImageLibraryAsync, MediaTypeOptions } from 'expo-image-picker';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Platform, Pressable, Text } from 'react-native';
+
 import { HorizontalDivider } from '../../atoms';
 import { ScreenProps } from '../../pages';
 
@@ -36,6 +38,8 @@ export const PhotoModal = ({
   const navigation = useNavigation<NativeStackNavigationProp<ScreenProps>>();
   const isIOS = Platform.OS === 'ios';
   const snapPoints = useMemo(() => [verticalScale(1), verticalScale(194)], []);
+  const [image, setImage] = useState<string | null>(null);
+
   const buttonStyles = ruffwind`
     bg-[#ededed]
     justify-center
@@ -53,6 +57,23 @@ export const PhotoModal = ({
   const handleSheetChanges = useCallback((index: number) => {
     console.log('handleSheetChanges', index);
   }, []);
+
+  // behaviors
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    const result = await launchImageLibraryAsync({
+      mediaTypes: MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
   useEffect(() => {
     if (modalPresent) {
@@ -96,7 +117,7 @@ export const PhotoModal = ({
             `rounded-t-${moderateScaleTW(10)}`
           )}
           onPress={() => {
-            // handleImagePicker()
+            pickImage();
             console.log('Photo Gallery');
           }}
         >
