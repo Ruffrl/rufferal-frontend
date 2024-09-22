@@ -125,7 +125,7 @@ export const PhotoModal = ({
             Photo Gallery
           </Text>
         </Pressable>
-        <HorizontalDivider type="tertiary" />
+        <HorizontalDivider color="border-iron-200" />
         <Pressable
           style={ruffwind.style(
             buttonStyles,

@@ -114,7 +114,7 @@ export const DogDetails = ({ navigation }: DogDetailsProps) => {
           </View>
         </View>
         <View style={ruffwind`my-4 gap-2`}>
-          <HorizontalDivider type="secondary" />
+          <HorizontalDivider color="border-amethystSmoke-600" />
           <Button
             text="Next"
             onPress={() => navigation.navigate('Dog Avatar')}

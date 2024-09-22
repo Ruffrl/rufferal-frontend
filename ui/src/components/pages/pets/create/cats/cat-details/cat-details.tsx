@@ -116,7 +116,7 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
           </View>
         </View>
         <View style={ruffwind.style(`mt-4 gap-2`, !isIOS && `mb-4`)}>
-          <HorizontalDivider type="secondary" />
+          <HorizontalDivider color="border-amethystSmoke-600" />
           <Button
             text="Next"
             onPress={() => navigation.navigate('Cat Avatar')}

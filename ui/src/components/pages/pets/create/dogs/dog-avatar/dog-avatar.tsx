@@ -38,7 +38,7 @@ export const DogAvatar = ({ navigation }: DogAvatarProps) => {
                     source={require('@rufferal/assets/src/icons/dog.png')}
                   />
                 )}
-                text="Gavin"
+                text="Maya"
               />
               <H3 text="Upload a profile photo" />
               <Text style={ruffwind`text-balticSea-950 font-body text-b2`}>

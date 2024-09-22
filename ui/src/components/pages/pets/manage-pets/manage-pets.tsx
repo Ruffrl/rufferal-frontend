@@ -97,7 +97,7 @@ const Pets = ({ pets }: { pets: Pet[] }) => (
         <PetItem key={pet.id} pet={pet} />
       ))}
     </View>
-    <HorizontalDivider />
+    <HorizontalDivider color='border-graySuit-400' />
   </View>
 );
 
