@@ -36,4 +36,6 @@ export { Radio } from './radio/radio';
 export { Tag } from './tag/tag';
 export { Toggle } from './toggle/toggle';
 export { Switch } from './switch/switch';
+export { SingleSlider } from './single-slider/single-slider';
+export { RangeSlider } from './range-slider/range-slider';
 export { VerticalDivider } from './vertical-divider/vertical-divider';

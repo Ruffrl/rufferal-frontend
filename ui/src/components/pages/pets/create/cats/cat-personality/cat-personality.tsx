@@ -14,7 +14,8 @@ import {
   H3,
   HorizontalDivider,
   ProgressBar,
-  Switch,
+  RangeSlider,
+  SingleSlider,
   Tag,
   Toggle,
 } from '../../../../../atoms';
@@ -29,7 +30,7 @@ export const CatPersonality = ({ navigation }: CatPersonalityProps) => {
 
   const [goodWithDogs, setGoodWithDogs] = useState(false);
   const handleGoodWithDogs = () => setGoodWithDogs((prev) => !prev);
- 
+
   const [goodWithCats, setGoodWithCats] = useState(false);
   const handleGoodWithCats = () => setGoodWithCats((prev) => !prev);
 
@@ -44,6 +45,21 @@ export const CatPersonality = ({ navigation }: CatPersonalityProps) => {
 
   const [careSpecial, setCareSpecial] = useState(false);
   const handleCareSpecial = () => setCareSpecial((prev) => !prev);
+  
+  const [personalityTemperment, setPersonalityTemperment] = useState<number>();
+  const handleTemperment = (value: number) => setPersonalityTemperment(value)
+  
+  const [personalityEnergy, setPersonalityEnergy] = useState<number>();
+  const handleEnergy = (value: number) => setPersonalityEnergy(value)
+  
+  const [personalityAutonomy, setPersonalityAutonomy] = useState<number>();
+  const handleAutonomy = (value: number) => setPersonalityAutonomy(value)
+  
+  const [personalityMotivation, setPersonalityMotivation] = useState<number>();
+  const handleMotivation = (value: number) => setPersonalityMotivation(value)
+  
+  const [blarg, setBlarg] = useState<[number, number]>();
+  const handleBlarg = (range: [number, number]) => setBlarg(range)
 
   return (
     <FeatureTemplate
@@ -105,10 +121,10 @@ export const CatPersonality = ({ navigation }: CatPersonalityProps) => {
             <Text style={ruffwind`text-gray-500 text-${moderateScaleTW(16)}`}>
               Kids
             </Text>
-            <Text>Slider 1</Text>
-            <Text>Slider 2</Text>
-            <Text>Slider 3</Text>
-            <Text>Slider 4</Text>
+            <SingleSlider handleChange={handleTemperment} value={personalityTemperment} />
+            <SingleSlider handleChange={handleEnergy} value={personalityEnergy} />
+            <SingleSlider handleChange={handleAutonomy} value={personalityAutonomy} />
+            <SingleSlider handleChange={handleMotivation} value={personalityMotivation} />
           </View>
           <HorizontalDivider />
           <View>
@@ -141,7 +157,8 @@ export const CatPersonality = ({ navigation }: CatPersonalityProps) => {
                 setToggleState={handleCareSpecial}
               />
             </View>
-            <Switch switchState={careSpecial} setSwitchState={handleCareSpecial} />
+          
+            <RangeSlider handleChange={handleBlarg} range={blarg} />
           </View>
         </View>
         <View style={ruffwind.style(`gap-2 mt-${verticalScaleTW(37)}`)}>

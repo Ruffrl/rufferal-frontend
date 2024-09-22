@@ -1,4 +1,5 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { horizontalScaleTW } from '@rufferal/utils';
 import { PropsWithChildren } from 'react';
 import { Platform, SafeAreaView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -8,6 +9,7 @@ export interface FeatureTemplateProps {
   backNavigation?: () => void;
   bgColor?: string;
   overrideSafe?: boolean;
+  paddingX?: string;
   skipNavigation?: () => void;
 }
 
@@ -16,6 +18,7 @@ export const FeatureTemplate = ({
   bgColor = 'bg-whitePointer-50',
   children,
   overrideSafe = false,
+  paddingX = `px-${horizontalScaleTW(20)}`,
   skipNavigation,
 }: PropsWithChildren<FeatureTemplateProps>) => {
   const insets = useSafeAreaInsets();
@@ -29,12 +32,14 @@ export const FeatureTemplate = ({
       paddingY = 'pt-12';
       break;
     case 'ios':
-      paddingY = overrideSafe ? `pt-[${insets.top}px] pb-[${insets.bottom}px]` : 'pt-4';
+      paddingY = overrideSafe
+        ? `pt-[${insets.top}px] pb-[${insets.bottom}px]`
+        : 'pt-4';
       break;
   }
 
   const FeatureBody = () => (
-    <View style={ruffwind.style(`flex-1 px-[18px]`, paddingY)}>
+    <View style={ruffwind.style(`flex-1`, paddingX, paddingY)}>
       {backNavigation && (
         <PageNavigation
           backNavigation={backNavigation}
