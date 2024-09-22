@@ -12,7 +12,7 @@ export const HorizontalDivider = ({
   return (
     <View
       style={ruffwind.style(
-        `border-b w-full border-${moderateScaleTW(1)}`,
+        `border-b w-full border-b-${moderateScaleTW(1)}`,
         color
       )}
     />
