@@ -7,7 +7,7 @@ import { GLOBAL_ICON_SIZE_MEDIUM_SMALL } from '@rufferal/utils';
 import { PageNavigationProps } from '../../../..';
 import { Button, H3, ProgressBar, Tag } from '../../../../../atoms';
 import { Photo } from '../../../../../molecules';
-import { FeatureTemplate } from '../../../../../templates';
+import { OverrideSafeFeatureTemplate } from '../../../../../templates';
 
 /* eslint-disable-next-line */
 export interface DogAvatarProps extends PageNavigationProps {}
@@ -16,10 +16,9 @@ export const DogAvatar = ({ navigation }: DogAvatarProps) => {
   const isIOS = Platform.OS === 'ios';
 
   return (
-    <FeatureTemplate
+    <OverrideSafeFeatureTemplate
       backNavigation={() => navigation.navigate('Dog Details')}
       skipNavigation={() => navigation.navigate('Dog Personality')}
-      overrideSafe
     >
       <BottomSheetModalProvider>
         <View style={ruffwind`flex-1 justify-between`}>
@@ -63,6 +62,6 @@ export const DogAvatar = ({ navigation }: DogAvatarProps) => {
           </View>
         </View>
       </BottomSheetModalProvider>
-    </FeatureTemplate>
+    </OverrideSafeFeatureTemplate>
   );
 };

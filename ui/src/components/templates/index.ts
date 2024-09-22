@@ -11,4 +11,6 @@
  */
 
 export { FeatureTemplate } from './feature-template/feature-template';
+export { ScrollFeatureTemplate } from './scroll-feature-template/scroll-feature-template';
+export { OverrideSafeFeatureTemplate } from './override-safe-feature-template/override-safe-feature-template';
 export { SplashTemplate } from './splash-template/splash-template';

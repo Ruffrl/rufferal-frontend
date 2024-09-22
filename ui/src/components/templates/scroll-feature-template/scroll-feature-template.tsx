@@ -1,23 +1,23 @@
 import { ruffwind } from '@rufferal/tailwind';
 import { horizontalScaleTW, verticalScaleTW } from '@rufferal/utils';
 import { PropsWithChildren } from 'react';
-import { Platform, SafeAreaView, View } from 'react-native';
+import { Platform, SafeAreaView, ScrollView, View } from 'react-native';
 import { PageNavigation } from '../../organisms';
 
-export interface FeatureTemplateProps {
+export interface ScrollFeatureTemplateProps {
   backNavigation?: () => void;
   bgColor?: string;
   paddingX?: string;
   skipNavigation?: () => void;
 }
 
-export const FeatureTemplate = ({
+export const ScrollFeatureTemplate = ({
   backNavigation,
   bgColor = 'bg-whitePointer-50',
   children,
   paddingX = `px-${horizontalScaleTW(20)}`,
   skipNavigation,
-}: PropsWithChildren<FeatureTemplateProps>) => {
+}: PropsWithChildren<ScrollFeatureTemplateProps>) => {
   let paddingY = `pt-${verticalScaleTW(32)}`;
   switch (Platform.OS) {
     case 'android':
@@ -37,7 +37,7 @@ export const FeatureTemplate = ({
             skipNavigation={skipNavigation}
           />
         )}
-        {children}
+        <ScrollView style={ruffwind`flex-1`}>{children}</ScrollView>
       </View>
     </SafeAreaView>
   );

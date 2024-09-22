@@ -7,7 +7,7 @@ import { GLOBAL_ICON_SIZE_MEDIUM_SMALL } from '@rufferal/utils';
 import { PageNavigationProps } from '../../../..';
 import { Button, H3, ProgressBar, Tag } from '../../../../../atoms';
 import { Photo } from '../../../../../molecules';
-import { FeatureTemplate } from '../../../../../templates';
+import { OverrideSafeFeatureTemplate } from '../../../../../templates';
 
 /* eslint-disable-next-line */
 export interface CatAvatarProps extends PageNavigationProps {}
@@ -16,10 +16,9 @@ export const CatAvatar = ({ navigation }: CatAvatarProps) => {
   const isIOS = Platform.OS === 'ios';
 
   return (
-    <FeatureTemplate
+    <OverrideSafeFeatureTemplate
       backNavigation={() => navigation.navigate('Cat Details')}
       skipNavigation={() => navigation.navigate('Cat Personality')}
-      overrideSafe
     >
       <BottomSheetModalProvider>
         <View style={ruffwind`flex-1 justify-between`}>
@@ -63,6 +62,6 @@ export const CatAvatar = ({ navigation }: CatAvatarProps) => {
           </View>
         </View>
       </BottomSheetModalProvider>
-    </FeatureTemplate>
+    </OverrideSafeFeatureTemplate>
   );
 };

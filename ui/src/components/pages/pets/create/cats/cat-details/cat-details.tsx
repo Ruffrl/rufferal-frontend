@@ -1,6 +1,6 @@
 import { ruffwind } from '@rufferal/tailwind';
 import { useState } from 'react';
-import { Platform, ScrollView, Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import { PageNavigationProps } from '../../../..';
 import {
   Button,
@@ -10,7 +10,7 @@ import {
   ProgressBar,
 } from '../../../../../atoms';
 import { Input, RadioGroup, Select } from '../../../../../molecules';
-import { FeatureTemplate } from '../../../../../templates';
+import { ScrollFeatureTemplate } from '../../../../../templates';
 import {
   CAT_AGE_OPTIONS,
   CAT_BREED_OPTIONS,
@@ -47,88 +47,83 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
   };
 
   return (
-    <FeatureTemplate backNavigation={() => navigation.navigate('Manage Pets')}>
-      <ScrollView>
-        <View style={ruffwind`mt-6`}>
-          <ProgressBar step={1} total={4} />
+    <ScrollFeatureTemplate
+      backNavigation={() => navigation.navigate('Manage Pets')}
+    >
+      <View style={ruffwind`mt-6`}>
+        <ProgressBar step={1} total={4} />
+      </View>
+      <View style={ruffwind`mt-6 gap-5`}>
+        <View style={ruffwind`gap-2`}>
+          <H3 text="Add a cat" />
+          <Text style={ruffwind`font-bodySemibold text-b2 text-balticSea-950`}>
+            Required information
+          </Text>
         </View>
-        <View style={ruffwind`mt-6 gap-5`}>
-          <View style={ruffwind`gap-2`}>
-            <H3 text="Add a cat" />
-            <Text
-              style={ruffwind`font-bodySemibold text-b2 text-balticSea-950`}
-            >
-              Required information
-            </Text>
+        <View style={ruffwind`gap-3`}>
+          <View style={ruffwind`gap-1`}>
+            <Input label="Name" />
+            <Select
+              label="Color"
+              data={CAT_COLOR_OPTIONS}
+              labelField="label"
+              onChange={(item) => console.log(item)}
+              searchField="label"
+              valueField="id"
+            />
+            <Select
+              label="Breed"
+              data={CAT_BREED_OPTIONS}
+              labelField="label"
+              onChange={(item) => console.log(item)}
+              searchField="label"
+              valueField="id"
+            />
           </View>
-          <View style={ruffwind`gap-3`}>
-            <View style={ruffwind`gap-1`}>
-              <Input label="Name" />
-              <Select
-                label="Color"
-                data={CAT_COLOR_OPTIONS}
-                labelField="label"
-                onChange={(item) => console.log(item)}
-                searchField="label"
-                valueField="id"
-              />
-              <Select
-                label="Breed"
-                data={CAT_BREED_OPTIONS}
-                labelField="label"
-                onChange={(item) => console.log(item)}
-                searchField="label"
-                valueField="id"
-              />
-            </View>
-            <View>
-              <RadioGroup
-                value={sex}
-                onChange={handleSex}
-                label="Sex"
-                items={SEX_OPTIONS}
-              />
-            </View>
-            <View>
-              <RadioGroup
-                value={age}
-                onChange={handleAge}
-                label="Age"
-                items={CAT_AGE_OPTIONS}
-              />
-            </View>
-            <View>
-              <RadioGroup
-                value={size}
-                onChange={handleSize}
-                label="Size"
-                items={CAT_SIZE_OPTIONS}
-              />
-            </View>
-            <View>
-              <RadioGroup
-                value={status}
-                onChange={handleStatus}
-                label="Spayed/neutered?"
-                items={STATUS_OPTIONS}
-              />
-            </View>
+          <View>
+            <RadioGroup
+              value={sex}
+              onChange={handleSex}
+              label="Sex"
+              items={SEX_OPTIONS}
+            />
+          </View>
+          <View>
+            <RadioGroup
+              value={age}
+              onChange={handleAge}
+              label="Age"
+              items={CAT_AGE_OPTIONS}
+            />
+          </View>
+          <View>
+            <RadioGroup
+              value={size}
+              onChange={handleSize}
+              label="Size"
+              items={CAT_SIZE_OPTIONS}
+            />
+          </View>
+          <View>
+            <RadioGroup
+              value={status}
+              onChange={handleStatus}
+              label="Spayed/neutered?"
+              items={STATUS_OPTIONS}
+            />
           </View>
         </View>
-        <View style={ruffwind.style(`mt-4 gap-2`, !isIOS && `mb-4`)}>
-          <HorizontalDivider color="border-amethystSmoke-600" />
-          <Button
-            text="Next"
-            onPress={() => navigation.navigate('Cat Avatar')}
-          />
-          <Button
-            text="Cancel"
-            type="transparent"
-            size="standard-short"
-            onPress={() => navigation.navigate('Manage Pets')}
-          />
-        </View>
-      </ScrollView>
-    </FeatureTemplate>
+      </View>
+      <View style={ruffwind.style(`mt-4 gap-2`, !isIOS && `mb-4`)}>
+        <HorizontalDivider color="border-amethystSmoke-600" />
+        <Button text="Next" onPress={() => navigation.navigate('Cat Avatar')} />
+        <Button
+          text="Cancel"
+          type="transparent"
+          size="standard-short"
+          onPress={() => navigation.navigate('Manage Pets')}
+        />
+      </View>
+    </ScrollFeatureTemplate>
   );
 };
