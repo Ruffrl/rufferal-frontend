@@ -1,20 +1,22 @@
 import { ruffwind } from '@rufferal/tailwind';
 import {
   GLOBAL_ICON_SIZE_MEDIUM_SMALL,
-  GLOBAL_PROTOTYPE_COLORS,
   moderateScaleTW,
   verticalScaleTW,
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
-import { Platform, ScrollView, Switch, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 
+import { useState } from 'react';
 import { PageNavigationProps } from '../../../..';
 import {
   Button,
   H3,
   HorizontalDivider,
   ProgressBar,
+  Switch,
   Tag,
+  Toggle,
 } from '../../../../../atoms';
 import { FeatureTemplate } from '../../../../../templates';
 
@@ -22,6 +24,27 @@ import { FeatureTemplate } from '../../../../../templates';
 export interface CatPersonalityProps extends PageNavigationProps {}
 
 export const CatPersonality = ({ navigation }: CatPersonalityProps) => {
+  const [goodWithKids, setGoodWithKids] = useState(false);
+  const handleGoodWithKids = () => setGoodWithKids((prev) => !prev);
+
+  const [goodWithDogs, setGoodWithDogs] = useState(false);
+  const handleGoodWithDogs = () => setGoodWithDogs((prev) => !prev);
+ 
+  const [goodWithCats, setGoodWithCats] = useState(false);
+  const handleGoodWithCats = () => setGoodWithCats((prev) => !prev);
+
+  const [careDeclawed, setCareDeclawed] = useState(false);
+  const handleCareDeclawed = () => setCareDeclawed((prev) => !prev);
+
+  const [careMedication, setCareMedication] = useState(false);
+  const handleCareMedication = () => setCareMedication((prev) => !prev);
+
+  const [careAnxiety, setCareAnxiety] = useState(false);
+  const handleCareAnxiety = () => setCareAnxiety((prev) => !prev);
+
+  const [careSpecial, setCareSpecial] = useState(false);
+  const handleCareSpecial = () => setCareSpecial((prev) => !prev);
+
   return (
     <FeatureTemplate
       backNavigation={() => navigation.navigate('Cat Personality')}
@@ -52,33 +75,33 @@ export const CatPersonality = ({ navigation }: CatPersonalityProps) => {
         <View style={ruffwind`mt-5 gap-4`}>
           <View>
             <Text>Good with</Text>
-            <Text>Toggle 1</Text>
-            <Text>Toggle 2</Text>
-            <Text>Toggle 3</Text>
-            <Text>Toggle 4</Text>
+
+            <View style={ruffwind`justify-between flex-row`}>
+              <Text>Kids</Text>
+              <Toggle
+                toggleState={goodWithKids}
+                setToggleState={handleGoodWithKids}
+              />
+            </View>
+            <View style={ruffwind`justify-between flex-row`}>
+              <Text>Dogs</Text>
+              <Toggle
+                toggleState={goodWithDogs}
+                setToggleState={handleGoodWithDogs}
+              />
+            </View>
+            <View style={ruffwind`justify-between flex-row`}>
+              <Text>Other cats</Text>
+              <Toggle
+                toggleState={goodWithCats}
+                setToggleState={handleGoodWithCats}
+              />
+            </View>
           </View>
           <HorizontalDivider />
           <View>
             <Text>Personality</Text>
-            <Switch
-              style={ruffwind.style(
-                Platform.OS === 'android' && {
-                  transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }],
-                }
-              )}
-              thumbColor={
-                true
-                  ? GLOBAL_PROTOTYPE_COLORS.tertiary.hex
-                  : GLOBAL_PROTOTYPE_COLORS.primary.hex
-              }
-              trackColor={{
-                false: GLOBAL_PROTOTYPE_COLORS.secondary.hex,
-                true: GLOBAL_PROTOTYPE_COLORS.successTertiary.hex,
-              }}
-              ios_backgroundColor={GLOBAL_PROTOTYPE_COLORS.secondary.hex}
-              onValueChange={() => console.log("Toggle")}
-              // value={selected === toggle}
-            />
+
             <Text style={ruffwind`text-gray-500 text-${moderateScaleTW(16)}`}>
               Kids
             </Text>
@@ -90,10 +113,35 @@ export const CatPersonality = ({ navigation }: CatPersonalityProps) => {
           <HorizontalDivider />
           <View>
             <Text>Care & behavior</Text>
-            <Text>Toggle 1</Text>
-            <Text>Toggle 2</Text>
-            <Text>Toggle 3</Text>
-            <Text>Toggle 4</Text>
+            <View style={ruffwind`justify-between flex-row`}>
+              <Text>Declawed</Text>
+              <Toggle
+                toggleState={careDeclawed}
+                setToggleState={handleCareDeclawed}
+              />
+            </View>
+            <View style={ruffwind`justify-between flex-row`}>
+              <Text>Requires medication</Text>
+              <Toggle
+                toggleState={careMedication}
+                setToggleState={handleCareMedication}
+              />
+            </View>
+            <View style={ruffwind`justify-between flex-row`}>
+              <Text>Seperation anxiety</Text>
+              <Toggle
+                toggleState={careAnxiety}
+                setToggleState={handleCareAnxiety}
+              />
+            </View>
+            <View style={ruffwind`justify-between flex-row`}>
+              <Text>Special needs</Text>
+              <Toggle
+                toggleState={careSpecial}
+                setToggleState={handleCareSpecial}
+              />
+            </View>
+            <Switch switchState={careSpecial} setSwitchState={handleCareSpecial} />
           </View>
         </View>
         <View style={ruffwind.style(`gap-2 mt-${verticalScaleTW(37)}`)}>
