@@ -12,5 +12,5 @@ export type ButtonType =
 export type FieldOption = {
   id: string;
   label: string;
-  value?: string | number | boolean;
+  value: string;
 };

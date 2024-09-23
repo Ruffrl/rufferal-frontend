@@ -7,6 +7,7 @@ import {
   FieldOption,
   FieldSelect,
   FieldSelectProps,
+  FieldState,
 } from '../../atoms';
 
 export type OtherOption = {
@@ -17,21 +18,26 @@ export interface SelectProps extends FieldSelectProps<FieldOption> {
   errorMessage?: string;
   label: string;
   other?: OtherOption;
+  disabled?: boolean;
 }
 
 export const Select = ({
   data,
   errorMessage,
   label,
-  labelField,
-  onChange,
-  placeholder = 'Select...',
-  searchField,
   size = 'standard',
-  state = 'default',
-  valueField,
   other,
+  disabled,
+  ...selectProps
 }: SelectProps) => {
+  let state: FieldState = 'default';
+
+  if (disabled) {
+    state = 'disabled';
+  } else if (errorMessage) {
+    state = 'errored';
+  }
+
   // Handle optional "Other" option
   if (other && Object.keys(other).length > 0) {
     data.push({
@@ -43,18 +49,15 @@ export const Select = ({
 
   return (
     <View style={ruffwind`gap-${moderateScaleTW(4)}`}>
-      <FieldLabel text={label} />
+      <FieldLabel text={label} state={state} />
       <FieldSelect
         data={data}
-        labelField={labelField}
-        onChange={(item) => console.log(item)}
-        searchField={searchField}
-        valueField={valueField}
         state={state}
         size={size}
         other={other}
+        {...selectProps}
       />
-      {state === 'errored' ? (
+      {errorMessage ? (
         <FieldHelper text={errorMessage} />
       ) : (
         <View style={ruffwind`h-${moderateScaleTW(12)}`} />

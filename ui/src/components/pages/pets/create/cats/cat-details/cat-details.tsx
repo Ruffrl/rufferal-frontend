@@ -3,12 +3,10 @@ import { ruffwind } from '@rufferal/tailwind';
 import { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
-import * as yup from 'yup';
 
 import { PageNavigationProps } from '../../../..';
 import {
   Button,
-  FieldOption,
   H3,
   HorizontalDivider,
   ProgressBar,
@@ -20,35 +18,11 @@ import {
   CAT_BREED_OPTIONS,
   CAT_COLOR_OPTIONS,
   CAT_SIZE_OPTIONS,
+  PetDetailsForm,
+  petDetailsSchema,
   SEX_OPTIONS,
   STATUS_OPTIONS,
 } from '../../pet-details-options';
-
-type CatDetailsForm = {
-  // photo: string;
-  name: string;
-  // color: string;
-  // breed: string;
-  // sex: string;
-  // age: string;
-  // size: string;
-  // status: string;
-};
-
-const catDetailsSchema: yup.ObjectSchema<CatDetailsForm> = yup
-  .object({
-    // photo: yup.string().required('Please provide a photo of your cat'),
-    name: yup.string().required('Please provide a name for your cat'),
-    // color: yup.string().required("Please provide your cat's color"),
-    // breed: yup.string().required("Please provide your cat's breed"),
-    // sex: yup.string().required("Please provide your cat's sex"),
-    // age: yup.string().required("Please provide your cat's age"),
-    // size: yup.string().required("Please provide your cat's size"),
-    // status: yup
-    //   .string()
-    //   .required("Please provide your cat's sterilization status"),
-  })
-  .required();
 
 /* eslint-disable-next-line */
 export interface CatDetailsProps extends PageNavigationProps {}
@@ -60,18 +34,11 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
   const [error, setError] = useState<string>();
 
   /* REACT HOOK FORM */
-  const form = useForm<CatDetailsForm>({
-    resolver: yupResolver(catDetailsSchema),
-    // defaultValues: {
-    //   name: undefined,
-    //   color: undefined,
-    //   breed: undefined,
-    //   age: undefined,
-    //   size: undefined,
-    //   sex: undefined,
-    //   status: undefined,
-    // },
+  const form = useForm<PetDetailsForm>({
+    resolver: yupResolver(petDetailsSchema('cat')),
     mode: 'onBlur',
+    // BLARG:TODO - RHF with RN doesn't scroll on error, so find a custom solution (https://dev.to/shaswatprabhat/auto-scroll-in-react-native-forms-3k16)
+    shouldFocusError: true,
   });
   const {
     control,
@@ -79,7 +46,7 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
     formState: { errors, isDirty },
   } = form;
 
-  const onSubmit = handleSubmit(async (data: CatDetailsForm) => {
+  const onSubmit = handleSubmit(async (data: PetDetailsForm) => {
     setLoading(true);
     if (process.env['NODE_ENV'] === 'development') {
       console.log('BLARG:TODO - handle store submission', data);
@@ -103,26 +70,6 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
       }
     }
   });
-
-  const [sex, setSex] = useState<FieldOption>();
-  const handleSex = (item: FieldOption) => {
-    setSex(item);
-  };
-
-  const [age, setAge] = useState<FieldOption>();
-  const handleAge = (item: FieldOption) => {
-    setAge(item);
-  };
-
-  const [size, setSize] = useState<FieldOption>();
-  const handleSize = (item: FieldOption) => {
-    setSize(item);
-  };
-
-  const [status, setStatus] = useState<FieldOption>();
-  const handleStatus = (item: FieldOption) => {
-    setStatus(item);
-  };
 
   return (
     <ScrollFeatureTemplate
@@ -158,53 +105,101 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
                   />
                 )}
               />
-              <Select
-                label="Color"
-                data={CAT_COLOR_OPTIONS}
-                labelField="label"
-                onChange={(item) => console.log(item)}
-                searchField="label"
-                valueField="id"
+              <Controller
+                name="color"
+                control={control}
+                render={({ field: { onBlur, onChange } }) => (
+                  <Select
+                    label="Color"
+                    data={CAT_COLOR_OPTIONS}
+                    labelField="label"
+                    onBlur={onBlur} // notify when input is touched
+                    onChange={onChange} // send value to hook form
+                    searchField="label"
+                    valueField="id"
+                    errorMessage={errors.color?.value?.message}
+                  />
+                )}
               />
-              <Select
-                label="Breed"
-                data={CAT_BREED_OPTIONS}
-                labelField="label"
-                onChange={(item) => console.log(item)}
-                searchField="label"
-                valueField="id"
-              />
-            </View>
-            <View>
-              <RadioGroup
-                value={sex}
-                onChange={handleSex}
-                label="Sex"
-                items={SEX_OPTIONS}
-              />
-            </View>
-            <View>
-              <RadioGroup
-                value={age}
-                onChange={handleAge}
-                label="Age"
-                items={CAT_AGE_OPTIONS}
-              />
-            </View>
-            <View>
-              <RadioGroup
-                value={size}
-                onChange={handleSize}
-                label="Size"
-                items={CAT_SIZE_OPTIONS}
+              <Controller
+                name="breed"
+                control={control}
+                render={({ field: { onBlur, onChange } }) => (
+                  <Select
+                    label="Breed"
+                    data={CAT_BREED_OPTIONS}
+                    labelField="label"
+                    onBlur={onBlur} // notify when input is touched
+                    onChange={onChange} // send value to hook form
+                    searchField="label"
+                    valueField="id"
+                    errorMessage={errors.breed?.value?.message}
+                  />
+                )}
               />
             </View>
             <View>
-              <RadioGroup
-                value={status}
-                onChange={handleStatus}
-                label="Spayed/neutered?"
-                items={STATUS_OPTIONS}
+              <Controller
+                name="sex"
+                control={control}
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <RadioGroup
+                    value={value}
+                    data={SEX_OPTIONS}
+                    onBlur={onBlur} // notify when input is touched
+                    onChange={onChange} // send value to hook form
+                    label="Sex"
+                    errorMessage={errors.sex?.value?.message}
+                  />
+                )}
+              />
+            </View>
+            <View>
+              <Controller
+                name="age"
+                control={control}
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <RadioGroup
+                    value={value}
+                    data={CAT_AGE_OPTIONS}
+                    onBlur={onBlur} // notify when input is touched
+                    onChange={onChange} // send value to hook form
+                    label="Age"
+                    errorMessage={errors.age?.value?.message}
+                  />
+                )}
+              />
+            </View>
+            <View>
+              <Controller
+                name="size"
+                control={control}
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <RadioGroup
+                    value={value}
+                    data={CAT_SIZE_OPTIONS}
+                    onBlur={onBlur} // notify when input is touched
+                    onChange={onChange} // send value to hook form
+                    label="Size"
+                    errorMessage={errors.size?.value?.message}
+                  />
+                )}
+              />
+            </View>
+            <View>
+              <Controller
+                name="status"
+                control={control}
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <RadioGroup
+                    value={value}
+                    data={STATUS_OPTIONS}
+                    onBlur={onBlur} // notify when input is touched
+                    onChange={onChange} // send value to hook form
+                    label="Spayed/neutered?"
+                    errorMessage={errors.status?.value?.message}
+                  />
+                )}
               />
             </View>
           </View>

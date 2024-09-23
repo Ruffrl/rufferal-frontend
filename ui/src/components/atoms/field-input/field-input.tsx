@@ -37,7 +37,7 @@ export const FieldInput = ({
   let placeholderColor = '#695C6F';
   switch (state) {
     case 'errored':
-      stateStyle = `bg-red-200 border-red-300`;
+      stateStyle = `bg-white border-red-300`;
       textStyle = `text-red-600`;
       placeholderColor = '#E8270E';
       break;
@@ -70,7 +70,6 @@ export const FieldInput = ({
           ruffwind.style(`font-body h-full flex-1 text-b2`, textStyle),
         ]}
         onChangeText={(text) => {
-          console.log('BLARG text', text);
           onChange(text);
         }}
         placeholderTextColor={placeholderColor}

@@ -1,3 +1,40 @@
+import * as yup from 'yup';
+import { FieldOption } from '././../../../atoms';
+
+/****************** FORM ******************/
+export type PetDetailsForm = {
+  name: string;
+  color: FieldOption;
+  breed: FieldOption;
+  sex: FieldOption;
+  age: FieldOption;
+  size: FieldOption;
+  status: FieldOption;
+};
+export const optionSchema: (
+  requiredMessage: string
+) => yup.ObjectSchema<FieldOption> = (requiredMessage: string) => {
+  return yup.object({
+    id: yup.string().required(),
+    label: yup.string().required(),
+    value: yup.string().required(requiredMessage),
+  });
+};
+export const petDetailsSchema: (
+  species: 'cat' | 'dog'
+) => yup.ObjectSchema<PetDetailsForm> = (species: 'cat' | 'dog') =>
+  yup
+    .object({
+      name: yup.string().required(`Please provide a name for your ${species}`),
+      color: optionSchema(`Please provide your ${species}'s color`),
+      breed: optionSchema(`Please provide your ${species}'s breed`),
+      sex: optionSchema(`Please provide your ${species}'s sex`),
+      age: optionSchema(`Please provide your ${species}'s age`),
+      size: optionSchema(`Please provide your ${species}'s size`),
+      status: optionSchema(`Please provide your ${species}'s status`),
+    })
+    .required();
+
 /****************** SHARED ******************/
 export const SEX = ['male', 'female'];
 export const SEX_OPTIONS = [

@@ -33,7 +33,6 @@ export const InputArea = ({
       <FieldLabel text={label} />
       <FieldInputArea
         onChange={(text) => {
-          console.log('FART', text);
           handleCharacterCount(text);
           onChange?.(text) && onChange(text);
         }}

@@ -32,7 +32,7 @@ export const Input = ({
 
   return (
     <View style={ruffwind`gap-${moderateScaleTW(4)}`}>
-      <FieldLabel text={label} />
+      <FieldLabel text={label} state={state} />
       <FieldInput state={state} size={size} {...inputProps} />
       {errorMessage ? (
         <FieldHelper text={errorMessage} />

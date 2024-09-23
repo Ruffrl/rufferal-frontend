@@ -8,20 +8,24 @@ import {
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { useState } from 'react';
-import { Platform, Text, View } from 'react-native';
-import { Dropdown } from 'react-native-element-dropdown';
-import { OtherOption } from '../../molecules';
+import {
+  FlatListProps,
+  ImageStyle,
+  Platform,
+  StyleProp,
+  Text,
+  TextProps,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native';
+import { Dropdown, IDropdownRef } from 'react-native-element-dropdown';
 import { FieldOption, FieldSize, FieldState } from '../';
+import { OtherOption } from '../../molecules';
 
-export interface FieldSelectProps<Option> {
-  data: Option[];
-  labelField: keyof Option;
-  onChange: (item: Option) => void;
-  placeholder?: string;
-  searchField?: keyof Option;
+export interface FieldSelectProps<Option> extends DropdownProps<Option> {
   size?: FieldSize;
   state?: FieldState;
-  valueField: keyof Option;
   other?: OtherOption;
 }
 
@@ -45,6 +49,7 @@ export const FieldSelect = ({
   state = 'default',
   valueField,
   other,
+  ...selectProps
 }: FieldSelectProps<FieldOption>) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   // state
@@ -58,6 +63,27 @@ export const FieldSelect = ({
       break;
   }
 
+  let stateStyle = `bg-white border-saltBox-200`;
+  let textStyle = `text-saltBox-950`;
+  let placeholderStyle = `text-saltBox-700`;
+  // BLARG: TODO: Convert tailwind colors into an exportable module so we can access hex values direct as needed
+  // colors.codGray[700]
+  let tintColor = '#4F4F4F';
+  switch (state) {
+    case 'errored':
+      stateStyle = `bg-white border-red-300`;
+      textStyle = `text-red-600`;
+      placeholderStyle = `text-red-600`;
+      tintColor = '#FF4931';
+      break;
+    case 'disabled':
+      stateStyle = `bg-iron-200 border-iron-300`;
+      textStyle = `text-iron-500`;
+      placeholderStyle = `text-iron-500`;
+      tintColor = '#999999';
+      break;
+  }
+
   const renderRightIcon = () =>
     selected ? (
       <Image
@@ -66,6 +92,7 @@ export const FieldSelect = ({
           'items-center justify-center'
         )}
         source={require('@rufferal/assets/src/icons/chevron-up.png')}
+        tintColor={tintColor}
       />
     ) : (
       <Image
@@ -74,6 +101,7 @@ export const FieldSelect = ({
           'items-center justify-center'
         )}
         source={require('@rufferal/assets/src/icons/chevron-down.png')}
+        tintColor={tintColor}
       />
     );
 
@@ -104,6 +132,7 @@ export const FieldSelect = ({
 
   return (
     <Dropdown
+      {...selectProps}
       data={data}
       labelField={labelField}
       onChange={(item) => {
@@ -120,23 +149,23 @@ export const FieldSelect = ({
       maxHeight={moderateScale(320)}
       renderRightIcon={renderRightIcon}
       renderItem={renderItem}
+      disable={state === 'disabled'}
       // Styling for view container
       style={ruffwind.style(
-        `bg-white
-        border-saltBox-200
+        `border-solid 
         gap-${moderateScaleTW(4)}
-        border-solid 
         border-${moderateScaleTW(1)}
         h-${moderateScaleTW(32)}
         px-${moderateScaleTW(16)}
         py-${moderateScaleTW(8)}
         rounded-${moderateScaleTW(8)}`,
+        stateStyle,
         width
       )}
       // Styling for selected text (inside select field)
-      selectedTextStyle={ruffwind`font-body text-saltBox-950 text-b2`}
+      selectedTextStyle={ruffwind.style(`font-body text-b2`, textStyle)}
       // Styling for text placeholder
-      placeholderStyle={ruffwind`font-body text-saltBox-700 text-b2`}
+      placeholderStyle={ruffwind.style(`font-body text-b2`, placeholderStyle)}
       // Styling for input search
       inputSearchStyle={[
         !isMobile && { outlineStyle: 'none' },
@@ -156,12 +185,75 @@ export const FieldSelect = ({
           shadowRadius: 0,
           elevation: 3,
         },
-        ruffwind`mt-${moderateScaleTW(14)} bg-white border-${moderateScaleTW(
-          0.5
-        )} border-saltBox-200 rounded-b`,
+        ruffwind`
+          mt-${moderateScaleTW(14)}
+          bg-white-500
+          border-${moderateScaleTW(0.5)}
+          border-saltBox-200
+          rounded-b`,
       ]}
       // Background color for item selected in list container
       activeColor={'#F6E8FF'}
     />
   );
 };
+
+export interface DropdownProps<T> {
+  ref?:
+    | React.RefObject<IDropdownRef>
+    | React.MutableRefObject<IDropdownRef>
+    | null
+    | undefined;
+  testID?: string;
+  itemTestIDField?: string;
+  style?: StyleProp<ViewStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
+  placeholderStyle?: StyleProp<TextStyle>;
+  selectedTextStyle?: StyleProp<TextStyle>;
+  selectedTextProps?: TextProps;
+  itemContainerStyle?: StyleProp<ViewStyle>;
+  itemTextStyle?: StyleProp<TextStyle>;
+  inputSearchStyle?: StyleProp<TextStyle>;
+  iconStyle?: StyleProp<ImageStyle>;
+  maxHeight?: number;
+  minHeight?: number;
+  fontFamily?: string;
+  iconColor?: string;
+  activeColor?: string;
+  data: T[];
+  value?: T | string | null | undefined;
+  placeholder?: string;
+  labelField: keyof T;
+  valueField: keyof T;
+  searchField?: keyof T;
+  search?: boolean;
+  searchPlaceholder?: string;
+  disable?: boolean;
+  autoScroll?: boolean;
+  showsVerticalScrollIndicator?: boolean;
+  dropdownPosition?: 'auto' | 'top' | 'bottom';
+  // flatListProps?: Omit<FlatListProps<any>, 'renderItem' | 'data'>;
+  flatListProps?: Omit<FlatListProps<unknown>, 'renderItem' | 'data'>;
+  keyboardAvoiding?: boolean;
+  backgroundColor?: string;
+  confirmSelectItem?: boolean;
+  accessibilityLabel?: string;
+  itemAccessibilityLabelField?: string;
+  inverted?: boolean;
+  mode?: 'default' | 'modal' | 'auto';
+  closeModalWhenSelectedItem?: boolean;
+  excludeItems?: T[];
+  excludeSearchItems?: T[];
+  onChange: (item: T) => void;
+  renderLeftIcon?: (visible?: boolean) => JSX.Element | null | undefined;
+  renderRightIcon?: (visible?: boolean) => JSX.Element | null | undefined;
+  renderItem?: (item: T, selected?: boolean) => JSX.Element | null | undefined;
+  renderInputSearch?: (
+    onSearch: (text: string) => void
+  ) => JSX.Element | null | undefined;
+  onFocus?: () => void;
+  onBlur?: () => void;
+  searchQuery?: (keyword: string, labelValue: string) => boolean;
+  onChangeText?: (search: string) => void;
+  onConfirmSelectItem?: (item: T) => void;
+}
