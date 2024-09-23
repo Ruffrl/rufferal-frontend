@@ -23,7 +23,7 @@ export const Screens = observer(() => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {/* ⬇️⬇️⬇️ CURRENT DEVELOPMENT PAGE ⬇️⬇️⬇️ */}
-        <Stack.Screen name="Cat Careplan" component={CatCareplanScreen} />
+        <Stack.Screen name="Dog Careplan" component={DogCareplanScreen} />
         {/* ⬆️⬆️⬆️ CURRENT DEVELOPMENT PAGE ⬆️⬆️⬆️ */}
 
         <Stack.Screen
@@ -34,11 +34,11 @@ export const Screens = observer(() => {
         <Stack.Screen name="Cat Details" component={CatDetailsScreen} />
         <Stack.Screen name="Cat Avatar" component={CatAvatarScreen} />
         <Stack.Screen name="Cat Personality" component={CatPersonalityScreen} />
-        {/* <Stack.Screen name="Cat Careplan" component={CatCareplanScreen} /> */}
+        <Stack.Screen name="Cat Careplan" component={CatCareplanScreen} />
         <Stack.Screen name="Dog Details" component={DogDetailsScreen} />
         <Stack.Screen name="Dog Avatar" component={DogAvatarScreen} />
         <Stack.Screen name="Dog Personality" component={DogPersonalityScreen} />
-        <Stack.Screen name="Dog Careplan" component={DogCareplanScreen} />
+        {/* <Stack.Screen name="Dog Careplan" component={DogCareplanScreen} /> */}
         <Stack.Screen name="Search" component={SearchScreen} />
 
         <Stack.Screen name="Camera" component={CameraScreen} />

@@ -90,4 +90,18 @@ export const HARNESS_OPTIONS = [
     value: 'no',
   },
 ];
+
 /****************** DOGS ******************/
+export const HOUSETRAINING = ['yes', 'no'];
+export const HOUSETRAINING_OPTIONS = [
+  {
+    id: 'jhp8becas9e',
+    label: 'Yes',
+    value: 'yes',
+  },
+  {
+    id: 'cl4801pdvd4',
+    label: 'No',
+    value: 'no',
+  },
+];
