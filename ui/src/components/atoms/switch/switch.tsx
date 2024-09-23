@@ -21,14 +21,16 @@ export const Switch = ({ switchState, setSwitchState }: SwitchProps) => {
       onValueChange={handleState}
       activeText="On"
       inActiveText="Off"
-      circleSize={12}
+      circleSize={moderateScale(12)}
       circleActiveColor="#FAF9FA"
       circleInActiveColor="#FAF9FA"
       backgroundActive="#9525CB"
       backgroundInActive="#C9C9C9"
+      switchPaddingLeft={moderateScale(4)}
+      switchPaddingRight={moderateScale(4)}
       textStyle={ruffwind.style(
-        `font-bodySemibold text-b1 text-center`,
-        switchState ? `text-saltBox-50` : `text-iron-500`
+        `font-bodySemibold text-b1 text-center m-0`,
+        switchState ? `text-saltBox-50 mr-${moderateScaleTW(4)}` : `text-iron-500 ml-${moderateScaleTW(4)}`
       )}
       switchStyle={ruffwind.style(`
         w-${moderateScaleTW(40)}

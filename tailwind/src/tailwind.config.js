@@ -1,3 +1,5 @@
+import { moderateScale } from '@rufferal/utils';
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [],
@@ -224,14 +226,26 @@ module.exports = {
         headerExtrabold: ['Proxima Nova Extrabold'], // 800
       },
       fontSize: {
-        b1: ['0.625rem', '0.875rem'], // 10px, 14px
-        b2: ['0.75rem', '1rem'], // 12px, 16px
-        b3: ['0.875rem', '1.25rem'], // 14px, 20px
-        b4: ['1rem', '1.5rem'], // 16px, 24px
-        h3: ['1.375rem', '1.625rem'], // 22px, 26px
-        h2: ['1.75rem', '1.875rem'], // 28px, 30px
-        h1: ['2rem', '2.25rem'], // 32px, 36px
+        b1: [`${moderateScale(10)}px`, `${moderateScale(14)}px`],
+        b2: [`${moderateScale(12)}px`, `${moderateScale(16)}px`],
+        b3: [`${moderateScale(14)}px`, `${moderateScale(20)}px`],
+        b4: [`${moderateScale(16)}px`, `${moderateScale(24)}px`],
+        h3: [`${moderateScale(22)}px`, `${moderateScale(26)}px`],
+        h2: [`${moderateScale(28)}px`, `${moderateScale(30)}px`],
+        h1: [`${moderateScale(32)}px`, `${moderateScale(36)}px`],
       },
+      // BLARG - DEBUG: If these are based on REM but all my others are based on a scaling of dimensional screens, then these are disconnected
+      // OPTION 1 (short term): Convert here to use dimensional resizing
+      // OPTION 2 (long term): Make a decision of REM or dimensional resizing and convert all over
+      // fontSize: {
+      //   b1: ['0.625rem', '0.875rem'], // 10px, 14px
+      //   b2: ['0.75rem', '1rem'], // 12px, 16px
+      //   b3: ['0.875rem', '1.25rem'], // 14px, 20px
+      //   b4: ['1rem', '1.5rem'], // 16px, 24px
+      //   h3: ['1.375rem', '1.625rem'], // 22px, 26px
+      //   h2: ['1.75rem', '1.875rem'], // 28px, 30px
+      //   h1: ['2rem', '2.25rem'], // 32px, 36px
+      // },
     },
   },
   plugins: [],

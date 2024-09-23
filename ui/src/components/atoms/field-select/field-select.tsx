@@ -2,15 +2,15 @@ import { ruffwind } from '@rufferal/tailwind';
 import {
   generateKey,
   GLOBAL_ICON_SIZE_SMALL,
-  horizontalScaleTW,
+  moderateScale,
   moderateScaleTW,
   titleCase,
-  verticalScale,
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { useState } from 'react';
 import { Platform, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
+import { OtherOption } from '../../molecules/select/select';
 import { FieldOption, FieldSize, FieldState } from '../types/field-types';
 
 export interface FieldSelectProps<Option> {
@@ -22,6 +22,7 @@ export interface FieldSelectProps<Option> {
   size?: FieldSize;
   state?: FieldState;
   valueField: keyof Option;
+  other?: OtherOption;
 }
 
 export const convertToOptions = (options: string[]): FieldOption[] => {
@@ -43,6 +44,7 @@ export const FieldSelect = ({
   size = 'standard',
   state = 'default',
   valueField,
+  other,
 }: FieldSelectProps<FieldOption>) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   // state
@@ -52,7 +54,7 @@ export const FieldSelect = ({
   let width = `w-full`;
   switch (size) {
     case 'small':
-      width = `w-${horizontalScaleTW(150)}`;
+      width = `w-${moderateScaleTW(150)}`;
       break;
   }
 
@@ -75,25 +77,30 @@ export const FieldSelect = ({
       />
     );
 
-  const renderItem = (item: FieldOption) => (
-    <View
-      style={ruffwind`
+  const renderItem = (item: FieldOption) => {
+    const isOtherItem =
+      other && Object.keys(other).length > 0 && data[data.length - 1] === item;
+
+    return (
+      <View
+        style={ruffwind`
         px-${moderateScaleTW(16)}
         py-${moderateScaleTW(8)}
       `}
-    >
-      <Text
-        style={ruffwind.style(
-          `text-b2`,
-          item.id === value
-            ? `text-electricViolet-700 font-bodySemibold`
-            : `text-balticSea-950 font-body`
-        )}
       >
-        {item.label}
-      </Text>
-    </View>
-  );
+        <Text
+          style={ruffwind.style(
+            `font-body text-b2`,
+            item.id === value
+              ? `text-electricViolet-700 font-bodySemibold`
+              : `text-balticSea-950 font-body`
+          )}
+        >
+          {isOtherItem ? other.component : item.label}
+        </Text>
+      </View>
+    );
+  };
 
   return (
     <Dropdown
@@ -110,14 +117,14 @@ export const FieldSelect = ({
       placeholder={placeholder}
       search
       showsVerticalScrollIndicator={false}
-      maxHeight={verticalScale(320)}
+      maxHeight={moderateScale(320)}
       renderRightIcon={renderRightIcon}
       renderItem={renderItem}
       // Styling for view container
       style={ruffwind.style(
         `bg-white
         border-saltBox-200
-        gap-1 
+        gap-${moderateScaleTW(4)}
         border-solid 
         border-${moderateScaleTW(1)}
         h-${moderateScaleTW(32)}
@@ -149,7 +156,9 @@ export const FieldSelect = ({
           shadowRadius: 0,
           elevation: 3,
         },
-        ruffwind`mt-[14px] bg-white border-[0.5px] border-saltBox-200 rounded-b`,
+        ruffwind`mt-${moderateScaleTW(14)} bg-white border-${moderateScaleTW(
+          0.5
+        )} border-saltBox-200 rounded-b`,
       ]}
       // Background color for item selected in list container
       activeColor={'#F6E8FF'}

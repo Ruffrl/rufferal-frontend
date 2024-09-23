@@ -12,6 +12,7 @@
  *
  */
 
+export type { AccordionSection } from './accordian/accordian';
 export type { FieldInputProps } from './field-input/field-input';
 export type { FieldSelectProps } from './field-select/field-select';
 export type {

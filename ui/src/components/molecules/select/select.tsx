@@ -1,4 +1,5 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { moderateScaleTW } from '@rufferal/utils';
 import { View } from 'react-native';
 import {
   FieldHelper,
@@ -8,9 +9,14 @@ import {
   FieldSelectProps,
 } from '../../atoms';
 
+export type OtherOption = {
+  component: JSX.Element;
+  label: string;
+};
 export interface SelectProps extends FieldSelectProps<FieldOption> {
   errorMessage?: string;
   label: string;
+  other?: OtherOption;
 }
 
 export const Select = ({
@@ -24,9 +30,19 @@ export const Select = ({
   size = 'standard',
   state = 'default',
   valueField,
+  other,
 }: SelectProps) => {
+  // Handle optional "Other" option
+  if (other && Object.keys(other).length > 0) {
+    data.push({
+      id: 'other',
+      label: other.label,
+      value: other.label.toLowerCase(),
+    });
+  }
+
   return (
-    <View style={ruffwind`gap-1`}>
+    <View style={ruffwind`gap-${moderateScaleTW(4)}`}>
       <FieldLabel text={label} />
       <FieldSelect
         data={data}
@@ -36,11 +52,12 @@ export const Select = ({
         valueField={valueField}
         state={state}
         size={size}
+        other={other}
       />
       {state === 'errored' ? (
         <FieldHelper text={errorMessage} />
       ) : (
-        <View style={ruffwind`h-3`} />
+        <View style={ruffwind`h-${moderateScaleTW(12)}`} />
       )}
     </View>
   );

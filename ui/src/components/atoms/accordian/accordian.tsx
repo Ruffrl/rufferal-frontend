@@ -13,83 +13,23 @@ import { Switch } from '../switch/switch';
 const CollapsibleAccordion = Blarg.default;
 
 export interface AccordianProps {
-  align?: string;
-  text?: string | React.ReactElement;
+  sections: AccordionSection[];
 }
+
+export type SectionSwitch = {
+  state: boolean;
+  setSwitch: () => void;
+};
 
 export interface AccordionSection {
   title: string;
   icon?: string;
   component: JSX.Element;
+  switch?: SectionSwitch;
 }
 
-const SECTIONS: AccordionSection[] = [
-  {
-    title: 'Harness',
-    icon: require('@rufferal/assets/src/icons/cat-walk.png'),
-    component: (
-      <>
-        <Text style={ruffwind`text-pink-500`}>Something</Text>
-        <Text style={ruffwind`text-pink-500`}>Other thing</Text>
-        <Text style={ruffwind`text-pink-500`}>This thing</Text>
-      </>
-    ),
-  },
-  {
-    title: 'Feeding',
-    component: (
-      <>
-        <Text style={ruffwind`text-pink-500`}>Something</Text>
-        <Text style={ruffwind`text-pink-500`}>Other thing</Text>
-        <Text style={ruffwind`text-pink-500`}>This thing</Text>
-      </>
-    ),
-  },
-  {
-    title: 'Overnight',
-    component: (
-      <>
-        <Text style={ruffwind`text-pink-500`}>Something</Text>
-        <Text style={ruffwind`text-pink-500`}>Other thing</Text>
-        <Text style={ruffwind`text-pink-500`}>This thing</Text>
-      </>
-    ),
-  },
-  {
-    title: 'Medical',
-    component: (
-      <>
-        <Text style={ruffwind`text-pink-500`}>Something</Text>
-        <Text style={ruffwind`text-pink-500`}>Other thing</Text>
-        <Text style={ruffwind`text-pink-500`}>This thing</Text>
-      </>
-    ),
-  },
-  {
-    title: 'Special needs',
-    component: (
-      <>
-        <Text style={ruffwind`text-pink-500`}>Something</Text>
-        <Text style={ruffwind`text-pink-500`}>Other thing</Text>
-        <Text style={ruffwind`text-pink-500`}>This thing</Text>
-      </>
-    ),
-  },
-  {
-    title: 'Additional notes',
-    component: (
-      <>
-        <Text style={ruffwind`text-pink-500`}>Something</Text>
-        <Text style={ruffwind`text-pink-500`}>Other thing</Text>
-        <Text style={ruffwind`text-pink-500`}>This thing</Text>
-      </>
-    ),
-  },
-];
-
-export const Accordian = ({ align = 'text-center', text }: AccordianProps) => {
+export const Accordian = ({ sections }: AccordianProps) => {
   const [activeSection, setActiveSection] = useState<number[] | string[]>([]);
-  const [switch1, setSwitch1] = useState(false);
 
   // renders
   const renderSectionHeader = (section: AccordionSection) => {
@@ -117,10 +57,12 @@ export const Accordian = ({ align = 'text-center', text }: AccordianProps) => {
         >
           {section.title}
         </Text>
-        <Switch
-          switchState={switch1}
-          setSwitchState={() => setSwitch1((prev) => !prev)}
-        />
+        {section.switch && (
+          <Switch
+            switchState={section.switch.state}
+            setSwitchState={section.switch.setSwitch}
+          />
+        )}
         <Image
           style={ruffwind.style(
             GLOBAL_ICON_SIZE_MEDIUM_SMALL,
@@ -158,7 +100,7 @@ export const Accordian = ({ align = 'text-center', text }: AccordianProps) => {
   return (
     <CollapsibleAccordion
       expandMultiple
-      sections={SECTIONS}
+      sections={sections}
       activeSections={activeSection}
       renderHeader={renderSectionHeader}
       renderContent={renderSectionContent}

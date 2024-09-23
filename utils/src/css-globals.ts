@@ -13,9 +13,16 @@ export const GLOBAL_ICON_SIZE_LARGE = tw`
   h-${moderateScaleTW(24)} 
   w-${moderateScaleTW(24)} 
 `;
+// BLARG - DEBUG: If these are based on dimensional scaling but font is based on REM, then these are disconnected
+// OPTION 1 (short term): Convert tailwind config to use dimensional resizing
+// OPTION 2 (long term): Make a decision of REM or dimensional resizing and convert all over
+// export const GLOBAL_ICON_SIZE = tw`
+//   h-[1.25rem]
+//   w-[1.25rem]
+// `;
 export const GLOBAL_ICON_SIZE = tw`
-  h-${moderateScaleTW(20)} 
-  w-${moderateScaleTW(20)} 
+  h-${moderateScaleTW(20)}
+  w-${moderateScaleTW(20)}
 `;
 export const GLOBAL_ICON_SIZE_MEDIUM = tw`
   h-${moderateScaleTW(18)} 
@@ -29,10 +36,6 @@ export const GLOBAL_ICON_SIZE_SMALL = tw`
   h-${moderateScaleTW(14)} 
   w-${moderateScaleTW(14)} 
 `;
-// export const GLOBAL_ICON_SIZE = tw`
-//   h-${moderateScaleTW(24)}
-//   w-${moderateScaleTW(24)}
-// `;
 
 /* SHADOWS */
 // BLARG - consider package for easier management of shadows:https://github.com/879479119/react-native-shadow
