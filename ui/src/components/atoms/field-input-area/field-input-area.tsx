@@ -6,7 +6,7 @@ import {
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { Platform, TextInput, TextInputProps, View } from 'react-native';
-import { FieldSize, FieldState } from '../types/field-types';
+import { FieldSize, FieldState } from '..';
 
 export interface FieldInputAreaProps extends Omit<TextInputProps, 'onChange'> {
   onSubmit?: () => void;

@@ -12,7 +12,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { ButtonType, FieldSize, FieldState } from '../types/field-types';
+import { ButtonType, FieldSize, FieldState } from '..';
 
 interface Props extends PressableProps {
   loading?: boolean;

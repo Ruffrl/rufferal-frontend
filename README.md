@@ -15,13 +15,13 @@ Things to think about
 - deployment
 - other developer nice to haves
 
-## Device Support
-_coming soon_
+## Device support
 
-### List of devices
-_coming soon_
+- IOS (versions _coming soon_ and above)
+- Android (versions _coming soon_ and above)
+- mobile-web and desktop _coming soon_
 
-### Mobile/Web mobile Viewport sizes
+### Mobile/web mobile viewport sizes
 
 - Designed for mobile displays from 320×568 through 430×1004
 - Primary test devices
@@ -46,17 +46,88 @@ _coming soon_
     - iPhone 15 Pro Max
     - 430 x 932
 
-### Tablet Viewport sizes
+### Tablet viewport sizes
+
 _coming soon_
 
-### Desktop Viewport sizes
+### Desktop viewport sizes
+
 _coming soon_
 
 ## Themes
+
 _coming soon_
 
 ## Installation
-_coming soon_
+
+### How this app was setup
+
+1. Create a new NX app with expo
+
+   ```bash
+   npx create-nx-workspace@latest --preset=expo --appName=rufferal
+
+   ✔ Where would you like to create your workspace? · rufferal-frontend
+   ✔ Test runner to use for end to end (E2E) tests · cypress
+   ✔ Which CI provider would you like to use? · github
+   ```
+
+2. Create libraries
+
+   ```bash
+   # UI LIBRARY
+   npx nx generate @nx/expo:lib ui
+     # I added my personal UI setup that follows "Atomic Design" methodologies
+
+   # ASSETS
+   npx nx generate @nx/expo:lib assets
+
+   # STORE (currently MobX)
+   npx nx generate @nx/expo:lib store
+
+   # UTILS
+   npx nx generate @nx/expo:lib utils
+
+   # STYLES CONFIGURATION (currently Tailwind)
+   npx nx generate @nx/expo:lib tailwind
+     # Chose to use explicit naming instead of generic naming because most of the work in this library will be unique to Tailwind configuration
+     # For custom tailwind configurations and branding/theme alignment
+   ```
+
+3. Name libraries accordingly
+
+   In `tsconfig.base.json`:
+
+   ```json
+   {
+     ...
+     "paths": {
+         "@rufferal/assets/*": ["assets/*"],
+         "@rufferal/store": ["store/src/index.ts"],
+         "@rufferal/tailwind": ["tailwind/src/index.ts"],
+         "@rufferal/ui": ["ui/src/index.ts"],
+         "@rufferal/utils": ["utils/src/index.ts"]
+       }
+   }
+   ```
+
+4. Generate components
+
+```bash
+nx g @nx/expo:component bottomsheet --directory ui/src/components/atoms/bottomsheet --nameAndDirectoryFormat=as-provided --export=false
+
+# Updates
+#   - Convert component to arrow component without a default export
+#   - Export component from directory
+#   - 
+#   - 
+```
+
+Personally, I ended up not using the component generator as it currently is
+
+- I would like to setup a component generator that applies my system/library expectations
+  - Creates functional (arrow) components instead of default exported normal function componets
+  - exports to local component folder (if in atoms, export is in ./atoms/index.ts, etc)
 
 ## (PROTOTYPE) Themes
 

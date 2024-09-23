@@ -2,7 +2,7 @@
 export * from './atoms';
 
 // Molecules are the building blocks that start to define functionality
-// export * from './molecules';
+export * from './molecules';
 
 // Organisms define the structure and layout of a page
 export * from './organisms';

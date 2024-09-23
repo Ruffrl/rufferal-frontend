@@ -10,8 +10,8 @@ import { Image } from 'expo-image';
 import { useState } from 'react';
 import { Platform, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import { OtherOption } from '../../molecules/select/select';
-import { FieldOption, FieldSize, FieldState } from '../types/field-types';
+import { OtherOption } from '../../molecules';
+import { FieldOption, FieldSize, FieldState } from '../';
 
 export interface FieldSelectProps<Option> {
   data: Option[];
