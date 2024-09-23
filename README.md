@@ -1,9 +1,80 @@
 # Rufferal Frontend
 
-blarg
+This repository contains the frontend codebase for an easy to use, pet friendly, care services application called Rufferal. The application is built using React Native and is designed to be responsive across multiple platforms including Android and iOS (_coming soon: desktop & mobile-web_).
 
-Things to think about
+## Table of contents
 
+- [Demo](#demo)
+- [Features](#features)
+- [Accessibility considerations](#accessibility-considerations)
+- [Extensions](#extensions)
+- [Design](#design)
+- [Software architecture](#software-architecture)
+- [Installation](#installation)
+- [About the creators](#about-the-creators)
+<!-- - [Contributing](#contributing) -->
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
+## Demo
+
+[ video ]
+
+[ desktop screengrab ]
+
+[ mobile web screengrab ]
+
+[ android screengrab ]
+
+[ ios screengrab ]
+
+## Features
+
+- **Cross-platform Compatibility**: Supports desktop browsers, mobile web browsers, Android devices, and iOS devices.
+- **Easy Onboarding and Research Caretakers**: Pet owners can skip sign in and directly browse services before signing up.
+- **User Authentication**: Secure user authentication and authorization flows with phone number, email, and social sign on.
+- **Community Referrals**: Pet owners can provide referrals (Ruffrls) to give insight into their experience with Caretakers and pet owners can see referral details while searching.
+- **Build or View Pet Profiles**: Fill out pet profiles to provide details about pet care as well as
+- **Gain Trust**: Caretakers can show off their qualifications via friendly and fun icons as well as set transparent prices.
+- **Book Care for Your Pet**: Pet owners can book various pet care services.
+- **Book Gigs**: Caretakers can browse available services by Pet and see
+- **Switch Modes**: Easily switch between Pet owner or Caretaker to book gigs or book services.
+- **Payment Integration**: Integration with a secure payment gateway for handling transactions.
+- **Profile Management**: Users can manage their profiles and pet information.
+
+## Accessibility Considerations
+
+[ axe and other services screenshots, or walkthrough, or whatever evidence we can produce here]
+
+[ details/list ]
+
+### Device support
+
+- IOS (versions _coming soon_ and above)
+- Android (versions _coming soon_ and above)
+- mobile-web and desktop _coming soon_
+
+## Extensions
+
+- **Notifications**: Push notifications for appointment and payment reminders, messaging notifications, and updates.
+- **Internal Messaging**: 1:1 messaging between Pet owners and caretakers to communicate details, discuss payment, receive updates about their pets, and so much more.
+- **AI Powered Care Plans**: Pet Owners can use our AI powered assistant, Ruffles, to create caretaker friendly care plan to attach to their pet's profile that can include walking details, overnight details, elderly pet details, pet medical details, and more
+- Details about Ruffles
+  - Ruffles would be a charming and distinctive companion, known for their unique fluffy coat and friendly demeanor. They would capture hearts with their adorable appearance and playful personality, making them a cherished member of any household.
+  - Physical Characteristics:
+    - Breed: A mixed breed with a uniquely fluffy and slightly unkempt appearance, possibly a combination of breeds like a Shih Tzu and Pomeranian mix.
+    - Size: Small to medium-sized, compact but with a fluffy and slightly tousled coat.
+    - Coat: Soft and voluminous, resembling the texture of wind-blown fur, with slight waves or curls.
+    - Color: Varied shades of cream and light brown, with patches or streaks of darker colors adding to their distinctive look.
+  - Facial Features:
+    - Eyes: Round and expressive, often dark brown or amber in color, conveying curiosity and intelligence.
+    - Ears: Medium-sized and covered with tufts of fur, often perking up at the slightest sound or movement.
+    - Expression: Sweet and endearing, with a hint of mischievousness in their gaze.
+  - Personality Traits:
+    - Cheerful: Always wearing a bright, happy expression, eager to explore and engage in playful activities.
+    - Affectionate: Loves cuddling and being close to their human family members, seeking attention and affection.
+    - Energetic: Despite their fluffy appearance, Ruffles is surprisingly agile and enjoys running around and playing fetch.
+    - Intelligent: Quick to learn new tricks and commands, showing off their cleverness and eagerness to please.
 - graphql
 - error handling
 - security handling
@@ -15,11 +86,256 @@ Things to think about
 - deployment
 - other developer nice to haves
 
-## Device support
+## Design
 
-- IOS (versions _coming soon_ and above)
-- Android (versions _coming soon_ and above)
-- mobile-web and desktop _coming soon_
+### Themes
+
+_more coming soon_
+
+_CURRENT SETUP tailwind/src/tailwind.config.js_
+
+```javascript
+import { moderateScale } from '@rufferal/utils';
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [],
+  theme: {
+    extend: {
+      colors: {
+        blizzardBlue: {
+          50: '#ECFDFF',
+          100: '#CEF8FF',
+          200: '#A0EFFE', // PRIMARY
+          300: '#64E2FC',
+          400: '#1DCBF3',
+          500: '#01ADD9',
+          600: '#0489B6',
+          700: '#0B6E93',
+          800: '#135977',
+          900: '#144A65',
+          950: '#073145',
+        },
+        whitePointer: {
+          50: '#FDF9FF', // PRIMARY
+          100: '#F7E8FF',
+          200: '#F0D5FF',
+          300: '#E4B4FE',
+          400: '#D484FC',
+          500: '#C355F7',
+          600: '#B233EA',
+          700: '#9B22CE',
+          800: '#8221A8',
+          900: '#6A1C87',
+          950: '#4B0764',
+        },
+        balticSea: {
+          50: '#F6F4F9',
+          100: '#EFEBF4',
+          200: '#E2DBEA',
+          300: '#D0C5DC',
+          400: '#BEADCC',
+          500: '#AF98BC',
+          600: '#9D81AA',
+          700: '#896E94',
+          800: '#6E5B78',
+          900: '#5B4D62',
+          950: '#2B242E', // PRIMARY
+        },
+        electricViolet: {
+          50: '#FBF5FF',
+          100: '#F6E8FF',
+          200: '#EFD6FE',
+          300: '#E2B5FD',
+          400: '#D086FA',
+          500: '#BE58F4',
+          600: '#AC36E7',
+          700: '#9525CB', // PRIMARY
+          800: '#7D23A6',
+          900: '#661E85',
+          950: '#470962',
+        },
+        seance: {
+          50: '#FBF5FF',
+          100: '#F6E9FE',
+          200: '#EFD6FE',
+          300: '#E2B6FC',
+          400: '#D087F9',
+          500: '#BE59F3',
+          600: '#AC37E6',
+          700: '#9526CA',
+          800: '#7D24A5', // PRIMARY
+          900: '#671E85',
+          950: '#480962',
+        },
+        wildSand: {
+          50: '#F6F6F6', // PRIMARY
+          100: '#EFEFEF',
+          200: '#DCDCDC',
+          300: '#BDBDBD',
+          400: '#989898',
+          500: '#7C7C7C',
+          600: '#656565',
+          700: '#525252',
+          800: '#464646',
+          900: '#3D3D3D',
+          950: '#292929',
+        },
+        iron: {
+          50: '#F7F7F7',
+          100: '#EDEDED',
+          200: '#D8D8D8', // DISABLED
+          300: '#D1D1D1', // PRIMARY
+          400: '#ADADAD',
+          500: '#999999', // DISABLED
+          600: '#888888',
+          700: '#7B7B7B',
+          800: '#676767',
+          900: '#545454',
+          950: '#363636',
+        },
+        graySuit: {
+          50: '#F9F8FA',
+          100: '#F4F2F5',
+          200: '#E9E8EC',
+          300: '#D8D5DD',
+          400: '#CAC4D0', // PRIMARY
+          500: '#AA9FB3',
+          600: '#97889F',
+          700: '#83768B',
+          800: '#6E6275',
+          900: '#5A5260',
+          950: '#3C3540',
+        },
+        saltBox: {
+          50: '#FAF9FA',
+          100: '#F3F2F5',
+          200: '#E8E4EA',
+          300: '#D4CED9',
+          400: '#BBB1C1',
+          500: '#9E90A5',
+          600: '#807188',
+          700: '#695C6F', // PRIMARY
+          800: '#564C5C',
+          900: '#4A424D',
+          950: '#2B242E',
+        },
+        lola: {
+          50: '#F9F8FA',
+          100: '#F4F2F5',
+          200: '#EBE7ED',
+          300: '#D5CED9', // PRIMARY
+          400: '#C5BBCA',
+          500: '#AE9FB3',
+          600: '#9A889F',
+          700: '#88758C',
+          800: '#716275',
+          900: '#5E5161',
+          950: '#3E3540',
+        },
+        red: {
+          50: '#fff3f1',
+          100: '#ffe3df',
+          200: '#ffcbc4',
+          300: '#ffa69b',
+          400: '#ff7462',
+          500: '#ff4931',
+          600: '#e8270e', // PRIMARY
+          700: '#cb200a',
+          800: '#a71f0d',
+          900: '#8a2012',
+          950: '#4c0b03',
+        },
+        silver: {
+          50: '#F7F7F7',
+          100: '#EDEDED',
+          200: '#DFDFDF',
+          300: '#C9C9C9', // PRIMARY
+          400: '#ADADAD',
+          500: '#999999',
+          600: '#888888',
+          700: '#7B7B7B',
+          800: '#676767',
+          900: '#545454',
+          950: '#363636',
+        },
+        codGray: {
+          50: '#F6F6F6',
+          100: '#E7E7E7',
+          200: '#D1D1D1',
+          300: '#B0B0B0',
+          400: '#888888',
+          500: '#6D6D6D',
+          600: '#5D5D5D',
+          700: '#4F4F4F',
+          800: '#454545',
+          900: '#3D3D3D',
+          950: '#080808', // PRIMARY
+        },
+        amethystSmoke: {
+          50: '#F9F8FA',
+          100: '#F4F2F5',
+          200: '#EAE7ED',
+          300: '#D9D4DE',
+          400: '#C3BCC9',
+          500: '#AC9FB3',
+          600: '#9F90A5', // PRIMARY
+          700: '#86758C',
+          800: '#706275',
+          900: '#5D5161',
+          950: '#3D3540',
+        },
+        azureRadiance: {
+          100: '#D6F2FF',
+          200: '#B5EAFF',
+          300: '#83DFFF',
+          400: '#48CBFF',
+          50: '#EDFAFF',
+          500: '#1EACFF',
+          600: '#068EFF',
+          700: '#007AFF', // PRIMARY
+          800: '#085DC5',
+          900: '#0D519B',
+          950: '#0E315D',
+        },
+        chatelle: {
+          50: '#FAF8FA',
+          100: '#F4F2F5',
+          200: '#EAE8EC',
+          300: '#D9D5DD',
+          400: '#BCB1C1', // PRIMARY
+          500: '#AE9FB3',
+          600: '#9B889F',
+          700: '#88758C',
+          800: '#716275',
+          900: '#5D5260',
+          950: '#3E3540',
+        },
+      },
+      fontFamily: {
+        body: ['Inter Regular'], // 400
+        bodyItalic: ['Inter Regular Italic'],
+        bodyMedium: ['Inter Medium'], // 500
+        bodySemibold: ['Inter Semibold'], // 600
+        bodyBold: ['Inter Bold'], // 700
+        headerSemibold: ['Proxima Nova Semibold'], // 600
+        headerBold: ['Proxima Nova Bold'], // 700
+        headerExtrabold: ['Proxima Nova Extrabold'], // 800
+      },
+      fontSize: {
+        b1: [`${moderateScale(10)}px`, `${moderateScale(14)}px`],
+        b2: [`${moderateScale(12)}px`, `${moderateScale(16)}px`],
+        b3: [`${moderateScale(14)}px`, `${moderateScale(20)}px`],
+        b4: [`${moderateScale(16)}px`, `${moderateScale(24)}px`],
+        h3: [`${moderateScale(22)}px`, `${moderateScale(26)}px`],
+        h2: [`${moderateScale(28)}px`, `${moderateScale(30)}px`],
+        h1: [`${moderateScale(32)}px`, `${moderateScale(36)}px`],
+      },
+    },
+  },
+  plugins: [],
+};
+```
 
 ### Mobile/web mobile viewport sizes
 
@@ -54,11 +370,115 @@ _coming soon_
 
 _coming soon_
 
-## Themes
+## Software architecture
 
-_coming soon_
+[ diagram goes here ]
+
+See [backend](https://github.com/Ruffrl/rufferal-backend)
+
+### Tech stack
+
+- **React**: JavaScript library for building user interfaces.
+- **React Native**: Framework for building native applications using React.
+- **TypeScript**: Strict syntactical superset of JavaScript.
+- **MobX**: State management library for React applications.
+- **Styled Components**: CSS-in-JS styling solution.
+  - **EXTENSION**: Tailwind refactor
+- **React Navigation**: Routing and navigation for React Native applications.
+- **Axios**: Promise-based HTTP client for making API requests.
+- **EXTENSION Apollo Client**: A JavaScript library that helps manage data with GraphQL, both locally and remotely.
 
 ## Installation
+
+To get a local copy of the project up and running follow these steps:
+
+### Prerequisites
+
+- Repo/organization permissions
+- Node
+- npm
+- Android Studio
+  - virtual device setup
+- XCode
+  - simulator setup
+
+### Repository
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/Ruffrl/rufferal-frontend.git
+   cd rufferal-frontend
+   ```
+
+- https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+### Running the Application
+
+- **Mobile** (React Native on Expo):
+
+  Ensure you have set up the development environment based on your target platform (iOS or Android).
+
+  - https://reactnative.dev/docs/environment-setup
+  - https://docs.expo.dev/get-started/set-up-your-environment/?mode=development-build
+
+  ```bash
+  npx nx run rufferal:start
+  ```
+
+  Follow in-server instructions to open android `a` or ios `i`
+  Simulators should open automatically, they may take a minute to load and bundle
+
+  OPTIONALLY
+
+  ```bash
+  npx nx run rufferal:run-android  # For Android
+  npx nx run rufferal:run-ios  # For iOS
+  ```
+
+      - Troubleshooting?
+        - Sometimes you need to open Android Studio -> Virtual Devices -> Select and run a device
+
+  Future
+
+      - Fullstack server?
+      - Debugging servers?
+
+- **Web** (Expo web):
+
+  ```bash
+  npx nx run rufferal:start
+  ```
+
+  Follow in-server instructions to open on web (w)
+  OR
+  Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+<!-- - **Web** (React):
+
+  ```bash
+  npx nx run rufferal-web:start
+  ```
+
+  Open [http://localhost:3000](http://localhost:3000) in your browser. -->
+
+### Building for production
+
+- **Mobile** (React Native):
+  _coming soon_
+  - https://nx.dev/nx-api/expo/executors/build
+  - https://nx.dev/reference/project-configuration#targets
+  - https://blog.nrwl.io/step-by-step-guide-to-creating-an-expo-monorepo-with-nx-30c976fdc2c1
+  - https://medium.com/@arkadi.berikashvili/react-native-eas-builds-on-nx-nrwl-expo-using-github-workflows-80f420f52563
+
+- **Web**:
+  _coming soon_
 
 ### How this app was setup
 
@@ -194,251 +614,110 @@ _coming soon_
    - Add style/theme overrides
    - Currently in a single config file
      - `tailwind/src/tailwind.config.js`
+     - See [themes](#themes)
 
-   ```javascript
-   import { moderateScale } from '@rufferal/utils';
+## About the creators
 
-   /** @type {import('tailwindcss').Config} */
-   module.exports = {
-     content: [],
-     theme: {
-       extend: {
-         colors: {
-           blizzardBlue: {
-             50: '#ECFDFF',
-             100: '#CEF8FF',
-             200: '#A0EFFE', // PRIMARY
-             300: '#64E2FC',
-             400: '#1DCBF3',
-             500: '#01ADD9',
-             600: '#0489B6',
-             700: '#0B6E93',
-             800: '#135977',
-             900: '#144A65',
-             950: '#073145',
-           },
-           whitePointer: {
-             50: '#FDF9FF', // PRIMARY
-             100: '#F7E8FF',
-             200: '#F0D5FF',
-             300: '#E4B4FE',
-             400: '#D484FC',
-             500: '#C355F7',
-             600: '#B233EA',
-             700: '#9B22CE',
-             800: '#8221A8',
-             900: '#6A1C87',
-             950: '#4B0764',
-           },
-           balticSea: {
-             50: '#F6F4F9',
-             100: '#EFEBF4',
-             200: '#E2DBEA',
-             300: '#D0C5DC',
-             400: '#BEADCC',
-             500: '#AF98BC',
-             600: '#9D81AA',
-             700: '#896E94',
-             800: '#6E5B78',
-             900: '#5B4D62',
-             950: '#2B242E', // PRIMARY
-           },
-           electricViolet: {
-             50: '#FBF5FF',
-             100: '#F6E8FF',
-             200: '#EFD6FE',
-             300: '#E2B5FD',
-             400: '#D086FA',
-             500: '#BE58F4',
-             600: '#AC36E7',
-             700: '#9525CB', // PRIMARY
-             800: '#7D23A6',
-             900: '#661E85',
-             950: '#470962',
-           },
-           seance: {
-             50: '#FBF5FF',
-             100: '#F6E9FE',
-             200: '#EFD6FE',
-             300: '#E2B6FC',
-             400: '#D087F9',
-             500: '#BE59F3',
-             600: '#AC37E6',
-             700: '#9526CA',
-             800: '#7D24A5', // PRIMARY
-             900: '#671E85',
-             950: '#480962',
-           },
-           wildSand: {
-             50: '#F6F6F6', // PRIMARY
-             100: '#EFEFEF',
-             200: '#DCDCDC',
-             300: '#BDBDBD',
-             400: '#989898',
-             500: '#7C7C7C',
-             600: '#656565',
-             700: '#525252',
-             800: '#464646',
-             900: '#3D3D3D',
-             950: '#292929',
-           },
-           iron: {
-             50: '#F7F7F7',
-             100: '#EDEDED',
-             200: '#D8D8D8', // DISABLED
-             300: '#D1D1D1', // PRIMARY
-             400: '#ADADAD',
-             500: '#999999', // DISABLED
-             600: '#888888',
-             700: '#7B7B7B',
-             800: '#676767',
-             900: '#545454',
-             950: '#363636',
-           },
-           graySuit: {
-             50: '#F9F8FA',
-             100: '#F4F2F5',
-             200: '#E9E8EC',
-             300: '#D8D5DD',
-             400: '#CAC4D0', // PRIMARY
-             500: '#AA9FB3',
-             600: '#97889F',
-             700: '#83768B',
-             800: '#6E6275',
-             900: '#5A5260',
-             950: '#3C3540',
-           },
-           saltBox: {
-             50: '#FAF9FA',
-             100: '#F3F2F5',
-             200: '#E8E4EA',
-             300: '#D4CED9',
-             400: '#BBB1C1',
-             500: '#9E90A5',
-             600: '#807188',
-             700: '#695C6F', // PRIMARY
-             800: '#564C5C',
-             900: '#4A424D',
-             950: '#2B242E',
-           },
-           lola: {
-             50: '#F9F8FA',
-             100: '#F4F2F5',
-             200: '#EBE7ED',
-             300: '#D5CED9', // PRIMARY
-             400: '#C5BBCA',
-             500: '#AE9FB3',
-             600: '#9A889F',
-             700: '#88758C',
-             800: '#716275',
-             900: '#5E5161',
-             950: '#3E3540',
-           },
-           red: {
-             50: '#fff3f1',
-             100: '#ffe3df',
-             200: '#ffcbc4',
-             300: '#ffa69b',
-             400: '#ff7462',
-             500: '#ff4931',
-             600: '#e8270e', // PRIMARY
-             700: '#cb200a',
-             800: '#a71f0d',
-             900: '#8a2012',
-             950: '#4c0b03',
-           },
-           silver: {
-             50: '#F7F7F7',
-             100: '#EDEDED',
-             200: '#DFDFDF',
-             300: '#C9C9C9', // PRIMARY
-             400: '#ADADAD',
-             500: '#999999',
-             600: '#888888',
-             700: '#7B7B7B',
-             800: '#676767',
-             900: '#545454',
-             950: '#363636',
-           },
-           codGray: {
-             50: '#F6F6F6',
-             100: '#E7E7E7',
-             200: '#D1D1D1',
-             300: '#B0B0B0',
-             400: '#888888',
-             500: '#6D6D6D',
-             600: '#5D5D5D',
-             700: '#4F4F4F',
-             800: '#454545',
-             900: '#3D3D3D',
-             950: '#080808', // PRIMARY
-           },
-           amethystSmoke: {
-             50: '#F9F8FA',
-             100: '#F4F2F5',
-             200: '#EAE7ED',
-             300: '#D9D4DE',
-             400: '#C3BCC9',
-             500: '#AC9FB3',
-             600: '#9F90A5', // PRIMARY
-             700: '#86758C',
-             800: '#706275',
-             900: '#5D5161',
-             950: '#3D3540',
-           },
-           azureRadiance: {
-             100: '#D6F2FF',
-             200: '#B5EAFF',
-             300: '#83DFFF',
-             400: '#48CBFF',
-             50: '#EDFAFF',
-             500: '#1EACFF',
-             600: '#068EFF',
-             700: '#007AFF', // PRIMARY
-             800: '#085DC5',
-             900: '#0D519B',
-             950: '#0E315D',
-           },
-           chatelle: {
-             50: '#FAF8FA',
-             100: '#F4F2F5',
-             200: '#EAE8EC',
-             300: '#D9D5DD',
-             400: '#BCB1C1', // PRIMARY
-             500: '#AE9FB3',
-             600: '#9B889F',
-             700: '#88758C',
-             800: '#716275',
-             900: '#5D5260',
-             950: '#3E3540',
-           },
-         },
-         fontFamily: {
-           body: ['Inter Regular'], // 400
-           bodyItalic: ['Inter Regular Italic'],
-           bodyMedium: ['Inter Medium'], // 500
-           bodySemibold: ['Inter Semibold'], // 600
-           bodyBold: ['Inter Bold'], // 700
-           headerSemibold: ['Proxima Nova Semibold'], // 600
-           headerBold: ['Proxima Nova Bold'], // 700
-           headerExtrabold: ['Proxima Nova Extrabold'], // 800
-         },
-         fontSize: {
-           b1: [`${moderateScale(10)}px`, `${moderateScale(14)}px`],
-           b2: [`${moderateScale(12)}px`, `${moderateScale(16)}px`],
-           b3: [`${moderateScale(14)}px`, `${moderateScale(20)}px`],
-           b4: [`${moderateScale(16)}px`, `${moderateScale(24)}px`],
-           h3: [`${moderateScale(22)}px`, `${moderateScale(26)}px`],
-           h2: [`${moderateScale(28)}px`, `${moderateScale(30)}px`],
-           h1: [`${moderateScale(32)}px`, `${moderateScale(36)}px`],
-         },
-       },
-     },
-     plugins: [],
-   };
-   ```
+- Sara Flores
+- Priya Power
 
-## (PROTOTYPE) Themes
+<!-- ## Contributing
+
+Contributions are welcome! Please follow the guidelines outlined in [CONTRIBUTING.md](CONTRIBUTING.md). -->
+
+## License
+
+This project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Hat tip to anyone whose code was used
+- Inspiration
+- etc.
+
+<!-- ### NX Notes
+
+<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+
+✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+
+[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/expo?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+
+#### Finish your CI setup
+
+[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/FWnkRYuUP7)
+
+#### Run tasks
+
+To run the dev server for your app, use:
+
+```sh
+npx nx serve rufferal
+```
+
+To create a production bundle:
+
+```sh
+npx nx build rufferal
+```
+
+To see all available targets to run for a project, run:
+
+```sh
+npx nx show project rufferal
+```
+
+These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+
+[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+#### Add new projects
+
+While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+
+Use the plugin's generator to create new projects.
+
+To generate a new application, use:
+
+```sh
+npx nx g @nx/expo:app demo
+```
+
+To generate a new library, use:
+
+```sh
+npx nx g @nx/react:lib mylib
+```
+
+You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+
+[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+#### Install Nx Console
+
+Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+
+[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+#### Useful links
+
+Learn more:
+
+- [Learn more about this workspace setup](https://nx.dev/nx-api/expo?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+And join the Nx community:
+
+- [Discord](https://go.nx.dev/community)
+- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
+- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
+- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) -->
+
+<!-- ## (PROTOTYPE) Themes
 
 ### Colors
 
@@ -780,86 +1059,4 @@ It will show tasks that you can run with Nx.
 
 - [Join the community](https://nx.dev/community)
 - [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
-- [Follow us on Twitter](https://twitter.com/nxdevtools)
-
-## NX Notes
-
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
-
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
-
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/expo?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
-
-### Finish your CI setup
-
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/FWnkRYuUP7)
-
-### Run tasks
-
-To run the dev server for your app, use:
-
-```sh
-npx nx serve rufferal
-```
-
-To create a production bundle:
-
-```sh
-npx nx build rufferal
-```
-
-To see all available targets to run for a project, run:
-
-```sh
-npx nx show project rufferal
-```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/expo:app demo
-```
-
-To generate a new library, use:
-
-```sh
-npx nx g @nx/react:lib mylib
-```
-
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/expo?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [Follow us on Twitter](https://twitter.com/nxdevtools) -->
