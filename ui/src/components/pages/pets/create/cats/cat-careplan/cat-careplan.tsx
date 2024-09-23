@@ -1,5 +1,8 @@
 import { ruffwind } from '@rufferal/tailwind';
-import { GLOBAL_ICON_SIZE_MEDIUM_SMALL } from '@rufferal/utils';
+import {
+  GLOBAL_ICON_SIZE_MEDIUM_SMALL,
+  verticalScaleTW,
+} from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
@@ -7,12 +10,14 @@ import { PageNavigationProps } from '../../../..';
 import {
   Accordian,
   AccordionSection,
+  Button,
   FieldOption,
   H3,
+  HorizontalDivider,
   ProgressBar,
   Tag,
 } from '../../../../../atoms';
-import { RadioGroup, Select } from '../../../../../molecules';
+import { InputArea, RadioGroup, Select } from '../../../../../molecules';
 import { ScrollFeatureTemplate } from '../../../../../templates';
 import {
   FEEDING_FREQUENCY_OPTIONS,
@@ -36,6 +41,10 @@ export const CatCareplan = ({ navigation }: CatCareplanProps) => {
     setHarnessSwitch((prev) => !prev);
   };
 
+  const [activeSection, setActiveSection] = useState<number[] | string[]>([]);
+  const handleActiveSections = (indexes: number[] | string[]) =>
+    setActiveSection(indexes);
+
   // renders
   const CAT_CAREPLAN_SECTIONS: AccordionSection[] = [
     {
@@ -49,9 +58,10 @@ export const CatCareplan = ({ navigation }: CatCareplanProps) => {
             label="Has your cat comfortably walked on a harness before?"
             items={HARNESS_OPTIONS}
           />
-          <Text style={ruffwind`text-pink-500`}>
-            MULTI LINE INPUT (Special Instructions)
-          </Text>
+          <InputArea
+            label="Special instructions"
+            placeholder="Add instructions here..."
+          />
         </>
       ),
       switch: {
@@ -82,9 +92,10 @@ export const CatCareplan = ({ navigation }: CatCareplanProps) => {
             valueField="id"
             other={OTHER_OPTION}
           />
-          <Text style={ruffwind`text-pink-500`}>
-            MULTI LINE INPUT (Special Instructions)
-          </Text>
+          <InputArea
+            label="Special instructions"
+            placeholder="Add instructions here..."
+          />
         </>
       ),
     },
@@ -92,36 +103,40 @@ export const CatCareplan = ({ navigation }: CatCareplanProps) => {
       title: 'Overnight',
       icon: require('@rufferal/assets/src/icons/moon.png'),
       component: (
-        <Text style={ruffwind`text-pink-500`}>
-          MULTI LINE INPUT (Special Instructions)
-        </Text>
+        <InputArea
+          label="Special instructions"
+          placeholder="Add instructions here..."
+        />
       ),
     },
     {
       title: 'Medical',
       icon: require('@rufferal/assets/src/icons/pills.png'),
       component: (
-        <Text style={ruffwind`text-pink-500`}>
-          MULTI LINE INPUT (Special Instructions)
-        </Text>
+        <InputArea
+          label="Special instructions"
+          placeholder="Add instructions here..."
+        />
       ),
     },
     {
       title: 'Special needs',
       icon: require('@rufferal/assets/src/icons/paw-print.png'),
       component: (
-        <Text style={ruffwind`text-pink-500`}>
-          MULTI LINE INPUT (Special Instructions)
-        </Text>
+        <InputArea
+          label="Special instructions"
+          placeholder="Add instructions here..."
+        />
       ),
     },
     {
       title: 'Additional notes',
       icon: require('@rufferal/assets/src/icons/fish.png'),
       component: (
-        <Text style={ruffwind`text-pink-500`}>
-          MULTI LINE INPUT (Special Instructions)
-        </Text>
+        <InputArea
+          label="Special instructions"
+          placeholder="Add instructions here..."
+        />
       ),
     },
   ];
@@ -129,13 +144,14 @@ export const CatCareplan = ({ navigation }: CatCareplanProps) => {
   return (
     <ScrollFeatureTemplate
       backNavigation={() => navigation.navigate('Cat Personality')}
+      // BLARG - handle if form dirty and valid, change from "Skip" to "Complete"
       skipNavigation={() => {
         console.log('BLARG: TODO: Handle form submission');
         navigation.navigate('Manage Pets');
       }}
     >
       <View style={ruffwind`mt-6`}>
-        <ProgressBar step={3} total={4} />
+        <ProgressBar step={4} total={4} />
       </View>
       <View style={ruffwind`mt-6 gap-2`}>
         <Tag
@@ -156,7 +172,35 @@ export const CatCareplan = ({ navigation }: CatCareplanProps) => {
         </Text>
       </View>
       <View style={ruffwind`mt-6 gap-2`}>
-        <Accordian sections={CAT_CAREPLAN_SECTIONS} />
+        <Accordian
+          activeSection={activeSection}
+          setActiveSections={(indexes) => handleActiveSections(indexes)}
+          sections={CAT_CAREPLAN_SECTIONS}
+        />
+      </View>
+      <View
+        style={ruffwind.style(
+          `gap-2`,
+          activeSection.length > 0
+            ? ` mt-${verticalScaleTW(16)}`
+            : `mt-${verticalScaleTW(161)}`
+        )}
+      >
+        <HorizontalDivider color="border-amethystSmoke-600" />
+        <Button
+          // BLARG - handle if form dirty and valid, change from "Next" to "Complete"
+          text="Next"
+          onPress={() => {
+            console.log('🚨 URGENT PRIYA - HANDLE FORM SUBMIT 🚨');
+            navigation.navigate('Manage Pets');
+          }}
+        />
+        <Button
+          text="Cancel"
+          type="transparent"
+          size="standard-short"
+          onPress={() => navigation.navigate('Manage Pets')}
+        />
       </View>
     </ScrollFeatureTemplate>
   );

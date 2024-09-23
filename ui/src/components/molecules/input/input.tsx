@@ -1,4 +1,5 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { moderateScaleTW } from '@rufferal/utils';
 import { View } from 'react-native';
 import {
   FieldHelper,
@@ -17,11 +18,12 @@ export const Input = ({
   label,
   size = 'standard',
   state = 'default',
+  ...inputProps
 }: InputProps) => {
   return (
-    <View style={ruffwind`gap-1`}>
+    <View style={ruffwind`gap-${moderateScaleTW(4)}`}>
       <FieldLabel text={label} />
-      <FieldInput state={state} size={size} />
+      <FieldInput state={state} size={size} {...inputProps} />
       {state === 'errored' ? (
         <FieldHelper text={errorMessage} />
       ) : (

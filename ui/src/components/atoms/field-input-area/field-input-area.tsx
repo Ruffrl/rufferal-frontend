@@ -8,19 +8,20 @@ import { Image } from 'expo-image';
 import { Platform, TextInput, TextInputProps, View } from 'react-native';
 import { FieldSize, FieldState } from '../types/field-types';
 
-export interface FieldInputProps extends TextInputProps {
+export interface FieldInputAreaProps extends Omit<TextInputProps, 'onChange'> {
   onSubmit?: () => void;
   size?: FieldSize;
   state?: FieldState;
+  onChange?: ((text: string) => void)
 }
 
-export const FieldInput = ({
+export const FieldInputArea = ({
   onChange,
   onSubmit,
   placeholder,
   size = 'standard',
   state = 'default',
-}: FieldInputProps) => {
+}: FieldInputAreaProps) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   let width = `w-full`;
   switch (size) {
@@ -34,15 +35,15 @@ export const FieldInput = ({
       accessible={true}
       style={ruffwind.style(
         `bg-white
-        border-saltBox-200
+        border-saltBox-100
         gap-1 
         border-solid 
         flex-row
         border-${moderateScaleTW(1)} 
-        h-${moderateScaleTW(32)}
-        px-${moderateScaleTW(16)}
-        py-${moderateScaleTW(8)}
-        rounded-${moderateScaleTW(8)}`,
+        h-${moderateScaleTW(84)}
+        px-${moderateScaleTW(8)}
+        py-${moderateScaleTW(4)}
+        rounded-${moderateScaleTW(4)}`,
         width
       )}
     >
@@ -51,12 +52,14 @@ export const FieldInput = ({
           !isMobile && { outlineStyle: 'none' },
           ruffwind.style(`font-body text-balticSea-950 h-full flex-1 text-b2`),
         ]}
-        onChangeText={() => onChange}
+        onChangeText={(text) => onChange?.(text) && onChange(text)}
         // BLARG: TODO: Convert tailwind colors into an exportable module so we can access hex values direct as needed
         // colors.saltbox[700]
         placeholderTextColor="#695C6F"
-        placeholder={placeholder || 'Select...'}
+        placeholder={placeholder || 'Add notes here...'}
         onSubmitEditing={onSubmit}
+        multiline
+        numberOfLines={4}
       />
       {state === 'errored' && (
         <Image

@@ -5,15 +5,16 @@ import {
   moderateScaleTW,
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
-import { useState } from 'react';
 import { Text, View } from 'react-native';
-import * as Blarg from 'react-native-collapsible/Accordion';
+import * as RNCAccordian from 'react-native-collapsible/Accordion';
 import { HorizontalDivider } from '../horizontal-divider/horizontal-divider';
 import { Switch } from '../switch/switch';
-const CollapsibleAccordion = Blarg.default;
+const CollapsibleAccordion = RNCAccordian.default;
 
 export interface AccordianProps {
   sections: AccordionSection[];
+  activeSection: number[] | string[];
+  setActiveSections: (indexes: number[] | string[]) => void;
 }
 
 export type SectionSwitch = {
@@ -28,9 +29,11 @@ export interface AccordionSection {
   switch?: SectionSwitch;
 }
 
-export const Accordian = ({ sections }: AccordianProps) => {
-  const [activeSection, setActiveSection] = useState<number[] | string[]>([]);
-
+export const Accordian = ({
+  activeSection,
+  sections,
+  setActiveSections,
+}: AccordianProps) => {
   // renders
   const renderSectionHeader = (section: AccordionSection) => {
     return (
@@ -104,7 +107,7 @@ export const Accordian = ({ sections }: AccordianProps) => {
       activeSections={activeSection}
       renderHeader={renderSectionHeader}
       renderContent={renderSectionContent}
-      onChange={(indexes: number[]) => setActiveSection(indexes)}
+      onChange={(indexes: number[]) => setActiveSections(indexes)}
       // BLARG - import from tailwind config electricViolet[700]
       underlayColor={'#9525CB'}
       sectionContainerStyle={ruffwind`

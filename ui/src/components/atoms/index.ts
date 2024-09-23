@@ -13,6 +13,7 @@
  */
 
 export type { AccordionSection } from './accordian/accordian';
+export type { FieldInputAreaProps } from './field-input-area/field-input-area';
 export type { FieldInputProps } from './field-input/field-input';
 export type { FieldSelectProps } from './field-select/field-select';
 export type {
@@ -25,7 +26,9 @@ export type {
 export { Accordian } from './accordian/accordian';
 export { Bottomsheet } from './bottomsheet/bottomsheet';
 export { Button } from './button/button';
+export { FieldCharacterCount } from './field-character-count/field-character-count';
 export { FieldHelper } from './field-helper/field-helper';
+export { FieldInputArea } from './field-input-area/field-input-area';
 export { FieldInput } from './field-input/field-input';
 export { FieldLabel } from './field-label/field-label';
 export { FieldSelect } from './field-select/field-select';
