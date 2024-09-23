@@ -17,7 +17,7 @@ import {
   Tag,
   Toggle,
 } from '../../../../../atoms';
-import { ScrollFeatureTemplate } from '../../../../../templates/scroll-feature-template/scroll-feature-template';
+import { ScrollFeatureTemplate } from '../../../../../templates';
 
 /* eslint-disable-next-line */
 export interface CatPersonalityProps extends PageNavigationProps {}

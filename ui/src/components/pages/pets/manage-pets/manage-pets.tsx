@@ -17,7 +17,7 @@ import {
   VerticalDivider,
 } from '../../../atoms';
 import { FeatureTemplate } from '../../../templates';
-import { PageNavigationProps } from '../../types/page-props';
+import { PageNavigationProps } from '../..';
 
 // interface ManagePetsProps extends PageNavigationProps {}
 

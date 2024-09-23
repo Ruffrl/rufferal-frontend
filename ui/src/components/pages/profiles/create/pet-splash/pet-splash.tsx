@@ -5,7 +5,7 @@ import { ruffwind } from '@rufferal/tailwind';
 import { verticalScale, verticalScaleTW } from '@rufferal/utils';
 import { Bottomsheet, Button, H2 } from '../../../../atoms';
 import { SplashTemplate } from '../../../../templates';
-import { PageNavigationProps } from '../../../types/page-props';
+import { PageNavigationProps } from '../../..';
 
 // interface PetSplashProps extends PageNavigationProps {}
 
