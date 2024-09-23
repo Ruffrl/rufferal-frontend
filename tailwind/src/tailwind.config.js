@@ -199,6 +199,19 @@ module.exports = {
           900: '#0D519B',
           950: '#0E315D',
         },
+        chatelle: {
+          50: '#FAF8FA',
+          100: '#F4F2F5',
+          200: '#EAE8EC',
+          300: '#D9D5DD',
+          400: '#BCB1C1', // PRIMARY
+          500: '#AE9FB3',
+          600: '#9B889F',
+          700: '#88758C',
+          800: '#716275',
+          900: '#5D5260',
+          950: '#3E3540',
+        },
       },
       fontFamily: {
         body: ['Inter Regular'], // 400

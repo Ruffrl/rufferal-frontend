@@ -3,7 +3,7 @@ import { GLOBAL_ICON_SIZE_MEDIUM_SMALL } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
 import { PageNavigationProps } from '../../../..';
-import { H3, ProgressBar, Tag } from '../../../../../atoms';
+import { Accordian, H3, ProgressBar, Tag } from '../../../../../atoms';
 import { ScrollFeatureTemplate } from '../../../../../templates';
 
 /* eslint-disable-next-line */
@@ -11,7 +11,13 @@ export interface CatCareplanProps extends PageNavigationProps {}
 
 export const CatCareplan = ({ navigation }: CatCareplanProps) => {
   return (
-    <ScrollFeatureTemplate>
+    <ScrollFeatureTemplate
+      backNavigation={() => navigation.navigate('Cat Personality')}
+      skipNavigation={() => {
+        console.log("BLARG: TODO: Handle form submission")
+        navigation.navigate('Manage Pets');
+      }}
+    >
       <View style={ruffwind`mt-6`}>
         <ProgressBar step={3} total={4} />
       </View>
@@ -34,10 +40,7 @@ export const CatCareplan = ({ navigation }: CatCareplanProps) => {
         </Text>
       </View>
       <View style={ruffwind`mt-6 gap-2`}>
-        <View>
-          <Text>Harness</Text>
-          <Text>Toggle</Text>
-        </View>
+        <Accordian />
       </View>
     </ScrollFeatureTemplate>
   );

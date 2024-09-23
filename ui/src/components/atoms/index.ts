@@ -21,6 +21,7 @@ export type {
   FieldState,
 } from './types/field-types';
 
+export { Accordian } from './accordian/accordian';
 export { Bottomsheet } from './bottomsheet/bottomsheet';
 export { Button } from './button/button';
 export { FieldHelper } from './field-helper/field-helper';
@@ -33,9 +34,9 @@ export { HorizontalDivider } from './horizontal-divider/horizontal-divider';
 export { Item } from './item/item';
 export { ProgressBar } from './progress-bar/progress-bar';
 export { Radio } from './radio/radio';
+export { RangeSlider } from './range-slider/range-slider';
+export { SingleSlider } from './single-slider/single-slider';
+export { Switch } from './switch/switch';
 export { Tag } from './tag/tag';
 export { Toggle } from './toggle/toggle';
-export { Switch } from './switch/switch';
-export { SingleSlider } from './single-slider/single-slider';
-export { RangeSlider } from './range-slider/range-slider';
 export { VerticalDivider } from './vertical-divider/vertical-divider';
