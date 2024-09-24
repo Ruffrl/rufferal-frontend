@@ -170,7 +170,7 @@ export const FieldSelect = ({
         },
         ruffwind`
           mt-${moderateScaleTW(14)}
-          bg-white-500
+          bg-white
           border-${moderateScaleTW(0.5)}
           border-saltBox-200
           rounded-b`,
