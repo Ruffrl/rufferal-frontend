@@ -9,6 +9,7 @@ import {
   GLOBAL_ICON_SIZE_LARGE,
   titleCase,
 } from '@rufferal/utils';
+import { PageNavigationProps } from '../..';
 import {
   Button,
   H3,
@@ -17,23 +18,85 @@ import {
   VerticalDivider,
 } from '../../../atoms';
 import { FeatureTemplate } from '../../../templates';
-import { PageNavigationProps } from '../..';
 
-// interface ManagePetsProps extends PageNavigationProps {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface ManagePetsProps extends PageNavigationProps {}
 
-export const ManagePets = ({ navigation }: PageNavigationProps) => {
-  observablePetStore.addPet({
-    name: 'gavin',
-    species: 'cat',
-    breed: 'american shorthair',
-    avatar: require('@rufferal/assets/src/images/cat-profile-stock-photo.jpeg'),
-  });
-  observablePetStore.addPet({
-    name: 'maya',
-    species: 'dog',
-    breed: 'german shepard',
-    avatar: require('@rufferal/assets/src/images/dog-profile-stock-photo.jpeg'),
-  });
+export const ManagePets = ({ navigation }: ManagePetsProps) => {
+  // observablePetStore.createPet({
+  //   avatar: require('@rufferal/assets/src/images/cat-profile-stock-photo.jpeg'),
+  //   details: {
+  //     species: 'cat',
+  //     name: 'Gavin',
+  //     color: {
+  //       id: 'hwfkdiwxkph',
+  //       label: 'Black',
+  //       value: 'black',
+  //     },
+  //     breed: {
+  //       id: 'xoxpvpaezt8',
+  //       label: 'Bombay',
+  //       value: 'bombay',
+  //     },
+  //     sex: {
+  //       id: 'whseq6w1c1e',
+  //       label: 'Male',
+  //       value: 'male',
+  //     },
+  //     age: {
+  //       id: 'l0joaxmw6ym',
+  //       label: 'Adult (2–8 Years)',
+  //       value: 'adult (2–8 years)',
+  //     },
+  //     size: {
+  //       id: 'ynxe968m0d',
+  //       label: 'Medium (7–11 Lbs)',
+  //       value: 'medium (7–11 lbs)',
+  //     },
+  //     status: {
+  //       id: '6az7qovb505',
+  //       label: 'Yes',
+  //       value: 'yes',
+  //     },
+  //   },
+  // });
+  // observablePetStore.createPet({
+  //   avatar: require('@rufferal/assets/src/images/dog-profile-stock-photo.jpeg'),
+  //   details: {
+  //     species: 'dog',
+  //     name: 'Maya',
+  //     color: {
+  //       id: '74kgz8267nt',
+  //       label: 'Black & Brown',
+  //       value: 'black & brown',
+  //     },
+  //     breed: {
+  //       id: 'v52lvv3bwsh',
+  //       label: 'German Shepherd Dog',
+  //       value: 'german shepherd dog',
+  //     },
+  //     sex: {
+  //       id: 'axhqeqqr8lt',
+  //       label: 'Female',
+  //       value: 'female',
+  //     },
+  //     age: {
+  //       id: '5zs17oz2198',
+  //       label: 'Senior (8+ Years)',
+  //       value: 'senior (8+ years)',
+  //     },
+  //     size: {
+  //       id: 'wyin6hsd8po',
+  //       label: 'Large (41–100 Lbs)',
+  //       value: 'large (41–100 lbs)',
+  //     },
+  //     status: {
+  //       id: '6az7qovb505',
+  //       label: 'Yes',
+  //       value: 'yes',
+  //     },
+  //   },
+  // });
   const pets = observablePetStore.activePets();
 
   return (
@@ -97,7 +160,7 @@ const Pets = ({ pets }: { pets: Pet[] }) => (
         <PetItem key={pet.id} pet={pet} />
       ))}
     </View>
-    <HorizontalDivider color='border-graySuit-400' />
+    <HorizontalDivider color="border-graySuit-400" />
   </View>
 );
 
@@ -113,15 +176,15 @@ const PetItem = ({ pet }: { pet: Pet }) => {
         </View>
         <View style={ruffwind`flex-1`}>
           <Text style={ruffwind`font-bodyBold text-b4 text-balticSea-950`}>
-            {capitalize(pet.name)}
+            {pet.details.name}
           </Text>
           <View style={ruffwind`flex-row gap-1`}>
             <Text style={ruffwind`font-body text-b2 text-saltBox-700`}>
-              {capitalize(pet.species)}
+              {capitalize(pet.details.species)}
             </Text>
             <VerticalDivider />
             <Text style={ruffwind`font-body text-b2 text-saltBox-700`}>
-              {titleCase(pet.breed)}
+              {titleCase(pet.details.breed.label)}
             </Text>
           </View>
         </View>

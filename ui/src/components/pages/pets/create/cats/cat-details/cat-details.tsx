@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
 
+import { observablePetStore, PetDetails } from '@rufferal/store';
 import { PageNavigationProps } from '../../../..';
 import {
   Button,
+  FieldHelper,
   H3,
   HorizontalDivider,
   ProgressBar,
@@ -18,7 +20,6 @@ import {
   CAT_BREED_OPTIONS,
   CAT_COLOR_OPTIONS,
   CAT_SIZE_OPTIONS,
-  PetDetailsForm,
   petDetailsSchema,
   SEX_OPTIONS,
   STATUS_OPTIONS,
@@ -34,23 +35,26 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
   const [error, setError] = useState<string>();
 
   /* REACT HOOK FORM */
-  const form = useForm<PetDetailsForm>({
+  const form = useForm<PetDetails>({
     resolver: yupResolver(petDetailsSchema('cat')),
     mode: 'onBlur',
     // BLARG:TODO - RHF with RN doesn't scroll on error, so find a custom solution (https://dev.to/shaswatprabhat/auto-scroll-in-react-native-forms-3k16)
     shouldFocusError: true,
+    defaultValues: {
+      species: 'cat',
+    },
   });
   const {
     control,
     handleSubmit,
-    formState: { errors, isDirty },
+    formState: { errors },
   } = form;
 
-  const onSubmit = handleSubmit(async (data: PetDetailsForm) => {
+  const onSubmit = handleSubmit(async (data: PetDetails) => {
     setLoading(true);
     if (process.env['NODE_ENV'] === 'development') {
-      console.log('BLARG:TODO - handle store submission', data);
-      // navigation.navigate('Cat Avatar')
+      observablePetStore.createPet({ details: data });
+      navigation.navigate('Cat Avatar');
     } else {
       // const url =
       //   Platform.OS === 'android'
@@ -207,12 +211,14 @@ export const CatDetails = ({ navigation }: CatDetailsProps) => {
 
         <View style={ruffwind.style(`mt-4 gap-2`, !isIOS && `mb-4`)}>
           <HorizontalDivider color="border-amethystSmoke-600" />
-          <Button text="Next" onPress={onSubmit} />
+          {error && <FieldHelper text={error} align={'text-center'} />}
+          <Button text="Next" onPress={onSubmit} loading={loading} />
           <Button
             text="Cancel"
             type="transparent"
             size="standard-short"
             onPress={() => navigation.navigate('Manage Pets')}
+            loading={loading}
           />
         </View>
       </FormProvider>

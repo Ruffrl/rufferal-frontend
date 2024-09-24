@@ -1,16 +1,8 @@
+import { PetDetails, PetSpecies } from '@rufferal/store';
 import * as yup from 'yup';
 import { FieldOption } from '././../../../atoms';
 
 /****************** FORM ******************/
-export type PetDetailsForm = {
-  name: string;
-  color: FieldOption;
-  breed: FieldOption;
-  sex: FieldOption;
-  age: FieldOption;
-  size: FieldOption;
-  status: FieldOption;
-};
 export const optionSchema: (
   requiredMessage: string
 ) => yup.ObjectSchema<FieldOption> = (requiredMessage: string) => {
@@ -21,10 +13,14 @@ export const optionSchema: (
   });
 };
 export const petDetailsSchema: (
-  species: 'cat' | 'dog'
-) => yup.ObjectSchema<PetDetailsForm> = (species: 'cat' | 'dog') =>
+  species: PetSpecies
+) => yup.ObjectSchema<PetDetails> = (species: PetSpecies) =>
   yup
     .object({
+      species: yup
+        .string()
+        .oneOf(['cat', 'dog'])
+        .required(`Missing species: ${species} type declaration`),
       name: yup.string().required(`Please provide a name for your ${species}`),
       color: optionSchema(`Please provide your ${species}'s color`),
       breed: optionSchema(`Please provide your ${species}'s breed`),
