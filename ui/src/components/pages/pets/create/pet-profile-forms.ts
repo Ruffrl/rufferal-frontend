@@ -66,18 +66,19 @@ export const dogPersonalitySchema: yup.ObjectSchema<DogPersonality> =
 export const catCareplanSchema: yup.ObjectSchema<CatCarePlan> = yup.object({
   harness: yup.object().shape(
     {
+      activated: yup.boolean().default(false),
       comfortableHarness: generateOptionSchema()
         .default(undefined)
-        .when('specialInstructions', ([specialInstructions], schema) => {
-          if (specialInstructions?.length > 0) {
+        .when(['specialInstructions', 'activated'], ([specialInstructions, activated], schema) => {
+          if (activated || specialInstructions?.length > 0) {
             return schema.required('All fields in this section are required');
           }
           return schema;
         }),
       specialInstructions: yup
         .string()
-        .when('comfortableHarness', ([comfortableHarness], schema) => {
-          if (comfortableHarness?.value?.length > 0) {
+        .when(['comfortableHarness', 'activated'], ([comfortableHarness, activated], schema) => {
+          if (activated || comfortableHarness?.value?.length > 0) {
             return schema.required('All fields in this section are required');
           }
           return schema;
@@ -181,3 +182,74 @@ export const dogCareplanSchema: yup.ObjectSchema<DogCarePlan> = yup.object({
       .required('All fields in this section are required'),
   }),
 });
+
+// comfortableHarness: generateOptionSchema().test(
+//   'Required',
+//   'All fields in this section are required',
+//   (_value, context) => {
+//     if (context.parent.specialInstructions) {
+//       return context.parent.specialInstructions?.length === 0;
+//     } else {
+//       return true;
+//     }
+//   }
+// ),
+// specialInstructions: yup
+//   .string()
+//   .test(
+//     'Required',
+//     'All fields in this section are required',
+//     (_value, context) => {
+//       if (context.parent.comfortableHarness.value) {
+//         return context.parent.comfortableHarness.value?.length === 0;
+//       } else {
+//         return true;
+//       }
+//     }
+//   ),
+
+// .when(
+//       'specialInstructions',
+//       ([specialInstructions], schema) => {
+//         if (specialInstructions?.length > 0) {
+//           console.log('CONDITION specialInstructions');
+//           return schema.required('BLARG - All fields in this section are required');
+//         }
+//         return schema;
+//       }
+// )
+// .when(
+//   'comfortableHarness',
+//   ([comfortableHarness], schema) => {
+//     console.log('BLARG comfortableHarness', comfortableHarness);
+//     if (comfortableHarness?.value?.length > 0) {
+//       console.log('CONDITION comfortableHarness');
+//       return schema.required('BLARG - All fields in this section are required');
+//     }
+//     return schema;
+//   }
+// );
+
+// // GOT IT!!!!!!!
+// harness: yup.object().shape(
+//   {
+
+//     comfortableHarness: generateOptionSchema()
+//       .default(undefined)
+//       .when('specialInstructions', ([specialInstructions], schema) => {
+//         if (specialInstructions?.length > 0) {
+//           return schema.required('All fields in this section are required');
+//         }
+//         return schema;
+//       }),
+//     specialInstructions: yup
+//       .string()
+//       .when('comfortableHarness', ([comfortableHarness], schema) => {
+//         if (comfortableHarness?.value?.length > 0) {
+//           return schema.required('All fields in this section are required');
+//         }
+//         return schema;
+//       }),
+//   },
+//   [['comfortableHarness', 'specialInstructions']]
+// ),

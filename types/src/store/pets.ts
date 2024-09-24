@@ -53,6 +53,7 @@ export type PetCareplan = {
 };
 export interface CatCarePlan extends PetCareplan {
   harness?: {
+    activated: boolean;
     comfortableHarness?: FieldOption;
     specialInstructions?: string;
   };

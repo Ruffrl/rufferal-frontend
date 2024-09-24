@@ -14,8 +14,10 @@ export const FieldInputArea = ({
   placeholder,
   size = 'standard',
   state = 'default',
+  ...inputProps
 }: FieldInputProps) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
+
   let width = `w-full`;
   switch (size) {
     case 'small':
@@ -41,18 +43,20 @@ export const FieldInputArea = ({
       )}
     >
       <TextInput
+        {...inputProps}
+        placeholder={placeholder || 'Add notes here...'}
+        onChangeText={onChange}
+        onSubmitEditing={onSubmit}
+        editable={state !== 'disabled'}
+        multiline
+        numberOfLines={4}
         style={[
           !isMobile && { outlineStyle: 'none' },
           ruffwind.style(`font-body text-balticSea-950 h-full flex-1 text-b2`),
         ]}
-        onChangeText={(text) => onChange(text)}
         // BLARG: TODO: Convert tailwind colors into an exportable module so we can access hex values direct as needed
         // colors.saltbox[700]
         placeholderTextColor="#695C6F"
-        placeholder={placeholder || 'Add notes here...'}
-        onSubmitEditing={onSubmit}
-        multiline
-        numberOfLines={4}
       />
       {state === 'errored' && (
         <Image

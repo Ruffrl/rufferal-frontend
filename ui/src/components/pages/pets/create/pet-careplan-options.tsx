@@ -1,5 +1,5 @@
 import { ruffwind } from '@rufferal/tailwind';
-import { OtherOption } from '@rufferal/types';
+import { FieldOption, OtherOption } from '@rufferal/types';
 import { Text } from 'react-native';
 
 /****************** SHARED ******************/
@@ -23,7 +23,7 @@ export const FEEDING_QUANTITY = [
   '2 cups',
   'Other (See Special Instructions below)',
 ];
-export const FEEDING_QUANTITY_OPTIONS = [
+export const FEEDING_QUANTITY_OPTIONS: FieldOption[] = [
   {
     id: 'j6bbnonw7b',
     label: 'Once A Day',
@@ -53,7 +53,7 @@ export const FEEDING_FREQUENCY = [
   '4x per day',
   'Other (See Special Instructions below) ',
 ];
-export const FEEDING_FREQUENCY_OPTIONS = [
+export const FEEDING_FREQUENCY_OPTIONS: FieldOption[] = [
   {
     id: 'j6bbnonw7b',
     label: 'Once A Day',
@@ -78,30 +78,30 @@ export const FEEDING_FREQUENCY_OPTIONS = [
 
 /****************** CATS ******************/
 export const HARNESS = ['yes', 'no'];
-export const HARNESS_OPTIONS = [
+export const HARNESS_OPTIONS: FieldOption[] = [
   {
     id: 'jhp8becas9e',
     label: 'Yes',
-    value: 'yes',
+    value: 'true',
   },
   {
     id: 'cl4801pdvd4',
     label: 'No',
-    value: 'no',
+    value: 'false',
   },
 ];
 
 /****************** DOGS ******************/
 export const HOUSETRAINING = ['yes', 'no'];
-export const HOUSETRAINING_OPTIONS = [
+export const HOUSETRAINING_OPTIONS: FieldOption[] = [
   {
     id: 'jhp8becas9e',
     label: 'Yes',
-    value: 'yes',
+    value: 'true',
   },
   {
     id: 'cl4801pdvd4',
     label: 'No',
-    value: 'no',
+    value: 'false',
   },
 ];

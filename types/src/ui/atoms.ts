@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { IDropdownRef } from 'react-native-element-dropdown';
 
+import { Control, FieldValues } from 'react-hook-form';
 import {
   ButtonType,
   FieldOption,
@@ -164,8 +165,9 @@ export interface RangeSliderProps {
 }
 
 export type SectionSwitch = {
-  state: boolean;
-  setSwitch: () => void;
+  control: Control<FieldValues>;
+  fieldName: string;
+  handleChange: (value: boolean) => void;
 };
 
 export interface SingleSliderProps {
@@ -188,4 +190,3 @@ export interface ToggleProps {
   toggleState: boolean;
   setToggleState: () => void;
 }
-

@@ -12,7 +12,7 @@ import {
 import { Image } from 'expo-image';
 import { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 
 import {
   Accordian,
@@ -35,50 +35,28 @@ import { catCareplanSchema } from '../../pet-profile-forms';
 
 export const CatCareplan = ({ navigation }: PageNavigationProps) => {
   /* STATE */
+  const isIOS = Platform.OS === 'ios';
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const [activeSection, setActiveSection] = useState<number[] | string[]>([]);
   const handleActiveSections = (indexes: number[] | string[]) =>
     setActiveSection(indexes);
-  const [harnessSwitch, setHarnessSwitch] = useState(false);
-  const handleHarnessSwitch = () => {
-    setHarnessSwitch((prev) => !prev);
-  };
 
   /* REACT HOOK FORM */
   const form = useForm<CatCarePlan>({
     resolver: yupResolver(catCareplanSchema),
     mode: 'onBlur',
-    // defaultValues: {
-    //   harness: {
-    //     comfortableHarness: undefined,
-    //     specialInstructions: undefined,
-    //   },
-    //   feeding: {
-    //     quantity: undefined,
-    //     frequency: undefined,
-    //     specialInstructions: undefined,
-    //   },
-    //   overnight: {
-    //     specialInstructions: undefined,
-    //   },
-    //   medical: {
-    //     specialInstructions: undefined,
-    //   },
-    //   specialNeeds: {
-    //     specialInstructions: undefined,
-    //   },
-    //   additionalNotes: {
-    //     specialInstructions: undefined,
-    //   },
-    // },
+    defaultValues: {
+      harness: { activated: false, specialInstructions: '' },
+    },
   });
   const {
     control,
     handleSubmit,
+    setValue,
+    resetField,
     formState: {
       errors,
-      isValid,
       /*
        * BLARG:TODO: - convert switch behavior to dirtyfield handling
        * - Prevent toggle from being turned ON if fields are not dirty
@@ -99,7 +77,7 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
       // 3. Get the current pet at top of CatCareplan
       // 4. pass appropriate id and ...pet to updatePet
       // observablePetStore.updatePet({ id: '11223', personality: data });
-      navigation.navigate('Manage Pets');
+      // navigation.navigate('Manage Pets');
     } else {
       // Handle form submission
       setError('');
@@ -115,6 +93,14 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
     }
   });
 
+  /* BEHAVIORS */
+  const handleHarnessChange = (value: boolean) => {
+    if (!value) {
+      resetField('harness.comfortableHarness');
+      resetField('harness.specialInstructions');
+    }
+  };
+
   /* RENDERS */
   const CAT_CAREPLAN_SECTIONS: AccordionSection[] = [
     {
@@ -129,7 +115,13 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
               <RadioGroup
                 value={value}
                 onBlur={onBlur}
-                onChange={onChange}
+                onChange={(text) => {
+                  setValue('harness.activated', true, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  });
+                  onChange(text);
+                }}
                 errorMessage={
                   errors.harness?.comfortableHarness?.value?.message
                 }
@@ -144,7 +136,13 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
             render={({ field: { onBlur, onChange, value } }) => (
               <InputArea
                 onBlur={onBlur}
-                onChange={onChange}
+                onChange={(text) => {
+                  setValue('harness.activated', true, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  });
+                  onChange(text);
+                }}
                 value={value}
                 errorMessage={errors.harness?.specialInstructions?.message}
                 label="Special instructions"
@@ -155,8 +153,9 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
         </>
       ),
       switch: {
-        state: harnessSwitch,
-        setSwitch: handleHarnessSwitch,
+        control,
+        fieldName: 'harness.activated',
+        handleChange: handleHarnessChange,
       },
     },
     {
@@ -342,19 +341,15 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
 
         <View
           style={ruffwind.style(
-            `gap-2`,
-            activeSection.length > 0
-              ? ` mt-${verticalScaleTW(16)}`
-              : `mt-${verticalScaleTW(161)}`
+            `gap-2 bg-pink-500`,
+            isIOS ? `mt-${verticalScaleTW(161)}` : `mt-${verticalScaleTW(180)}`,
+            activeSection.length > 0 && `mt-${verticalScaleTW(16)}`,
+            activeSection.length > 0 && !isIOS && `mb-${verticalScaleTW(16)}`
           )}
         >
           <HorizontalDivider color="border-amethystSmoke-600" />
           {error && <FieldHelper text={error} align={'text-center'} />}
-          <Button
-            text='Complete'
-            onPress={onSubmit}
-            loading={loading}
-          />
+          <Button text="Complete" onPress={onSubmit} loading={loading} />
           <Button
             text="Cancel"
             type="transparent"

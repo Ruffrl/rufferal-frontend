@@ -14,6 +14,7 @@ export const FieldInput = ({
   placeholder,
   size = 'standard',
   state = 'default',
+  ...inputProps
 }: FieldInputProps) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   let width = `w-full`;
@@ -58,17 +59,16 @@ export const FieldInput = ({
       )}
     >
       <TextInput
+        {...inputProps}
+        placeholder={placeholder || 'Select...'}
+        onChangeText={onChange}
+        onSubmitEditing={onSubmit}
+        editable={state !== 'disabled'}
         style={[
           !isMobile && { outlineStyle: 'none' },
           ruffwind.style(`font-body h-full flex-1 text-b2`, textStyle),
         ]}
-        onChangeText={(text) => {
-          onChange(text);
-        }}
         placeholderTextColor={placeholderColor}
-        placeholder={placeholder || 'Select...'}
-        onSubmitEditing={onSubmit}
-        editable={state !== 'disabled'}
       />
       {state === 'errored' && (
         <Image

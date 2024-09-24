@@ -1,6 +1,8 @@
+import { FieldOption } from "@rufferal/types";
+
 /****************** SHARED ******************/
 export const SEX = ['male', 'female'];
-export const SEX_OPTIONS = [
+export const SEX_OPTIONS: FieldOption[] = [
   {
     id: 'whseq6w1c1e',
     label: 'Male',
@@ -14,16 +16,16 @@ export const SEX_OPTIONS = [
 ];
 
 export const STATUS = ['yes', 'no'];
-export const STATUS_OPTIONS = [
+export const STATUS_OPTIONS: FieldOption[] = [
   {
     id: '6az7qovb505',
     label: 'Yes',
-    value: 'yes',
+    value: 'true',
   },
   {
     id: 'xmx7j5xkcxj',
     label: 'No',
-    value: 'no',
+    value: 'false',
   },
 ];
 
@@ -51,7 +53,7 @@ export const CAT_COLORS = [
   'tuxedo',
   'white',
 ];
-export const CAT_COLOR_OPTIONS = [
+export const CAT_COLOR_OPTIONS: FieldOption[] = [
   {
     id: 'hwfkdiwxkph',
     label: 'Black',
@@ -218,7 +220,7 @@ export const CAT_BREEDS = [
   'turkish angora',
   'turkish van',
 ];
-export const CAT_BREED_OPTIONS = [
+export const CAT_BREED_OPTIONS: FieldOption[] = [
   {
     id: 'r7x00i47j3',
     label: 'Abyssinian',
@@ -512,7 +514,7 @@ export const CAT_AGES = [
   'Adult (2–8 years)',
   'Senior (8+ years)',
 ];
-export const CAT_AGE_OPTIONS = [
+export const CAT_AGE_OPTIONS: FieldOption[] = [
   {
     id: '1wqu4bnz908',
     label: 'Kitten (0–9 Months)',
@@ -541,7 +543,7 @@ export const CAT_SIZES = [
   'Large (12–16 lbs)',
   'Extra large (16+ lbs)',
 ];
-export const CAT_SIZE_OPTIONS = [
+export const CAT_SIZE_OPTIONS: FieldOption[] = [
   {
     id: 'ffad55kke4',
     label: 'Small (0–6 Lbs)',
@@ -593,7 +595,7 @@ export const DOG_COLORS = [
   'white',
   'yellow',
 ];
-export const DOG_COLOR_OPTIONS = [
+export const DOG_COLOR_OPTIONS: FieldOption[] = [
   {
     id: 'kkfjicu8ab',
     label: 'Apricot / Beige',
@@ -1089,7 +1091,7 @@ export const DOG_BREEDS = [
   'yugoslavian shepherd dog - sharplanina',
   "cirneco dell'etna",
 ];
-export const DOG_BREED_OPTIONS = [
+export const DOG_BREED_OPTIONS: FieldOption[] = [
   {
     id: 'duczi3d8r4f',
     label: 'Affenpinscher',
@@ -2903,7 +2905,7 @@ export const DOG_AGES = [
   'Adult (2–8 years)',
   'Senior (8+ years)',
 ];
-export const DOG_AGE_OPTIONS = [
+export const DOG_AGE_OPTIONS: FieldOption[] = [
   {
     id: '5olpqsjlvf6',
     label: 'Puppy (0–9 Months)',
@@ -2932,7 +2934,7 @@ export const DOG_SIZES = [
   'Large (41–100 lbs)',
   'Extra large (101+ lbs)',
 ];
-export const DOG_SIZE_OPTIONS = [
+export const DOG_SIZE_OPTIONS: FieldOption[] = [
   {
     id: 'uh457bd6zc',
     label: 'Small (0–15 Lbs)',

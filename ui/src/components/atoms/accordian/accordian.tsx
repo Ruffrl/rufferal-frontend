@@ -1,15 +1,18 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { AccordianProps, AccordionSection } from '@rufferal/types';
 import {
   GLOBAL_ICON_SIZE,
   GLOBAL_ICON_SIZE_MEDIUM_SMALL,
   moderateScaleTW,
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
+import { Controller } from 'react-hook-form';
 import { Text, View } from 'react-native';
-import * as RNCAccordian from 'react-native-collapsible/Accordion';
 import { HorizontalDivider } from '../horizontal-divider/horizontal-divider';
+
 import { Switch } from '../switch/switch';
-import { AccordianProps, AccordionSection } from '@rufferal/types';
+
+import * as RNCAccordian from 'react-native-collapsible/Accordion';
 const CollapsibleAccordion = RNCAccordian.default;
 
 export const Accordian = ({
@@ -44,9 +47,21 @@ export const Accordian = ({
           {section.title}
         </Text>
         {section.switch && (
-          <Switch
-            switchState={section.switch.state}
-            setSwitchState={section.switch.setSwitch}
+          <Controller
+            name={section.switch.fieldName}
+            control={section.switch.control}
+            render={({ field: { onBlur, onChange, value } }) =>
+              section.switch ? (
+                <Switch
+                  value={value}
+                  onBlur={onBlur}
+                  onChange={onChange}
+                  handleChange={section.switch.handleChange}
+                />
+              ) : (
+                <View />
+              )
+            }
           />
         )}
         <Image

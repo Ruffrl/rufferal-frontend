@@ -3,14 +3,13 @@ import { Text, View } from 'react-native';
 
 import { observablePetStore } from '@rufferal/store';
 import { ruffwind } from '@rufferal/tailwind';
-import { Pet } from '@rufferal/types';
+import { PageNavigationProps, Pet } from '@rufferal/types';
 import {
   capitalize,
   GLOBAL_ICON_SIZE,
   GLOBAL_ICON_SIZE_LARGE,
   titleCase,
 } from '@rufferal/utils';
-import { PageNavigationProps } from '../..';
 import {
   Button,
   H3,
@@ -20,10 +19,7 @@ import {
 } from '../../../atoms';
 import { FeatureTemplate } from '../../../templates';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ManagePetsProps extends PageNavigationProps {}
-
-export const ManagePets = ({ navigation }: ManagePetsProps) => {
+export const ManagePets = ({ navigation }: PageNavigationProps) => {
   // observablePetStore.createPet({
   //   avatar: require('@rufferal/assets/src/images/cat-profile-stock-photo.jpeg'),
   //   details: {
