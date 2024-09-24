@@ -1,6 +1,6 @@
 import { FieldOption } from '..';
 
-export type PersonalityRange = 1 | 2 | 3 | 4 | 5 | undefined;
+export type PersonalityRange = number | undefined;
 
 export type PetSpecies = 'cat' | 'dog';
 export type PetState = 'active' | 'inactive';
@@ -15,51 +15,51 @@ export type PetDetails = {
   status: FieldOption;
 };
 export type PetPersonality = {
-  goodKids: boolean;
-  goodOtherSpecies: boolean;
-  goodSameSpecies: boolean;
-  temperment: PersonalityRange; // shy...social
-  energy: PersonalityRange; // relaxed...energy
-  autonomy: PersonalityRange; // dependent...independent
-  motivation: PersonalityRange; // food motivated...praise motivated
-  requiresMedication: boolean;
-  seperationAnxiety: boolean;
-  specialNeeds: boolean;
+  goodKids?: boolean;
+  goodOtherSpecies?: boolean;
+  goodSameSpecies?: boolean;
+  temperment?: PersonalityRange; // shy...social
+  energy?: PersonalityRange; // relaxed...energy
+  autonomy?: PersonalityRange; // dependent...independent
+  motivation?: PersonalityRange; // food motivated...praise motivated
+  requiresMedication?: boolean;
+  seperationAnxiety?: boolean;
+  specialNeeds?: boolean;
 };
 export interface CatPersonality extends PetPersonality {
-  declawed: boolean;
+  declawed?: boolean;
 }
 export interface DogPersonality extends PetPersonality {
-  houseTrained: boolean;
+  houseTrained?: boolean;
 }
 export type PetCareplan = {
-  feeding: {
-    quantity: string;
-    frequency: string;
+  feeding?: {
+    quantity: FieldOption;
+    frequency: FieldOption;
     specialInstructions: string;
   };
-  overnight: {
+  overnight?: {
     specialInstructions: string;
   };
-  medical: {
+  medical?: {
     specialInstructions: string;
   };
-  specialNeeds: {
+  specialNeeds?: {
     specialInstructions: string;
   };
-  additionalNotes: {
+  additionalNotes?: {
     specialInstructions: string;
   };
 };
-export interface CatCareplan extends PetCareplan {
-  harness: {
-    comfortableHarness: boolean;
+export interface CatCarePlan extends PetCareplan {
+  harness?: {
+    comfortableHarness: FieldOption;
     specialInstructions: string;
   };
 }
-export interface DogCareplan extends PetCareplan {
-  houseTraining: {
-    hasAccidents: boolean;
+export interface DogCarePlan extends PetCareplan {
+  houseTraining?: {
+    hasAccidents: FieldOption;
     specialInstructions: string;
   };
 }

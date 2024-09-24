@@ -1,35 +1,3 @@
-import { FieldOption, PetDetails, PetSpecies } from '@rufferal/types';
-import * as yup from 'yup';
-
-/****************** FORM ******************/
-export const optionSchema: (
-  requiredMessage: string
-) => yup.ObjectSchema<FieldOption> = (requiredMessage: string) => {
-  return yup.object({
-    id: yup.string().required(),
-    label: yup.string().required(),
-    value: yup.string().required(requiredMessage),
-  });
-};
-export const petDetailsSchema: (
-  species: PetSpecies
-) => yup.ObjectSchema<PetDetails> = (species: PetSpecies) =>
-  yup
-    .object({
-      species: yup
-        .string()
-        .oneOf(['cat', 'dog'])
-        .required(`Missing species: ${species} type declaration`),
-      name: yup.string().required(`Please provide a name for your ${species}`),
-      color: optionSchema(`Please provide your ${species}'s color`),
-      breed: optionSchema(`Please provide your ${species}'s breed`),
-      sex: optionSchema(`Please provide your ${species}'s sex`),
-      age: optionSchema(`Please provide your ${species}'s age`),
-      size: optionSchema(`Please provide your ${species}'s size`),
-      status: optionSchema(`Please provide your ${species}'s status`),
-    })
-    .required();
-
 /****************** SHARED ******************/
 export const SEX = ['male', 'female'];
 export const SEX_OPTIONS = [

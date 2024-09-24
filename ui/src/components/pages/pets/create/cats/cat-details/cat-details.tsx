@@ -20,10 +20,10 @@ import {
   CAT_BREED_OPTIONS,
   CAT_COLOR_OPTIONS,
   CAT_SIZE_OPTIONS,
-  petDetailsSchema,
   SEX_OPTIONS,
   STATUS_OPTIONS,
 } from '../../pet-details-options';
+import { petDetailsSchema } from '../../pet-profile-forms';
 
 export const CatDetails = ({ navigation }: PageNavigationProps) => {
   /* STATE */
@@ -98,11 +98,11 @@ export const CatDetails = ({ navigation }: PageNavigationProps) => {
                 control={control}
                 render={({ field: { onBlur, onChange, value } }) => (
                   <Input
-                    label="Name"
                     onBlur={onBlur} // notify when input is touched
                     onChange={onChange} // send value to hook form
                     value={value}
                     errorMessage={errors.name?.message}
+                    label="Name"
                   />
                 )}
               />
@@ -111,14 +111,14 @@ export const CatDetails = ({ navigation }: PageNavigationProps) => {
                 control={control}
                 render={({ field: { onBlur, onChange } }) => (
                   <Select
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    errorMessage={errors.color?.value?.message}
                     label="Color"
                     data={CAT_COLOR_OPTIONS}
                     labelField="label"
-                    onBlur={onBlur} // notify when input is touched
-                    onChange={onChange} // send value to hook form
                     searchField="label"
                     valueField="id"
-                    errorMessage={errors.color?.value?.message}
                   />
                 )}
               />
@@ -146,11 +146,11 @@ export const CatDetails = ({ navigation }: PageNavigationProps) => {
                 render={({ field: { onBlur, onChange, value } }) => (
                   <RadioGroup
                     value={value}
-                    data={SEX_OPTIONS}
                     onBlur={onBlur} // notify when input is touched
                     onChange={onChange} // send value to hook form
-                    label="Sex"
                     errorMessage={errors.sex?.value?.message}
+                    data={SEX_OPTIONS}
+                    label="Sex"
                   />
                 )}
               />
@@ -206,6 +206,7 @@ export const CatDetails = ({ navigation }: PageNavigationProps) => {
           </View>
         </View>
 
+        {/* BLARG:TODO - do I still need this IOS margin bottom? */}
         <View style={ruffwind.style(`mt-4 gap-2`, !isIOS && `mb-4`)}>
           <HorizontalDivider color="border-amethystSmoke-600" />
           {error && <FieldHelper text={error} align={'text-center'} />}
