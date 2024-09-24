@@ -1,13 +1,8 @@
 import { Slider } from '@react-native-assets/slider';
 import { ruffwind } from '@rufferal/tailwind';
+import { SingleSliderProps } from '@rufferal/types';
 import { capitalize, moderateScale, moderateScaleTW } from '@rufferal/utils';
 import { Text, View } from 'react-native';
-
-interface SingleSliderProps {
-  handleChange: (value: number) => void;
-  labels?: [string, string];
-  value?: number;
-}
 
 // 🚨🚨🚨 WARNING: When thumb is at extreme ends, it is cut off by padding/width 🚨🚨🚨
 // BLARG: TODO: Create custom Slider (that can support Range behavior and replace this library here and in RangeSlider atoms)

@@ -1,11 +1,7 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { ProgressBarProps } from '@rufferal/types';
 import { moderateScaleTW, verticalScaleTW } from '@rufferal/utils';
 import { View } from 'react-native';
-
-export interface ProgressBarProps {
-  step: number;
-  total: number;
-}
 
 // BLARG: TODO: Add animations as you progress from step to step
 // Use Reanimated or Animated to generate

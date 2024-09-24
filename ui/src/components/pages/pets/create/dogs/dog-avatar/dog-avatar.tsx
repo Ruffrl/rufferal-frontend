@@ -1,18 +1,15 @@
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { ruffwind } from '@rufferal/tailwind';
+import { PageNavigationProps } from '@rufferal/types';
+import { GLOBAL_ICON_SIZE_MEDIUM_SMALL } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { Platform, Text, View } from 'react-native';
 
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { GLOBAL_ICON_SIZE_MEDIUM_SMALL } from '@rufferal/utils';
-import { PageNavigationProps } from '../../../..';
 import { Button, H3, ProgressBar, Tag } from '../../../../../atoms';
 import { Photo } from '../../../../../molecules';
 import { OverrideSafeFeatureTemplate } from '../../../../../templates';
 
-/* eslint-disable-next-line */
-export interface DogAvatarProps extends PageNavigationProps {}
-
-export const DogAvatar = ({ navigation }: DogAvatarProps) => {
+export const DogAvatar = ({ navigation }: PageNavigationProps) => {
   const isIOS = Platform.OS === 'ios';
 
   return (

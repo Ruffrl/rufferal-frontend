@@ -1,6 +1,5 @@
-import { PetDetails, PetSpecies } from '@rufferal/store';
+import { FieldOption, PetDetails, PetSpecies } from '@rufferal/types';
 import * as yup from 'yup';
-import { FieldOption } from '././../../../atoms';
 
 /****************** FORM ******************/
 export const optionSchema: (

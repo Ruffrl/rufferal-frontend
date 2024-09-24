@@ -1,11 +1,7 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { TagProps } from '@rufferal/types';
 import { moderateScaleTW } from '@rufferal/utils';
 import { Text, View } from 'react-native';
-
-export interface TagProps {
-  Icon?: () => JSX.Element;
-  text: string | React.ReactElement;
-}
 
 export const Tag = ({ Icon, text }: TagProps) => {
   return (

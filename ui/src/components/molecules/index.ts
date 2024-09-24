@@ -10,8 +10,6 @@
  *
  */
 
-export type { OtherOption } from './select/select';
-
 export { InputArea } from './input-area/input-area';
 export { Input } from './input/input';
 export { Photo } from './photo/photo';

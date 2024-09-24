@@ -1,19 +1,8 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { FieldState, InputProps } from '@rufferal/types';
 import { moderateScaleTW } from '@rufferal/utils';
 import { View } from 'react-native';
-import {
-  FieldHelper,
-  FieldInput,
-  FieldInputProps,
-  FieldLabel,
-  FieldState,
-} from '../../atoms';
-
-export interface InputProps extends FieldInputProps {
-  errorMessage?: string;
-  label: string;
-  disabled?: boolean;
-}
+import { FieldHelper, FieldInput, FieldLabel } from '../../atoms';
 
 export const Input = ({
   errorMessage,

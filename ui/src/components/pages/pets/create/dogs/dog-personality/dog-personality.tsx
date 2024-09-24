@@ -1,13 +1,13 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { PageNavigationProps } from '@rufferal/types';
 import {
   GLOBAL_ICON_SIZE_MEDIUM_SMALL,
   verticalScaleTW,
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
+import { useState } from 'react';
 import { Text, View } from 'react-native';
 
-import { useState } from 'react';
-import { PageNavigationProps } from '../../../..';
 import {
   Button,
   H3,
@@ -19,10 +19,7 @@ import {
 } from '../../../../../atoms';
 import { ScrollFeatureTemplate } from '../../../../../templates';
 
-/* eslint-disable-next-line */
-export interface DogPersonalityProps extends PageNavigationProps {}
-
-export const DogPersonality = ({ navigation }: DogPersonalityProps) => {
+export const DogPersonality = ({ navigation }: PageNavigationProps) => {
   const [goodWithKids, setGoodWithKids] = useState(false);
   const handleGoodWithKids = () => setGoodWithKids((prev) => !prev);
   // useCallback(() => { }, [])

@@ -1,10 +1,7 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { ItemProps } from '@rufferal/types';
 import { PropsWithChildren } from 'react';
 import { Platform, View } from 'react-native';
-
-interface ItemProps {
-  height?: string;
-}
 
 export const Item = ({
   height = 'h-16',

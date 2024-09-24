@@ -1,12 +1,6 @@
 import { ruffwind } from '@rufferal/tailwind';
-import React from 'react';
+import { FieldCharacterCountProps } from '@rufferal/types';
 import { Text } from 'react-native';
-
-export interface FieldCharacterCountProps {
-  align?: string;
-  count: number;
-  max: number;
-}
 
 export const FieldCharacterCount = ({
   align = 'text-right',

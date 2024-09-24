@@ -1,6 +1,6 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { OtherOption } from '@rufferal/types';
 import { Text } from 'react-native';
-import { OtherOption } from '../../../molecules';
 
 /****************** SHARED ******************/
 export const OTHER_OPTION: OtherOption = {

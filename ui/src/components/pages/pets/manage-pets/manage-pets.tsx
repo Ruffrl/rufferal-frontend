@@ -1,8 +1,9 @@
 import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
 
-import { observablePetStore, Pet } from '@rufferal/store';
+import { observablePetStore } from '@rufferal/store';
 import { ruffwind } from '@rufferal/tailwind';
+import { Pet } from '@rufferal/types';
 import {
   capitalize,
   GLOBAL_ICON_SIZE,

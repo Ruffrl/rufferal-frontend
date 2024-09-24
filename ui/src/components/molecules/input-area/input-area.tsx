@@ -1,4 +1,5 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { InputAreaProps } from '@rufferal/types';
 import { moderateScaleTW } from '@rufferal/utils';
 import { useState } from 'react';
 import { View } from 'react-native';
@@ -6,15 +7,8 @@ import {
   FieldCharacterCount,
   FieldHelper,
   FieldInputArea,
-  FieldInputAreaProps,
   FieldLabel,
 } from '../../atoms';
-
-export interface InputAreaProps extends FieldInputAreaProps {
-  errorMessage?: string;
-  label: string;
-  maxCharacters?: number;
-}
 
 export const InputArea = ({
   errorMessage = 'TESTING',
@@ -34,7 +28,7 @@ export const InputArea = ({
       <FieldInputArea
         onChange={(text) => {
           handleCharacterCount(text);
-          onChange?.(text) && onChange(text);
+          onChange(text);
         }}
         state={state}
         size={size}

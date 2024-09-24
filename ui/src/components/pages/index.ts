@@ -25,7 +25,6 @@ export type ScreenProps = {
   Search: undefined;
   // Profile: { userId: string };
 };
-export type { PageNavigationProps } from './types/page-props';
 
 export { CatAvatar } from './pets/create/cats/cat-avatar/cat-avatar';
 export { CatCareplan } from './pets/create/cats/cat-careplan/cat-careplan';

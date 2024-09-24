@@ -1,12 +1,8 @@
 import { RangeSlider as Slider } from '@react-native-assets/slider';
 import { ruffwind } from '@rufferal/tailwind';
+import { RangeSliderProps } from '@rufferal/types';
 import { moderateScale, moderateScaleTW } from '@rufferal/utils';
 import { View } from 'react-native';
-
-interface RangeSliderProps {
-  handleChange: (range: [number, number]) => void;
-  range?: [number, number];
-}
 
 export const RangeSlider = ({ handleChange, range }: RangeSliderProps) => {
   return (

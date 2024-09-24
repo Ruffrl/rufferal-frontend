@@ -1,19 +1,12 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { FieldInputProps } from '@rufferal/types';
 import {
   GLOBAL_ICON_SIZE_SMALL,
   horizontalScaleTW,
   moderateScaleTW,
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
-import { Platform, TextInput, TextInputProps, View } from 'react-native';
-import { FieldSize, FieldState } from '..';
-
-export interface FieldInputProps extends Omit<TextInputProps, 'onChange'> {
-  onChange: (text: string) => void;
-  onSubmit?: () => void;
-  size?: FieldSize;
-  state?: FieldState;
-}
+import { Platform, TextInput, View } from 'react-native';
 
 export const FieldInput = ({
   onChange,

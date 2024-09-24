@@ -6,8 +6,8 @@ import {
 import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
 
+import { PageNavigationProps } from '@rufferal/types';
 import { useState } from 'react';
-import { PageNavigationProps } from '../../../..';
 import {
   Button,
   H3,
@@ -19,10 +19,7 @@ import {
 } from '../../../../../atoms';
 import { ScrollFeatureTemplate } from '../../../../../templates';
 
-/* eslint-disable-next-line */
-export interface CatPersonalityProps extends PageNavigationProps {}
-
-export const CatPersonality = ({ navigation }: CatPersonalityProps) => {
+export const CatPersonality = ({ navigation }: PageNavigationProps) => {
   const [goodWithKids, setGoodWithKids] = useState(false);
   const handleGoodWithKids = () => setGoodWithKids((prev) => !prev);
   // useCallback(() => { }, [])

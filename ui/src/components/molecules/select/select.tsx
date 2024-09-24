@@ -1,25 +1,8 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { FieldState, SelectProps } from '@rufferal/types';
 import { moderateScaleTW } from '@rufferal/utils';
 import { View } from 'react-native';
-import {
-  FieldHelper,
-  FieldLabel,
-  FieldOption,
-  FieldSelect,
-  FieldSelectProps,
-  FieldState,
-} from '../../atoms';
-
-export type OtherOption = {
-  component: JSX.Element;
-  label: string;
-};
-export interface SelectProps extends FieldSelectProps<FieldOption> {
-  errorMessage?: string;
-  label: string;
-  other?: OtherOption;
-  disabled?: boolean;
-}
+import { FieldHelper, FieldLabel, FieldSelect } from '../../atoms';
 
 export const Select = ({
   data,

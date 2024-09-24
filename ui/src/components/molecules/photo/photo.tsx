@@ -5,11 +5,9 @@ import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { PhotoModal } from './photo-modal';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface PhotoProps {}
 
 // ⚠️ USAGE - to use this you must wrap your page with BottomSheetModalProvider
-export const Photo = (props: PhotoProps) => {
+export const Photo = () => {
   const [modalPresent, setModalPresent] = useState(false);
   const handleModalDismiss = () => setModalPresent(false);
 

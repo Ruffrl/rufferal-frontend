@@ -1,11 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { observablePetStore } from '@rufferal/store';
 import { ruffwind } from '@rufferal/tailwind';
+import { PageNavigationProps, PetDetails } from '@rufferal/types';
 import { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
 
-import { observablePetStore, PetDetails } from '@rufferal/store';
-import { PageNavigationProps } from '../../../..';
 import {
   Button,
   FieldHelper,
@@ -25,10 +25,7 @@ import {
   STATUS_OPTIONS,
 } from '../../pet-details-options';
 
-/* eslint-disable-next-line */
-export interface DogDetailsProps extends PageNavigationProps {}
-
-export const DogDetails = ({ navigation }: DogDetailsProps) => {
+export const DogDetails = ({ navigation }: PageNavigationProps) => {
   /* STATE */
   const isIOS = Platform.OS === 'ios';
   const [loading, setLoading] = useState(false);

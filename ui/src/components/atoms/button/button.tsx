@@ -1,29 +1,12 @@
 // import React from 'react';
 import { ruffwind } from '@rufferal/tailwind';
+import { ButtonProps } from '@rufferal/types';
 import {
   horizontalScaleTW,
   moderateScale,
   moderateScaleTW,
 } from '@rufferal/utils';
-import {
-  ActivityIndicator,
-  Pressable,
-  PressableProps,
-  Text,
-  View,
-} from 'react-native';
-import { ButtonType, FieldSize, FieldState } from '..';
-
-interface Props extends PressableProps {
-  loading?: boolean;
-  rounded?: boolean;
-  size?: FieldSize;
-  state?: FieldState;
-  text?: string;
-  iconRight?: React.JSX.Element;
-  iconLeft?: React.JSX.Element;
-  type?: ButtonType;
-}
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 
 const BUTTON_STYLES = ruffwind`
   w-full
@@ -44,7 +27,7 @@ export const Button = ({
   iconRight,
   iconLeft,
   type = 'primary',
-}: Props) => {
+}: ButtonProps) => {
   // Primary && Default theme
   let colorStyle = 'bg-seance-800';
   let textColor = 'text-wildSand-50';
@@ -52,7 +35,7 @@ export const Button = ({
   let width = `w-full`;
   let fontStyles = 'font-bodyBold text-b4';
   let shadow = false;
-  let loadingColor = 'white'
+  let loadingColor = 'white';
 
   switch (size) {
     case 'standard-short':
@@ -76,7 +59,7 @@ export const Button = ({
   } else if (type === 'transparent') {
     colorStyle = 'bg-transparent';
     textColor = 'text-electricViolet-700';
-    loadingColor = '#9525CB'
+    loadingColor = '#9525CB';
   } else if (type === 'socialBlack') {
     shadow = true;
     colorStyle = 'bg-black';
@@ -87,7 +70,7 @@ export const Button = ({
     colorStyle = 'bg-white';
     textColor = 'text-[#0000008a]';
     fontStyles = 'font-bodyMedium text-[0.938rem] leading-[1.119rem]';
-    loadingColor = 'black'
+    loadingColor = 'black';
   }
 
   // Manage state themes

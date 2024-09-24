@@ -1,23 +1,8 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { FieldOption, FieldState, RadioGroupProps } from '@rufferal/types';
 import { moderateScaleTW } from '@rufferal/utils';
 import { View } from 'react-native';
-import {
-  FieldHelper,
-  FieldLabel,
-  FieldOption,
-  FieldState,
-  Radio,
-} from '../../atoms';
-
-export interface RadioGroupProps {
-  data: FieldOption[];
-  disabled?: boolean;
-  errorMessage?: string;
-  label?: string;
-  onBlur?: () => void;
-  onChange: (item: FieldOption) => void;
-  value?: FieldOption;
-}
+import { FieldHelper, FieldLabel, Radio } from '../../atoms';
 
 export const RadioGroup = ({
   data,
@@ -34,7 +19,7 @@ export const RadioGroup = ({
   } else if (errorMessage) {
     state = 'errored';
   }
-  
+
   const handlePress = (item: FieldOption) => {
     if (item.id !== value?.id) {
       onChange(item);

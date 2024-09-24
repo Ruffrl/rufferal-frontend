@@ -9,25 +9,8 @@ import { Text, View } from 'react-native';
 import * as RNCAccordian from 'react-native-collapsible/Accordion';
 import { HorizontalDivider } from '../horizontal-divider/horizontal-divider';
 import { Switch } from '../switch/switch';
+import { AccordianProps, AccordionSection } from '@rufferal/types';
 const CollapsibleAccordion = RNCAccordian.default;
-
-export interface AccordianProps {
-  sections: AccordionSection[];
-  activeSection: number[] | string[];
-  setActiveSections: (indexes: number[] | string[]) => void;
-}
-
-export type SectionSwitch = {
-  state: boolean;
-  setSwitch: () => void;
-};
-
-export interface AccordionSection {
-  title: string;
-  icon?: string;
-  component: JSX.Element;
-  switch?: SectionSwitch;
-}
 
 export const Accordian = ({
   activeSection,

@@ -1,19 +1,12 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { FieldInputProps } from '@rufferal/types';
 import {
   GLOBAL_ICON_SIZE_SMALL,
   horizontalScaleTW,
   moderateScaleTW,
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
-import { Platform, TextInput, TextInputProps, View } from 'react-native';
-import { FieldSize, FieldState } from '..';
-
-export interface FieldInputAreaProps extends Omit<TextInputProps, 'onChange'> {
-  onSubmit?: () => void;
-  size?: FieldSize;
-  state?: FieldState;
-  onChange?: ((text: string) => void)
-}
+import { Platform, TextInput, View } from 'react-native';
 
 export const FieldInputArea = ({
   onChange,
@@ -21,7 +14,7 @@ export const FieldInputArea = ({
   placeholder,
   size = 'standard',
   state = 'default',
-}: FieldInputAreaProps) => {
+}: FieldInputProps) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   let width = `w-full`;
   switch (size) {
@@ -52,7 +45,7 @@ export const FieldInputArea = ({
           !isMobile && { outlineStyle: 'none' },
           ruffwind.style(`font-body text-balticSea-950 h-full flex-1 text-b2`),
         ]}
-        onChangeText={(text) => onChange?.(text) && onChange(text)}
+        onChangeText={(text) => onChange(text)}
         // BLARG: TODO: Convert tailwind colors into an exportable module so we can access hex values direct as needed
         // colors.saltbox[700]
         placeholderTextColor="#695C6F"

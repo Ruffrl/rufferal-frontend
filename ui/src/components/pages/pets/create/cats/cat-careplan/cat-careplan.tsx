@@ -1,17 +1,20 @@
 import { ruffwind } from '@rufferal/tailwind';
 import {
+  AccordionSection,
+  FieldOption,
+  PageNavigationProps,
+} from '@rufferal/types';
+import {
   GLOBAL_ICON_SIZE_MEDIUM_SMALL,
   verticalScaleTW,
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
-import { PageNavigationProps } from '../../../..';
+
 import {
   Accordian,
-  AccordionSection,
   Button,
-  FieldOption,
   H3,
   HorizontalDivider,
   ProgressBar,
@@ -26,10 +29,7 @@ import {
   OTHER_OPTION,
 } from '../../pet-careplan-options';
 
-/* eslint-disable-next-line */
-export interface CatCareplanProps extends PageNavigationProps {}
-
-export const CatCareplan = ({ navigation }: CatCareplanProps) => {
+export const CatCareplan = ({ navigation }: PageNavigationProps) => {
   // form state
   const [harness, setHarness] = useState<FieldOption>();
   const handleHarness = (item: FieldOption) => {

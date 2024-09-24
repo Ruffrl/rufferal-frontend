@@ -1,4 +1,5 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { FieldOption, FieldSelectProps } from '@rufferal/types';
 import {
   generateKey,
   GLOBAL_ICON_SIZE_SMALL,
@@ -8,26 +9,8 @@ import {
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { useState } from 'react';
-import {
-  FlatListProps,
-  ImageStyle,
-  Platform,
-  StyleProp,
-  Text,
-  TextProps,
-  TextStyle,
-  View,
-  ViewStyle,
-} from 'react-native';
-import { Dropdown, IDropdownRef } from 'react-native-element-dropdown';
-import { FieldOption, FieldSize, FieldState } from '../';
-import { OtherOption } from '../../molecules';
-
-export interface FieldSelectProps<Option> extends DropdownProps<Option> {
-  size?: FieldSize;
-  state?: FieldState;
-  other?: OtherOption;
-}
+import { Platform, Text, View } from 'react-native';
+import { Dropdown } from 'react-native-element-dropdown';
 
 export const convertToOptions = (options: string[]): FieldOption[] => {
   return options.map((option) => {
@@ -197,63 +180,3 @@ export const FieldSelect = ({
     />
   );
 };
-
-export interface DropdownProps<T> {
-  ref?:
-    | React.RefObject<IDropdownRef>
-    | React.MutableRefObject<IDropdownRef>
-    | null
-    | undefined;
-  testID?: string;
-  itemTestIDField?: string;
-  style?: StyleProp<ViewStyle>;
-  containerStyle?: StyleProp<ViewStyle>;
-  placeholderStyle?: StyleProp<TextStyle>;
-  selectedTextStyle?: StyleProp<TextStyle>;
-  selectedTextProps?: TextProps;
-  itemContainerStyle?: StyleProp<ViewStyle>;
-  itemTextStyle?: StyleProp<TextStyle>;
-  inputSearchStyle?: StyleProp<TextStyle>;
-  iconStyle?: StyleProp<ImageStyle>;
-  maxHeight?: number;
-  minHeight?: number;
-  fontFamily?: string;
-  iconColor?: string;
-  activeColor?: string;
-  data: T[];
-  value?: T | string | null | undefined;
-  placeholder?: string;
-  labelField: keyof T;
-  valueField: keyof T;
-  searchField?: keyof T;
-  search?: boolean;
-  searchPlaceholder?: string;
-  disable?: boolean;
-  autoScroll?: boolean;
-  showsVerticalScrollIndicator?: boolean;
-  dropdownPosition?: 'auto' | 'top' | 'bottom';
-  // flatListProps?: Omit<FlatListProps<any>, 'renderItem' | 'data'>;
-  flatListProps?: Omit<FlatListProps<unknown>, 'renderItem' | 'data'>;
-  keyboardAvoiding?: boolean;
-  backgroundColor?: string;
-  confirmSelectItem?: boolean;
-  accessibilityLabel?: string;
-  itemAccessibilityLabelField?: string;
-  inverted?: boolean;
-  mode?: 'default' | 'modal' | 'auto';
-  closeModalWhenSelectedItem?: boolean;
-  excludeItems?: T[];
-  excludeSearchItems?: T[];
-  onChange: (item: T) => void;
-  renderLeftIcon?: (visible?: boolean) => JSX.Element | null | undefined;
-  renderRightIcon?: (visible?: boolean) => JSX.Element | null | undefined;
-  renderItem?: (item: T, selected?: boolean) => JSX.Element | null | undefined;
-  renderInputSearch?: (
-    onSearch: (text: string) => void
-  ) => JSX.Element | null | undefined;
-  onFocus?: () => void;
-  onBlur?: () => void;
-  searchQuery?: (keyword: string, labelValue: string) => boolean;
-  onChangeText?: (search: string) => void;
-  onConfirmSelectItem?: (item: T) => void;
-}

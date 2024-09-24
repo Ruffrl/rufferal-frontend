@@ -1,12 +1,7 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { FieldLabelProps } from '@rufferal/types';
 import { capitalize } from '@rufferal/utils';
 import { Text } from 'react-native';
-import { FieldState } from '..';
-
-export interface FieldLabelProps {
-  text: string;
-  state?: FieldState;
-}
 
 export const FieldLabel = ({ text, state }: FieldLabelProps) => {
   let textStyle = `text-balticSea-950`;

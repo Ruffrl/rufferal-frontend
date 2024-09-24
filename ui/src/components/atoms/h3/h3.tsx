@@ -1,13 +1,8 @@
 import { ruffwind } from '@rufferal/tailwind';
-import React from 'react';
+import { FullTextProps } from '@rufferal/types';
 import { Text } from 'react-native';
 
-interface H3Props {
-  align?: string;
-  text: string | React.ReactElement;
-}
-
-export const H3 = ({ align = 'text-left', text }: H3Props) => {
+export const H3 = ({ align = 'text-left', text }: FullTextProps) => {
   return (
     <Text
       style={ruffwind.style(

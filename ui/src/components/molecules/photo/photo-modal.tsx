@@ -17,13 +17,9 @@ import { launchImageLibraryAsync, MediaTypeOptions } from 'expo-image-picker';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Platform, Pressable, Text } from 'react-native';
 
+import { PhotoModalProps } from '@rufferal/types';
 import { HorizontalDivider } from '../../atoms';
 import { ScreenProps } from '../../pages';
-
-export interface PhotoModalProps {
-  handleModalDismiss: () => void;
-  modalPresent: boolean;
-}
 
 // ⚠️ USAGE - to use this you must wrap your page with BottomSheetModalProvider
 export const PhotoModal = ({

@@ -1,14 +1,8 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { RadioProps } from '@rufferal/types';
 import { GLOBAL_ICON_SIZE_MEDIUM } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { Pressable, Text } from 'react-native';
-import { FieldOption } from '../../atoms';
-
-export interface RadioProps {
-  item: FieldOption;
-  onPress: (item: FieldOption) => void;
-  selected?: boolean;
-}
 
 export const Radio = ({ item, onPress, selected = false }: RadioProps) => {
   const Selected = () => (

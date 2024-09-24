@@ -1,13 +1,10 @@
 import * as RNSwitch from '@meksiabdou/react-native-switch';
 import { ruffwind } from '@rufferal/tailwind';
+import { SwitchProps } from '@rufferal/types';
 import { moderateScale, moderateScaleTW } from '@rufferal/utils';
 import { useCallback } from 'react';
 const SwitchToggle = RNSwitch.default;
 
-interface SwitchProps {
-  switchState: boolean;
-  setSwitchState: () => void;
-}
 
 export const Switch = ({ switchState, setSwitchState }: SwitchProps) => {
   const handleState = useCallback(() => {

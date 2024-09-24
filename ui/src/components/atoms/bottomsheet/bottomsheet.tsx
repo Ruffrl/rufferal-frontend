@@ -1,14 +1,7 @@
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { ruffwind } from '@rufferal/tailwind';
+import { BottomsheetProps } from '@rufferal/types';
 import React, { PropsWithChildren, useCallback, useRef } from 'react';
-
-interface BottomsheetProps {
-  animateOnMount?: boolean;
-  backgroundColor?: string;
-  content: React.ReactNode;
-  padding?: string;
-  snapPoints?: number[];
-}
 
 export const Bottomsheet = ({
   animateOnMount = true,
