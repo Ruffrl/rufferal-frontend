@@ -280,11 +280,11 @@ export const DogCareplan = ({ navigation }: PageNavigationProps) => {
   return (
     <ScrollFeatureTemplate
       backNavigation={() => navigation.navigate('Dog Personality')}
-      skipNavigation={() => {
+      forwardNavigation={() => {
         console.log('BLARG:TODO: Handle form submission');
         navigation.navigate('Manage Pets');
       }}
-       // BLARG - handle if form dirty and valid, change from "Skip" to "Complete"
+      // BLARG - handle if form dirty and valid, change from "Skip" to "Complete"
       // skipText={isValid ? "Complete" : "Skip"}
     >
       <FormProvider {...form}>

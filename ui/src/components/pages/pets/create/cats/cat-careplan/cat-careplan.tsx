@@ -73,16 +73,12 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
   });
 
   return (
-    <ScrollFeatureTemplate
-      backNavigation={() => navigation.navigate('Cat Personality')}
-      skipNavigation={() => {
-        console.log('BLARG: TODO: Handle form submission');
-        navigation.navigate('Manage Pets');
-      }}
-      // BLARG - handle change from "Skip" to "Complete" (optional text)
-      // skipText="Complete"
-    >
-      <FormProvider {...form}>
+    <FormProvider {...form}>
+      <ScrollFeatureTemplate
+        backNavigation={() => navigation.navigate('Cat Personality')}
+        forwardNavigation={onSubmit}
+        forwardText="Complete"
+      >
         <View style={ruffwind`mt-6`}>
           <ProgressBar step={4} total={4} />
         </View>
@@ -132,7 +128,7 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
             loading={loading}
           />
         </View>
-      </FormProvider>
-    </ScrollFeatureTemplate>
+      </ScrollFeatureTemplate>
+    </FormProvider>
   );
 };

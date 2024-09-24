@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react-native';
 import React from 'react';
 
-import { PageNavigation } from './page-navigation';
+import { FeatureNavigation } from './feature-navigation';
 
-describe('H2', () => {
+describe('FeatureNavigation', () => {
   it('should render successfully', () => {
-    const { root } = render(<PageNavigation />);
+    const { root } = render(<FeatureNavigation />);
     expect(root).toBeTruthy();
   });
 });

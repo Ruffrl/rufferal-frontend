@@ -57,7 +57,8 @@ export const CatPersonality = ({ navigation }: PageNavigationProps) => {
   return (
     <ScrollFeatureTemplate
       backNavigation={() => navigation.navigate('Cat Avatar')}
-      skipNavigation={() => navigation.navigate('Cat Careplan')}
+      forwardNavigation={() => navigation.navigate('Cat Careplan')}
+      forwardText='Skip'
     >
       <View style={ruffwind`mt-6`}>
         <ProgressBar step={3} total={4} />

@@ -57,7 +57,8 @@ export const DogPersonality = ({ navigation }: PageNavigationProps) => {
   return (
     <ScrollFeatureTemplate
       backNavigation={() => navigation.navigate('Dog Avatar')}
-      skipNavigation={() => navigation.navigate('Dog Careplan')}
+      forwardNavigation={() => navigation.navigate('Dog Careplan')}
+      forwardText='Skip'
     >
       <View style={ruffwind`mt-6`}>
         <ProgressBar step={3} total={4} />

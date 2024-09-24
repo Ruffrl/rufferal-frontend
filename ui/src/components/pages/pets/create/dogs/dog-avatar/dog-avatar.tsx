@@ -15,7 +15,8 @@ export const DogAvatar = ({ navigation }: PageNavigationProps) => {
   return (
     <OverrideSafeFeatureTemplate
       backNavigation={() => navigation.navigate('Dog Details')}
-      skipNavigation={() => navigation.navigate('Dog Personality')}
+      forwardNavigation={() => navigation.navigate('Dog Personality')}
+      forwardText='Skip'
     >
       <BottomSheetModalProvider>
         <View style={ruffwind`flex-1 justify-between`}>

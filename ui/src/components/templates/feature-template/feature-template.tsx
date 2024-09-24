@@ -2,13 +2,13 @@ import { ruffwind } from '@rufferal/tailwind';
 import { horizontalScaleTW, verticalScaleTW } from '@rufferal/utils';
 import { PropsWithChildren } from 'react';
 import { Platform, SafeAreaView, View } from 'react-native';
-import { PageNavigation } from '../../organisms';
+import { FeatureNavigation } from '../../organisms';
 
 export interface FeatureTemplateProps {
   backNavigation?: () => void;
   bgColor?: string;
   paddingX?: string;
-  skipNavigation?: () => void;
+  forwardNavigation?: () => void;
 }
 
 export const FeatureTemplate = ({
@@ -16,7 +16,7 @@ export const FeatureTemplate = ({
   bgColor = 'bg-whitePointer-50',
   children,
   paddingX = `px-${horizontalScaleTW(20)}`,
-  skipNavigation,
+  forwardNavigation,
 }: PropsWithChildren<FeatureTemplateProps>) => {
   let paddingY = `pt-${verticalScaleTW(32)}`;
   switch (Platform.OS) {
@@ -32,9 +32,9 @@ export const FeatureTemplate = ({
     <SafeAreaView style={ruffwind.style(`flex-1`, bgColor)}>
       <View style={ruffwind.style(`flex-1`, paddingX, paddingY)}>
         {backNavigation && (
-          <PageNavigation
+          <FeatureNavigation
             backNavigation={backNavigation}
-            skipNavigation={skipNavigation}
+            forwardNavigation={forwardNavigation}
           />
         )}
         {children}
