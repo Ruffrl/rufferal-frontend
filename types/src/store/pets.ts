@@ -34,20 +34,25 @@ export interface DogPersonality extends PetPersonality {
 }
 export type PetCareplan = {
   feeding?: {
+    activated: boolean;
     quantity?: FieldOption;
     frequency?: FieldOption;
     specialInstructions?: string;
   };
   overnight?: {
+    activated: boolean;
     specialInstructions?: string;
   };
   medical?: {
+    activated: boolean;
     specialInstructions?: string;
   };
   specialNeeds?: {
+    activated: boolean;
     specialInstructions?: string;
   };
   additionalNotes?: {
+    activated: boolean;
     specialInstructions?: string;
   };
 };
@@ -60,6 +65,7 @@ export interface CatCarePlan extends PetCareplan {
 }
 export interface DogCarePlan extends PetCareplan {
   houseTraining?: {
+    activated: boolean;
     hasAccidents?: FieldOption;
     specialInstructions?: string;
   };

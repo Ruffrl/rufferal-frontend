@@ -1,17 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ruffwind } from '@rufferal/tailwind';
-import {
-  AccordionSection,
-  CatCarePlan,
-  PageNavigationProps,
-} from '@rufferal/types';
+import { CatCarePlan, PageNavigationProps } from '@rufferal/types';
 import {
   GLOBAL_ICON_SIZE_MEDIUM_SMALL,
   verticalScaleTW,
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { useState } from 'react';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
 
 import {
@@ -23,14 +19,8 @@ import {
   ProgressBar,
   Tag,
 } from '../../../../../atoms';
-import { InputArea, RadioGroup, Select } from '../../../../../molecules';
 import { ScrollFeatureTemplate } from '../../../../../templates';
-import {
-  FEEDING_FREQUENCY_OPTIONS,
-  FEEDING_QUANTITY_OPTIONS,
-  HARNESS_OPTIONS,
-  OTHER_OPTION,
-} from '../../pet-careplan-options';
+import { generateCatCareplans } from '../../pet-careplan-options';
 import { catCareplanSchema } from '../../pet-profile-forms';
 
 export const CatCareplan = ({ navigation }: PageNavigationProps) => {
@@ -48,25 +38,14 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
     mode: 'onBlur',
     defaultValues: {
       harness: { activated: false, specialInstructions: '' },
+      feeding: { activated: false, specialInstructions: '' },
+      overnight: { activated: false, specialInstructions: '' },
+      medical: { activated: false, specialInstructions: '' },
+      specialNeeds: { activated: false, specialInstructions: '' },
+      additionalNotes: { activated: false, specialInstructions: '' },
     },
   });
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    resetField,
-    formState: {
-      errors,
-      /*
-       * BLARG:TODO: - convert switch behavior to dirtyfield handling
-       * - Prevent toggle from being turned ON if fields are not dirty
-       * - If toggle is ON and clicked -> reset field (https://react-hook-form.com/docs/useform/resetfield)
-       * - If toggle is OFF and dirtyFields -> turn toggle ON
-       */
-      // dirtyFields: { harness },
-    },
-  } = form;
-  console.log('BLARG errors', errors);
+  const { handleSubmit } = form;
 
   const onSubmit = handleSubmit(async (data: CatCarePlan) => {
     setLoading(true);
@@ -92,211 +71,6 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
       }
     }
   });
-
-  /* BEHAVIORS */
-  const handleHarnessChange = (value: boolean) => {
-    if (!value) {
-      resetField('harness.comfortableHarness');
-      resetField('harness.specialInstructions');
-    }
-  };
-
-  /* RENDERS */
-  const CAT_CAREPLAN_SECTIONS: AccordionSection[] = [
-    {
-      title: 'Harness',
-      icon: require('@rufferal/assets/src/icons/cat-walk.png'),
-      component: (
-        <>
-          <Controller
-            name="harness.comfortableHarness"
-            control={control}
-            render={({ field: { onBlur, onChange, value } }) => (
-              <RadioGroup
-                value={value}
-                onBlur={onBlur}
-                onChange={(text) => {
-                  setValue('harness.activated', true, {
-                    shouldValidate: true,
-                    shouldDirty: true,
-                  });
-                  onChange(text);
-                }}
-                errorMessage={
-                  errors.harness?.comfortableHarness?.value?.message
-                }
-                label="Has your cat comfortably walked on a harness before?"
-                data={HARNESS_OPTIONS}
-              />
-            )}
-          />
-          <Controller
-            name="harness.specialInstructions"
-            control={control}
-            render={({ field: { onBlur, onChange, value } }) => (
-              <InputArea
-                onBlur={onBlur}
-                onChange={(text) => {
-                  setValue('harness.activated', true, {
-                    shouldValidate: true,
-                    shouldDirty: true,
-                  });
-                  onChange(text);
-                }}
-                value={value}
-                errorMessage={errors.harness?.specialInstructions?.message}
-                label="Special instructions"
-                placeholder="Add instructions here..."
-              />
-            )}
-          />
-        </>
-      ),
-      switch: {
-        control,
-        fieldName: 'harness.activated',
-        handleChange: handleHarnessChange,
-      },
-    },
-    {
-      title: 'Feeding',
-      icon: require('@rufferal/assets/src/icons/food.png'),
-      component: (
-        <>
-          <Controller
-            name="feeding.quantity"
-            control={control}
-            render={({ field: { onBlur, onChange } }) => (
-              <Select
-                onBlur={onBlur}
-                onChange={onChange}
-                errorMessage={errors.feeding?.quantity?.value?.message}
-                label="Quantity"
-                data={FEEDING_QUANTITY_OPTIONS}
-                labelField="label"
-                searchField="label"
-                valueField="id"
-                other={OTHER_OPTION}
-              />
-            )}
-          />
-          <Controller
-            name="feeding.frequency"
-            control={control}
-            render={({ field: { onBlur, onChange } }) => (
-              <Select
-                onBlur={onBlur}
-                onChange={onChange}
-                errorMessage={errors.feeding?.frequency?.value?.message}
-                label="Frequency"
-                data={FEEDING_FREQUENCY_OPTIONS}
-                labelField="label"
-                searchField="label"
-                valueField="id"
-                other={OTHER_OPTION}
-              />
-            )}
-          />
-          <Controller
-            name="feeding.specialInstructions"
-            control={control}
-            render={({ field: { onBlur, onChange, value } }) => (
-              <InputArea
-                onBlur={onBlur}
-                onChange={onChange}
-                value={value}
-                errorMessage={errors.feeding?.specialInstructions?.message}
-                label="Special instructions"
-                placeholder="Add instructions here..."
-              />
-            )}
-          />
-        </>
-      ),
-    },
-    {
-      title: 'Overnight',
-      icon: require('@rufferal/assets/src/icons/moon.png'),
-      component: (
-        <Controller
-          name="overnight.specialInstructions"
-          control={control}
-          render={({ field: { onBlur, onChange, value } }) => (
-            <InputArea
-              onBlur={onBlur}
-              onChange={onChange}
-              value={value}
-              errorMessage={errors.overnight?.specialInstructions?.message}
-              label="Special instructions"
-              placeholder="Add instructions here..."
-            />
-          )}
-        />
-      ),
-    },
-    {
-      title: 'Medical',
-      icon: require('@rufferal/assets/src/icons/pills.png'),
-      component: (
-        <Controller
-          name="medical.specialInstructions"
-          control={control}
-          render={({ field: { onBlur, onChange, value } }) => (
-            <InputArea
-              onBlur={onBlur}
-              onChange={onChange}
-              value={value}
-              errorMessage={errors.medical?.specialInstructions?.message}
-              label="Special instructions"
-              placeholder="Add instructions here..."
-            />
-          )}
-        />
-      ),
-    },
-    {
-      title: 'Special needs',
-      icon: require('@rufferal/assets/src/icons/paw-print.png'),
-      component: (
-        <Controller
-          name="specialNeeds.specialInstructions"
-          control={control}
-          render={({ field: { onBlur, onChange, value } }) => (
-            <InputArea
-              onBlur={onBlur}
-              onChange={onChange}
-              value={value}
-              errorMessage={errors.specialNeeds?.specialInstructions?.message}
-              label="Special instructions"
-              placeholder="Add instructions here..."
-            />
-          )}
-        />
-      ),
-    },
-    {
-      title: 'Additional notes',
-      icon: require('@rufferal/assets/src/icons/fish.png'),
-      component: (
-        <Controller
-          name="additionalNotes.specialInstructions"
-          control={control}
-          render={({ field: { onBlur, onChange, value } }) => (
-            <InputArea
-              onBlur={onBlur}
-              onChange={onChange}
-              value={value}
-              errorMessage={
-                errors.additionalNotes?.specialInstructions?.message
-              }
-              label="Special instructions"
-              placeholder="Add instructions here..."
-            />
-          )}
-        />
-      ),
-    },
-  ];
 
   return (
     <ScrollFeatureTemplate
@@ -335,13 +109,13 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
           <Accordian
             activeSection={activeSection}
             setActiveSections={(indexes) => handleActiveSections(indexes)}
-            sections={CAT_CAREPLAN_SECTIONS}
+            sections={generateCatCareplans(form)}
           />
         </View>
 
         <View
           style={ruffwind.style(
-            `gap-2 bg-pink-500`,
+            `gap-2`,
             isIOS ? `mt-${verticalScaleTW(161)}` : `mt-${verticalScaleTW(180)}`,
             activeSection.length > 0 && `mt-${verticalScaleTW(16)}`,
             activeSection.length > 0 && !isIOS && `mb-${verticalScaleTW(16)}`
