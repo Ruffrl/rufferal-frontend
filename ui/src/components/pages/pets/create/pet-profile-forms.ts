@@ -28,6 +28,11 @@ export const petDetailsSchema: (
     })
     .required();
 
+export const catAvatarSchema: yup.ObjectSchema<{ avatar?: string }> =
+  yup.object({
+    avatar: yup.string(),
+  });
+
 export const catPersonalitySchema: yup.ObjectSchema<CatPersonality> =
   yup.object({
     goodKids: yup.boolean(),
@@ -59,40 +64,83 @@ export const dogPersonalitySchema: yup.ObjectSchema<DogPersonality> =
   });
 
 export const catCareplanSchema: yup.ObjectSchema<CatCarePlan> = yup.object({
-  harness: yup.object({
-    comfortableHarness: generateOptionSchema(
-      'All fields in this section are required'
-    ),
-    specialInstructions: yup
-      .string()
-      .required('All fields in this section are required'),
-  }),
-  feeding: yup.object({
-    quantity: generateOptionSchema('All fields in this section are required'),
-    frequency: generateOptionSchema('All fields in this section are required'),
-    specialInstructions: yup
-      .string()
-      .required('All fields in this section are required'),
-  }),
+  harness: yup.object().shape(
+    {
+      comfortableHarness: generateOptionSchema()
+        .default(undefined)
+        .when('specialInstructions', ([specialInstructions], schema) => {
+          if (specialInstructions?.length > 0) {
+            return schema.required('All fields in this section are required');
+          }
+          return schema;
+        }),
+      specialInstructions: yup
+        .string()
+        .when('comfortableHarness', ([comfortableHarness], schema) => {
+          if (comfortableHarness?.value?.length > 0) {
+            return schema.required('All fields in this section are required');
+          }
+          return schema;
+        }),
+    },
+    [['comfortableHarness', 'specialInstructions']]
+  ),
+  feeding: yup.object().shape(
+    {
+      quantity: generateOptionSchema()
+        .default(undefined)
+        .when(
+          ['frequency', 'specialInstructions'],
+          ([frequency, specialInstructions], schema) => {
+            if (
+              frequency?.value?.length > 0 ||
+              specialInstructions?.length > 0
+            ) {
+              return schema.required('All fields in this section are required');
+            }
+            return schema;
+          }
+        ),
+      frequency: generateOptionSchema()
+        .default(undefined)
+        .when(
+          ['quantity', 'specialInstructions'],
+          ([quantity, specialInstructions], schema) => {
+            if (
+              quantity?.value?.length > 0 ||
+              specialInstructions?.length > 0
+            ) {
+              return schema.required('All fields in this section are required');
+            }
+            return schema;
+          }
+        ),
+      specialInstructions: yup
+        .string()
+        .when(['quantity', 'frequency'], ([quantity, frequency], schema) => {
+          if (quantity?.value?.length > 0 || frequency?.value?.length > 0) {
+            return schema.required('All fields in this section are required');
+          }
+          return schema;
+        }),
+    },
+    [
+      ['frequency', 'specialInstructions'],
+      ['quantity', 'specialInstructions'],
+      ['quantity', 'frequency'],
+    ]
+  ),
   overnight: yup.object({
-    specialInstructions: yup
-      .string()
-      .required('All fields in this section are required'),
+    specialInstructions: yup.string(),
   }),
   medical: yup.object({
-    specialInstructions: yup
-      .string()
-      .required('All fields in this section are required'),
+    specialInstructions: yup.string(),
   }),
   specialNeeds: yup.object({
-    specialInstructions: yup
-      .string()
-      .required('All fields in this section are required'),
+    specialInstructions: yup.string(),
   }),
   additionalNotes: yup.object({
-    specialInstructions: yup
-      .string()
-      .required('All fields in this section are required'),
+    specialInstructions: yup.string(),
   }),
 });
 

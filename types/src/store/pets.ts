@@ -34,33 +34,33 @@ export interface DogPersonality extends PetPersonality {
 }
 export type PetCareplan = {
   feeding?: {
-    quantity: FieldOption;
-    frequency: FieldOption;
-    specialInstructions: string;
+    quantity?: FieldOption;
+    frequency?: FieldOption;
+    specialInstructions?: string;
   };
   overnight?: {
-    specialInstructions: string;
+    specialInstructions?: string;
   };
   medical?: {
-    specialInstructions: string;
+    specialInstructions?: string;
   };
   specialNeeds?: {
-    specialInstructions: string;
+    specialInstructions?: string;
   };
   additionalNotes?: {
-    specialInstructions: string;
+    specialInstructions?: string;
   };
 };
 export interface CatCarePlan extends PetCareplan {
   harness?: {
-    comfortableHarness: FieldOption;
-    specialInstructions: string;
+    comfortableHarness?: FieldOption;
+    specialInstructions?: string;
   };
 }
 export interface DogCarePlan extends PetCareplan {
   houseTraining?: {
-    hasAccidents: FieldOption;
-    specialInstructions: string;
+    hasAccidents?: FieldOption;
+    specialInstructions?: string;
   };
 }
 

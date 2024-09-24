@@ -10,7 +10,7 @@ export type ButtonType =
   | 'socialWhite';
 
 export type FieldOption = {
-  id: string;
-  label: string;
-  value: string;
+  id?: string;
+  label?: string;
+  value?: string;
 };

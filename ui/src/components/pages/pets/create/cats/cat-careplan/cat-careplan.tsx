@@ -49,6 +49,29 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
   const form = useForm<CatCarePlan>({
     resolver: yupResolver(catCareplanSchema),
     mode: 'onBlur',
+    // defaultValues: {
+    //   harness: {
+    //     comfortableHarness: undefined,
+    //     specialInstructions: undefined,
+    //   },
+    //   feeding: {
+    //     quantity: undefined,
+    //     frequency: undefined,
+    //     specialInstructions: undefined,
+    //   },
+    //   overnight: {
+    //     specialInstructions: undefined,
+    //   },
+    //   medical: {
+    //     specialInstructions: undefined,
+    //   },
+    //   specialNeeds: {
+    //     specialInstructions: undefined,
+    //   },
+    //   additionalNotes: {
+    //     specialInstructions: undefined,
+    //   },
+    // },
   });
   const {
     control,
@@ -59,12 +82,13 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
       /*
        * BLARG:TODO: - convert switch behavior to dirtyfield handling
        * - Prevent toggle from being turned ON if fields are not dirty
-       * - If toggle is ON and clicked -> reset field
+       * - If toggle is ON and clicked -> reset field (https://react-hook-form.com/docs/useform/resetfield)
        * - If toggle is OFF and dirtyFields -> turn toggle ON
        */
       // dirtyFields: { harness },
     },
   } = form;
+  console.log('BLARG errors', errors);
 
   const onSubmit = handleSubmit(async (data: CatCarePlan) => {
     setLoading(true);
@@ -282,8 +306,8 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
         console.log('BLARG: TODO: Handle form submission');
         navigation.navigate('Manage Pets');
       }}
-      // BLARG - handle if form dirty and valid, change from "Skip" to "Complete"
-      // skipText={isValid ? "Complete" : "Skip"}
+      // BLARG - handle change from "Skip" to "Complete" (optional text)
+      // skipText="Complete"
     >
       <FormProvider {...form}>
         <View style={ruffwind`mt-6`}>
@@ -327,7 +351,7 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
           <HorizontalDivider color="border-amethystSmoke-600" />
           {error && <FieldHelper text={error} align={'text-center'} />}
           <Button
-            text={isValid ? 'Complete' : 'Next'}
+            text='Complete'
             onPress={onSubmit}
             loading={loading}
           />
