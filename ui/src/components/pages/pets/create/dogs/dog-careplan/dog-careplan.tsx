@@ -55,12 +55,12 @@ export const DogCareplan = ({ navigation }: DogCareplanProps) => {
           <RadioGroup
             value={harness}
             onChange={handleHarness}
-            label="Does your dog have any accidents?"
+            label="Does your dog have any accidents in the house?"
             items={HOUSETRAINING_OPTIONS}
           />
           <InputArea
             label="Special instructions"
-            placeholder="Add accident trigger information here..."
+            placeholder="Add house training notes here..."
           />
         </>
       ),

@@ -52,6 +52,7 @@ export const Button = ({
   let width = `w-full`;
   let fontStyles = 'font-bodyBold text-b4';
   let shadow = false;
+  let loadingColor = 'white'
 
   switch (size) {
     case 'standard-short':
@@ -75,6 +76,7 @@ export const Button = ({
   } else if (type === 'transparent') {
     colorStyle = 'bg-transparent';
     textColor = 'text-electricViolet-700';
+    loadingColor = '#9525CB'
   } else if (type === 'socialBlack') {
     shadow = true;
     colorStyle = 'bg-black';
@@ -85,6 +87,7 @@ export const Button = ({
     colorStyle = 'bg-white';
     textColor = 'text-[#0000008a]';
     fontStyles = 'font-bodyMedium text-[0.938rem] leading-[1.119rem]';
+    loadingColor = 'black'
   }
 
   // Manage state themes
@@ -118,7 +121,7 @@ export const Button = ({
       disabled={state === 'disabled'}
     >
       {loading ? (
-        <ActivityIndicator size={moderateScale(36)} color="white" />
+        <ActivityIndicator size={moderateScale(36)} color={loadingColor} />
       ) : (
         <View
           style={ruffwind`
