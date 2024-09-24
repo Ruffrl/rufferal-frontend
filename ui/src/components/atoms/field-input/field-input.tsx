@@ -17,6 +17,7 @@ export const FieldInput = ({
   ...inputProps
 }: FieldInputProps) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
+  
   let width = `w-full`;
   switch (size) {
     case 'small':

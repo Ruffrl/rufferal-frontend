@@ -37,7 +37,7 @@ export const FieldSelect = ({
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   // state
   const [selected, setSelected] = useState(false);
-  const [value, setValue] = useState<string | null>(null);
+  const [value, setValue] = useState<string>();
 
   let width = `w-full`;
   switch (size) {

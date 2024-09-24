@@ -1,15 +1,13 @@
 import { FieldInputProps, FieldOption, FieldSelectProps } from '..';
 
-export interface InputAreaProps extends FieldInputProps {
-  errorMessage?: string;
-  label: string;
+export interface InputAreaProps extends InputProps {
   maxCharacters?: number;
 }
 
 export interface InputProps extends FieldInputProps {
+  disabled?: boolean;
   errorMessage?: string;
   label: string;
-  disabled?: boolean;
 }
 
 export type OtherOption = {
@@ -33,8 +31,8 @@ export interface RadioGroupProps {
 }
 
 export interface SelectProps extends FieldSelectProps<FieldOption> {
+  disabled?: boolean;
   errorMessage?: string;
   label: string;
   other?: OtherOption;
-  disabled?: boolean;
 }

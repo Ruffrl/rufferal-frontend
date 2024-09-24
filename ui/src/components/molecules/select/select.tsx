@@ -6,11 +6,11 @@ import { FieldHelper, FieldLabel, FieldSelect } from '../../atoms';
 
 export const Select = ({
   data,
+  disabled = false,
   errorMessage,
   label,
-  size = 'standard',
   other,
-  disabled,
+  size = 'standard',
   ...selectProps
 }: SelectProps) => {
   let state: FieldState = 'default';
@@ -23,11 +23,13 @@ export const Select = ({
 
   // Handle optional "Other" option
   if (other && Object.keys(other).length > 0) {
-    data.push({
+    const filteredOthers = data.filter(item => item.id !== 'other');
+    filteredOthers.push({
       id: 'other',
       label: other.label,
       value: other.label.toLowerCase(),
     });
+    data = filteredOthers;
   }
 
   return (

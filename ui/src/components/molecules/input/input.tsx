@@ -5,10 +5,10 @@ import { View } from 'react-native';
 import { FieldHelper, FieldInput, FieldLabel } from '../../atoms';
 
 export const Input = ({
+  disabled = false,
   errorMessage,
   label,
   size = 'standard',
-  disabled = false,
   ...inputProps
 }: InputProps) => {
   let state: FieldState = 'default';
