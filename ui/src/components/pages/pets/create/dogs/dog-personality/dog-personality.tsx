@@ -18,6 +18,7 @@ import {
   Toggle,
 } from '../../../../../atoms';
 import { ScrollFeatureTemplate } from '../../../../../templates';
+import { BehaviorLabel } from '../../shared/behavior-label/behavior-label';
 
 export const DogPersonality = ({ navigation }: PageNavigationProps) => {
   const [goodWithKids, setGoodWithKids] = useState(false);
@@ -181,31 +182,3 @@ export const DogPersonality = ({ navigation }: PageNavigationProps) => {
     </ScrollFeatureTemplate>
   );
 };
-
-/* ********** */
-/* COMPONENTS */
-/* ********** */
-const BehaviorLabel = ({
-  label,
-  multiple = false,
-}: {
-  label: string;
-  multiple?: boolean;
-}) => (
-  <View style={ruffwind`flex-row justify-between`}>
-    <Text
-      style={ruffwind`font-bodySemibold text-b3 text-left text-balticSea-950`}
-    >
-      {label}
-    </Text>
-    {multiple && (
-      <Text style={ruffwind`font-body text-b2 text-right text-saltBox-700`}>
-        Select multiple
-      </Text>
-    )}
-  </View>
-);
-
-const ToggleLabel = ({ label }: { label: string }) => (
-  <Text style={ruffwind`font-body text-b3 text-saltBox-700`}>{label}</Text>
-);

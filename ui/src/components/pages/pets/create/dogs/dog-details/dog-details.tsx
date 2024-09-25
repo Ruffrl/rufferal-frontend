@@ -22,8 +22,8 @@ import {
   DOG_SIZE_OPTIONS,
   SEX_OPTIONS,
   STATUS_OPTIONS,
-} from '../../pet-details-options';
-import { petDetailsSchema } from '../../pet-profile-forms';
+} from '../../shared/pet-details-options';
+import { petDetailsSchema } from '../../shared/pet-profile-forms';
 
 export const DogDetails = ({ navigation }: PageNavigationProps) => {
   /* STATE */

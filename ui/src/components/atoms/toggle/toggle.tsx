@@ -1,19 +1,25 @@
 import { ToggleProps } from '@rufferal/types';
 import { moderateScale } from '@rufferal/utils';
-import { useCallback } from 'react';
 import SwitchToggle from 'react-native-switch-toggle';
 
 // 🚨🚨🚨 WARNING: SwitchToggle: Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead. 🚨🚨🚨
 // BLARG: TODO: Create custom Toggle (that can support "On"/"Off" text and replace this library here and in SwitchToggle atoms)
-export const Toggle = ({ toggleState, setToggleState }: ToggleProps) => {
-  const handleState = useCallback(() => {
-    setToggleState();
-  }, [setToggleState]);
-
+export const Toggle = ({
+  handleChange,
+  onBlur,
+  onChange,
+  switchOn,
+  ...toggleProps
+}: ToggleProps) => {
+  const handleValueChange = () => {
+    // handleChange(!value);
+    onChange(!switchOn);
+  };
   return (
     <SwitchToggle
-      switchOn={toggleState}
-      onPress={handleState}
+      {...toggleProps}
+      switchOn={switchOn}
+      onPress={handleValueChange}
       circleColorOff="#FAF9FA"
       circleColorOn="#FAF9FA"
       backgroundColorOn="#9525CB"

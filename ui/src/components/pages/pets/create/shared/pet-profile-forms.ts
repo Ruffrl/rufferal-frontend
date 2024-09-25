@@ -5,6 +5,7 @@ import {
   DogPersonality,
   PetCareplan,
   PetDetails,
+  PetPersonality,
   PetSpecies,
 } from '@rufferal/types';
 import { generateOptionSchema } from '@rufferal/utils';
@@ -34,37 +35,32 @@ export const catAvatarSchema: yup.ObjectSchema<{ avatar?: string }> =
     avatar: yup.string(),
   });
 
+const petPersonalitySchema: yup.ObjectSchema<PetPersonality> = yup.object({
+  goodKids: yup.boolean().default(false),
+  goodOtherSpecies: yup.boolean().default(false),
+  goodSameSpecies: yup.boolean().default(false),
+  temperment: yup.number().oneOf([1, 2, 3, 4, 5]),
+  energy: yup.number().oneOf([1, 2, 3, 4, 5]),
+  autonomy: yup.number().oneOf([1, 2, 3, 4, 5]),
+  motivation: yup.number().oneOf([1, 2, 3, 4, 5]),
+  requiresMedication: yup.boolean().default(false),
+  seperationAnxiety: yup.boolean().default(false),
+  specialNeeds: yup.boolean().default(false),
+});
+
+const cPersonality = yup.object({
+  declawed: yup.boolean().default(false),
+});
 export const catPersonalitySchema: yup.ObjectSchema<CatPersonality> =
-  yup.object({
-    goodKids: yup.boolean(),
-    goodOtherSpecies: yup.boolean(),
-    goodSameSpecies: yup.boolean(),
-    temperment: yup.number().oneOf([1, 2, 3, 4, 5]),
-    energy: yup.number().oneOf([1, 2, 3, 4, 5]),
-    autonomy: yup.number().oneOf([1, 2, 3, 4, 5]),
-    motivation: yup.number().oneOf([1, 2, 3, 4, 5]),
-    declawed: yup.boolean(),
-    requiresMedication: yup.boolean(),
-    seperationAnxiety: yup.boolean(),
-    specialNeeds: yup.boolean(),
-  });
+  petPersonalitySchema.concat(cPersonality);
 
+const dPersonality = yup.object({
+  houseTrained: yup.boolean().default(false),
+});
 export const dogPersonalitySchema: yup.ObjectSchema<DogPersonality> =
-  yup.object({
-    goodKids: yup.boolean(),
-    goodOtherSpecies: yup.boolean(),
-    goodSameSpecies: yup.boolean(),
-    temperment: yup.number().oneOf([1, 2, 3, 4, 5]),
-    energy: yup.number().oneOf([1, 2, 3, 4, 5]),
-    autonomy: yup.number().oneOf([1, 2, 3, 4, 5]),
-    motivation: yup.number().oneOf([1, 2, 3, 4, 5]),
-    houseTrained: yup.boolean(),
-    requiresMedication: yup.boolean(),
-    seperationAnxiety: yup.boolean(),
-    specialNeeds: yup.boolean(),
-  });
+  petPersonalitySchema.concat(dPersonality);
 
-export const petCareplanSchema: yup.ObjectSchema<PetCareplan> = yup.object({
+const petCareplanSchema: yup.ObjectSchema<PetCareplan> = yup.object({
   feeding: yup.object().shape(
     {
       activated: yup.boolean().default(false),

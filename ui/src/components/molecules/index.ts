@@ -10,6 +10,7 @@
  *
  */
 
+export { CheckToggle } from './check-toggle/check-toggle';
 export { InputArea } from './input-area/input-area';
 export { Input } from './input/input';
 export { Photo } from './photo/photo';

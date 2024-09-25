@@ -21,8 +21,8 @@ import {
   Tag,
 } from '../../../../../atoms';
 import { ScrollFeatureTemplate } from '../../../../../templates';
-import { generateDogCareplans } from '../../pet-careplan-options';
-import { dogCareplanSchema } from '../../pet-profile-forms';
+import { generateDogCareplans } from '../../shared/pet-careplan-options';
+import { dogCareplanSchema } from '../../shared/pet-profile-forms';
 
 export const DogCareplan = ({ navigation }: PageNavigationProps) => {
   /* STATE */

@@ -124,7 +124,7 @@ export interface FieldInputProps extends Omit<TextInputProps, 'onChange'> {
   state?: FieldState;
 }
 
-export interface FieldLabelProps {
+export interface LabelProps {
   text: string;
   state?: FieldState;
 }
@@ -181,12 +181,43 @@ export interface SwitchProps {
   setSwitchState: () => void;
 }
 
+export interface SwitchToggleProps {
+  testID?: string;
+  switchOn: boolean;
+  onPress: () => void;
+  containerStyle?: ViewStyle;
+  circleStyle?: ViewStyle;
+  backgroundColorOn?: string;
+  backgroundColorOff?: string;
+  backgroundImageOn?: React.ReactElement;
+  backgroundImageOff?: React.ReactElement;
+  circleColorOff?: string;
+  circleColorOn?: string;
+  duration?: number;
+  type?: number;
+  buttonText?: string;
+  backTextRight?: string;
+  backTextLeft?: string;
+  buttonTextStyle?: StyleProp<TextStyle>;
+  textRightStyle?: StyleProp<TextStyle>;
+  textLeftStyle?: StyleProp<TextStyle>;
+  buttonStyle?: StyleProp<ViewStyle>;
+  buttonContainerStyle?: StyleProp<ViewStyle>;
+  rightContainerStyle?: StyleProp<ViewStyle>;
+  leftContainerStyle?: StyleProp<ViewStyle>;
+  RTL?: boolean;
+}
+
 export interface TagProps {
   Icon?: () => JSX.Element;
   text: string | React.ReactElement;
 }
 
-export interface ToggleProps {
-  toggleState: boolean;
-  setToggleState: () => void;
+export interface ToggleProps extends Omit<SwitchToggleProps, 'onPress'> {
+  handleChange?: (value: boolean) => void;
+  onBlur: () => void;
+  onChange: (value: boolean) => void;
+  switchOn: boolean;
 }
+
+

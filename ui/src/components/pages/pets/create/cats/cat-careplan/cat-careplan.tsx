@@ -21,8 +21,8 @@ import {
   Tag,
 } from '../../../../../atoms';
 import { ScrollFeatureTemplate } from '../../../../../templates';
-import { generateCatCareplans } from '../../pet-careplan-options';
-import { catCareplanSchema } from '../../pet-profile-forms';
+import { generateCatCareplans } from '../../shared/pet-careplan-options';
+import { catCareplanSchema } from '../../shared/pet-profile-forms';
 
 export const CatCareplan = ({ navigation }: PageNavigationProps) => {
   /* STATE */

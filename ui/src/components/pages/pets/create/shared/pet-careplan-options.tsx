@@ -8,7 +8,7 @@ import {
 } from '@rufferal/types';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { Text } from 'react-native';
-import { InputArea, RadioGroup, Select } from '../../../molecules';
+import { InputArea, RadioGroup, Select } from '../../../../molecules';
 
 /****************** SHARED ******************/
 export const OTHER_OPTION: OtherOption = {
@@ -471,7 +471,9 @@ export const generateDogCareplans = (
                   onChange(text);
                 }}
                 value={value}
-                errorMessage={errors.houseTraining?.specialInstructions?.message}
+                errorMessage={
+                  errors.houseTraining?.specialInstructions?.message
+                }
                 label="Special instructions"
                 placeholder="Add house training notes here..."
               />
