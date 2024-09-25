@@ -1,4 +1,5 @@
 export * from './css-globals';
 export * from './dimensions';
 export * from './generators';
-export * from './text-manipulators';
+export * from './text-transformers';
+export * from './transformers';

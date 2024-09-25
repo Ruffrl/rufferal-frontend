@@ -16,7 +16,7 @@ export const CatAvatar = ({ navigation }: PageNavigationProps) => {
     <OverrideSafeFeatureTemplate
       backNavigation={() => navigation.navigate('Cat Details')}
       forwardNavigation={() => navigation.navigate('Cat Personality')}
-      forwardText='Skip'
+      forwardText="Skip"
     >
       <BottomSheetModalProvider>
         <View style={ruffwind`flex-1 justify-between`}>

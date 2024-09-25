@@ -38,6 +38,7 @@ export const CatDetails = ({ navigation }: PageNavigationProps) => {
     // BLARG:TODO - RHF with RN doesn't scroll on error, so find a custom solution (https://dev.to/shaswatprabhat/auto-scroll-in-react-native-forms-3k16)
     shouldFocusError: true,
     defaultValues: {
+      name: '',
       species: 'cat',
     },
   });

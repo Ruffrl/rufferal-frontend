@@ -2,8 +2,18 @@ import { FieldOption } from '..';
 
 export type PersonalityRange = number | undefined;
 
+export interface Pet {
+  id?: string;
+  details?: PetDetails;
+  avatar?: string;
+  personality?: PetPersonality;
+  careplan?: PetCareplan;
+  state?: PetState;
+}
+
 export type PetSpecies = 'cat' | 'dog';
 export type PetState = 'active' | 'inactive';
+
 export type PetDetails = {
   species: PetSpecies;
   name: string;
@@ -69,13 +79,4 @@ export interface DogCarePlan extends PetCareplan {
     hasAccidents?: FieldOption;
     specialInstructions?: string;
   };
-}
-
-export interface Pet {
-  id?: string;
-  details: PetDetails;
-  avatar?: string;
-  personality?: PetPersonality;
-  careplan?: PetCareplan;
-  state?: PetState;
 }

@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Platform, Text, View } from 'react-native';
 
+import { observablePetStore } from '@rufferal/store';
 import {
   Accordian,
   Button,
@@ -50,13 +51,9 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
   const onSubmit = handleSubmit(async (data: CatCarePlan) => {
     setLoading(true);
     if (process.env['NODE_ENV'] === 'development') {
-      console.log('BLARG:TODO - handle store submission', data);
-      // 1. Add findPet function to PetStore
-      // 2. Add currentPetId variable to PetStore
-      // 3. Get the current pet at top of CatCareplan
-      // 4. pass appropriate id and ...pet to updatePet
-      // observablePetStore.updatePet({ id: '11223', personality: data });
-      // navigation.navigate('Manage Pets');
+      const petId = observablePetStore.editingPetId;
+      observablePetStore.updatePet({ id: petId, careplan: data });
+      navigation.navigate('Manage Pets');
     } else {
       // Handle form submission
       setError('');
