@@ -2,6 +2,7 @@ import { ruffwind } from '@rufferal/tailwind';
 import {
   AccordionSection,
   CatCarePlan,
+  DogCarePlan,
   FieldOption,
   OtherOption,
 } from '@rufferal/types';
@@ -419,3 +420,302 @@ export const HOUSETRAINING_OPTIONS: FieldOption[] = [
     value: 'false',
   },
 ];
+
+export const generateDogCareplans = (
+  form: UseFormReturn<DogCarePlan>
+): AccordionSection[] => {
+  const {
+    control,
+    formState: { errors },
+    setValue,
+    resetField,
+  } = form;
+
+  return [
+    {
+      title: 'House Training',
+      icon: require('@rufferal/assets/src/icons/dog-walk.png'),
+      component: (
+        <>
+          <Controller
+            name="houseTraining.hasAccidents"
+            control={control}
+            render={({ field: { onBlur, onChange, value } }) => (
+              <RadioGroup
+                value={value}
+                onBlur={onBlur}
+                onChange={(text) => {
+                  setValue('houseTraining.activated', true, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  });
+                  onChange(text);
+                }}
+                errorMessage={errors.houseTraining?.hasAccidents?.message}
+                label="Does your dog have any accidents in the house?"
+                data={HOUSETRAINING_OPTIONS}
+              />
+            )}
+          />
+          <Controller
+            name="houseTraining.specialInstructions"
+            control={control}
+            render={({ field: { onBlur, onChange, value } }) => (
+              <InputArea
+                onBlur={onBlur}
+                onChange={(text) => {
+                  setValue('houseTraining.activated', true, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  });
+                  onChange(text);
+                }}
+                value={value}
+                errorMessage={errors.houseTraining?.specialInstructions?.message}
+                label="Special instructions"
+                placeholder="Add house training notes here..."
+              />
+            )}
+          />
+        </>
+      ),
+      switch: {
+        control,
+        fieldName: 'houseTraining.activated',
+        handleChange: (value: boolean) => {
+          if (!value) {
+            resetField('houseTraining.hasAccidents');
+            resetField('houseTraining.specialInstructions');
+          }
+        },
+      },
+    },
+    {
+      title: 'Feeding',
+      icon: require('@rufferal/assets/src/icons/food.png'),
+      component: (
+        <>
+          <Controller
+            name="feeding.quantity"
+            control={control}
+            render={({ field: { onBlur, onChange } }) => (
+              <Select
+                onBlur={onBlur}
+                onChange={(item) => {
+                  setValue('feeding.activated', true, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  });
+                  onChange(item);
+                }}
+                errorMessage={errors.feeding?.quantity?.message}
+                label="Quantity"
+                data={FEEDING_QUANTITY_OPTIONS}
+                labelField="label"
+                searchField="label"
+                valueField="id"
+                other={OTHER_OPTION}
+              />
+            )}
+          />
+          <Controller
+            name="feeding.frequency"
+            control={control}
+            render={({ field: { onBlur, onChange } }) => (
+              <Select
+                onBlur={onBlur}
+                onChange={(item) => {
+                  setValue('feeding.activated', true, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  });
+                  onChange(item);
+                }}
+                errorMessage={errors.feeding?.frequency?.message}
+                label="Frequency"
+                data={FEEDING_FREQUENCY_OPTIONS}
+                labelField="label"
+                searchField="label"
+                valueField="id"
+                other={OTHER_OPTION}
+              />
+            )}
+          />
+          <Controller
+            name="feeding.specialInstructions"
+            control={control}
+            render={({ field: { onBlur, onChange, value } }) => (
+              <InputArea
+                onBlur={onBlur}
+                onChange={(text) => {
+                  setValue('feeding.activated', true, {
+                    shouldValidate: true,
+                    shouldDirty: true,
+                  });
+                  onChange(text);
+                }}
+                value={value}
+                errorMessage={errors.feeding?.specialInstructions?.message}
+                label="Special instructions"
+                placeholder="Add instructions here..."
+              />
+            )}
+          />
+        </>
+      ),
+      switch: {
+        control,
+        fieldName: 'feeding.activated',
+        handleChange: (value: boolean) => {
+          if (!value) {
+            resetField('feeding.quantity');
+            resetField('feeding.frequency');
+            resetField('feeding.specialInstructions');
+          }
+        },
+      },
+    },
+    {
+      title: 'Overnight',
+      icon: require('@rufferal/assets/src/icons/moon.png'),
+      component: (
+        <Controller
+          name="overnight.specialInstructions"
+          control={control}
+          render={({ field: { onBlur, onChange, value } }) => (
+            <InputArea
+              onBlur={onBlur}
+              onChange={(text) => {
+                setValue('overnight.activated', true, {
+                  shouldValidate: true,
+                  shouldDirty: true,
+                });
+                onChange(text);
+              }}
+              value={value}
+              errorMessage={errors.overnight?.specialInstructions?.message}
+              label="Special instructions"
+              placeholder="Add instructions here..."
+            />
+          )}
+        />
+      ),
+      switch: {
+        control,
+        fieldName: 'overnight.activated',
+        handleChange: (value: boolean) => {
+          if (!value) {
+            resetField('overnight.specialInstructions');
+          }
+        },
+      },
+    },
+    {
+      title: 'Medical',
+      icon: require('@rufferal/assets/src/icons/pills.png'),
+      component: (
+        <Controller
+          name="medical.specialInstructions"
+          control={control}
+          render={({ field: { onBlur, onChange, value } }) => (
+            <InputArea
+              onBlur={onBlur}
+              onChange={(text) => {
+                setValue('medical.activated', true, {
+                  shouldValidate: true,
+                  shouldDirty: true,
+                });
+                onChange(text);
+              }}
+              value={value}
+              errorMessage={errors.medical?.specialInstructions?.message}
+              label="Special instructions"
+              placeholder="Add instructions here..."
+            />
+          )}
+        />
+      ),
+      switch: {
+        control,
+        fieldName: 'medical.activated',
+        handleChange: (value: boolean) => {
+          if (!value) {
+            resetField('medical.specialInstructions');
+          }
+        },
+      },
+    },
+    {
+      title: 'Special needs',
+      icon: require('@rufferal/assets/src/icons/paw-print.png'),
+      component: (
+        <Controller
+          name="specialNeeds.specialInstructions"
+          control={control}
+          render={({ field: { onBlur, onChange, value } }) => (
+            <InputArea
+              onBlur={onBlur}
+              onChange={(text) => {
+                setValue('specialNeeds.activated', true, {
+                  shouldValidate: true,
+                  shouldDirty: true,
+                });
+                onChange(text);
+              }}
+              value={value}
+              errorMessage={errors.specialNeeds?.specialInstructions?.message}
+              label="Special instructions"
+              placeholder="Add instructions here..."
+            />
+          )}
+        />
+      ),
+      switch: {
+        control,
+        fieldName: 'specialNeeds.activated',
+        handleChange: (value: boolean) => {
+          if (!value) {
+            resetField('specialNeeds.specialInstructions');
+          }
+        },
+      },
+    },
+    {
+      title: 'Additional notes',
+      icon: require('@rufferal/assets/src/icons/fish.png'),
+      component: (
+        <Controller
+          name="additionalNotes.specialInstructions"
+          control={control}
+          render={({ field: { onBlur, onChange, value } }) => (
+            <InputArea
+              onBlur={onBlur}
+              onChange={(text) => {
+                setValue('additionalNotes.activated', true, {
+                  shouldValidate: true,
+                  shouldDirty: true,
+                });
+                onChange(text);
+              }}
+              value={value}
+              errorMessage={
+                errors.additionalNotes?.specialInstructions?.message
+              }
+              label="Special instructions"
+              placeholder="Add instructions here..."
+            />
+          )}
+        />
+      ),
+      switch: {
+        control,
+        fieldName: 'additionalNotes.activated',
+        handleChange: (value: boolean) => {
+          if (!value) {
+            resetField('additionalNotes.specialInstructions');
+          }
+        },
+      },
+    },
+  ];
+};
