@@ -1,12 +1,13 @@
 import { ruffwind } from '@rufferal/tailwind';
 import { DogCarePlan, PageNavigationProps } from '@rufferal/types';
 import {
+  cleanCareplan,
   GLOBAL_ICON_SIZE_MEDIUM_SMALL,
   verticalScaleTW,
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { observablePetStore } from '@rufferal/store';
@@ -26,6 +27,7 @@ import { dogCareplanSchema } from '../../shared/pet-profile-forms';
 
 export const DogCareplan = ({ navigation }: PageNavigationProps) => {
   /* STATE */
+  const isIOS = Platform.OS === 'ios';
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const [activeSection, setActiveSection] = useState<number[] | string[]>([]);
@@ -50,8 +52,11 @@ export const DogCareplan = ({ navigation }: PageNavigationProps) => {
   const onSubmit = handleSubmit(async (data: DogCarePlan) => {
     setLoading(true);
     if (process.env['NODE_ENV'] === 'development') {
-      const petId = observablePetStore.editingPetId;
-      observablePetStore.updatePet({ id: petId, careplan: data });
+      const cleanedData = cleanCareplan(data);
+      if (cleanedData) {
+        const petId = observablePetStore.editingPetId;
+        observablePetStore.updatePet({ id: petId, careplan: cleanedData });
+      }
       navigation.navigate('Manage Pets');
     } else {
       // Handle form submission
@@ -109,9 +114,9 @@ export const DogCareplan = ({ navigation }: PageNavigationProps) => {
         <View
           style={ruffwind.style(
             `gap-2`,
-            activeSection.length > 0
-              ? ` mt-${verticalScaleTW(16)}`
-              : `mt-${verticalScaleTW(161)}`
+            isIOS ? `mt-${verticalScaleTW(161)}` : `mt-${verticalScaleTW(200)}`,
+            activeSection.length > 0 && `mt-${verticalScaleTW(16)}`,
+            activeSection.length > 0 && !isIOS && `mb-${verticalScaleTW(16)}`
           )}
         >
           <HorizontalDivider color="border-amethystSmoke-600" />

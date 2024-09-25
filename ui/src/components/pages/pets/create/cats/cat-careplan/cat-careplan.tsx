@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ruffwind } from '@rufferal/tailwind';
 import { CatCarePlan, PageNavigationProps } from '@rufferal/types';
 import {
+  cleanCareplan,
   GLOBAL_ICON_SIZE_MEDIUM_SMALL,
   verticalScaleTW,
 } from '@rufferal/utils';
@@ -51,8 +52,11 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
   const onSubmit = handleSubmit(async (data: CatCarePlan) => {
     setLoading(true);
     if (process.env['NODE_ENV'] === 'development') {
-      const petId = observablePetStore.editingPetId;
-      observablePetStore.updatePet({ id: petId, careplan: data });
+      const cleanedData = cleanCareplan(data);
+      if (cleanedData) {
+        const petId = observablePetStore.editingPetId;
+        observablePetStore.updatePet({ id: petId, careplan: cleanedData });
+      }
       navigation.navigate('Manage Pets');
     } else {
       // Handle form submission
@@ -98,6 +102,7 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
             Turn toggle on to include instructions in this pet’s bookings
           </Text>
         </View>
+        
         <View style={ruffwind`mt-6 gap-2`}>
           <Accordian
             activeSection={activeSection}
@@ -109,7 +114,7 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
         <View
           style={ruffwind.style(
             `gap-2`,
-            isIOS ? `mt-${verticalScaleTW(161)}` : `mt-${verticalScaleTW(180)}`,
+            isIOS ? `mt-${verticalScaleTW(161)}` : `mt-${verticalScaleTW(200)}`,
             activeSection.length > 0 && `mt-${verticalScaleTW(16)}`,
             activeSection.length > 0 && !isIOS && `mb-${verticalScaleTW(16)}`
           )}

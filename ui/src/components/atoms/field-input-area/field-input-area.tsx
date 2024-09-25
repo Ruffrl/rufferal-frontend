@@ -1,10 +1,6 @@
 import { ruffwind } from '@rufferal/tailwind';
 import { FieldInputProps } from '@rufferal/types';
-import {
-  GLOBAL_ICON_SIZE_SMALL,
-  horizontalScaleTW,
-  moderateScaleTW,
-} from '@rufferal/utils';
+import { GLOBAL_ICON_SIZE_SMALL, horizontalScaleTW, moderateScaleTW } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { Platform, TextInput, View } from 'react-native';
 
@@ -49,9 +45,9 @@ export const FieldInputArea = ({
       style={ruffwind.style(
         `border-solid 
         flex-row
-        gap-${moderateScaleTW(4)}
         border-${moderateScaleTW(1)} 
         h-${moderateScaleTW(84)}
+        gap-${moderateScaleTW(4)}
         px-${moderateScaleTW(8)}
         py-${moderateScaleTW(4)}
         rounded-${moderateScaleTW(4)}`,
@@ -67,9 +63,10 @@ export const FieldInputArea = ({
         editable={state !== 'disabled'}
         multiline
         numberOfLines={4}
+        textAlignVertical="top"
         style={[
           !isMobile && { outlineStyle: 'none' },
-          ruffwind.style(`font-body h-full flex-1 text-b2`, textStyle),
+          ruffwind.style(`font-body flex-1 h-full text-b2`, textStyle),
         ]}
         placeholderTextColor={placeholderColor}
       />

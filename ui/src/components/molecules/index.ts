@@ -12,6 +12,7 @@
 
 export { CheckToggle } from './check-toggle/check-toggle';
 export { InputArea } from './input-area/input-area';
+export { InputSlider } from './input-slider/input-slider';
 export { Input } from './input/input';
 export { Photo } from './photo/photo';
 export { RadioGroup } from './radio-group/radio-group';

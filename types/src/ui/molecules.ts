@@ -1,4 +1,10 @@
-import { FieldInputProps, FieldOption, FieldSelectProps, ToggleProps } from '..';
+import {
+  FieldInputProps,
+  FieldOption,
+  FieldSelectProps,
+  SingleSliderProps,
+  ToggleProps,
+} from '..';
 
 export interface InputAreaProps extends InputProps {
   maxCharacters?: number;
@@ -8,6 +14,13 @@ export interface InputProps extends FieldInputProps {
   disabled?: boolean;
   errorMessage?: string;
   label: string;
+}
+
+export interface InputSliderProps extends SingleSliderProps {
+  disabled?: boolean;
+  errorMessage?: string;
+  label?: string;
+  sliderLabels?: [string, string];
 }
 
 export interface CheckToggleProps extends ToggleProps {

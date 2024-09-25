@@ -171,8 +171,7 @@ export type SectionSwitch = {
 };
 
 export interface SingleSliderProps {
-  handleChange: (value: number) => void;
-  labels?: [string, string];
+  onChange: (value: number) => void;
   value?: number;
 }
 
