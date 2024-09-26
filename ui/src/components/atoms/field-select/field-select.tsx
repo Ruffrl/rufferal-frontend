@@ -31,13 +31,13 @@ export const FieldSelect = ({
   size = 'standard',
   state = 'default',
   valueField,
+  value,
   other,
   ...selectProps
 }: FieldSelectProps<FieldOption>) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
   // state
   const [selected, setSelected] = useState(false);
-  const [value, setValue] = useState<string>();
 
   let width = `w-full`;
   switch (size) {
@@ -116,12 +116,10 @@ export const FieldSelect = ({
   return (
     <Dropdown
       {...selectProps}
+      value={value}
       data={data}
       labelField={labelField}
-      onChange={(item) => {
-        setValue(item.id);
-        onChange(item);
-      }}
+      onChange={onChange}
       searchField={searchField}
       valueField={valueField}
       onFocus={() => setSelected(true)}

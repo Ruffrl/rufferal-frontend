@@ -31,10 +31,17 @@ export const DogPersonality = observer(
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
 
+    let defaults: DogPersonalityForm | undefined;
+
+    if (observablePetStore.editingPetId) {
+      defaults = observablePetStore.currentEditingPet()?.personality;
+    }
+
     /* REACT HOOK FORM */
     const form = useForm<DogPersonalityForm>({
       resolver: yupResolver(dogPersonalitySchema),
       mode: 'onBlur',
+      defaultValues: defaults
     });
     const {
       control,
@@ -202,7 +209,7 @@ export const DogPersonality = observer(
                 control={control}
                 render={({ field: { onBlur, onChange, value } }) => (
                   <CheckToggle
-                    label="Declawed"
+                    label="House trained"
                     onBlur={onBlur}
                     onChange={onChange}
                     switchOn={!!value}
@@ -265,7 +272,10 @@ export const DogPersonality = observer(
               text="Cancel"
               type="transparent"
               size="standard-short"
-              onPress={() => navigation.navigate('Manage Pets')}
+              onPress={() => {
+                observablePetStore.setEditing({ id: undefined });
+                navigation.navigate('Manage Pets');
+              }}
               loading={loading}
             />
           </View>

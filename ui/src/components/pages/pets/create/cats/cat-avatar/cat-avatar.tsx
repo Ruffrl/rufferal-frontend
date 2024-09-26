@@ -21,10 +21,17 @@ export const CatAvatar = observer(({ navigation }: PageNavigationProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
 
+  let defaults: PetAvatar | undefined;
+
+  if (observablePetStore.editingPetId) {
+    defaults = observablePetStore.currentEditingPet()?.avatar;
+  }
+
   /* REACT HOOK FORM */
   const form = useForm<PetAvatar>({
     resolver: yupResolver(petAvatarSchema),
     mode: 'onBlur',
+    defaultValues: defaults
   });
   const {
     control,
@@ -102,7 +109,10 @@ export const CatAvatar = observer(({ navigation }: PageNavigationProps) => {
                 text="Cancel"
                 type="transparent"
                 size="standard-short"
-                onPress={() => navigation.navigate('Manage Pets')}
+                onPress={() => {
+                  observablePetStore.setEditing({ id: undefined });
+                  navigation.navigate('Manage Pets');
+                }}
                 loading={loading}
               />
             </View>

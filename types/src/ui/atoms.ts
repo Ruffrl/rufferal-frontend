@@ -144,7 +144,7 @@ export interface HorizontalDividerProps {
   color?: string;
 }
 
-export interface ItemProps {
+export interface ItemProps extends PressableProps {
   height?: string;
 }
 

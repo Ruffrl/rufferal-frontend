@@ -33,12 +33,18 @@ export const DogDetails = observer(({ navigation }: PageNavigationProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
 
+  let defaults: PetDetails | undefined;
+
+  if (observablePetStore.editingPetId) {
+    defaults = observablePetStore.currentEditingPet()?.details;
+  }
+
   /* REACT HOOK FORM */
   const form = useForm<PetDetails>({
     resolver: yupResolver(petDetailsSchema('dog')),
     mode: 'onBlur',
-    defaultValues: {
-      species: 'cat',
+    defaultValues: defaults || {
+      species: 'dog',
     },
   });
   const {
@@ -50,7 +56,12 @@ export const DogDetails = observer(({ navigation }: PageNavigationProps) => {
   const onSubmit = handleSubmit(async (data: PetDetails) => {
     setLoading(true);
     if (process.env['NODE_ENV'] === 'development') {
-      observablePetStore.createPet({ details: data });
+      if (observablePetStore.editingPetId) {
+        const petId = observablePetStore.editingPetId;
+        observablePetStore.updatePet({ id: petId, details: data });
+      } else {
+        observablePetStore.createPet({ details: data });
+      }
       setLoading(false);
       navigation.navigate('Dog Avatar');
     } else {
@@ -82,7 +93,7 @@ export const DogDetails = observer(({ navigation }: PageNavigationProps) => {
         >
           <SecondaryFormHeader
             header="Add a dog"
-            species="cat"
+            species="dog"
             subHeader="Required information"
             subHeaderBold
           />
@@ -94,43 +105,45 @@ export const DogDetails = observer(({ navigation }: PageNavigationProps) => {
                 control={control}
                 render={({ field: { onBlur, onChange, value } }) => (
                   <Input
-                    label="Name"
-                    onBlur={onBlur} // notify when input is touched
-                    onChange={onChange} // send value to hook form
-                    value={value}
                     errorMessage={errors.name?.message}
+                    label="Name"
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    value={value}
                   />
                 )}
               />
               <Controller
                 name="color"
                 control={control}
-                render={({ field: { onBlur, onChange } }) => (
+                render={({ field: { onBlur, onChange, value } }) => (
                   <Select
-                    label="Color"
                     data={DOG_COLOR_OPTIONS}
-                    labelField="label"
-                    onBlur={onBlur} // notify when input is touched
-                    onChange={onChange} // send value to hook form
-                    searchField="label"
-                    valueField="id"
                     errorMessage={errors.color?.value?.message}
+                    label="Color"
+                    labelField="label"
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    searchField="label"
+                    value={value?.id}
+                    valueField="id"
                   />
                 )}
               />
               <Controller
                 name="breed"
                 control={control}
-                render={({ field: { onBlur, onChange } }) => (
+                render={({ field: { onBlur, onChange, value } }) => (
                   <Select
-                    label="Breed"
                     data={DOG_BREED_OPTIONS}
-                    labelField="label"
-                    onBlur={onBlur} // notify when input is touched
-                    onChange={onChange} // send value to hook form
-                    searchField="label"
-                    valueField="id"
                     errorMessage={errors.breed?.value?.message}
+                    label="Breed"
+                    labelField="label"
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    searchField="label"
+                    value={value?.id}
+                    valueField="id"
                   />
                 )}
               />
@@ -141,12 +154,12 @@ export const DogDetails = observer(({ navigation }: PageNavigationProps) => {
                 control={control}
                 render={({ field: { onBlur, onChange, value } }) => (
                   <RadioGroup
-                    value={value}
                     data={SEX_OPTIONS}
-                    onBlur={onBlur} // notify when input is touched
-                    onChange={onChange} // send value to hook form
-                    label="Sex"
                     errorMessage={errors.sex?.value?.message}
+                    label="Sex"
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    value={value}
                   />
                 )}
               />
@@ -157,12 +170,12 @@ export const DogDetails = observer(({ navigation }: PageNavigationProps) => {
                 control={control}
                 render={({ field: { onBlur, onChange, value } }) => (
                   <RadioGroup
-                    value={value}
                     data={DOG_AGE_OPTIONS}
-                    onBlur={onBlur} // notify when input is touched
-                    onChange={onChange} // send value to hook form
-                    label="Age"
                     errorMessage={errors.age?.value?.message}
+                    label="Age"
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    value={value}
                   />
                 )}
               />
@@ -173,12 +186,12 @@ export const DogDetails = observer(({ navigation }: PageNavigationProps) => {
                 control={control}
                 render={({ field: { onBlur, onChange, value } }) => (
                   <RadioGroup
-                    value={value}
                     data={DOG_SIZE_OPTIONS}
-                    onBlur={onBlur} // notify when input is touched
-                    onChange={onChange} // send value to hook form
-                    label="Size"
                     errorMessage={errors.size?.value?.message}
+                    label="Size"
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    value={value}
                   />
                 )}
               />
@@ -189,12 +202,12 @@ export const DogDetails = observer(({ navigation }: PageNavigationProps) => {
                 control={control}
                 render={({ field: { onBlur, onChange, value } }) => (
                   <RadioGroup
-                    value={value}
                     data={STATUS_OPTIONS}
-                    onBlur={onBlur} // notify when input is touched
-                    onChange={onChange} // send value to hook form
-                    label="Spayed/neutered?"
                     errorMessage={errors.status?.value?.message}
+                    label="Spayed/neutered?"
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    value={value}
                   />
                 )}
               />
@@ -215,7 +228,10 @@ export const DogDetails = observer(({ navigation }: PageNavigationProps) => {
             text="Cancel"
             type="transparent"
             size="standard-short"
-            onPress={() => navigation.navigate('Manage Pets')}
+            onPress={() => {
+              observablePetStore.setEditing({ id: undefined });
+              navigation.navigate('Manage Pets');
+            }}
             loading={loading}
           />
         </View>

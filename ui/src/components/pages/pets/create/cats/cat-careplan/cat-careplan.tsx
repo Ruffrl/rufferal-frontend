@@ -32,10 +32,17 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
   const [activeSection, setActiveSection] = useState<number[]>([]);
   const handleActiveSections = (indexes: number[]) => setActiveSection(indexes);
 
+  let defaults: CatCarePlan | undefined;
+
+  if (observablePetStore.editingPetId) {
+    defaults = observablePetStore.currentEditingPet()?.careplan;
+  }
+
   /* REACT HOOK FORM */
   const form = useForm<CatCarePlan>({
     resolver: yupResolver(catCareplanSchema),
     mode: 'onBlur',
+    defaultValues: defaults
   });
   const { handleSubmit, watch } = form;
 
@@ -154,7 +161,10 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
             text="Cancel"
             type="transparent"
             size="standard-short"
-            onPress={() => navigation.navigate('Manage Pets')}
+            onPress={() => {
+              observablePetStore.setEditing({ id: undefined });
+              navigation.navigate('Manage Pets');
+            }}
             loading={loading}
           />
         </View>

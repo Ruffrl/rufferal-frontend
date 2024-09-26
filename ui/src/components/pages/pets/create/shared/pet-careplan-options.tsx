@@ -128,7 +128,9 @@ export const generateCatCareplans = (
             control={control}
             render={({ field: { onBlur, onChange, value } }) => (
               <RadioGroup
-                value={value}
+                data={HARNESS_OPTIONS}
+                errorMessage={errors.harness?.comfortableHarness?.message}
+                label="Does your dog have any accidents in the house?"
                 onBlur={onBlur}
                 onChange={(text) => {
                   setValue('harness.activated', true, {
@@ -137,9 +139,7 @@ export const generateCatCareplans = (
                   });
                   onChange(text);
                 }}
-                errorMessage={errors.harness?.comfortableHarness?.message}
-                label="Has your cat comfortably walked on a harness before?"
-                data={HARNESS_OPTIONS}
+                value={value}
               />
             )}
           />
@@ -148,6 +148,10 @@ export const generateCatCareplans = (
             control={control}
             render={({ field: { onBlur, onChange, value } }) => (
               <InputArea
+                errorMessage={
+                  errors.harness?.specialInstructions?.message
+                }
+                label="Special instructions"
                 onBlur={onBlur}
                 onChange={(text) => {
                   setValue('harness.activated', true, {
@@ -156,10 +160,8 @@ export const generateCatCareplans = (
                   });
                   onChange(text);
                 }}
+                placeholder="Add house training notes here..."
                 value={value}
-                errorMessage={errors.harness?.specialInstructions?.message}
-                label="Special instructions"
-                placeholder="Add instructions here..."
               />
             )}
           />
@@ -184,8 +186,12 @@ export const generateCatCareplans = (
           <Controller
             name="feeding.quantity"
             control={control}
-            render={({ field: { onBlur, onChange } }) => (
+            render={({ field: { onBlur, onChange, value } }) => (
               <Select
+                data={FEEDING_QUANTITY_OPTIONS}
+                errorMessage={errors.feeding?.quantity?.message}
+                label="Quantity"
+                labelField="label"
                 onBlur={onBlur}
                 onChange={(item) => {
                   setValue('feeding.activated', true, {
@@ -194,21 +200,22 @@ export const generateCatCareplans = (
                   });
                   onChange(item);
                 }}
-                errorMessage={errors.feeding?.quantity?.message}
-                label="Quantity"
-                data={FEEDING_QUANTITY_OPTIONS}
-                labelField="label"
-                searchField="label"
-                valueField="id"
                 other={OTHER_OPTION}
+                searchField="label"
+                value={value?.id}
+                valueField="id"
               />
             )}
           />
           <Controller
             name="feeding.frequency"
             control={control}
-            render={({ field: { onBlur, onChange } }) => (
+            render={({ field: { onBlur, onChange, value } }) => (
               <Select
+                data={FEEDING_FREQUENCY_OPTIONS}
+                errorMessage={errors.feeding?.frequency?.message}
+                label="Frequency"
+                labelField="label"
                 onBlur={onBlur}
                 onChange={(item) => {
                   setValue('feeding.activated', true, {
@@ -217,13 +224,10 @@ export const generateCatCareplans = (
                   });
                   onChange(item);
                 }}
-                errorMessage={errors.feeding?.frequency?.message}
-                label="Frequency"
-                data={FEEDING_FREQUENCY_OPTIONS}
-                labelField="label"
-                searchField="label"
-                valueField="id"
                 other={OTHER_OPTION}
+                searchField="label"
+                value={value?.id}
+                valueField="id"
               />
             )}
           />
@@ -232,6 +236,8 @@ export const generateCatCareplans = (
             control={control}
             render={({ field: { onBlur, onChange, value } }) => (
               <InputArea
+                errorMessage={errors.feeding?.specialInstructions?.message}
+                label="Special instructions"
                 onBlur={onBlur}
                 onChange={(text) => {
                   setValue('feeding.activated', true, {
@@ -240,10 +246,8 @@ export const generateCatCareplans = (
                   });
                   onChange(text);
                 }}
-                value={value}
-                errorMessage={errors.feeding?.specialInstructions?.message}
-                label="Special instructions"
                 placeholder="Add instructions here..."
+                value={value}
               />
             )}
           />
@@ -270,6 +274,8 @@ export const generateCatCareplans = (
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <InputArea
+              errorMessage={errors.overnight?.specialInstructions?.message}
+              label="Special instructions"
               onBlur={onBlur}
               onChange={(text) => {
                 setValue('overnight.activated', true, {
@@ -278,10 +284,8 @@ export const generateCatCareplans = (
                 });
                 onChange(text);
               }}
-              value={value}
-              errorMessage={errors.overnight?.specialInstructions?.message}
-              label="Special instructions"
               placeholder="Add instructions here..."
+              value={value}
             />
           )}
         />
@@ -305,6 +309,8 @@ export const generateCatCareplans = (
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <InputArea
+              errorMessage={errors.medical?.specialInstructions?.message}
+              label="Special instructions"
               onBlur={onBlur}
               onChange={(text) => {
                 setValue('medical.activated', true, {
@@ -313,10 +319,8 @@ export const generateCatCareplans = (
                 });
                 onChange(text);
               }}
-              value={value}
-              errorMessage={errors.medical?.specialInstructions?.message}
-              label="Special instructions"
               placeholder="Add instructions here..."
+              value={value}
             />
           )}
         />
@@ -340,6 +344,8 @@ export const generateCatCareplans = (
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <InputArea
+              errorMessage={errors.specialNeeds?.specialInstructions?.message}
+              label="Special instructions"
               onBlur={onBlur}
               onChange={(text) => {
                 setValue('specialNeeds.activated', true, {
@@ -348,10 +354,8 @@ export const generateCatCareplans = (
                 });
                 onChange(text);
               }}
-              value={value}
-              errorMessage={errors.specialNeeds?.specialInstructions?.message}
-              label="Special instructions"
               placeholder="Add instructions here..."
+              value={value}
             />
           )}
         />
@@ -375,6 +379,10 @@ export const generateCatCareplans = (
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <InputArea
+              errorMessage={
+                errors.additionalNotes?.specialInstructions?.message
+              }
+              label="Special instructions"
               onBlur={onBlur}
               onChange={(text) => {
                 setValue('additionalNotes.activated', true, {
@@ -383,12 +391,8 @@ export const generateCatCareplans = (
                 });
                 onChange(text);
               }}
-              value={value}
-              errorMessage={
-                errors.additionalNotes?.specialInstructions?.message
-              }
-              label="Special instructions"
               placeholder="Add instructions here..."
+              value={value}
             />
           )}
         />
@@ -442,7 +446,9 @@ export const generateDogCareplans = (
             control={control}
             render={({ field: { onBlur, onChange, value } }) => (
               <RadioGroup
-                value={value}
+                data={HOUSETRAINING_OPTIONS}
+                errorMessage={errors.houseTraining?.hasAccidents?.message}
+                label="Does your dog have any accidents in the house?"
                 onBlur={onBlur}
                 onChange={(text) => {
                   setValue('houseTraining.activated', true, {
@@ -451,9 +457,7 @@ export const generateDogCareplans = (
                   });
                   onChange(text);
                 }}
-                errorMessage={errors.houseTraining?.hasAccidents?.message}
-                label="Does your dog have any accidents in the house?"
-                data={HOUSETRAINING_OPTIONS}
+                value={value}
               />
             )}
           />
@@ -462,6 +466,10 @@ export const generateDogCareplans = (
             control={control}
             render={({ field: { onBlur, onChange, value } }) => (
               <InputArea
+                errorMessage={
+                  errors.houseTraining?.specialInstructions?.message
+                }
+                label="Special instructions"
                 onBlur={onBlur}
                 onChange={(text) => {
                   setValue('houseTraining.activated', true, {
@@ -470,12 +478,8 @@ export const generateDogCareplans = (
                   });
                   onChange(text);
                 }}
-                value={value}
-                errorMessage={
-                  errors.houseTraining?.specialInstructions?.message
-                }
-                label="Special instructions"
                 placeholder="Add house training notes here..."
+                value={value}
               />
             )}
           />
@@ -500,8 +504,12 @@ export const generateDogCareplans = (
           <Controller
             name="feeding.quantity"
             control={control}
-            render={({ field: { onBlur, onChange } }) => (
+            render={({ field: { onBlur, onChange, value } }) => (
               <Select
+                data={FEEDING_QUANTITY_OPTIONS}
+                errorMessage={errors.feeding?.quantity?.message}
+                label="Quantity"
+                labelField="label"
                 onBlur={onBlur}
                 onChange={(item) => {
                   setValue('feeding.activated', true, {
@@ -510,21 +518,22 @@ export const generateDogCareplans = (
                   });
                   onChange(item);
                 }}
-                errorMessage={errors.feeding?.quantity?.message}
-                label="Quantity"
-                data={FEEDING_QUANTITY_OPTIONS}
-                labelField="label"
-                searchField="label"
-                valueField="id"
                 other={OTHER_OPTION}
+                searchField="label"
+                value={value?.id}
+                valueField="id"
               />
             )}
           />
           <Controller
             name="feeding.frequency"
             control={control}
-            render={({ field: { onBlur, onChange } }) => (
+            render={({ field: { onBlur, onChange, value } }) => (
               <Select
+                data={FEEDING_FREQUENCY_OPTIONS}
+                errorMessage={errors.feeding?.frequency?.message}
+                label="Frequency"
+                labelField="label"
                 onBlur={onBlur}
                 onChange={(item) => {
                   setValue('feeding.activated', true, {
@@ -533,13 +542,10 @@ export const generateDogCareplans = (
                   });
                   onChange(item);
                 }}
-                errorMessage={errors.feeding?.frequency?.message}
-                label="Frequency"
-                data={FEEDING_FREQUENCY_OPTIONS}
-                labelField="label"
-                searchField="label"
-                valueField="id"
                 other={OTHER_OPTION}
+                searchField="label"
+                value={value?.id}
+                valueField="id"
               />
             )}
           />
@@ -548,6 +554,8 @@ export const generateDogCareplans = (
             control={control}
             render={({ field: { onBlur, onChange, value } }) => (
               <InputArea
+                errorMessage={errors.feeding?.specialInstructions?.message}
+                label="Special instructions"
                 onBlur={onBlur}
                 onChange={(text) => {
                   setValue('feeding.activated', true, {
@@ -556,10 +564,8 @@ export const generateDogCareplans = (
                   });
                   onChange(text);
                 }}
-                value={value}
-                errorMessage={errors.feeding?.specialInstructions?.message}
-                label="Special instructions"
                 placeholder="Add instructions here..."
+                value={value}
               />
             )}
           />
@@ -586,6 +592,8 @@ export const generateDogCareplans = (
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <InputArea
+              errorMessage={errors.overnight?.specialInstructions?.message}
+              label="Special instructions"
               onBlur={onBlur}
               onChange={(text) => {
                 setValue('overnight.activated', true, {
@@ -594,10 +602,8 @@ export const generateDogCareplans = (
                 });
                 onChange(text);
               }}
-              value={value}
-              errorMessage={errors.overnight?.specialInstructions?.message}
-              label="Special instructions"
               placeholder="Add instructions here..."
+              value={value}
             />
           )}
         />
@@ -621,6 +627,8 @@ export const generateDogCareplans = (
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <InputArea
+              errorMessage={errors.medical?.specialInstructions?.message}
+              label="Special instructions"
               onBlur={onBlur}
               onChange={(text) => {
                 setValue('medical.activated', true, {
@@ -629,10 +637,8 @@ export const generateDogCareplans = (
                 });
                 onChange(text);
               }}
-              value={value}
-              errorMessage={errors.medical?.specialInstructions?.message}
-              label="Special instructions"
               placeholder="Add instructions here..."
+              value={value}
             />
           )}
         />
@@ -656,6 +662,8 @@ export const generateDogCareplans = (
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <InputArea
+              errorMessage={errors.specialNeeds?.specialInstructions?.message}
+              label="Special instructions"
               onBlur={onBlur}
               onChange={(text) => {
                 setValue('specialNeeds.activated', true, {
@@ -664,10 +672,8 @@ export const generateDogCareplans = (
                 });
                 onChange(text);
               }}
-              value={value}
-              errorMessage={errors.specialNeeds?.specialInstructions?.message}
-              label="Special instructions"
               placeholder="Add instructions here..."
+              value={value}
             />
           )}
         />
@@ -691,6 +697,10 @@ export const generateDogCareplans = (
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <InputArea
+              errorMessage={
+                errors.additionalNotes?.specialInstructions?.message
+              }
+              label="Special instructions"
               onBlur={onBlur}
               onChange={(text) => {
                 setValue('additionalNotes.activated', true, {
@@ -699,12 +709,8 @@ export const generateDogCareplans = (
                 });
                 onChange(text);
               }}
-              value={value}
-              errorMessage={
-                errors.additionalNotes?.specialInstructions?.message
-              }
-              label="Special instructions"
               placeholder="Add instructions here..."
+              value={value}
             />
           )}
         />
