@@ -17,7 +17,6 @@ export interface InputProps extends FieldInputProps {
 }
 
 export interface InputPhotoProps {
-  cameraNavPath: string;
   errorMessage?: string;
   label?: string;
   uri?: string;
@@ -45,7 +44,6 @@ export type OtherOption = {
 export interface PhotoModalProps {
   handleModalDismiss: () => void;
   modalPresent: boolean;
-  navPath: string;
   onChange: (uri: string) => void;
 }
 

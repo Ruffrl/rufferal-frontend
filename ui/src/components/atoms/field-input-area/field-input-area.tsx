@@ -10,6 +10,7 @@ export const FieldInputArea = ({
   placeholder,
   size = 'standard',
   state = 'default',
+  value,
   ...inputProps
 }: FieldInputProps) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
@@ -57,6 +58,7 @@ export const FieldInputArea = ({
     >
       <TextInput
         {...inputProps}
+        value={value || ''}
         placeholder={placeholder || 'Add notes here...'}
         onChangeText={onChange}
         onSubmitEditing={onSubmit}

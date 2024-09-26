@@ -14,6 +14,7 @@ export const FieldInput = ({
   placeholder,
   size = 'standard',
   state = 'default',
+  value,
   ...inputProps
 }: FieldInputProps) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
@@ -61,6 +62,7 @@ export const FieldInput = ({
     >
       <TextInput
         {...inputProps}
+        value={value || ''}
         placeholder={placeholder || 'Select...'}
         onChangeText={onChange}
         onSubmitEditing={onSubmit}

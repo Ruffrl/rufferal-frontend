@@ -8,10 +8,10 @@ import { Pressable, Text, View } from 'react-native';
 import { useCameraPermissions } from 'expo-camera';
 import { PhotoModal } from './photo-modal';
 import { permissionAlert } from './photo-permission-alert';
+import { FieldHelper } from '../../atoms';
 
 // ⚠️ USAGE - to use this you must wrap your page with BottomSheetModalProvider
 export const InputPhoto = ({
-  cameraNavPath,
   errorMessage,
   label = 'Tap to change or add photo',
   onChange,
@@ -67,10 +67,10 @@ export const InputPhoto = ({
       <Text style={ruffwind`text-balticSea-950 font-bodySemibold text-b2`}>
         {label}
       </Text>
+      {errorMessage && <FieldHelper text={errorMessage} />}
       <PhotoModal
         handleModalDismiss={handleModalDismiss}
         modalPresent={modalPresent}
-        navPath={cameraNavPath}
         onChange={onChange}
       />
     </View>

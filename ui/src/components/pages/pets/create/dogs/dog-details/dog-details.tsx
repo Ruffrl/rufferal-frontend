@@ -4,12 +4,12 @@ import { ruffwind } from '@rufferal/tailwind';
 import { PageNavigationProps, PetDetails } from '@rufferal/types';
 import { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { Platform, Text, View } from 'react-native';
+import { Platform, View } from 'react-native';
 
+import { moderateScaleTW } from '@rufferal/utils';
 import {
   Button,
   FieldHelper,
-  H3,
   HorizontalDivider,
   ProgressBar,
 } from '../../../../../atoms';
@@ -24,6 +24,7 @@ import {
   STATUS_OPTIONS,
 } from '../../shared/pet-details-options';
 import { petDetailsSchema } from '../../shared/pet-profile-forms';
+import { SecondaryFormHeader } from '../../shared/secondary-form-header/secondary-form-header';
 
 export const DogDetails = ({ navigation }: PageNavigationProps) => {
   /* STATE */
@@ -35,8 +36,6 @@ export const DogDetails = ({ navigation }: PageNavigationProps) => {
   const form = useForm<PetDetails>({
     resolver: yupResolver(petDetailsSchema('dog')),
     mode: 'onBlur',
-    // BLARG:TODO - RHF with RN doesn't scroll on error, so find a custom solution (https://dev.to/shaswatprabhat/auto-scroll-in-react-native-forms-3k16)
-    shouldFocusError: true,
     defaultValues: {
       species: 'cat',
     },
@@ -51,13 +50,9 @@ export const DogDetails = ({ navigation }: PageNavigationProps) => {
     setLoading(true);
     if (process.env['NODE_ENV'] === 'development') {
       observablePetStore.createPet({ details: data });
+      setLoading(false);
       navigation.navigate('Dog Avatar');
     } else {
-      // const url =
-      //   Platform.OS === 'android'
-      //     ? 'http://10.0.2.2:5000/create-profile'
-      //     : 'http://localhost:5000/create-profile';
-
       // Handle form submission
       setError('');
 
@@ -77,22 +72,22 @@ export const DogDetails = ({ navigation }: PageNavigationProps) => {
       backNavigation={() => navigation.navigate('Manage Pets')}
     >
       <FormProvider {...form}>
-        <View style={ruffwind`mt-6`}>
+        <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
           <ProgressBar step={1} total={4} />
         </View>
 
-        <View style={ruffwind`mt-6 gap-5`}>
-          <View style={ruffwind`gap-2`}>
-            <H3 text="Add a dog" />
-            <Text
-              style={ruffwind`font-bodySemibold text-b2 text-balticSea-950`}
-            >
-              Required information
-            </Text>
-          </View>
+        <View
+          style={ruffwind`mt-${moderateScaleTW(24)} gap-${moderateScaleTW(20)}`}
+        >
+          <SecondaryFormHeader
+            header="Add a dog"
+            species="cat"
+            subHeader="Required information"
+            subHeaderBold
+          />
 
-          <View style={ruffwind`gap-3`}>
-            <View style={ruffwind`gap-1`}>
+          <View style={ruffwind`gap-${moderateScaleTW(12)}`}>
+            <View style={ruffwind`gap-${moderateScaleTW(4)}`}>
               <Controller
                 name="name"
                 control={control}
@@ -206,7 +201,12 @@ export const DogDetails = ({ navigation }: PageNavigationProps) => {
           </View>
         </View>
 
-        <View style={ruffwind.style(`mt-4 gap-2`, !isIOS && `mb-4`)}>
+        <View
+          style={ruffwind.style(
+            `mt-${moderateScaleTW(16)} gap-${moderateScaleTW(8)}`,
+            !isIOS && `mb-${moderateScaleTW(16)}`
+          )}
+        >
           <HorizontalDivider color="border-amethystSmoke-600" />
           {error && <FieldHelper text={error} align={'text-center'} />}
           <Button text="Next" onPress={onSubmit} loading={loading} />

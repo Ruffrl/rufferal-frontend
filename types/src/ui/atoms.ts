@@ -21,8 +21,8 @@ import {
 
 export interface AccordianProps {
   sections: AccordionSection[];
-  activeSection: number[] | string[];
-  setActiveSections: (indexes: number[] | string[]) => void;
+  activeSection: number[];
+  setActiveSections: (indexes: number[]) => void;
 }
 
 export interface AccordionSection {

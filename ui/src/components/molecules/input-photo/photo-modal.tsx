@@ -31,7 +31,6 @@ import { permissionAlert } from './photo-permission-alert';
 export const PhotoModal = ({
   handleModalDismiss,
   modalPresent,
-  navPath,
   onChange,
 }: PhotoModalProps) => {
   /* STATE */

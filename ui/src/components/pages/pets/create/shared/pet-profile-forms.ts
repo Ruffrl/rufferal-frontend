@@ -21,7 +21,10 @@ export const petDetailsSchema: (
         .string()
         .oneOf(['cat', 'dog'])
         .required(`Missing species: ${species} type declaration`),
-      name: yup.string().required(`Please provide a name for your ${species}`),
+      name: yup
+        .string()
+        .required(`Please provide a name for your ${species}`)
+        .max(50, 'Name must be under 50 characters'),
       color: generateOptionSchema(`Please provide your ${species}'s color`),
       breed: generateOptionSchema(`Please provide your ${species}'s breed`),
       sex: generateOptionSchema(`Please provide your ${species}'s sex`),
@@ -31,19 +34,18 @@ export const petDetailsSchema: (
     })
     .required();
 
-export const petAvatarSchema: yup.ObjectSchema<PetAvatar> =
-  yup.object({
-    uri: yup.string(),
-  });
+export const petAvatarSchema: yup.ObjectSchema<PetAvatar> = yup.object({
+  uri: yup.string(),
+});
 
 const petPersonalitySchema: yup.ObjectSchema<PetPersonality> = yup.object({
   goodKids: yup.boolean(),
   goodOtherSpecies: yup.boolean(),
   goodSameSpecies: yup.boolean(),
-  temperment: yup.number().oneOf([1, 2, 3, 4, 5]),
-  energy: yup.number().oneOf([1, 2, 3, 4, 5]),
-  autonomy: yup.number().oneOf([1, 2, 3, 4, 5]),
-  motivation: yup.number().oneOf([1, 2, 3, 4, 5]),
+  temperment: yup.number().oneOf([1, 2, 3, 4, 5]).default(3),
+  energy: yup.number().oneOf([1, 2, 3, 4, 5]).default(3),
+  autonomy: yup.number().oneOf([1, 2, 3, 4, 5]).default(3),
+  motivation: yup.number().oneOf([1, 2, 3, 4, 5]).default(3),
   requiresMedication: yup.boolean(),
   seperationAnxiety: yup.boolean(),
   specialNeeds: yup.boolean(),

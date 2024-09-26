@@ -1,10 +1,6 @@
 import { ruffwind } from '@rufferal/tailwind';
-import {
-  GLOBAL_ICON_SIZE_MEDIUM_SMALL,
-  verticalScaleTW,
-} from '@rufferal/utils';
-import { Image } from 'expo-image';
-import { Platform, Text, View } from 'react-native';
+import { moderateScaleTW, verticalScaleTW } from '@rufferal/utils';
+import { Platform, View } from 'react-native';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -18,15 +14,14 @@ import { observablePetStore } from '@rufferal/store';
 import {
   Button,
   FieldHelper,
-  H3,
   HorizontalDivider,
   ProgressBar,
-  Tag,
 } from '../../../../../atoms';
 import { CheckToggle, InputSlider } from '../../../../../molecules';
 import { ScrollFeatureTemplate } from '../../../../../templates';
 import { BehaviorLabel } from '../../shared/behavior-label/behavior-label';
 import { catPersonalitySchema } from '../../shared/pet-profile-forms';
+import { SecondaryFormHeader } from '../../shared/secondary-form-header/secondary-form-header';
 
 export const CatPersonality = ({ navigation }: PageNavigationProps) => {
   /* STATE */
@@ -48,8 +43,10 @@ export const CatPersonality = ({ navigation }: PageNavigationProps) => {
   const onSubmit = handleSubmit(async (data: CatPersonalityForm) => {
     setLoading(true);
     if (process.env['NODE_ENV'] === 'development') {
+      console.log('data', data);
       const petId = observablePetStore.editingPetId;
       observablePetStore.updatePet({ id: petId, personality: data });
+      setLoading(false);
       navigation.navigate('Cat Careplan');
     } else {
       // Handle form submission
@@ -73,31 +70,23 @@ export const CatPersonality = ({ navigation }: PageNavigationProps) => {
       forwardText="Skip"
     >
       <FormProvider {...form}>
-        <View style={ruffwind`mt-6`}>
+        <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
           <ProgressBar step={3} total={4} />
         </View>
 
-        <View style={ruffwind`mt-6 gap-2`}>
-          <Tag
-            Icon={() => (
-              <Image
-                style={ruffwind.style(
-                  GLOBAL_ICON_SIZE_MEDIUM_SMALL,
-                  'items-center justify-center'
-                )}
-                source={require('@rufferal/assets/src/icons/cat.png')}
-              />
-            )}
-            text="Gavin"
+        <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
+          <SecondaryFormHeader
+            hasTag
+            header="Behavior and personality"
+            species="cat"
+            subHeader="Help pet caretakers understand your cat’s needs and unique traits"
           />
-          <H3 text="Behavior and personality" />
-          <Text style={ruffwind`text-balticSea-950 font-body text-b2`}>
-            Help pet caretakers understand your cat’s needs and unique traits
-          </Text>
         </View>
 
-        <View style={ruffwind`mt-5 gap-4`}>
-          <View style={ruffwind`gap-2`}>
+        <View
+          style={ruffwind`mt-${moderateScaleTW(20)} gap-${moderateScaleTW(16)}`}
+        >
+          <View style={ruffwind`gap-${moderateScaleTW(8)}`}>
             <BehaviorLabel label="Good with" multiple />
             <Controller
               name="goodKids"
@@ -144,7 +133,12 @@ export const CatPersonality = ({ navigation }: PageNavigationProps) => {
 
           <View>
             <BehaviorLabel label="Personality" />
-            <View style={ruffwind`mt-1 gap-3`}>
+            <View
+              style={ruffwind`
+                mt-${moderateScaleTW(4)}
+                gap-${moderateScaleTW(12)}
+              `}
+            >
               <Controller
                 name="temperment"
                 control={control}
@@ -198,7 +192,7 @@ export const CatPersonality = ({ navigation }: PageNavigationProps) => {
 
           <HorizontalDivider color="border-saltBox-200" />
 
-          <View style={ruffwind`gap-2`}>
+          <View style={ruffwind`gap-${moderateScaleTW(8)}`}>
             <BehaviorLabel label="Care & behavior" multiple />
             <Controller
               name="declawed"
@@ -257,7 +251,7 @@ export const CatPersonality = ({ navigation }: PageNavigationProps) => {
 
         <View
           style={ruffwind.style(
-            `gap-2 mt-${verticalScaleTW(37)}`,
+            `gap-${moderateScaleTW(8)} mt-${verticalScaleTW(37)}`,
             !isIOS && `mb-${verticalScaleTW(16)}`
           )}
         >

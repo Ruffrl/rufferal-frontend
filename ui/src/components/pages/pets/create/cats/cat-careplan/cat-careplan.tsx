@@ -3,51 +3,84 @@ import { ruffwind } from '@rufferal/tailwind';
 import { CatCarePlan, PageNavigationProps } from '@rufferal/types';
 import {
   cleanCareplan,
-  GLOBAL_ICON_SIZE_MEDIUM_SMALL,
+  moderateScaleTW,
   verticalScaleTW,
 } from '@rufferal/utils';
-import { Image } from 'expo-image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Platform, Text, View } from 'react-native';
+import { Platform, View } from 'react-native';
 
 import { observablePetStore } from '@rufferal/store';
 import {
   Accordian,
   Button,
   FieldHelper,
-  H3,
   HorizontalDivider,
   ProgressBar,
-  Tag,
 } from '../../../../../atoms';
 import { ScrollFeatureTemplate } from '../../../../../templates';
 import { generateCatCareplans } from '../../shared/pet-careplan-options';
 import { catCareplanSchema } from '../../shared/pet-profile-forms';
+import { SecondaryFormHeader } from '../../shared/secondary-form-header/secondary-form-header';
 
 export const CatCareplan = ({ navigation }: PageNavigationProps) => {
   /* STATE */
   const isIOS = Platform.OS === 'ios';
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
-  const [activeSection, setActiveSection] = useState<number[] | string[]>([]);
-  const handleActiveSections = (indexes: number[] | string[]) =>
-    setActiveSection(indexes);
+  const [activeSection, setActiveSection] = useState<number[]>([]);
+  const handleActiveSections = (indexes: number[]) => setActiveSection(indexes);
 
   /* REACT HOOK FORM */
   const form = useForm<CatCarePlan>({
     resolver: yupResolver(catCareplanSchema),
     mode: 'onBlur',
-    defaultValues: {
-      harness: { activated: false, specialInstructions: '' },
-      feeding: { activated: false, specialInstructions: '' },
-      overnight: { activated: false, specialInstructions: '' },
-      medical: { activated: false, specialInstructions: '' },
-      specialNeeds: { activated: false, specialInstructions: '' },
-      additionalNotes: { activated: false, specialInstructions: '' },
-    },
   });
-  const { handleSubmit } = form;
+  const { handleSubmit, watch } = form;
+
+  const harnessSection = watch('harness.activated');
+  const feedingSection = watch('feeding.activated');
+  const overnightSection = watch('overnight.activated');
+  const medicalSection = watch('medical.activated');
+  const specialNeedsSection = watch('specialNeeds.activated');
+  const additionalNotesSection = watch('additionalNotes.activated');
+
+  useEffect(() => {
+    if (harnessSection) {
+      setActiveSection([...activeSection, 0]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [harnessSection]);
+  useEffect(() => {
+    if (feedingSection) {
+      setActiveSection([...activeSection, 1]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [feedingSection]);
+  useEffect(() => {
+    if (overnightSection) {
+      setActiveSection([...activeSection, 2]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [overnightSection]);
+  useEffect(() => {
+    if (medicalSection) {
+      setActiveSection([...activeSection, 3]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [medicalSection]);
+  useEffect(() => {
+    if (specialNeedsSection) {
+      setActiveSection([...activeSection, 4]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [specialNeedsSection]);
+  useEffect(() => {
+    if (additionalNotesSection) {
+      setActiveSection([...activeSection, 5]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [additionalNotesSection]);
 
   const onSubmit = handleSubmit(async (data: CatCarePlan) => {
     setLoading(true);
@@ -57,6 +90,7 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
         const petId = observablePetStore.editingPetId;
         observablePetStore.updatePet({ id: petId, careplan: cleanedData });
       }
+      setLoading(false);
       navigation.navigate('Manage Pets');
     } else {
       // Handle form submission
@@ -80,30 +114,22 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
         forwardNavigation={onSubmit}
         forwardText="Complete"
       >
-        <View style={ruffwind`mt-6`}>
+        <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
           <ProgressBar step={4} total={4} />
         </View>
 
-        <View style={ruffwind`mt-6 gap-2`}>
-          <Tag
-            Icon={() => (
-              <Image
-                style={ruffwind.style(
-                  GLOBAL_ICON_SIZE_MEDIUM_SMALL,
-                  'items-center justify-center'
-                )}
-                source={require('@rufferal/assets/src/icons/cat.png')}
-              />
-            )}
-            text="Gavin"
+        <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
+          <SecondaryFormHeader
+            hasTag
+            header="Add a careplan"
+            species="cat"
+            subHeader="Turn toggle on to include instructions in this pet’s bookings"
           />
-          <H3 text="Add a careplan" />
-          <Text style={ruffwind`text-balticSea-950 font-body text-b2`}>
-            Turn toggle on to include instructions in this pet’s bookings
-          </Text>
         </View>
-        
-        <View style={ruffwind`mt-6 gap-2`}>
+
+        <View
+          style={ruffwind`mt-${moderateScaleTW(24)} gap-${moderateScaleTW(8)}`}
+        >
           <Accordian
             activeSection={activeSection}
             setActiveSections={(indexes) => handleActiveSections(indexes)}
@@ -113,7 +139,7 @@ export const CatCareplan = ({ navigation }: PageNavigationProps) => {
 
         <View
           style={ruffwind.style(
-            `gap-2`,
+            `gap-${moderateScaleTW(8)}`,
             isIOS ? `mt-${verticalScaleTW(161)}` : `mt-${verticalScaleTW(200)}`,
             activeSection.length > 0 && `mt-${verticalScaleTW(16)}`,
             activeSection.length > 0 && !isIOS && `mb-${verticalScaleTW(16)}`
