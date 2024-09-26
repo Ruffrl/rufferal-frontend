@@ -21,10 +21,17 @@ export const CatAvatar = observer(({ navigation }: PageNavigationProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
 
+  let defaults: PetAvatar | undefined;
+
+  if (observablePetStore.editingPetId) {
+    defaults = observablePetStore.currentEditingPet()?.avatar;
+  }
+
   /* REACT HOOK FORM */
   const form = useForm<PetAvatar>({
     resolver: yupResolver(petAvatarSchema),
     mode: 'onBlur',
+    defaultValues: defaults
   });
   const {
     control,

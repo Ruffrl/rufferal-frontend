@@ -31,10 +31,17 @@ export const DogPersonality = observer(
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
 
+    let defaults: DogPersonalityForm | undefined;
+
+    if (observablePetStore.editingPetId) {
+      defaults = observablePetStore.currentEditingPet()?.personality;
+    }
+
     /* REACT HOOK FORM */
     const form = useForm<DogPersonalityForm>({
       resolver: yupResolver(dogPersonalitySchema),
       mode: 'onBlur',
+      defaultValues: defaults
     });
     const {
       control,

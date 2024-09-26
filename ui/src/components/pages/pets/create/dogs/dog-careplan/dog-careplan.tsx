@@ -32,10 +32,18 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
   const [activeSection, setActiveSection] = useState<number[]>([]);
   const handleActiveSections = (indexes: number[]) => setActiveSection(indexes);
 
+  let defaults: DogCarePlan | undefined;
+
+  if (observablePetStore.editingPetId) {
+    defaults = observablePetStore.currentEditingPet()?.careplan;
+  }
+
+
   /* REACT HOOK FORM */
   const form = useForm<DogCarePlan>({
     resolver: yupResolver(dogCareplanSchema),
     mode: 'onBlur',
+    defaultValues: defaults
   });
   const { handleSubmit, watch } = form;
 

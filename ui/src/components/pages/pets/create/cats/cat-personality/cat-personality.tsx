@@ -30,10 +30,18 @@ export const CatPersonality = observer(
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
 
+    let defaults: CatPersonalityForm | undefined;
+
+    if (observablePetStore.editingPetId) {
+      defaults = observablePetStore.currentEditingPet()?.personality;
+    }
+  
+
     /* REACT HOOK FORM */
     const form = useForm<CatPersonalityForm>({
       resolver: yupResolver(catPersonalitySchema),
       mode: 'onBlur',
+      defaultValues: defaults
     });
     const {
       control,
@@ -44,7 +52,6 @@ export const CatPersonality = observer(
     const onSubmit = handleSubmit(async (data: CatPersonalityForm) => {
       setLoading(true);
       if (process.env['NODE_ENV'] === 'development') {
-        console.log('data', data);
         const petId = observablePetStore.editingPetId;
         observablePetStore.updatePet({ id: petId, personality: data });
         setLoading(false);
