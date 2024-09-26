@@ -618,8 +618,8 @@ To get a local copy of the project up and running follow these steps:
 
 ## About the creators
 
-- Sara Flores
-- Priya Power
+- Meet the designer: [Sara Flores](https://www.linkedin.com/in/sara-flores-6685602ab/)
+- Meet the developer: [Priya Power](https://www.linkedin.com/in/priya-power/)
 
 <!-- ## Contributing
 
