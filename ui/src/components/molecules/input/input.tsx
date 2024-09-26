@@ -1,33 +1,32 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { FieldState, InputProps } from '@rufferal/types';
 import { moderateScaleTW } from '@rufferal/utils';
 import { View } from 'react-native';
-import {
-  FieldHelper,
-  FieldInput,
-  FieldInputProps,
-  FieldLabel,
-} from '../../atoms';
-
-export interface InputProps extends FieldInputProps {
-  errorMessage?: string;
-  label: string;
-}
+import { FieldHelper, FieldInput, FieldLabel } from '../../atoms';
 
 export const Input = ({
+  disabled = false,
   errorMessage,
   label,
   size = 'standard',
-  state = 'default',
   ...inputProps
 }: InputProps) => {
+  let state: FieldState = 'default';
+
+  if (disabled) {
+    state = 'disabled';
+  } else if (errorMessage) {
+    state = 'errored';
+  }
+
   return (
     <View style={ruffwind`gap-${moderateScaleTW(4)}`}>
-      <FieldLabel text={label} />
+      <FieldLabel text={label} state={state} />
       <FieldInput state={state} size={size} {...inputProps} />
-      {state === 'errored' ? (
+      {errorMessage ? (
         <FieldHelper text={errorMessage} />
       ) : (
-        <View style={ruffwind`h-3`} />
+        <View style={ruffwind`h-${moderateScaleTW(12)}`} />
       )}
     </View>
   );

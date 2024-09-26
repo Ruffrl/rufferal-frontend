@@ -1,14 +1,18 @@
 import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
-
-import { observablePetStore, Pet } from '@rufferal/store';
+import { observablePetStore } from '@rufferal/store';
 import { ruffwind } from '@rufferal/tailwind';
+import { PageNavigationProps, Pet } from '@rufferal/types';
 import {
   capitalize,
+  createImageSize,
   GLOBAL_ICON_SIZE,
   GLOBAL_ICON_SIZE_LARGE,
+  moderateScaleTW,
   titleCase,
 } from '@rufferal/utils';
+import { observer } from 'mobx-react-lite';
+
 import {
   Button,
   H3,
@@ -17,23 +21,8 @@ import {
   VerticalDivider,
 } from '../../../atoms';
 import { FeatureTemplate } from '../../../templates';
-import { PageNavigationProps } from '../..';
 
-// interface ManagePetsProps extends PageNavigationProps {}
-
-export const ManagePets = ({ navigation }: PageNavigationProps) => {
-  observablePetStore.addPet({
-    name: 'gavin',
-    species: 'cat',
-    breed: 'american shorthair',
-    avatar: require('@rufferal/assets/src/images/cat-profile-stock-photo.jpeg'),
-  });
-  observablePetStore.addPet({
-    name: 'maya',
-    species: 'dog',
-    breed: 'german shepard',
-    avatar: require('@rufferal/assets/src/images/dog-profile-stock-photo.jpeg'),
-  });
+export const ManagePets = observer(({ navigation }: PageNavigationProps) => {
   const pets = observablePetStore.activePets();
 
   return (
@@ -58,7 +47,7 @@ export const ManagePets = ({ navigation }: PageNavigationProps) => {
       </View>
     </FeatureTemplate>
   );
-};
+});
 
 /* ********** */
 /* COMPONENTS */
@@ -97,31 +86,56 @@ const Pets = ({ pets }: { pets: Pet[] }) => (
         <PetItem key={pet.id} pet={pet} />
       ))}
     </View>
-    <HorizontalDivider color='border-graySuit-400' />
+    <HorizontalDivider color="border-graySuit-400" />
   </View>
 );
 
 const PetItem = ({ pet }: { pet: Pet }) => {
   return (
     <Item>
-      <View style={ruffwind`flex-row h-full gap-2`}>
+      <View style={ruffwind`flex-row h-full gap-${moderateScaleTW(8)}`}>
         <View style={ruffwind`justify-center`}>
-          <Image
-            style={ruffwind`items-center justify-center h-[34px] w-[34px] rounded-full`}
-            source={pet.avatar}
-          />
+          {pet.avatar?.uri ? (
+            <Image
+              style={ruffwind.style(
+                `items-center justify-center rounded-full`,
+                createImageSize(34)
+              )}
+              source={pet.avatar.uri}
+            />
+          ) : (
+            <View
+              style={ruffwind.style(
+                `items-center
+                justify-center
+                rounded-full
+                border-electricViolet-700
+                border-${moderateScaleTW(2)}
+                h-${moderateScaleTW(34)}
+                w-${moderateScaleTW(34)}
+                `
+              )}
+            >
+              <Image
+                style={ruffwind.style(GLOBAL_ICON_SIZE_LARGE)}
+                source={require('@rufferal/assets/src/icons/paw-print.png')}
+                // BLARG -import from tailwind config
+                tintColor={'#9525CB'}
+              />
+            </View>
+          )}
         </View>
         <View style={ruffwind`flex-1`}>
           <Text style={ruffwind`font-bodyBold text-b4 text-balticSea-950`}>
-            {capitalize(pet.name)}
+            {pet.details?.name}
           </Text>
-          <View style={ruffwind`flex-row gap-1`}>
+          <View style={ruffwind`flex-row gap-${moderateScaleTW(4)}`}>
             <Text style={ruffwind`font-body text-b2 text-saltBox-700`}>
-              {capitalize(pet.species)}
+              {capitalize(pet.details?.species)}
             </Text>
             <VerticalDivider />
             <Text style={ruffwind`font-body text-b2 text-saltBox-700`}>
-              {titleCase(pet.breed)}
+              {titleCase(pet.details?.breed.label)}
             </Text>
           </View>
         </View>

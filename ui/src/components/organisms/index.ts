@@ -10,4 +10,4 @@
  *
  */
 
-export { PageNavigation } from './page-navigation/page-navigation';
+export { FeatureNavigation } from './feature-navigation/feature-navigation';

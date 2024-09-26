@@ -1,60 +1,48 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { FieldState, SelectProps } from '@rufferal/types';
 import { moderateScaleTW } from '@rufferal/utils';
 import { View } from 'react-native';
-import {
-  FieldHelper,
-  FieldLabel,
-  FieldOption,
-  FieldSelect,
-  FieldSelectProps,
-} from '../../atoms';
-
-export type OtherOption = {
-  component: JSX.Element;
-  label: string;
-};
-export interface SelectProps extends FieldSelectProps<FieldOption> {
-  errorMessage?: string;
-  label: string;
-  other?: OtherOption;
-}
+import { FieldHelper, FieldLabel, FieldSelect } from '../../atoms';
 
 export const Select = ({
   data,
+  disabled = false,
   errorMessage,
   label,
-  labelField,
-  onChange,
-  placeholder = 'Select...',
-  searchField,
-  size = 'standard',
-  state = 'default',
-  valueField,
   other,
+  size = 'standard',
+  ...selectProps
 }: SelectProps) => {
+  let state: FieldState = 'default';
+
+  if (disabled) {
+    state = 'disabled';
+  } else if (errorMessage) {
+    state = 'errored';
+  }
+
   // Handle optional "Other" option
   if (other && Object.keys(other).length > 0) {
-    data.push({
+    const filteredOthers = data.filter(item => item.id !== 'other');
+    filteredOthers.push({
       id: 'other',
       label: other.label,
       value: other.label.toLowerCase(),
     });
+    data = filteredOthers;
   }
 
   return (
     <View style={ruffwind`gap-${moderateScaleTW(4)}`}>
-      <FieldLabel text={label} />
+      <FieldLabel text={label} state={state} />
       <FieldSelect
         data={data}
-        labelField={labelField}
-        onChange={(item) => console.log(item)}
-        searchField={searchField}
-        valueField={valueField}
         state={state}
         size={size}
         other={other}
+        {...selectProps}
       />
-      {state === 'errored' ? (
+      {errorMessage ? (
         <FieldHelper text={errorMessage} />
       ) : (
         <View style={ruffwind`h-${moderateScaleTW(12)}`} />

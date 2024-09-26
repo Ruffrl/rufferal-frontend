@@ -12,20 +12,10 @@
  *
  */
 
-export type { AccordionSection } from './accordian/accordian';
-export type { FieldInputAreaProps } from './field-input-area/field-input-area';
-export type { FieldInputProps } from './field-input/field-input';
-export type { FieldSelectProps } from './field-select/field-select';
-export type {
-  ButtonType,
-  FieldOption,
-  FieldSize,
-  FieldState,
-} from './types/field-types';
-
 export { Accordian } from './accordian/accordian';
 export { Bottomsheet } from './bottomsheet/bottomsheet';
 export { Button } from './button/button';
+export { CheckLabel } from './check-label/check-label';
 export { FieldCharacterCount } from './field-character-count/field-character-count';
 export { FieldHelper } from './field-helper/field-helper';
 export { FieldInputArea } from './field-input-area/field-input-area';

@@ -1,10 +1,7 @@
 import { ruffwind } from '@rufferal/tailwind';
 import { Text } from 'react-native';
 
-/* eslint-disable-next-line @typescript-eslint/no-empty-interface*/
-interface VerticalDividerProps {}
-
-export const VerticalDivider = (props: VerticalDividerProps) => {
+export const VerticalDivider = () => {
   return (
     <Text style={ruffwind`font-body text-b2 text-electricViolet-300`}>|</Text>
   );

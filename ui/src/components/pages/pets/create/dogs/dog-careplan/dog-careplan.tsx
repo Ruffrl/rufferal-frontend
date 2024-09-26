@@ -1,207 +1,164 @@
+import { yupResolver } from '@hookform/resolvers/yup';
+import { observablePetStore } from '@rufferal/store';
 import { ruffwind } from '@rufferal/tailwind';
+import { DogCarePlan, PageNavigationProps } from '@rufferal/types';
 import {
-  GLOBAL_ICON_SIZE_MEDIUM_SMALL,
+  cleanCareplan,
+  moderateScaleTW,
   verticalScaleTW,
 } from '@rufferal/utils';
-import { Image } from 'expo-image';
-import { useState } from 'react';
-import { Text, View } from 'react-native';
-import { PageNavigationProps } from '../../../..';
+import { observer } from 'mobx-react-lite';
+import { useEffect, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { Platform, View } from 'react-native';
+
 import {
   Accordian,
-  AccordionSection,
   Button,
-  FieldOption,
-  H3,
+  FieldHelper,
   HorizontalDivider,
   ProgressBar,
-  Tag,
 } from '../../../../../atoms';
-import { InputArea, RadioGroup, Select } from '../../../../../molecules';
 import { ScrollFeatureTemplate } from '../../../../../templates';
-import {
-  FEEDING_FREQUENCY_OPTIONS,
-  FEEDING_QUANTITY_OPTIONS,
-  HOUSETRAINING_OPTIONS,
-  OTHER_OPTION,
-} from '../../pet-careplan-options';
+import { generateDogCareplans } from '../../shared/pet-careplan-options';
+import { dogCareplanSchema } from '../../shared/pet-profile-forms';
+import { SecondaryFormHeader } from '../../shared/secondary-form-header/secondary-form-header';
 
-/* eslint-disable-next-line */
-export interface DogCareplanProps extends PageNavigationProps {}
+export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
+  /* STATE */
+  const isIOS = Platform.OS === 'ios';
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>();
+  const [activeSection, setActiveSection] = useState<number[]>([]);
+  const handleActiveSections = (indexes: number[]) => setActiveSection(indexes);
 
-export const DogCareplan = ({ navigation }: DogCareplanProps) => {
-  // form state
-  const [harness, setHarness] = useState<FieldOption>();
-  const handleHarness = (item: FieldOption) => {
-    setHarness(item);
-  };
+  /* REACT HOOK FORM */
+  const form = useForm<DogCarePlan>({
+    resolver: yupResolver(dogCareplanSchema),
+    mode: 'onBlur',
+  });
+  const { handleSubmit, watch } = form;
 
-  const [harnessSwitch, setHarnessSwitch] = useState(false);
-  const handleHarnessSwitch = () => {
-    setHarnessSwitch((prev) => !prev);
-  };
+  const houseTrainingSection = watch('houseTraining.activated');
+  const feedingSection = watch('feeding.activated');
+  const overnightSection = watch('overnight.activated');
+  const medicalSection = watch('medical.activated');
+  const specialNeedsSection = watch('specialNeeds.activated');
+  const additionalNotesSection = watch('additionalNotes.activated');
 
-  const [activeSection, setActiveSection] = useState<number[] | string[]>([]);
-  const handleActiveSections = (indexes: number[] | string[]) =>
-    setActiveSection(indexes);
+  useEffect(() => {
+    if (houseTrainingSection) {
+      setActiveSection([...activeSection, 0]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [houseTrainingSection]);
+  useEffect(() => {
+    if (feedingSection) {
+      setActiveSection([...activeSection, 1]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [feedingSection]);
+  useEffect(() => {
+    if (overnightSection) {
+      setActiveSection([...activeSection, 2]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [overnightSection]);
+  useEffect(() => {
+    if (medicalSection) {
+      setActiveSection([...activeSection, 3]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [medicalSection]);
+  useEffect(() => {
+    if (specialNeedsSection) {
+      setActiveSection([...activeSection, 4]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [specialNeedsSection]);
+  useEffect(() => {
+    if (additionalNotesSection) {
+      setActiveSection([...activeSection, 5]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [additionalNotesSection]);
 
-  // renders
-  const DOG_CAREPLAN_SECTIONS: AccordionSection[] = [
-    {
-      title: 'House Training',
-      icon: require('@rufferal/assets/src/icons/dog-walk.png'),
-      component: (
-        <>
-          <RadioGroup
-            value={harness}
-            onChange={handleHarness}
-            label="Does your dog have any accidents?"
-            items={HOUSETRAINING_OPTIONS}
-          />
-          <InputArea
-            label="Special instructions"
-            placeholder="Add accident trigger information here..."
-          />
-        </>
-      ),
-      switch: {
-        state: harnessSwitch,
-        setSwitch: handleHarnessSwitch,
-      },
-    },
-    {
-      title: 'Feeding',
-      icon: require('@rufferal/assets/src/icons/food.png'),
-      component: (
-        <>
-          <Select
-            label="Quantity"
-            data={FEEDING_QUANTITY_OPTIONS}
-            labelField="label"
-            onChange={(item) => console.log(item)}
-            searchField="label"
-            valueField="id"
-            other={OTHER_OPTION}
-          />
-          <Select
-            label="Frequency"
-            data={FEEDING_FREQUENCY_OPTIONS}
-            labelField="label"
-            onChange={(item) => console.log(item)}
-            searchField="label"
-            valueField="id"
-            other={OTHER_OPTION}
-          />
-          <InputArea
-            label="Special instructions"
-            placeholder="Add instructions here..."
-          />
-        </>
-      ),
-    },
-    {
-      title: 'Overnight',
-      icon: require('@rufferal/assets/src/icons/moon.png'),
-      component: (
-        <InputArea
-          label="Special instructions"
-          placeholder="Add instructions here..."
-        />
-      ),
-    },
-    {
-      title: 'Medical',
-      icon: require('@rufferal/assets/src/icons/pills.png'),
-      component: (
-        <InputArea
-          label="Special instructions"
-          placeholder="Add instructions here..."
-        />
-      ),
-    },
-    {
-      title: 'Special needs',
-      icon: require('@rufferal/assets/src/icons/paw-print.png'),
-      component: (
-        <InputArea
-          label="Special instructions"
-          placeholder="Add instructions here..."
-        />
-      ),
-    },
-    {
-      title: 'Additional notes',
-      icon: require('@rufferal/assets/src/icons/bone.png'),
-      component: (
-        <InputArea
-          label="Special instructions"
-          placeholder="Add instructions here..."
-        />
-      ),
-    },
-  ];
+  const onSubmit = handleSubmit(async (data: DogCarePlan) => {
+    setLoading(true);
+    if (process.env['NODE_ENV'] === 'development') {
+      const cleanedData = cleanCareplan(data);
+      if (cleanedData) {
+        const petId = observablePetStore.editingPetId;
+        observablePetStore.updatePet({ id: petId, careplan: cleanedData });
+      }
+      observablePetStore.setEditing({ id: undefined });
+      setLoading(false);
+      navigation.navigate('Manage Pets');
+    } else {
+      // Handle form submission
+      setError('');
+
+      try {
+        console.log('BLARG:TODO - handle backend submission', data);
+        navigation.navigate('Manage Pets');
+      } catch (err) {
+        setError(String(err));
+      } finally {
+        setLoading(false);
+      }
+    }
+  });
 
   return (
-    <ScrollFeatureTemplate
-      backNavigation={() => navigation.navigate('Dog Personality')}
-      // BLARG - handle if form dirty and valid, change from "Skip" to "Complete"
-      skipNavigation={() => {
-        console.log('BLARG: TODO: Handle form submission');
-        navigation.navigate('Manage Pets');
-      }}
-    >
-      <View style={ruffwind`mt-6`}>
-        <ProgressBar step={4} total={4} />
-      </View>
-      <View style={ruffwind`mt-6 gap-2`}>
-        <Tag
-          Icon={() => (
-            <Image
-              style={ruffwind.style(
-                GLOBAL_ICON_SIZE_MEDIUM_SMALL,
-                'items-center justify-center'
-              )}
-              source={require('@rufferal/assets/src/icons/dog.png')}
-            />
-          )}
-          text="Maya"
-        />
-        <H3 text="Add a careplan" />
-        <Text style={ruffwind`text-balticSea-950 font-body text-b2`}>
-          Turn toggle on to include instructions in this pet’s bookings
-        </Text>
-      </View>
-      <View style={ruffwind`mt-6 gap-2`}>
-        <Accordian
-          activeSection={activeSection}
-          setActiveSections={(indexes) => handleActiveSections(indexes)}
-          sections={DOG_CAREPLAN_SECTIONS}
-        />
-      </View>
-      <View
-        style={ruffwind.style(
-          `gap-2`,
-          activeSection.length > 0
-            ? ` mt-${verticalScaleTW(16)}`
-            : `mt-${verticalScaleTW(161)}`
-        )}
+    <FormProvider {...form}>
+      <ScrollFeatureTemplate
+        backNavigation={() => navigation.navigate('Dog Personality')}
+        forwardNavigation={onSubmit}
+        forwardText="Complete"
       >
-        <HorizontalDivider color="border-amethystSmoke-600" />
-        <Button
-          // BLARG - handle if form dirty and valid, change from "Next" to "Complete"
-          text="Next"
-          onPress={() => {
-            console.log('🚨 URGENT PRIYA - HANDLE FORM SUBMIT 🚨');
-            navigation.navigate('Manage Pets');
-          }}
-        />
-        <Button
-          text="Cancel"
-          type="transparent"
-          size="standard-short"
-          onPress={() => navigation.navigate('Manage Pets')}
-        />
-      </View>
-    </ScrollFeatureTemplate>
+        <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
+          <ProgressBar step={4} total={4} />
+        </View>
+
+        <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
+          <SecondaryFormHeader
+            hasTag
+            header="Add a careplan"
+            species="dog"
+            subHeader="Turn toggle on to include instructions in this pet’s bookings"
+          />
+        </View>
+
+        <View
+          style={ruffwind`mt-${moderateScaleTW(24)} gap-${moderateScaleTW(8)}`}
+        >
+          <Accordian
+            activeSection={activeSection}
+            setActiveSections={(indexes) => handleActiveSections(indexes)}
+            sections={generateDogCareplans(form)}
+          />
+        </View>
+
+        <View
+          style={ruffwind.style(
+            `gap-${moderateScaleTW(8)}`,
+            isIOS ? `mt-${verticalScaleTW(161)}` : `mt-${verticalScaleTW(200)}`,
+            activeSection.length > 0 && `mt-${verticalScaleTW(16)}`,
+            activeSection.length > 0 && !isIOS && `mb-${verticalScaleTW(16)}`
+          )}
+        >
+          <HorizontalDivider color="border-amethystSmoke-600" />
+          {error && <FieldHelper text={error} align={'text-center'} />}
+          <Button text="Complete" onPress={onSubmit} loading={loading} />
+          <Button
+            text="Cancel"
+            type="transparent"
+            size="standard-short"
+            onPress={() => navigation.navigate('Manage Pets')}
+            loading={loading}
+          />
+        </View>
+      </ScrollFeatureTemplate>
+    </FormProvider>
   );
-};
+});

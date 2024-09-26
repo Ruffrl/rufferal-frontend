@@ -1,10 +1,7 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { HorizontalDividerProps } from '@rufferal/types';
 import { moderateScaleTW } from '@rufferal/utils';
 import { View } from 'react-native';
-
-interface HorizontalDividerProps {
-  color?: string;
-}
 
 export const HorizontalDivider = ({
   color = 'border-iron-200',

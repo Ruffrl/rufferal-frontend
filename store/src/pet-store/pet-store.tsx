@@ -1,47 +1,88 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Pet } from '@rufferal/types';
 import { generateKey } from '@rufferal/utils';
 import { makeAutoObservable } from 'mobx';
-
-type PetSpecies = 'cat' | 'dog';
-type PetStatus = 'active' | 'inactive';
-
-export interface Pet {
-  avatar: string;
-  breed: string;
-  id?: string;
-  name: string;
-  species: PetSpecies;
-  status?: PetStatus;
-}
+import { makePersistable } from 'mobx-persist-store';
 
 class PetStore {
   pets: Pet[] = [];
+  editingPetId?: string;
 
   constructor() {
     makeAutoObservable(this);
+
+    makePersistable(this, {
+      name: 'PetStore',
+      properties: ['pets'],
+      storage: AsyncStorage,
+    });
   }
 
-  addPet({ id, name, species, breed, avatar }: Pet) {
-    const newPet: Pet = {
-      avatar,
-      breed,
-      id: id || generateKey(),
-      name,
-      species,
-      status: 'active',
-    };
-    this.pets.push(newPet);
+  createPet({ id, ...createParams }: Pet) {
+    if (process.env['NODE_ENV'] === 'development') {
+      const newId = id || generateKey();
+      const newPet: Pet = {
+        id: newId,
+        state: 'active',
+        ...createParams,
+      };
+      this.setEditing({ id: newId });
+      this.pets.push(newPet);
+    }
   }
 
-  archivePet(petId: string) {
-    const currentPet = this.pets.find((pet) => pet.id === petId);
+  findPet(id?: string) {
+    if (id) {
+      return this.pets.find((pet) => pet.id === id);
+    } else {
+      return undefined;
+    }
+  }
+
+  setEditing({ id }: { id?: string }) {
+    this.editingPetId = id;
+  }
+
+  currentEditingPet() {
+    return this.findPet(this.editingPetId);
+  }
+
+  updatePet({ id, ...updateParams }: Pet) {
+    // Find the index of the pet with the specified id
+    const index = this.pets.findIndex((pet) => pet.id === id);
+    // If the pet is found,
+    if (index !== -1) {
+      // remove it from the array and return the pet for updates
+      let [currentPet] = this.pets.splice(index, 1);
+      // modify values
+      currentPet = { ...currentPet, ...updateParams };
+      // add back to array
+      this.pets.push(currentPet);
+    } else {
+      console.error('ERROR: Could not update Pet');
+    }
+  }
+
+  archivePet({ id }: { id: string }) {
+    const currentPet = this.findPet(id);
     if (currentPet) {
-      currentPet.status = 'inactive';
+      currentPet.state = 'inactive';
     }
   }
 
   activePets() {
-    const aPets = this.pets.filter((pet) => pet.status === 'active');
-    return aPets ? aPets : [];
+    const active = this.pets.filter((pet) => pet.state === 'active');
+    return active ? active : [];
+  }
+
+  async resetStorage() {
+    console.log('Resetting PetStore');
+    try {
+      await AsyncStorage.removeItem('PetStore');
+    } catch (e) {
+      console.log('ASYNC ERROR:', e);
+    }
+    console.log('Pet Store reset | pets:', this.pets);
   }
 }
 

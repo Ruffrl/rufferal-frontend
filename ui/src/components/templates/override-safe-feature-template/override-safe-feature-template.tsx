@@ -1,24 +1,20 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { FeatureTemplateProps } from '@rufferal/types';
 import { horizontalScaleTW, verticalScaleTW } from '@rufferal/utils';
 import { PropsWithChildren } from 'react';
 import { Platform, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { PageNavigation } from '../../organisms';
-
-export interface OverrideSafeFeatureTemplateProps {
-  backNavigation?: () => void;
-  bgColor?: string;
-  paddingX?: string;
-  skipNavigation?: () => void;
-}
+import { FeatureNavigation } from '../../organisms';
 
 export const OverrideSafeFeatureTemplate = ({
   backNavigation,
+  backText,
   bgColor = 'bg-whitePointer-50',
   children,
   paddingX = `px-${horizontalScaleTW(20)}`,
-  skipNavigation,
-}: PropsWithChildren<OverrideSafeFeatureTemplateProps>) => {
+  forwardNavigation,
+  forwardText,
+}: PropsWithChildren<FeatureTemplateProps>) => {
   const insets = useSafeAreaInsets();
 
   let paddingY = `pt-${verticalScaleTW(32)}`;
@@ -35,9 +31,11 @@ export const OverrideSafeFeatureTemplate = ({
     <View style={ruffwind.style(`flex-1`, bgColor)}>
       <View style={ruffwind.style(`flex-1`, paddingX, paddingY)}>
         {backNavigation && (
-          <PageNavigation
+          <FeatureNavigation
             backNavigation={backNavigation}
-            skipNavigation={skipNavigation}
+            backText={backText}
+            forwardNavigation={forwardNavigation}
+            forwardText={forwardText}
           />
         )}
         {children}

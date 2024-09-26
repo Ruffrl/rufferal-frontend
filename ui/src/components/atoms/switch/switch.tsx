@@ -1,24 +1,30 @@
 import * as RNSwitch from '@meksiabdou/react-native-switch';
 import { ruffwind } from '@rufferal/tailwind';
 import { moderateScale, moderateScaleTW } from '@rufferal/utils';
-import { useCallback } from 'react';
 const SwitchToggle = RNSwitch.default;
 
-interface SwitchProps {
-  switchState: boolean;
-  setSwitchState: () => void;
-}
-
-export const Switch = ({ switchState, setSwitchState }: SwitchProps) => {
-  const handleState = useCallback(() => {
-    setSwitchState();
-  }, [setSwitchState]);
+export const Switch = ({
+  handleChange,
+  onBlur,
+  onChange,
+  value,
+}: {
+  handleChange: (value: boolean) => void;
+  onBlur: () => void;
+  onChange: (value: boolean) => void;
+  value: boolean;
+}) => {
+  const handleValueChange = () => {
+    handleChange(!value);
+    onChange(!value);
+  };
 
   return (
     <SwitchToggle
-      value={switchState}
+      value={value}
       width={moderateScale(40)}
-      onValueChange={handleState}
+      onValueChange={handleValueChange}
+      onBlur={onBlur}
       activeText="On"
       inActiveText="Off"
       circleSize={moderateScale(12)}
@@ -30,7 +36,9 @@ export const Switch = ({ switchState, setSwitchState }: SwitchProps) => {
       switchPaddingRight={moderateScale(4)}
       textStyle={ruffwind.style(
         `font-bodySemibold text-b1 text-center m-0`,
-        switchState ? `text-saltBox-50 mr-${moderateScaleTW(4)}` : `text-iron-500 ml-${moderateScaleTW(4)}`
+        value
+          ? `text-saltBox-50 mr-${moderateScaleTW(4)}`
+          : `text-iron-500 ml-${moderateScaleTW(4)}`
       )}
       switchStyle={ruffwind.style(`
         w-${moderateScaleTW(40)}
