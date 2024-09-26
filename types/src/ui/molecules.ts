@@ -54,7 +54,7 @@ export interface RadioGroupProps {
   label?: string;
   onBlur?: () => void;
   onChange: (item: FieldOption) => void;
-  value?: FieldOption;
+  value?: FieldOption | null;
 }
 
 export interface SelectProps extends FieldSelectProps<FieldOption> {

@@ -42,7 +42,7 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
   const form = useForm<CatCarePlan>({
     resolver: yupResolver(catCareplanSchema),
     mode: 'onBlur',
-    defaultValues: defaults
+    defaultValues: defaults,
   });
   const { handleSubmit, watch } = form;
 

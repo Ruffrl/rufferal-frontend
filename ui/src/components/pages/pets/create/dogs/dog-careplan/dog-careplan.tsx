@@ -38,12 +38,11 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
     defaults = observablePetStore.currentEditingPet()?.careplan;
   }
 
-
   /* REACT HOOK FORM */
   const form = useForm<DogCarePlan>({
     resolver: yupResolver(dogCareplanSchema),
     mode: 'onBlur',
-    defaultValues: defaults
+    defaultValues: defaults,
   });
   const { handleSubmit, watch } = form;
 

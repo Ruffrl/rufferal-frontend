@@ -114,7 +114,6 @@ export const generateCatCareplans = (
     control,
     formState: { errors },
     setValue,
-    resetField,
   } = form;
 
   return [
@@ -148,9 +147,7 @@ export const generateCatCareplans = (
             control={control}
             render={({ field: { onBlur, onChange, value } }) => (
               <InputArea
-                errorMessage={
-                  errors.harness?.specialInstructions?.message
-                }
+                errorMessage={errors.harness?.specialInstructions?.message}
                 label="Special instructions"
                 onBlur={onBlur}
                 onChange={(text) => {
@@ -172,8 +169,9 @@ export const generateCatCareplans = (
         fieldName: 'harness.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('harness.comfortableHarness');
-            resetField('harness.specialInstructions');
+            console.log('HARNESS conditions');
+            setValue('harness.comfortableHarness', null);
+            setValue('harness.specialInstructions', null);
           }
         },
       },
@@ -258,9 +256,9 @@ export const generateCatCareplans = (
         fieldName: 'feeding.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('feeding.quantity');
-            resetField('feeding.frequency');
-            resetField('feeding.specialInstructions');
+            setValue('feeding.quantity', null);
+            setValue('feeding.frequency', null);
+            setValue('feeding.specialInstructions', null);
           }
         },
       },
@@ -295,7 +293,7 @@ export const generateCatCareplans = (
         fieldName: 'overnight.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('overnight.specialInstructions');
+            setValue('overnight.specialInstructions', null);
           }
         },
       },
@@ -330,7 +328,7 @@ export const generateCatCareplans = (
         fieldName: 'medical.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('medical.specialInstructions');
+            setValue('medical.specialInstructions', null);
           }
         },
       },
@@ -365,7 +363,7 @@ export const generateCatCareplans = (
         fieldName: 'specialNeeds.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('specialNeeds.specialInstructions');
+            setValue('specialNeeds.specialInstructions', null);
           }
         },
       },
@@ -402,7 +400,7 @@ export const generateCatCareplans = (
         fieldName: 'additionalNotes.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('additionalNotes.specialInstructions');
+            setValue('additionalNotes.specialInstructions', null);
           }
         },
       },
@@ -432,7 +430,6 @@ export const generateDogCareplans = (
     control,
     formState: { errors },
     setValue,
-    resetField,
   } = form;
 
   return [
@@ -490,8 +487,8 @@ export const generateDogCareplans = (
         fieldName: 'houseTraining.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('houseTraining.hasAccidents');
-            resetField('houseTraining.specialInstructions');
+            setValue('houseTraining.hasAccidents', null);
+            setValue('houseTraining.specialInstructions', null);
           }
         },
       },
@@ -576,9 +573,9 @@ export const generateDogCareplans = (
         fieldName: 'feeding.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('feeding.quantity');
-            resetField('feeding.frequency');
-            resetField('feeding.specialInstructions');
+            setValue('feeding.quantity', null);
+            setValue('feeding.frequency', null);
+            setValue('feeding.specialInstructions', null);
           }
         },
       },
@@ -613,7 +610,7 @@ export const generateDogCareplans = (
         fieldName: 'overnight.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('overnight.specialInstructions');
+            setValue('overnight.specialInstructions', null);
           }
         },
       },
@@ -648,7 +645,7 @@ export const generateDogCareplans = (
         fieldName: 'medical.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('medical.specialInstructions');
+            setValue('medical.specialInstructions', null);
           }
         },
       },
@@ -683,7 +680,7 @@ export const generateDogCareplans = (
         fieldName: 'specialNeeds.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('specialNeeds.specialInstructions');
+            setValue('specialNeeds.specialInstructions', null);
           }
         },
       },
@@ -720,7 +717,7 @@ export const generateDogCareplans = (
         fieldName: 'additionalNotes.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('additionalNotes.specialInstructions');
+            setValue('additionalNotes.specialInstructions', null);
           }
         },
       },
