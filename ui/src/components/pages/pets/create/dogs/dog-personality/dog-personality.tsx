@@ -209,7 +209,7 @@ export const DogPersonality = observer(
                 control={control}
                 render={({ field: { onBlur, onChange, value } }) => (
                   <CheckToggle
-                    label="Declawed"
+                    label="House trained"
                     onBlur={onBlur}
                     onChange={onChange}
                     switchOn={!!value}
