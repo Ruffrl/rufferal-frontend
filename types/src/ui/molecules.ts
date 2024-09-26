@@ -16,6 +16,14 @@ export interface InputProps extends FieldInputProps {
   label: string;
 }
 
+export interface InputPhotoProps {
+  cameraNavPath: string;
+  errorMessage?: string;
+  label?: string;
+  uri?: string;
+  onChange: (uri: string) => void;
+}
+
 export interface InputSliderProps extends SingleSliderProps {
   disabled?: boolean;
   errorMessage?: string;
@@ -37,6 +45,8 @@ export type OtherOption = {
 export interface PhotoModalProps {
   handleModalDismiss: () => void;
   modalPresent: boolean;
+  navPath: string;
+  onChange: (uri: string) => void;
 }
 
 export interface RadioGroupProps {

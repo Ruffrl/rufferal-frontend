@@ -9,4 +9,3 @@ export { DogPersonalityScreen } from './pets/dogs/DogPersonalityScreen';
 export { ManagePetsScreen } from './pets/ManagePetsScreen';
 export { PetSplashScreen } from './profile/create/PetSplashScreen';
 export { SearchScreen } from './search/SearchScreen';
-export { CameraScreen } from './photo/camera/CameraScreen';

@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react-native';
 
-import { Photo } from './photo';
+import { InputPhoto } from './input-photo';
 
-describe('Photo', () => {
+describe('InputPhoto', () => {
   it('should render successfully', () => {
-    const { root } = render(<Photo />);
+    const { root } = render(<InputPhoto />);
     expect(root).toBeTruthy();
   });
 });

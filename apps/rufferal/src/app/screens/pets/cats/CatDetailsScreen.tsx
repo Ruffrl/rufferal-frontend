@@ -1,4 +1,5 @@
-import { CatDetails, PageNavigationProps } from '@rufferal/ui';
+import { PageNavigationProps } from '@rufferal/types';
+import { CatDetails } from '@rufferal/ui';
 
 export const CatDetailsScreen = ({ navigation }: PageNavigationProps) => {
   return <CatDetails navigation={navigation} />;

@@ -1,5 +1,6 @@
-import { CatPersonality, PageNavigationProps } from '@rufferal/ui';
+import { PageNavigationProps } from '@rufferal/types';
+import { CatPersonality } from '@rufferal/ui';
 
-export const CatPersonalityScreen  = ({ navigation }: PageNavigationProps) => {
+export const CatPersonalityScreen = ({ navigation }: PageNavigationProps) => {
   return <CatPersonality navigation={navigation} />;
 };

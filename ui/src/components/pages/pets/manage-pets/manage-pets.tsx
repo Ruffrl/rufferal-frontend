@@ -6,8 +6,10 @@ import { ruffwind } from '@rufferal/tailwind';
 import { PageNavigationProps, Pet } from '@rufferal/types';
 import {
   capitalize,
+  createImageSize,
   GLOBAL_ICON_SIZE,
   GLOBAL_ICON_SIZE_LARGE,
+  moderateScaleTW,
   titleCase,
 } from '@rufferal/utils';
 import {
@@ -20,80 +22,6 @@ import {
 import { FeatureTemplate } from '../../../templates';
 
 export const ManagePets = ({ navigation }: PageNavigationProps) => {
-  // observablePetStore.createPet({
-  //   avatar: require('@rufferal/assets/src/images/cat-profile-stock-photo.jpeg'),
-  //   details: {
-  //     species: 'cat',
-  //     name: 'Gavin',
-  //     color: {
-  //       id: 'hwfkdiwxkph',
-  //       label: 'Black',
-  //       value: 'black',
-  //     },
-  //     breed: {
-  //       id: 'xoxpvpaezt8',
-  //       label: 'Bombay',
-  //       value: 'bombay',
-  //     },
-  //     sex: {
-  //       id: 'whseq6w1c1e',
-  //       label: 'Male',
-  //       value: 'male',
-  //     },
-  //     age: {
-  //       id: 'l0joaxmw6ym',
-  //       label: 'Adult (2–8 Years)',
-  //       value: 'adult (2–8 years)',
-  //     },
-  //     size: {
-  //       id: 'ynxe968m0d',
-  //       label: 'Medium (7–11 Lbs)',
-  //       value: 'medium (7–11 lbs)',
-  //     },
-  //     status: {
-  //       id: '6az7qovb505',
-  //       label: 'Yes',
-  //       value: 'yes',
-  //     },
-  //   },
-  // });
-  // observablePetStore.createPet({
-  //   avatar: require('@rufferal/assets/src/images/dog-profile-stock-photo.jpeg'),
-  //   details: {
-  //     species: 'dog',
-  //     name: 'Maya',
-  //     color: {
-  //       id: '74kgz8267nt',
-  //       label: 'Black & Brown',
-  //       value: 'black & brown',
-  //     },
-  //     breed: {
-  //       id: 'v52lvv3bwsh',
-  //       label: 'German Shepherd Dog',
-  //       value: 'german shepherd dog',
-  //     },
-  //     sex: {
-  //       id: 'axhqeqqr8lt',
-  //       label: 'Female',
-  //       value: 'female',
-  //     },
-  //     age: {
-  //       id: '5zs17oz2198',
-  //       label: 'Senior (8+ Years)',
-  //       value: 'senior (8+ years)',
-  //     },
-  //     size: {
-  //       id: 'wyin6hsd8po',
-  //       label: 'Large (41–100 Lbs)',
-  //       value: 'large (41–100 lbs)',
-  //     },
-  //     status: {
-  //       id: '6az7qovb505',
-  //       label: 'Yes',
-  //       value: 'yes',
-  //     },
-  //   },
-  // });
   const pets = observablePetStore.activePets();
 
   return (
@@ -164,24 +92,49 @@ const Pets = ({ pets }: { pets: Pet[] }) => (
 const PetItem = ({ pet }: { pet: Pet }) => {
   return (
     <Item>
-      <View style={ruffwind`flex-row h-full gap-2`}>
+      <View style={ruffwind`flex-row h-full gap-${moderateScaleTW(8)}`}>
         <View style={ruffwind`justify-center`}>
-          <Image
-            style={ruffwind`items-center justify-center h-[34px] w-[34px] rounded-full`}
-            source={pet.avatar}
-          />
+          {pet.avatar?.uri ? (
+            <Image
+              style={ruffwind.style(
+                `items-center justify-center rounded-full`,
+                createImageSize(34)
+              )}
+              source={pet.avatar.uri}
+            />
+          ) : (
+            <View
+              style={ruffwind.style(
+                `items-center
+                justify-center
+                rounded-full
+                border-electricViolet-700
+                border-${moderateScaleTW(2)}
+                h-${moderateScaleTW(34)}
+                w-${moderateScaleTW(34)}
+                `
+              )}
+            >
+              <Image
+                style={ruffwind.style(GLOBAL_ICON_SIZE_LARGE)}
+                source={require('@rufferal/assets/src/icons/paw-print.png')}
+                // BLARG -import from tailwind config
+                tintColor={'#9525CB'}
+              />
+            </View>
+          )}
         </View>
         <View style={ruffwind`flex-1`}>
           <Text style={ruffwind`font-bodyBold text-b4 text-balticSea-950`}>
-            {pet.details.name}
+            {pet.details?.name}
           </Text>
-          <View style={ruffwind`flex-row gap-1`}>
+          <View style={ruffwind`flex-row gap-${moderateScaleTW(4)}`}>
             <Text style={ruffwind`font-body text-b2 text-saltBox-700`}>
-              {capitalize(pet.details.species)}
+              {capitalize(pet.details?.species)}
             </Text>
             <VerticalDivider />
             <Text style={ruffwind`font-body text-b2 text-saltBox-700`}>
-              {titleCase(pet.details.breed.label)}
+              {titleCase(pet.details?.breed.label)}
             </Text>
           </View>
         </View>

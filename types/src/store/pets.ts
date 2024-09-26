@@ -5,7 +5,7 @@ export type PersonalityRange = number | undefined;
 export interface Pet {
   id?: string;
   details?: PetDetails;
-  avatar?: string;
+  avatar?: PetAvatar;
   personality?: PetPersonality;
   careplan?: PetCareplan;
   state?: PetState;
@@ -23,6 +23,9 @@ export type PetDetails = {
   age: FieldOption;
   size: FieldOption;
   status: FieldOption;
+};
+export type PetAvatar = {
+  uri?: string;
 };
 export type PetPersonality = {
   goodKids?: boolean;

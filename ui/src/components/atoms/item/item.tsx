@@ -1,10 +1,11 @@
 import { ruffwind } from '@rufferal/tailwind';
 import { ItemProps } from '@rufferal/types';
+import { moderateScaleTW } from '@rufferal/utils';
 import { PropsWithChildren } from 'react';
 import { Platform, View } from 'react-native';
 
 export const Item = ({
-  height = 'h-16',
+  height = `h-${moderateScaleTW(64)}`,
   children,
 }: PropsWithChildren<ItemProps>) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
@@ -20,7 +21,7 @@ export const Item = ({
           shadowRadius: 3,
           elevation: 3,
         },
-        ruffwind.style(`bg-white w-full p-3`, height),
+        ruffwind.style(`bg-white w-full p-${moderateScaleTW(12)}`, height),
       ]}
     >
       {children}

@@ -3,6 +3,7 @@ import {
   CatPersonality,
   DogCarePlan,
   DogPersonality,
+  PetAvatar,
   PetCareplan,
   PetDetails,
   PetPersonality,
@@ -30,9 +31,9 @@ export const petDetailsSchema: (
     })
     .required();
 
-export const catAvatarSchema: yup.ObjectSchema<{ avatar?: string }> =
+export const petAvatarSchema: yup.ObjectSchema<PetAvatar> =
   yup.object({
-    avatar: yup.string(),
+    uri: yup.string(),
   });
 
 const petPersonalitySchema: yup.ObjectSchema<PetPersonality> = yup.object({

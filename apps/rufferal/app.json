@@ -38,9 +38,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow Rufferal to access your camera",
-          "microphonePermission": "Allow Rufferal to access your microphone",
-          "recordAudioAndroid": true
+          "cameraPermission": "Allow Rufferal to access your camera"
         }
       ],
       [
