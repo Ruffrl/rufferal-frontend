@@ -154,7 +154,10 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
             text="Cancel"
             type="transparent"
             size="standard-short"
-            onPress={() => navigation.navigate('Manage Pets')}
+            onPress={() => {
+              observablePetStore.setEditing({ id: undefined });
+              navigation.navigate('Manage Pets');
+            }}
             loading={loading}
           />
         </View>
