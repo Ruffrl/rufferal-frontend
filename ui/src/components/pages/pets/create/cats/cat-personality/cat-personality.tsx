@@ -1,16 +1,16 @@
-import { ruffwind } from '@rufferal/tailwind';
-import { moderateScaleTW, verticalScaleTW } from '@rufferal/utils';
-import { Platform, View } from 'react-native';
-
 import { yupResolver } from '@hookform/resolvers/yup';
+import { observablePetStore } from '@rufferal/store';
+import { ruffwind } from '@rufferal/tailwind';
 import {
   CatPersonality as CatPersonalityForm,
   PageNavigationProps,
 } from '@rufferal/types';
+import { moderateScaleTW, verticalScaleTW } from '@rufferal/utils';
+import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { Platform, View } from 'react-native';
 
-import { observablePetStore } from '@rufferal/store';
 import {
   Button,
   FieldHelper,
@@ -23,250 +23,254 @@ import { BehaviorLabel } from '../../shared/behavior-label/behavior-label';
 import { catPersonalitySchema } from '../../shared/pet-profile-forms';
 import { SecondaryFormHeader } from '../../shared/secondary-form-header/secondary-form-header';
 
-export const CatPersonality = ({ navigation }: PageNavigationProps) => {
-  /* STATE */
-  const isIOS = Platform.OS === 'ios';
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string>();
+export const CatPersonality = observer(
+  ({ navigation }: PageNavigationProps) => {
+    /* STATE */
+    const isIOS = Platform.OS === 'ios';
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string>();
 
-  /* REACT HOOK FORM */
-  const form = useForm<CatPersonalityForm>({
-    resolver: yupResolver(catPersonalitySchema),
-    mode: 'onBlur',
-  });
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = form;
+    /* REACT HOOK FORM */
+    const form = useForm<CatPersonalityForm>({
+      resolver: yupResolver(catPersonalitySchema),
+      mode: 'onBlur',
+    });
+    const {
+      control,
+      handleSubmit,
+      formState: { errors },
+    } = form;
 
-  const onSubmit = handleSubmit(async (data: CatPersonalityForm) => {
-    setLoading(true);
-    if (process.env['NODE_ENV'] === 'development') {
-      console.log('data', data);
-      const petId = observablePetStore.editingPetId;
-      observablePetStore.updatePet({ id: petId, personality: data });
-      setLoading(false);
-      navigation.navigate('Cat Careplan');
-    } else {
-      // Handle form submission
-      setError('');
-
-      try {
-        console.log('BLARG:TODO - handle backend submission', data);
-        navigation.navigate('Manage Pets');
-      } catch (err) {
-        setError(String(err));
-      } finally {
+    const onSubmit = handleSubmit(async (data: CatPersonalityForm) => {
+      setLoading(true);
+      if (process.env['NODE_ENV'] === 'development') {
+        console.log('data', data);
+        const petId = observablePetStore.editingPetId;
+        observablePetStore.updatePet({ id: petId, personality: data });
         setLoading(false);
+        navigation.navigate('Cat Careplan');
+      } else {
+        // Handle form submission
+        setError('');
+
+        try {
+          console.log('BLARG:TODO - handle backend submission', data);
+          navigation.navigate('Manage Pets');
+        } catch (err) {
+          setError(String(err));
+        } finally {
+          setLoading(false);
+        }
       }
-    }
-  });
+    });
 
-  return (
-    <ScrollFeatureTemplate
-      backNavigation={() => navigation.navigate('Cat Avatar')}
-      forwardNavigation={() => navigation.navigate('Cat Careplan')}
-      forwardText="Skip"
-    >
-      <FormProvider {...form}>
-        <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
-          <ProgressBar step={3} total={4} />
-        </View>
+    return (
+      <ScrollFeatureTemplate
+        backNavigation={() => navigation.navigate('Cat Avatar')}
+        forwardNavigation={() => navigation.navigate('Cat Careplan')}
+        forwardText="Skip"
+      >
+        <FormProvider {...form}>
+          <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
+            <ProgressBar step={3} total={4} />
+          </View>
 
-        <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
-          <SecondaryFormHeader
-            hasTag
-            header="Behavior and personality"
-            species="cat"
-            subHeader="Help pet caretakers understand your cat’s needs and unique traits"
-          />
-        </View>
-
-        <View
-          style={ruffwind`mt-${moderateScaleTW(20)} gap-${moderateScaleTW(16)}`}
-        >
-          <View style={ruffwind`gap-${moderateScaleTW(8)}`}>
-            <BehaviorLabel label="Good with" multiple />
-            <Controller
-              name="goodKids"
-              control={control}
-              render={({ field: { onBlur, onChange, value } }) => (
-                <CheckToggle
-                  label="Kids"
-                  onBlur={onBlur}
-                  onChange={onChange}
-                  switchOn={!!value}
-                  errorMessage={errors.goodKids?.message}
-                />
-              )}
-            />
-            <Controller
-              name="goodOtherSpecies"
-              control={control}
-              render={({ field: { onBlur, onChange, value } }) => (
-                <CheckToggle
-                  label="Dogs"
-                  onBlur={onBlur}
-                  onChange={onChange}
-                  switchOn={!!value}
-                  errorMessage={errors.goodOtherSpecies?.message}
-                />
-              )}
-            />
-            <Controller
-              name="goodSameSpecies"
-              control={control}
-              render={({ field: { onBlur, onChange, value } }) => (
-                <CheckToggle
-                  label="Other cats"
-                  onBlur={onBlur}
-                  onChange={onChange}
-                  switchOn={!!value}
-                  errorMessage={errors.goodSameSpecies?.message}
-                />
-              )}
+          <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
+            <SecondaryFormHeader
+              hasTag
+              header="Behavior and personality"
+              species="cat"
+              subHeader="Help pet caretakers understand your cat’s needs and unique traits"
             />
           </View>
 
-          <HorizontalDivider color="border-saltBox-200" />
+          <View
+            style={ruffwind`mt-${moderateScaleTW(20)} gap-${moderateScaleTW(
+              16
+            )}`}
+          >
+            <View style={ruffwind`gap-${moderateScaleTW(8)}`}>
+              <BehaviorLabel label="Good with" multiple />
+              <Controller
+                name="goodKids"
+                control={control}
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <CheckToggle
+                    label="Kids"
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    switchOn={!!value}
+                    errorMessage={errors.goodKids?.message}
+                  />
+                )}
+              />
+              <Controller
+                name="goodOtherSpecies"
+                control={control}
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <CheckToggle
+                    label="Dogs"
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    switchOn={!!value}
+                    errorMessage={errors.goodOtherSpecies?.message}
+                  />
+                )}
+              />
+              <Controller
+                name="goodSameSpecies"
+                control={control}
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <CheckToggle
+                    label="Other cats"
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    switchOn={!!value}
+                    errorMessage={errors.goodSameSpecies?.message}
+                  />
+                )}
+              />
+            </View>
 
-          <View>
-            <BehaviorLabel label="Personality" />
-            <View
-              style={ruffwind`
+            <HorizontalDivider color="border-saltBox-200" />
+
+            <View>
+              <BehaviorLabel label="Personality" />
+              <View
+                style={ruffwind`
                 mt-${moderateScaleTW(4)}
                 gap-${moderateScaleTW(12)}
               `}
-            >
+              >
+                <Controller
+                  name="temperment"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <InputSlider
+                      sliderLabels={['shy', 'social']}
+                      onChange={onChange}
+                      value={value}
+                      errorMessage={errors.temperment?.message}
+                    />
+                  )}
+                />
+                <Controller
+                  name="energy"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <InputSlider
+                      sliderLabels={['relaxed', 'active']}
+                      onChange={onChange}
+                      value={value}
+                      errorMessage={errors.energy?.message}
+                    />
+                  )}
+                />
+                <Controller
+                  name="autonomy"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <InputSlider
+                      sliderLabels={['dependent', 'independent']}
+                      onChange={onChange}
+                      value={value}
+                      errorMessage={errors.autonomy?.message}
+                    />
+                  )}
+                />
+                <Controller
+                  name="motivation"
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <InputSlider
+                      sliderLabels={['food motivated', 'praise motivated']}
+                      onChange={onChange}
+                      value={value}
+                      errorMessage={errors.motivation?.message}
+                    />
+                  )}
+                />
+              </View>
+            </View>
+
+            <HorizontalDivider color="border-saltBox-200" />
+
+            <View style={ruffwind`gap-${moderateScaleTW(8)}`}>
+              <BehaviorLabel label="Care & behavior" multiple />
               <Controller
-                name="temperment"
+                name="declawed"
                 control={control}
-                render={({ field: { onChange, value } }) => (
-                  <InputSlider
-                    sliderLabels={['shy', 'social']}
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <CheckToggle
+                    label="Declawed"
+                    onBlur={onBlur}
                     onChange={onChange}
-                    value={value}
-                    errorMessage={errors.temperment?.message}
+                    switchOn={!!value}
+                    errorMessage={errors.declawed?.message}
                   />
                 )}
               />
               <Controller
-                name="energy"
+                name="requiresMedication"
                 control={control}
-                render={({ field: { onChange, value } }) => (
-                  <InputSlider
-                    sliderLabels={['relaxed', 'active']}
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <CheckToggle
+                    label="Requires medication"
+                    onBlur={onBlur}
                     onChange={onChange}
-                    value={value}
-                    errorMessage={errors.energy?.message}
+                    switchOn={!!value}
+                    errorMessage={errors.requiresMedication?.message}
                   />
                 )}
               />
               <Controller
-                name="autonomy"
+                name="seperationAnxiety"
                 control={control}
-                render={({ field: { onChange, value } }) => (
-                  <InputSlider
-                    sliderLabels={['dependent', 'independent']}
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <CheckToggle
+                    label="Seperation anxiety"
+                    onBlur={onBlur}
                     onChange={onChange}
-                    value={value}
-                    errorMessage={errors.autonomy?.message}
+                    switchOn={!!value}
+                    errorMessage={errors.seperationAnxiety?.message}
                   />
                 )}
               />
               <Controller
-                name="motivation"
+                name="specialNeeds"
                 control={control}
-                render={({ field: { onChange, value } }) => (
-                  <InputSlider
-                    sliderLabels={['food motivated', 'praise motivated']}
+                render={({ field: { onBlur, onChange, value } }) => (
+                  <CheckToggle
+                    label="Special needs"
+                    onBlur={onBlur}
                     onChange={onChange}
-                    value={value}
-                    errorMessage={errors.motivation?.message}
+                    switchOn={!!value}
+                    errorMessage={errors.specialNeeds?.message}
                   />
                 )}
               />
             </View>
           </View>
 
-          <HorizontalDivider color="border-saltBox-200" />
-
-          <View style={ruffwind`gap-${moderateScaleTW(8)}`}>
-            <BehaviorLabel label="Care & behavior" multiple />
-            <Controller
-              name="declawed"
-              control={control}
-              render={({ field: { onBlur, onChange, value } }) => (
-                <CheckToggle
-                  label="Declawed"
-                  onBlur={onBlur}
-                  onChange={onChange}
-                  switchOn={!!value}
-                  errorMessage={errors.declawed?.message}
-                />
-              )}
-            />
-            <Controller
-              name="requiresMedication"
-              control={control}
-              render={({ field: { onBlur, onChange, value } }) => (
-                <CheckToggle
-                  label="Requires medication"
-                  onBlur={onBlur}
-                  onChange={onChange}
-                  switchOn={!!value}
-                  errorMessage={errors.requiresMedication?.message}
-                />
-              )}
-            />
-            <Controller
-              name="seperationAnxiety"
-              control={control}
-              render={({ field: { onBlur, onChange, value } }) => (
-                <CheckToggle
-                  label="Seperation anxiety"
-                  onBlur={onBlur}
-                  onChange={onChange}
-                  switchOn={!!value}
-                  errorMessage={errors.seperationAnxiety?.message}
-                />
-              )}
-            />
-            <Controller
-              name="specialNeeds"
-              control={control}
-              render={({ field: { onBlur, onChange, value } }) => (
-                <CheckToggle
-                  label="Special needs"
-                  onBlur={onBlur}
-                  onChange={onChange}
-                  switchOn={!!value}
-                  errorMessage={errors.specialNeeds?.message}
-                />
-              )}
+          <View
+            style={ruffwind.style(
+              `gap-${moderateScaleTW(8)} mt-${verticalScaleTW(37)}`,
+              !isIOS && `mb-${verticalScaleTW(16)}`
+            )}
+          >
+            <HorizontalDivider color="border-amethystSmoke-600" />
+            {error && <FieldHelper text={error} align={'text-center'} />}
+            <Button text="Next" onPress={onSubmit} loading={loading} />
+            <Button
+              text="Cancel"
+              type="transparent"
+              size="standard-short"
+              onPress={() => navigation.navigate('Manage Pets')}
+              loading={loading}
             />
           </View>
-        </View>
-
-        <View
-          style={ruffwind.style(
-            `gap-${moderateScaleTW(8)} mt-${verticalScaleTW(37)}`,
-            !isIOS && `mb-${verticalScaleTW(16)}`
-          )}
-        >
-          <HorizontalDivider color="border-amethystSmoke-600" />
-          {error && <FieldHelper text={error} align={'text-center'} />}
-          <Button text="Next" onPress={onSubmit} loading={loading} />
-          <Button
-            text="Cancel"
-            type="transparent"
-            size="standard-short"
-            onPress={() => navigation.navigate('Manage Pets')}
-            loading={loading}
-          />
-        </View>
-      </FormProvider>
-    </ScrollFeatureTemplate>
-  );
-};
+        </FormProvider>
+      </ScrollFeatureTemplate>
+    );
+  }
+);

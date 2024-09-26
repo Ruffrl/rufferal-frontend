@@ -1,6 +1,5 @@
 import { Image } from 'expo-image';
 import { Text, View } from 'react-native';
-
 import { observablePetStore } from '@rufferal/store';
 import { ruffwind } from '@rufferal/tailwind';
 import { PageNavigationProps, Pet } from '@rufferal/types';
@@ -12,6 +11,8 @@ import {
   moderateScaleTW,
   titleCase,
 } from '@rufferal/utils';
+import { observer } from 'mobx-react-lite';
+
 import {
   Button,
   H3,
@@ -21,7 +22,7 @@ import {
 } from '../../../atoms';
 import { FeatureTemplate } from '../../../templates';
 
-export const ManagePets = ({ navigation }: PageNavigationProps) => {
+export const ManagePets = observer(({ navigation }: PageNavigationProps) => {
   const pets = observablePetStore.activePets();
 
   return (
@@ -46,7 +47,7 @@ export const ManagePets = ({ navigation }: PageNavigationProps) => {
       </View>
     </FeatureTemplate>
   );
-};
+});
 
 /* ********** */
 /* COMPONENTS */

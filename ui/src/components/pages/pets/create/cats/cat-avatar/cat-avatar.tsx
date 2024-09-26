@@ -1,20 +1,21 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { ruffwind } from '@rufferal/tailwind';
-import { PageNavigationProps, PetAvatar } from '@rufferal/types';
-import { Platform, View } from 'react-native';
-
 import { yupResolver } from '@hookform/resolvers/yup';
 import { observablePetStore } from '@rufferal/store';
+import { ruffwind } from '@rufferal/tailwind';
+import { PageNavigationProps, PetAvatar } from '@rufferal/types';
 import { moderateScaleTW } from '@rufferal/utils';
+import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { Platform, View } from 'react-native';
+
 import { Button, FieldHelper, ProgressBar } from '../../../../../atoms';
 import { InputPhoto } from '../../../../../molecules';
 import { OverrideSafeFeatureTemplate } from '../../../../../templates';
 import { petAvatarSchema } from '../../shared/pet-profile-forms';
 import { SecondaryFormHeader } from '../../shared/secondary-form-header/secondary-form-header';
 
-export const CatAvatar = ({ navigation }: PageNavigationProps) => {
+export const CatAvatar = observer(({ navigation }: PageNavigationProps) => {
   /* STATE */
   const isIOS = Platform.OS === 'ios';
   const [loading, setLoading] = useState(false);
@@ -110,4 +111,4 @@ export const CatAvatar = ({ navigation }: PageNavigationProps) => {
       </FormProvider>
     </OverrideSafeFeatureTemplate>
   );
-};
+});

@@ -1,3 +1,5 @@
+import { yupResolver } from '@hookform/resolvers/yup';
+import { observablePetStore } from '@rufferal/store';
 import { ruffwind } from '@rufferal/tailwind';
 import { DogCarePlan, PageNavigationProps } from '@rufferal/types';
 import {
@@ -5,12 +7,11 @@ import {
   moderateScaleTW,
   verticalScaleTW,
 } from '@rufferal/utils';
+import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import { Platform, View } from 'react-native';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import { observablePetStore } from '@rufferal/store';
-import { FormProvider, useForm } from 'react-hook-form';
 import {
   Accordian,
   Button,
@@ -23,7 +24,7 @@ import { generateDogCareplans } from '../../shared/pet-careplan-options';
 import { dogCareplanSchema } from '../../shared/pet-profile-forms';
 import { SecondaryFormHeader } from '../../shared/secondary-form-header/secondary-form-header';
 
-export const DogCareplan = ({ navigation }: PageNavigationProps) => {
+export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
   /* STATE */
   const isIOS = Platform.OS === 'ios';
   const [loading, setLoading] = useState(false);
@@ -90,6 +91,7 @@ export const DogCareplan = ({ navigation }: PageNavigationProps) => {
         const petId = observablePetStore.editingPetId;
         observablePetStore.updatePet({ id: petId, careplan: cleanedData });
       }
+      observablePetStore.setEditing({ id: undefined });
       setLoading(false);
       navigation.navigate('Manage Pets');
     } else {
@@ -159,4 +161,4 @@ export const DogCareplan = ({ navigation }: PageNavigationProps) => {
       </ScrollFeatureTemplate>
     </FormProvider>
   );
-};
+});

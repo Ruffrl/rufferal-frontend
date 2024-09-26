@@ -2,11 +2,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { observablePetStore } from '@rufferal/store';
 import { ruffwind } from '@rufferal/tailwind';
 import { PageNavigationProps, PetDetails } from '@rufferal/types';
+import { moderateScaleTW } from '@rufferal/utils';
+import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { Platform, View } from 'react-native';
 
-import { moderateScaleTW } from '@rufferal/utils';
 import {
   Button,
   FieldHelper,
@@ -26,7 +27,7 @@ import {
 import { petDetailsSchema } from '../../shared/pet-profile-forms';
 import { SecondaryFormHeader } from '../../shared/secondary-form-header/secondary-form-header';
 
-export const CatDetails = ({ navigation }: PageNavigationProps) => {
+export const CatDetails = observer(({ navigation }: PageNavigationProps) => {
   /* STATE */
   const isIOS = Platform.OS === 'ios';
   const [loading, setLoading] = useState(false);
@@ -229,4 +230,4 @@ export const CatDetails = ({ navigation }: PageNavigationProps) => {
       </FormProvider>
     </ScrollFeatureTemplate>
   );
-};
+});
