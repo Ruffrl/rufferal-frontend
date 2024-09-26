@@ -24,6 +24,7 @@ export type PetDetails = {
   size: FieldOption;
   status: FieldOption;
 };
+export type PetDetailField = keyof PetDetails;
 export type PetAvatar = {
   uri?: string;
 };

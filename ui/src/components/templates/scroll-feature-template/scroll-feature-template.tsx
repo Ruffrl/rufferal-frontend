@@ -1,9 +1,9 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { FeatureTemplateProps } from '@rufferal/types';
 import { horizontalScaleTW, verticalScaleTW } from '@rufferal/utils';
 import { PropsWithChildren } from 'react';
 import { Platform, SafeAreaView, ScrollView, View } from 'react-native';
 import { FeatureNavigation } from '../../organisms';
-import { FeatureTemplateProps } from '@rufferal/types';
 
 export const ScrollFeatureTemplate = ({
   backNavigation,
@@ -13,6 +13,7 @@ export const ScrollFeatureTemplate = ({
   forwardNavigation,
   forwardText,
   paddingX = `px-${horizontalScaleTW(20)}`,
+  scrollRef,
 }: PropsWithChildren<FeatureTemplateProps>) => {
   let paddingY = `pt-${verticalScaleTW(32)}`;
   switch (Platform.OS) {
@@ -35,7 +36,9 @@ export const ScrollFeatureTemplate = ({
             forwardText={forwardText}
           />
         )}
-        <ScrollView style={ruffwind`flex-1`}>{children}</ScrollView>
+        <ScrollView ref={scrollRef} style={ruffwind`flex-1`}>
+          {children}
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
