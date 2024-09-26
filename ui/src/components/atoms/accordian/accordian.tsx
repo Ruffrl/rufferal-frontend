@@ -19,6 +19,7 @@ export const Accordian = ({
   activeSection,
   sections,
   setActiveSections,
+  scrollTracker,
 }: AccordianProps) => {
   // renders
   const renderSectionHeader = (section: AccordionSection) => {
@@ -47,22 +48,27 @@ export const Accordian = ({
           {section.title}
         </Text>
         {section.switch && (
-          <Controller
-            name={section.switch.fieldName}
-            control={section.switch.control}
-            render={({ field: { onBlur, onChange, value } }) =>
-              section.switch ? (
-                <Switch
-                  value={value}
-                  onBlur={onBlur}
-                  onChange={onChange}
-                  handleChange={section.switch.handleChange}
-                />
-              ) : (
-                <View />
-              )
-            }
-          />
+          <>
+            {scrollTracker(
+              <Controller
+                name={section.switch.fieldName}
+                control={section.switch.control}
+                render={({ field: { onBlur, onChange, value } }) =>
+                  section.switch ? (
+                    <Switch
+                      value={value}
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      handleChange={section.switch.handleChange}
+                    />
+                  ) : (
+                    <View />
+                  )
+                }
+              />,
+              `${section.switch.fieldName}`
+            )}
+          </>
         )}
         <Image
           style={ruffwind.style(

@@ -23,6 +23,7 @@ export interface AccordianProps {
   sections: AccordionSection[];
   activeSection: number[];
   setActiveSections: (indexes: number[]) => void;
+  scrollTracker: (component: React.ReactNode, inputKey: string) => JSX.Element
 }
 
 export interface AccordionSection {

@@ -43,9 +43,11 @@ export type PetPersonality = {
 export interface CatPersonality extends PetPersonality {
   declawed?: boolean;
 }
+export type CatPersonalityField = keyof CatPersonality;
 export interface DogPersonality extends PetPersonality {
   houseTrained?: boolean;
 }
+export type DogPersonalityField = keyof DogPersonality;
 export type PetCareplan = {
   feeding?: {
     activated: boolean;
@@ -77,6 +79,7 @@ export interface CatCarePlan extends PetCareplan {
     specialInstructions?: string | null;
   };
 }
+export type CatCareplanField = keyof CatCarePlan;
 export interface DogCarePlan extends PetCareplan {
   houseTraining?: {
     activated: boolean;
@@ -84,3 +87,4 @@ export interface DogCarePlan extends PetCareplan {
     specialInstructions?: string | null;
   };
 }
+export type DogCareplanField = keyof DogCarePlan;

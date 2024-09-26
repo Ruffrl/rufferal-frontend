@@ -1,10 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { observablePetStore } from '@rufferal/store';
 import { ruffwind } from '@rufferal/tailwind';
-import { CatCarePlan, PageNavigationProps } from '@rufferal/types';
+import {
+  CatCarePlan,
+  CatCareplanField,
+  PageNavigationProps,
+} from '@rufferal/types';
 import {
   cleanCareplan,
   moderateScaleTW,
+  useAutoScroll,
   verticalScaleTW,
 } from '@rufferal/utils';
 import { observer } from 'mobx-react-lite';
@@ -31,6 +36,7 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
   const [error, setError] = useState<string>();
   const [activeSection, setActiveSection] = useState<number[]>([]);
   const handleActiveSections = (indexes: number[]) => setActiveSection(indexes);
+  const { scrollRef, scrollTracker, scrollTo } = useAutoScroll();
 
   let defaults: CatCarePlan | undefined;
 
@@ -44,7 +50,19 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
     mode: 'onBlur',
     defaultValues: defaults,
   });
-  const { handleSubmit, watch } = form;
+  const {
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = form;
+
+  useEffect(() => {
+    const firstErrorField = Object.keys(errors)[0] as CatCareplanField;
+
+    if (firstErrorField) {
+      scrollTo([`${firstErrorField}.activated`]);
+    }
+  }, [errors, scrollTo]);
 
   const harnessSection = watch('harness.activated');
   const feedingSection = watch('feeding.activated');
@@ -122,6 +140,7 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
         backNavigation={() => navigation.navigate('Cat Personality')}
         forwardNavigation={onSubmit}
         forwardText="Complete"
+        scrollRef={scrollRef}
       >
         <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
           <ProgressBar step={4} total={4} />
@@ -141,6 +160,7 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
         >
           <Accordian
             activeSection={activeSection}
+            scrollTracker={scrollTracker}
             setActiveSections={(indexes) => handleActiveSections(indexes)}
             sections={generateCatCareplans(form)}
           />
