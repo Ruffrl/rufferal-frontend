@@ -159,7 +159,7 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
           style={ruffwind`mt-${moderateScaleTW(24)} gap-${moderateScaleTW(8)}`}
         >
           <Accordian
-            activeSection={activeSection}
+            activeSections={activeSection}
             scrollTracker={scrollTracker}
             setActiveSections={(indexes) => handleActiveSections(indexes)}
             sections={generateCatCareplans(form)}
