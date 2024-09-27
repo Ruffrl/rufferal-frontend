@@ -69,6 +69,7 @@ const petCareplanSchema: yup.ObjectSchema<PetCareplan> = yup.object({
       activated: yup.boolean().default(false),
       quantity: generateOptionSchema()
         .default(undefined)
+        .nullable()
         .when(
           ['frequency', 'specialInstructions', 'activated'],
           ([frequency, specialInstructions, activated], schema) => {
@@ -84,6 +85,7 @@ const petCareplanSchema: yup.ObjectSchema<PetCareplan> = yup.object({
         ),
       frequency: generateOptionSchema()
         .default(undefined)
+        .nullable()
         .when(
           ['quantity', 'specialInstructions', 'activated'],
           ([quantity, specialInstructions, activated], schema) => {
@@ -99,6 +101,7 @@ const petCareplanSchema: yup.ObjectSchema<PetCareplan> = yup.object({
         ),
       specialInstructions: yup
         .string()
+        .nullable()
         .when(
           ['quantity', 'frequency', 'activated'],
           ([quantity, frequency, activated], schema) => {
@@ -123,6 +126,7 @@ const petCareplanSchema: yup.ObjectSchema<PetCareplan> = yup.object({
     activated: yup.boolean().default(false),
     specialInstructions: yup
       .string()
+      .nullable()
       .when('activated', ([activated], schema) => {
         if (activated) {
           return schema.required('All fields in this section are required');
@@ -134,6 +138,7 @@ const petCareplanSchema: yup.ObjectSchema<PetCareplan> = yup.object({
     activated: yup.boolean().default(false),
     specialInstructions: yup
       .string()
+      .nullable()
       .when('activated', ([activated], schema) => {
         if (activated) {
           return schema.required('All fields in this section are required');
@@ -145,6 +150,7 @@ const petCareplanSchema: yup.ObjectSchema<PetCareplan> = yup.object({
     activated: yup.boolean().default(false),
     specialInstructions: yup
       .string()
+      .nullable()
       .when('activated', ([activated], schema) => {
         if (activated) {
           return schema.required('All fields in this section are required');
@@ -156,6 +162,7 @@ const petCareplanSchema: yup.ObjectSchema<PetCareplan> = yup.object({
     activated: yup.boolean().default(false),
     specialInstructions: yup
       .string()
+      .nullable()
       .when('activated', ([activated], schema) => {
         if (activated) {
           return schema.required('All fields in this section are required');
@@ -171,6 +178,7 @@ const cCareplan = yup.object({
       activated: yup.boolean().default(false),
       comfortableHarness: generateOptionSchema()
         .default(undefined)
+        .nullable()
         .when(
           ['specialInstructions', 'activated'],
           ([specialInstructions, activated], schema) => {
@@ -182,6 +190,7 @@ const cCareplan = yup.object({
         ),
       specialInstructions: yup
         .string()
+        .nullable()
         .when(
           ['comfortableHarness', 'activated'],
           ([comfortableHarness, activated], schema) => {
@@ -204,6 +213,7 @@ const dCareplan = yup.object({
       activated: yup.boolean().default(false),
       hasAccidents: generateOptionSchema()
         .default(undefined)
+        .nullable()
         .when(
           ['specialInstructions', 'activated'],
           ([specialInstructions, activated], schema) => {
@@ -215,6 +225,7 @@ const dCareplan = yup.object({
         ),
       specialInstructions: yup
         .string()
+        .nullable()
         .when(
           ['hasAccidents', 'activated'],
           ([hasAccidents, activated], schema) => {

@@ -2,12 +2,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { observablePetStore } from '@rufferal/store';
 import { ruffwind } from '@rufferal/tailwind';
 import {
+  CatPersonalityField,
   CatPersonality as CatPersonalityForm,
   PageNavigationProps,
 } from '@rufferal/types';
-import { moderateScaleTW, verticalScaleTW } from '@rufferal/utils';
+import {
+  moderateScaleTW,
+  useAutoScroll,
+  verticalScaleTW,
+} from '@rufferal/utils';
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { Platform, View } from 'react-native';
 
@@ -29,25 +34,33 @@ export const CatPersonality = observer(
     const isIOS = Platform.OS === 'ios';
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
+    const { scrollRef, scrollTracker, scrollTo } = useAutoScroll();
 
     let defaults: CatPersonalityForm | undefined;
 
     if (observablePetStore.editingPetId) {
       defaults = observablePetStore.currentEditingPet()?.personality;
     }
-  
 
     /* REACT HOOK FORM */
     const form = useForm<CatPersonalityForm>({
       resolver: yupResolver(catPersonalitySchema),
       mode: 'onBlur',
-      defaultValues: defaults
+      defaultValues: defaults,
     });
     const {
       control,
       handleSubmit,
       formState: { errors },
     } = form;
+
+    useEffect(() => {
+      const firstErrorField = Object.keys(errors)[0] as CatPersonalityField;
+
+      if (firstErrorField) {
+        scrollTo([firstErrorField]);
+      }
+    }, [errors, scrollTo]);
 
     const onSubmit = handleSubmit(async (data: CatPersonalityForm) => {
       setLoading(true);
@@ -75,7 +88,10 @@ export const CatPersonality = observer(
       <ScrollFeatureTemplate
         backNavigation={() => navigation.navigate('Cat Avatar')}
         forwardNavigation={() => navigation.navigate('Cat Careplan')}
-        forwardText="Skip"
+        forwardText={
+          defaults && Object.keys(defaults)?.length > 0 ? 'Next' : 'Skip'
+        }
+        scrollRef={scrollRef}
       >
         <FormProvider {...form}>
           <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
@@ -98,45 +114,54 @@ export const CatPersonality = observer(
           >
             <View style={ruffwind`gap-${moderateScaleTW(8)}`}>
               <BehaviorLabel label="Good with" multiple />
-              <Controller
-                name="goodKids"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <CheckToggle
-                    label="Kids"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    switchOn={!!value}
-                    errorMessage={errors.goodKids?.message}
-                  />
-                )}
-              />
-              <Controller
-                name="goodOtherSpecies"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <CheckToggle
-                    label="Dogs"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    switchOn={!!value}
-                    errorMessage={errors.goodOtherSpecies?.message}
-                  />
-                )}
-              />
-              <Controller
-                name="goodSameSpecies"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <CheckToggle
-                    label="Other cats"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    switchOn={!!value}
-                    errorMessage={errors.goodSameSpecies?.message}
-                  />
-                )}
-              />
+              {scrollTracker(
+                <Controller
+                  name="goodKids"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <CheckToggle
+                      label="Kids"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      switchOn={!!value}
+                      errorMessage={errors.goodKids?.message}
+                    />
+                  )}
+                />,
+                'goodKids'
+              )}
+              {scrollTracker(
+                <Controller
+                  name="goodOtherSpecies"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <CheckToggle
+                      label="Dogs"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      switchOn={!!value}
+                      errorMessage={errors.goodOtherSpecies?.message}
+                    />
+                  )}
+                />,
+                'goodOtherSpecies'
+              )}
+              {scrollTracker(
+                <Controller
+                  name="goodSameSpecies"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <CheckToggle
+                      label="Other cats"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      switchOn={!!value}
+                      errorMessage={errors.goodSameSpecies?.message}
+                    />
+                  )}
+                />,
+                'goodSameSpecies'
+              )}
             </View>
 
             <HorizontalDivider color="border-saltBox-200" />
@@ -149,54 +174,66 @@ export const CatPersonality = observer(
                 gap-${moderateScaleTW(12)}
               `}
               >
-                <Controller
-                  name="temperment"
-                  control={control}
-                  render={({ field: { onChange, value } }) => (
-                    <InputSlider
-                      sliderLabels={['shy', 'social']}
-                      onChange={onChange}
-                      value={value}
-                      errorMessage={errors.temperment?.message}
-                    />
-                  )}
-                />
-                <Controller
-                  name="energy"
-                  control={control}
-                  render={({ field: { onChange, value } }) => (
-                    <InputSlider
-                      sliderLabels={['relaxed', 'active']}
-                      onChange={onChange}
-                      value={value}
-                      errorMessage={errors.energy?.message}
-                    />
-                  )}
-                />
-                <Controller
-                  name="autonomy"
-                  control={control}
-                  render={({ field: { onChange, value } }) => (
-                    <InputSlider
-                      sliderLabels={['dependent', 'independent']}
-                      onChange={onChange}
-                      value={value}
-                      errorMessage={errors.autonomy?.message}
-                    />
-                  )}
-                />
-                <Controller
-                  name="motivation"
-                  control={control}
-                  render={({ field: { onChange, value } }) => (
-                    <InputSlider
-                      sliderLabels={['food motivated', 'praise motivated']}
-                      onChange={onChange}
-                      value={value}
-                      errorMessage={errors.motivation?.message}
-                    />
-                  )}
-                />
+                {scrollTracker(
+                  <Controller
+                    name="temperment"
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                      <InputSlider
+                        sliderLabels={['shy', 'social']}
+                        onChange={onChange}
+                        value={value}
+                        errorMessage={errors.temperment?.message}
+                      />
+                    )}
+                  />,
+                  'temperment'
+                )}
+                {scrollTracker(
+                  <Controller
+                    name="energy"
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                      <InputSlider
+                        sliderLabels={['relaxed', 'active']}
+                        onChange={onChange}
+                        value={value}
+                        errorMessage={errors.energy?.message}
+                      />
+                    )}
+                  />,
+                  'energy'
+                )}
+                {scrollTracker(
+                  <Controller
+                    name="autonomy"
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                      <InputSlider
+                        sliderLabels={['dependent', 'independent']}
+                        onChange={onChange}
+                        value={value}
+                        errorMessage={errors.autonomy?.message}
+                      />
+                    )}
+                  />,
+                  'autonomy'
+                )}
+                {scrollTracker(
+                  <Controller
+                    name="motivation"
+                    control={control}
+                    render={({ field: { onChange, value } }) => (
+                      <InputSlider
+                        sliderLabels={['food motivated', 'praise motivated']}
+                        onChange={onChange}
+                        value={value}
+                        errorMessage={errors.motivation?.message}
+                      />
+                    )}
+                  />,
+                  'motivation'
+                )}
               </View>
             </View>
 
@@ -204,58 +241,70 @@ export const CatPersonality = observer(
 
             <View style={ruffwind`gap-${moderateScaleTW(8)}`}>
               <BehaviorLabel label="Care & behavior" multiple />
-              <Controller
-                name="declawed"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <CheckToggle
-                    label="Declawed"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    switchOn={!!value}
-                    errorMessage={errors.declawed?.message}
-                  />
-                )}
-              />
-              <Controller
-                name="requiresMedication"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <CheckToggle
-                    label="Requires medication"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    switchOn={!!value}
-                    errorMessage={errors.requiresMedication?.message}
-                  />
-                )}
-              />
-              <Controller
-                name="seperationAnxiety"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <CheckToggle
-                    label="Seperation anxiety"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    switchOn={!!value}
-                    errorMessage={errors.seperationAnxiety?.message}
-                  />
-                )}
-              />
-              <Controller
-                name="specialNeeds"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <CheckToggle
-                    label="Special needs"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    switchOn={!!value}
-                    errorMessage={errors.specialNeeds?.message}
-                  />
-                )}
-              />
+              {scrollTracker(
+                <Controller
+                  name="declawed"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <CheckToggle
+                      label="Declawed"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      switchOn={!!value}
+                      errorMessage={errors.declawed?.message}
+                    />
+                  )}
+                />,
+                'declawed'
+              )}
+              {scrollTracker(
+                <Controller
+                  name="requiresMedication"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <CheckToggle
+                      label="Requires medication"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      switchOn={!!value}
+                      errorMessage={errors.requiresMedication?.message}
+                    />
+                  )}
+                />,
+                'requiresMedication'
+              )}
+              {scrollTracker(
+                <Controller
+                  name="seperationAnxiety"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <CheckToggle
+                      label="Seperation anxiety"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      switchOn={!!value}
+                      errorMessage={errors.seperationAnxiety?.message}
+                    />
+                  )}
+                />,
+                'seperationAnxiety'
+              )}
+              {scrollTracker(
+                <Controller
+                  name="specialNeeds"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <CheckToggle
+                      label="Special needs"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      switchOn={!!value}
+                      errorMessage={errors.specialNeeds?.message}
+                    />
+                  )}
+                />,
+                'specialNeeds'
+              )}
             </View>
           </View>
 
@@ -267,7 +316,15 @@ export const CatPersonality = observer(
           >
             <HorizontalDivider color="border-amethystSmoke-600" />
             {error && <FieldHelper text={error} align={'text-center'} />}
-            <Button text="Next" onPress={onSubmit} loading={loading} />
+            <Button
+              text={
+                defaults && Object.keys(defaults)?.length > 0
+                  ? 'Update'
+                  : 'Next'
+              }
+              onPress={onSubmit}
+              loading={loading}
+            />
             <Button
               text="Cancel"
               type="transparent"

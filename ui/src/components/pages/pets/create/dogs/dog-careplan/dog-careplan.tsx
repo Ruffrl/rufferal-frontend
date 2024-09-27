@@ -1,10 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { observablePetStore } from '@rufferal/store';
 import { ruffwind } from '@rufferal/tailwind';
-import { DogCarePlan, PageNavigationProps } from '@rufferal/types';
+import {
+  DogCarePlan,
+  DogCareplanField,
+  PageNavigationProps,
+} from '@rufferal/types';
 import {
   cleanCareplan,
   moderateScaleTW,
+  useAutoScroll,
   verticalScaleTW,
 } from '@rufferal/utils';
 import { observer } from 'mobx-react-lite';
@@ -20,7 +25,11 @@ import {
   ProgressBar,
 } from '../../../../../atoms';
 import { ScrollFeatureTemplate } from '../../../../../templates';
-import { generateDogCareplans } from '../../shared/pet-careplan-options';
+import {
+  DOG_SECTIONS,
+  generateDogCareplans,
+  getDefaultSectionIndices,
+} from '../../shared/pet-careplan-options';
 import { dogCareplanSchema } from '../../shared/pet-profile-forms';
 import { SecondaryFormHeader } from '../../shared/secondary-form-header/secondary-form-header';
 
@@ -29,8 +38,12 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
   const isIOS = Platform.OS === 'ios';
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
-  const [activeSection, setActiveSection] = useState<number[]>([]);
-  const handleActiveSections = (indexes: number[]) => setActiveSection(indexes);
+  const [activeSections, setActiveSections] = useState<number[]>([]);
+  const handleActiveSections = (indexes: number[]) =>
+    setActiveSections(indexes);
+  const [accordionDirty, setAccordionDirty] = useState<boolean>(false);
+  const handleAccordionDirty = (dirty: boolean) => setAccordionDirty(dirty);
+  const { scrollRef, scrollTracker, scrollTo } = useAutoScroll();
 
   let defaults: DogCarePlan | undefined;
 
@@ -38,14 +51,25 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
     defaults = observablePetStore.currentEditingPet()?.careplan;
   }
 
-
   /* REACT HOOK FORM */
   const form = useForm<DogCarePlan>({
     resolver: yupResolver(dogCareplanSchema),
     mode: 'onBlur',
-    defaultValues: defaults
+    defaultValues: defaults,
   });
-  const { handleSubmit, watch } = form;
+  const {
+    handleSubmit,
+    watch,
+    formState: { errors, isDirty },
+  } = form;
+
+  useEffect(() => {
+    const firstErrorField = Object.keys(errors)[0] as DogCareplanField;
+
+    if (firstErrorField) {
+      scrollTo([`${firstErrorField}.activated`]);
+    }
+  }, [errors, scrollTo]);
 
   const houseTrainingSection = watch('houseTraining.activated');
   const feedingSection = watch('feeding.activated');
@@ -56,40 +80,52 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
 
   useEffect(() => {
     if (houseTrainingSection) {
-      setActiveSection([...activeSection, 0]);
+      setActiveSections([...activeSections, 0]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [houseTrainingSection]);
   useEffect(() => {
     if (feedingSection) {
-      setActiveSection([...activeSection, 1]);
+      setActiveSections([...activeSections, 1]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feedingSection]);
   useEffect(() => {
     if (overnightSection) {
-      setActiveSection([...activeSection, 2]);
+      setActiveSections([...activeSections, 2]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [overnightSection]);
   useEffect(() => {
     if (medicalSection) {
-      setActiveSection([...activeSection, 3]);
+      setActiveSections([...activeSections, 3]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [medicalSection]);
   useEffect(() => {
     if (specialNeedsSection) {
-      setActiveSection([...activeSection, 4]);
+      setActiveSections([...activeSections, 4]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [specialNeedsSection]);
   useEffect(() => {
     if (additionalNotesSection) {
-      setActiveSection([...activeSection, 5]);
+      setActiveSections([...activeSections, 5]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [additionalNotesSection]);
+  useEffect(() => {
+    if (
+      defaults &&
+      activeSections.length === 0 &&
+      !isDirty &&
+      !accordionDirty
+    ) {
+      console.log('Inside default handling');
+      const indexes = getDefaultSectionIndices(DOG_SECTIONS, defaults);
+      setActiveSections(indexes);
+    }
+  }, [accordionDirty, activeSections.length, defaults, isDirty]);
 
   const onSubmit = handleSubmit(async (data: DogCarePlan) => {
     setLoading(true);
@@ -122,7 +158,10 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
       <ScrollFeatureTemplate
         backNavigation={() => navigation.navigate('Dog Personality')}
         forwardNavigation={onSubmit}
-        forwardText="Complete"
+        forwardText={
+          defaults && Object.keys(defaults)?.length > 0 ? 'Update' : 'Complete'
+        }
+        scrollRef={scrollRef}
       >
         <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
           <ProgressBar step={4} total={4} />
@@ -141,9 +180,12 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
           style={ruffwind`mt-${moderateScaleTW(24)} gap-${moderateScaleTW(8)}`}
         >
           <Accordian
-            activeSection={activeSection}
-            setActiveSections={(indexes) => handleActiveSections(indexes)}
+            accordionDirty={accordionDirty}
+            activeSections={activeSections}
+            scrollTracker={scrollTracker}
             sections={generateDogCareplans(form)}
+            setAccordionDirty={handleAccordionDirty}
+            setActiveSections={(indexes) => handleActiveSections(indexes)}
           />
         </View>
 
@@ -151,13 +193,21 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
           style={ruffwind.style(
             `gap-${moderateScaleTW(8)}`,
             isIOS ? `mt-${verticalScaleTW(161)}` : `mt-${verticalScaleTW(200)}`,
-            activeSection.length > 0 && `mt-${verticalScaleTW(16)}`,
-            activeSection.length > 0 && !isIOS && `mb-${verticalScaleTW(16)}`
+            activeSections.length > 0 && `mt-${verticalScaleTW(16)}`,
+            activeSections.length > 0 && !isIOS && `mb-${verticalScaleTW(16)}`
           )}
         >
           <HorizontalDivider color="border-amethystSmoke-600" />
           {error && <FieldHelper text={error} align={'text-center'} />}
-          <Button text="Complete" onPress={onSubmit} loading={loading} />
+          <Button
+            text={
+              defaults && Object.keys(defaults)?.length > 0
+                ? 'Update'
+                : 'Complete'
+            }
+            onPress={onSubmit}
+            loading={loading}
+          />
           <Button
             text="Cancel"
             type="transparent"

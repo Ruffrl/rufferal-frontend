@@ -1,10 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { observablePetStore } from '@rufferal/store';
 import { ruffwind } from '@rufferal/tailwind';
-import { PageNavigationProps, PetDetails } from '@rufferal/types';
-import { moderateScaleTW } from '@rufferal/utils';
+import {
+  PageNavigationProps,
+  PetDetailField,
+  PetDetails,
+} from '@rufferal/types';
+import { moderateScaleTW, useAutoScroll } from '@rufferal/utils';
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { Platform, View } from 'react-native';
 
@@ -32,6 +36,7 @@ export const CatDetails = observer(({ navigation }: PageNavigationProps) => {
   const isIOS = Platform.OS === 'ios';
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
+  const { scrollRef, scrollTracker, scrollTo } = useAutoScroll();
 
   let defaults: PetDetails | undefined;
 
@@ -43,8 +48,6 @@ export const CatDetails = observer(({ navigation }: PageNavigationProps) => {
   const form = useForm<PetDetails>({
     resolver: yupResolver(petDetailsSchema('cat')),
     mode: 'onBlur',
-    // BLARG:TODO - RHF with RN doesn't scroll on error, so find a custom solution (https://dev.to/shaswatprabhat/auto-scroll-in-react-native-forms-3k16)
-    shouldFocusError: true,
     defaultValues: defaults || {
       species: 'cat',
     },
@@ -54,6 +57,14 @@ export const CatDetails = observer(({ navigation }: PageNavigationProps) => {
     handleSubmit,
     formState: { errors },
   } = form;
+
+  useEffect(() => {
+    const firstErrorField = Object.keys(errors)[0] as PetDetailField;
+
+    if (firstErrorField) {
+      scrollTo([firstErrorField]);
+    }
+  }, [errors, scrollTo]);
 
   const onSubmit = handleSubmit(async (data: PetDetails) => {
     setLoading(true);
@@ -89,6 +100,11 @@ export const CatDetails = observer(({ navigation }: PageNavigationProps) => {
   return (
     <ScrollFeatureTemplate
       backNavigation={() => navigation.navigate('Manage Pets')}
+      scrollRef={scrollRef}
+      forwardNavigation={
+        defaults?.name ? () => navigation.navigate('Cat Avatar') : undefined
+      }
+      forwardText={defaults?.name && 'Next'}
     >
       <FormProvider {...form}>
         <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
@@ -107,117 +123,138 @@ export const CatDetails = observer(({ navigation }: PageNavigationProps) => {
 
           <View style={ruffwind`gap-${moderateScaleTW(12)}`}>
             <View style={ruffwind`gap-${moderateScaleTW(4)}`}>
-              <Controller
-                name="name"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <Input
-                    errorMessage={errors.name?.message}
-                    label="Name"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    value={value}
-                  />
-                )}
-              />
-              <Controller
-                name="color"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <Select
-                    data={CAT_COLOR_OPTIONS}
-                    errorMessage={errors.color?.value?.message}
-                    label="Color"
-                    labelField="label"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    searchField="label"
-                    value={value?.id}
-                    valueField="id"
-                  />
-                )}
-              />
-              <Controller
-                name="breed"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <Select
-                    data={CAT_BREED_OPTIONS}
-                    errorMessage={errors.breed?.value?.message}
-                    label="Breed"
-                    labelField="label"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    searchField="label"
-                    value={value?.id}
-                    valueField="id"
-                  />
-                )}
-              />
+              {scrollTracker(
+                <Controller
+                  name="name"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <Input
+                      errorMessage={errors.name?.message}
+                      label="Name"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      value={value}
+                    />
+                  )}
+                />,
+                'name'
+              )}
+              {scrollTracker(
+                <Controller
+                  name="color"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <Select
+                      data={CAT_COLOR_OPTIONS}
+                      errorMessage={errors.color?.value?.message}
+                      label="Color"
+                      labelField="label"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      searchField="label"
+                      value={value?.id}
+                      valueField="id"
+                    />
+                  )}
+                />,
+                'color'
+              )}
+              {scrollTracker(
+                <Controller
+                  name="breed"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <Select
+                      data={CAT_BREED_OPTIONS}
+                      errorMessage={errors.breed?.value?.message}
+                      label="Breed"
+                      labelField="label"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      searchField="label"
+                      value={value?.id}
+                      valueField="id"
+                    />
+                  )}
+                />,
+                'breed'
+              )}
             </View>
             <View>
-              <Controller
-                name="sex"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <RadioGroup
-                    data={SEX_OPTIONS}
-                    errorMessage={errors.sex?.value?.message}
-                    label="Sex"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    value={value}
-                  />
-                )}
-              />
+              {scrollTracker(
+                <Controller
+                  name="sex"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <RadioGroup
+                      data={SEX_OPTIONS}
+                      errorMessage={errors.sex?.value?.message}
+                      label="Sex"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      value={value}
+                    />
+                  )}
+                />,
+                'sex'
+              )}
             </View>
             <View>
-              <Controller
-                name="age"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <RadioGroup
-                    data={CAT_AGE_OPTIONS}
-                    errorMessage={errors.age?.value?.message}
-                    label="Age"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    value={value}
-                  />
-                )}
-              />
+              {scrollTracker(
+                <Controller
+                  name="age"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <RadioGroup
+                      data={CAT_AGE_OPTIONS}
+                      errorMessage={errors.age?.value?.message}
+                      label="Age"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      value={value}
+                    />
+                  )}
+                />,
+                'age'
+              )}
             </View>
             <View>
-              <Controller
-                name="size"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <RadioGroup
-                    data={CAT_SIZE_OPTIONS}
-                    errorMessage={errors.size?.value?.message}
-                    label="Size"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    value={value}
-                  />
-                )}
-              />
+              {scrollTracker(
+                <Controller
+                  name="size"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <RadioGroup
+                      data={CAT_SIZE_OPTIONS}
+                      errorMessage={errors.size?.value?.message}
+                      label="Size"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      value={value}
+                    />
+                  )}
+                />,
+                'size'
+              )}
             </View>
             <View>
-              <Controller
-                name="status"
-                control={control}
-                render={({ field: { onBlur, onChange, value } }) => (
-                  <RadioGroup
-                    data={STATUS_OPTIONS}
-                    errorMessage={errors.status?.value?.message}
-                    label="Spayed/neutered?"
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    value={value}
-                  />
-                )}
-              />
+              {scrollTracker(
+                <Controller
+                  name="status"
+                  control={control}
+                  render={({ field: { onBlur, onChange, value } }) => (
+                    <RadioGroup
+                      data={STATUS_OPTIONS}
+                      errorMessage={errors.status?.value?.message}
+                      label="Spayed/neutered?"
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      value={value}
+                    />
+                  )}
+                />,
+                'status'
+              )}
             </View>
           </View>
         </View>
@@ -231,7 +268,11 @@ export const CatDetails = observer(({ navigation }: PageNavigationProps) => {
         >
           <HorizontalDivider color="border-amethystSmoke-600" />
           {error && <FieldHelper text={error} align={'text-center'} />}
-          <Button text="Next" onPress={onSubmit} loading={loading} />
+          <Button
+            text={defaults?.name ? 'Update' : 'Next'}
+            onPress={onSubmit}
+            loading={loading}
+          />
           <Button
             text="Cancel"
             type="transparent"

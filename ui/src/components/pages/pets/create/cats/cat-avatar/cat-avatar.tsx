@@ -31,7 +31,7 @@ export const CatAvatar = observer(({ navigation }: PageNavigationProps) => {
   const form = useForm<PetAvatar>({
     resolver: yupResolver(petAvatarSchema),
     mode: 'onBlur',
-    defaultValues: defaults
+    defaultValues: defaults,
   });
   const {
     control,
@@ -65,7 +65,7 @@ export const CatAvatar = observer(({ navigation }: PageNavigationProps) => {
     <OverrideSafeFeatureTemplate
       backNavigation={() => navigation.navigate('Cat Details')}
       forwardNavigation={() => navigation.navigate('Cat Personality')}
-      forwardText="Skip"
+      forwardText={defaults?.uri ? 'Next' : 'Skip'}
     >
       <FormProvider {...form}>
         <BottomSheetModalProvider>
@@ -104,7 +104,7 @@ export const CatAvatar = observer(({ navigation }: PageNavigationProps) => {
               )}
             >
               {error && <FieldHelper text={error} align={'text-center'} />}
-              <Button text="Next" onPress={onSubmit} loading={loading} />
+              <Button text={defaults?.uri ? 'Update' : 'Next'} onPress={onSubmit} loading={loading} />
               <Button
                 text="Cancel"
                 type="transparent"

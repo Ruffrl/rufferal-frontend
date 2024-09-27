@@ -20,8 +20,11 @@ import {
 } from '..';
 
 export interface AccordianProps {
+  accordionDirty: boolean;
+  activeSections: number[];
+  scrollTracker: (component: React.ReactNode, inputKey: string) => JSX.Element;
   sections: AccordionSection[];
-  activeSection: number[];
+  setAccordionDirty: (dirty: boolean) => void;
   setActiveSections: (indexes: number[]) => void;
 }
 
@@ -117,11 +120,13 @@ export interface FieldCharacterCountProps {
   max: number;
 }
 
-export interface FieldInputProps extends Omit<TextInputProps, 'onChange'> {
+export interface FieldInputProps
+  extends Omit<TextInputProps, 'onChange' | 'value'> {
   onChange: (text: string) => void;
   onSubmit?: () => void;
   size?: FieldSize;
   state?: FieldState;
+  value: string | undefined | null;
 }
 
 export interface LabelProps {
@@ -218,5 +223,3 @@ export interface ToggleProps extends Omit<SwitchToggleProps, 'onPress'> {
   onChange: (value: boolean) => void;
   switchOn: boolean;
 }
-
-

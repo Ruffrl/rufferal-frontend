@@ -12,16 +12,26 @@ import { HorizontalDivider } from '../horizontal-divider/horizontal-divider';
 
 import { Switch } from '../switch/switch';
 
+import { useCallback } from 'react';
 import * as RNCAccordian from 'react-native-collapsible/Accordion';
 const CollapsibleAccordion = RNCAccordian.default;
 
 export const Accordian = ({
-  activeSection,
+  accordionDirty,
+  activeSections,
+  scrollTracker,
   sections,
+  setAccordionDirty,
   setActiveSections,
 }: AccordianProps) => {
+  const handleDirty = useCallback(() => {
+    if (!accordionDirty) {
+      setAccordionDirty(true);
+    }
+  }, [accordionDirty, setAccordionDirty]);
+
   // renders
-  const renderSectionHeader = (section: AccordionSection) => {
+  const renderSectionHeader = (section: AccordionSection, index: number) => {
     return (
       <View
         style={ruffwind`
@@ -47,22 +57,27 @@ export const Accordian = ({
           {section.title}
         </Text>
         {section.switch && (
-          <Controller
-            name={section.switch.fieldName}
-            control={section.switch.control}
-            render={({ field: { onBlur, onChange, value } }) =>
-              section.switch ? (
-                <Switch
-                  value={value}
-                  onBlur={onBlur}
-                  onChange={onChange}
-                  handleChange={section.switch.handleChange}
-                />
-              ) : (
-                <View />
-              )
-            }
-          />
+          <>
+            {scrollTracker(
+              <Controller
+                name={section.switch.fieldName}
+                control={section.switch.control}
+                render={({ field: { onBlur, onChange, value } }) =>
+                  section.switch ? (
+                    <Switch
+                      value={value}
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      handleChange={section.switch.handleChange}
+                    />
+                  ) : (
+                    <View />
+                  )
+                }
+              />,
+              `${section.switch.fieldName}`
+            )}
+          </>
         )}
         <Image
           style={ruffwind.style(
@@ -102,10 +117,14 @@ export const Accordian = ({
     <CollapsibleAccordion
       expandMultiple
       sections={sections}
-      activeSections={activeSection}
-      renderHeader={renderSectionHeader}
+      activeSections={activeSections}
+      renderHeader={(content, index) => renderSectionHeader(content, index)}
       renderContent={renderSectionContent}
-      onChange={(indexes: number[]) => setActiveSections(indexes)}
+      // onChange={setActiveSections}
+      onChange={(indexes) => {
+        handleDirty();
+        setActiveSections(indexes);
+      }}
       // BLARG - import from tailwind config electricViolet[700]
       underlayColor={'#9525CB'}
       sectionContainerStyle={ruffwind`

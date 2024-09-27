@@ -6,11 +6,33 @@ import {
   FieldOption,
   OtherOption,
 } from '@rufferal/types';
+import { titleCaseToCamelCase } from '@rufferal/utils';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { Text } from 'react-native';
 import { InputArea, RadioGroup, Select } from '../../../../molecules';
 
 /****************** SHARED ******************/
+export const getDefaultSectionIndices = (
+  sections: Array<{ title: string }>, // Array of objects with a title property
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  defaults: Record<string, any> // Object representing defaults with flexible structure
+): Array<number> => {
+  // Returns an array of section indexes
+  const defaultKeys = Object.keys(defaults); // Get keys from defaults object
+  const sectionIndices: Array<number> = []; // Array to hold section indexes
+
+  sections.forEach((section, index) => {
+    // Iterate over each section
+    const key = titleCaseToCamelCase(section.title) || ''; // Convert section title to camelCase
+    if (defaultKeys.includes(key)) {
+      // Check if the camelCase key exists in defaults
+      sectionIndices.push(index); // Push the index if it exists
+    }
+  });
+
+  return sectionIndices; // Return the array with section indexes
+};
+
 export const OTHER_OPTION: OtherOption = {
   label: 'Other (see Special Instructions Below)',
   component: (
@@ -107,6 +129,26 @@ export const HARNESS_OPTIONS: FieldOption[] = [
   },
 ];
 
+export const CAT_SECTIONS = [
+  {
+    title: 'Harness',
+  },
+  {
+    title: 'Feeding',
+  },
+  {
+    title: 'Overnight',
+  },
+  {
+    title: 'Medical',
+  },
+  {
+    title: 'Special needs',
+  },
+  {
+    title: 'Additional notes',
+  },
+];
 export const generateCatCareplans = (
   form: UseFormReturn<CatCarePlan>
 ): AccordionSection[] => {
@@ -114,7 +156,6 @@ export const generateCatCareplans = (
     control,
     formState: { errors },
     setValue,
-    resetField,
   } = form;
 
   return [
@@ -148,9 +189,7 @@ export const generateCatCareplans = (
             control={control}
             render={({ field: { onBlur, onChange, value } }) => (
               <InputArea
-                errorMessage={
-                  errors.harness?.specialInstructions?.message
-                }
+                errorMessage={errors.harness?.specialInstructions?.message}
                 label="Special instructions"
                 onBlur={onBlur}
                 onChange={(text) => {
@@ -172,8 +211,9 @@ export const generateCatCareplans = (
         fieldName: 'harness.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('harness.comfortableHarness');
-            resetField('harness.specialInstructions');
+            console.log('HARNESS conditions');
+            setValue('harness.comfortableHarness', null);
+            setValue('harness.specialInstructions', null);
           }
         },
       },
@@ -258,9 +298,9 @@ export const generateCatCareplans = (
         fieldName: 'feeding.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('feeding.quantity');
-            resetField('feeding.frequency');
-            resetField('feeding.specialInstructions');
+            setValue('feeding.quantity', null);
+            setValue('feeding.frequency', null);
+            setValue('feeding.specialInstructions', null);
           }
         },
       },
@@ -295,7 +335,7 @@ export const generateCatCareplans = (
         fieldName: 'overnight.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('overnight.specialInstructions');
+            setValue('overnight.specialInstructions', null);
           }
         },
       },
@@ -330,7 +370,7 @@ export const generateCatCareplans = (
         fieldName: 'medical.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('medical.specialInstructions');
+            setValue('medical.specialInstructions', null);
           }
         },
       },
@@ -365,7 +405,7 @@ export const generateCatCareplans = (
         fieldName: 'specialNeeds.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('specialNeeds.specialInstructions');
+            setValue('specialNeeds.specialInstructions', null);
           }
         },
       },
@@ -402,7 +442,7 @@ export const generateCatCareplans = (
         fieldName: 'additionalNotes.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('additionalNotes.specialInstructions');
+            setValue('additionalNotes.specialInstructions', null);
           }
         },
       },
@@ -425,6 +465,26 @@ export const HOUSETRAINING_OPTIONS: FieldOption[] = [
   },
 ];
 
+export const DOG_SECTIONS = [
+  {
+    title: 'House Training',
+  },
+  {
+    title: 'Feeding',
+  },
+  {
+    title: 'Overnight',
+  },
+  {
+    title: 'Medical',
+  },
+  {
+    title: 'Special needs',
+  },
+  {
+    title: 'Additional notes',
+  },
+];
 export const generateDogCareplans = (
   form: UseFormReturn<DogCarePlan>
 ): AccordionSection[] => {
@@ -432,7 +492,6 @@ export const generateDogCareplans = (
     control,
     formState: { errors },
     setValue,
-    resetField,
   } = form;
 
   return [
@@ -490,8 +549,8 @@ export const generateDogCareplans = (
         fieldName: 'houseTraining.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('houseTraining.hasAccidents');
-            resetField('houseTraining.specialInstructions');
+            setValue('houseTraining.hasAccidents', null);
+            setValue('houseTraining.specialInstructions', null);
           }
         },
       },
@@ -576,9 +635,9 @@ export const generateDogCareplans = (
         fieldName: 'feeding.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('feeding.quantity');
-            resetField('feeding.frequency');
-            resetField('feeding.specialInstructions');
+            setValue('feeding.quantity', null);
+            setValue('feeding.frequency', null);
+            setValue('feeding.specialInstructions', null);
           }
         },
       },
@@ -613,7 +672,7 @@ export const generateDogCareplans = (
         fieldName: 'overnight.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('overnight.specialInstructions');
+            setValue('overnight.specialInstructions', null);
           }
         },
       },
@@ -648,7 +707,7 @@ export const generateDogCareplans = (
         fieldName: 'medical.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('medical.specialInstructions');
+            setValue('medical.specialInstructions', null);
           }
         },
       },
@@ -683,7 +742,7 @@ export const generateDogCareplans = (
         fieldName: 'specialNeeds.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('specialNeeds.specialInstructions');
+            setValue('specialNeeds.specialInstructions', null);
           }
         },
       },
@@ -720,7 +779,7 @@ export const generateDogCareplans = (
         fieldName: 'additionalNotes.activated',
         handleChange: (value: boolean) => {
           if (!value) {
-            resetField('additionalNotes.specialInstructions');
+            setValue('additionalNotes.specialInstructions', null);
           }
         },
       },

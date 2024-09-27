@@ -24,6 +24,7 @@ export type PetDetails = {
   size: FieldOption;
   status: FieldOption;
 };
+export type PetDetailField = keyof PetDetails;
 export type PetAvatar = {
   uri?: string;
 };
@@ -42,44 +43,48 @@ export type PetPersonality = {
 export interface CatPersonality extends PetPersonality {
   declawed?: boolean;
 }
+export type CatPersonalityField = keyof CatPersonality;
 export interface DogPersonality extends PetPersonality {
   houseTrained?: boolean;
 }
+export type DogPersonalityField = keyof DogPersonality;
 export type PetCareplan = {
   feeding?: {
     activated: boolean;
-    quantity?: FieldOption;
-    frequency?: FieldOption;
-    specialInstructions?: string;
+    quantity?: FieldOption | null;
+    frequency?: FieldOption | null;
+    specialInstructions?: string | null;
   };
   overnight?: {
     activated: boolean;
-    specialInstructions?: string;
+    specialInstructions?: string | null;
   };
   medical?: {
     activated: boolean;
-    specialInstructions?: string;
+    specialInstructions?: string | null;
   };
   specialNeeds?: {
     activated: boolean;
-    specialInstructions?: string;
+    specialInstructions?: string | null;
   };
   additionalNotes?: {
     activated: boolean;
-    specialInstructions?: string;
+    specialInstructions?: string | null;
   };
 };
 export interface CatCarePlan extends PetCareplan {
   harness?: {
     activated: boolean;
-    comfortableHarness?: FieldOption;
-    specialInstructions?: string;
+    comfortableHarness?: FieldOption | null;
+    specialInstructions?: string | null;
   };
 }
+export type CatCareplanField = keyof CatCarePlan;
 export interface DogCarePlan extends PetCareplan {
   houseTraining?: {
     activated: boolean;
-    hasAccidents?: FieldOption;
-    specialInstructions?: string;
+    hasAccidents?: FieldOption | null;
+    specialInstructions?: string | null;
   };
 }
+export type DogCareplanField = keyof DogCarePlan;
