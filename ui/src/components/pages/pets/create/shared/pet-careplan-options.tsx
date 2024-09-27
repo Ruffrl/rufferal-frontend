@@ -17,9 +17,9 @@ export const getDefaultSectionIndices = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   defaults: Record<string, any> // Object representing defaults with flexible structure
 ): Array<number> => {
-  // Returns an array of section indices
+  // Returns an array of section indexes
   const defaultKeys = Object.keys(defaults); // Get keys from defaults object
-  const sectionIndices: Array<number> = []; // Array to hold section indices
+  const sectionIndices: Array<number> = []; // Array to hold section indexes
 
   sections.forEach((section, index) => {
     // Iterate over each section
@@ -30,7 +30,7 @@ export const getDefaultSectionIndices = (
     }
   });
 
-  return sectionIndices; // Return the array with section indices
+  return sectionIndices; // Return the array with section indexes
 };
 
 export const OTHER_OPTION: OtherOption = {

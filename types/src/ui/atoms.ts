@@ -20,9 +20,11 @@ import {
 } from '..';
 
 export interface AccordianProps {
+  accordionDirty: boolean;
   activeSections: number[];
   scrollTracker: (component: React.ReactNode, inputKey: string) => JSX.Element;
   sections: AccordionSection[];
+  setAccordionDirty: (dirty: boolean) => void;
   setActiveSections: (indexes: number[]) => void;
 }
 

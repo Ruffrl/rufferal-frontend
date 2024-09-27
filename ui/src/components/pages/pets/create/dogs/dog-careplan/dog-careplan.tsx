@@ -25,7 +25,11 @@ import {
   ProgressBar,
 } from '../../../../../atoms';
 import { ScrollFeatureTemplate } from '../../../../../templates';
-import { DOG_SECTIONS, generateDogCareplans, getDefaultSectionIndices } from '../../shared/pet-careplan-options';
+import {
+  DOG_SECTIONS,
+  generateDogCareplans,
+  getDefaultSectionIndices,
+} from '../../shared/pet-careplan-options';
 import { dogCareplanSchema } from '../../shared/pet-profile-forms';
 import { SecondaryFormHeader } from '../../shared/secondary-form-header/secondary-form-header';
 
@@ -34,8 +38,11 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
   const isIOS = Platform.OS === 'ios';
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
-  const [activeSection, setActiveSection] = useState<number[]>([]);
-  const handleActiveSections = (indexes: number[]) => setActiveSection(indexes);
+  const [activeSections, setActiveSections] = useState<number[]>([]);
+  const handleActiveSections = (indexes: number[]) =>
+    setActiveSections(indexes);
+  const [accordionDirty, setAccordionDirty] = useState<boolean>(false);
+  const handleAccordionDirty = (dirty: boolean) => setAccordionDirty(dirty);
   const { scrollRef, scrollTracker, scrollTo } = useAutoScroll();
 
   let defaults: DogCarePlan | undefined;
@@ -63,7 +70,7 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
       scrollTo([`${firstErrorField}.activated`]);
     }
   }, [errors, scrollTo]);
-  
+
   const houseTrainingSection = watch('houseTraining.activated');
   const feedingSection = watch('feeding.activated');
   const overnightSection = watch('overnight.activated');
@@ -71,50 +78,54 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
   const specialNeedsSection = watch('specialNeeds.activated');
   const additionalNotesSection = watch('additionalNotes.activated');
 
-
   useEffect(() => {
     if (houseTrainingSection) {
-      setActiveSection([...activeSection, 0]);
+      setActiveSections([...activeSections, 0]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [houseTrainingSection]);
   useEffect(() => {
     if (feedingSection) {
-      setActiveSection([...activeSection, 1]);
+      setActiveSections([...activeSections, 1]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feedingSection]);
   useEffect(() => {
     if (overnightSection) {
-      setActiveSection([...activeSection, 2]);
+      setActiveSections([...activeSections, 2]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [overnightSection]);
   useEffect(() => {
     if (medicalSection) {
-      setActiveSection([...activeSection, 3]);
+      setActiveSections([...activeSections, 3]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [medicalSection]);
   useEffect(() => {
     if (specialNeedsSection) {
-      setActiveSection([...activeSection, 4]);
+      setActiveSections([...activeSections, 4]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [specialNeedsSection]);
   useEffect(() => {
     if (additionalNotesSection) {
-      setActiveSection([...activeSection, 5]);
+      setActiveSections([...activeSections, 5]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [additionalNotesSection]);
   useEffect(() => {
-    if (defaults && activeSection.length === 0 && !isDirty) {
+    if (
+      defaults &&
+      activeSections.length === 0 &&
+      !isDirty &&
+      !accordionDirty
+    ) {
       console.log('Inside default handling');
-      const indices = getDefaultSectionIndices(DOG_SECTIONS, defaults);
-      setActiveSection(indices);
+      const indexes = getDefaultSectionIndices(DOG_SECTIONS, defaults);
+      setActiveSections(indexes);
     }
-  }, [activeSection.length, defaults, isDirty]);
+  }, [accordionDirty, activeSections.length, defaults, isDirty]);
 
   const onSubmit = handleSubmit(async (data: DogCarePlan) => {
     setLoading(true);
@@ -167,10 +178,12 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
           style={ruffwind`mt-${moderateScaleTW(24)} gap-${moderateScaleTW(8)}`}
         >
           <Accordian
-            activeSections={activeSection}
+            accordionDirty={accordionDirty}
+            activeSections={activeSections}
             scrollTracker={scrollTracker}
-            setActiveSections={(indexes) => handleActiveSections(indexes)}
             sections={generateDogCareplans(form)}
+            setAccordionDirty={handleAccordionDirty}
+            setActiveSections={(indexes) => handleActiveSections(indexes)}
           />
         </View>
 
@@ -178,8 +191,8 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
           style={ruffwind.style(
             `gap-${moderateScaleTW(8)}`,
             isIOS ? `mt-${verticalScaleTW(161)}` : `mt-${verticalScaleTW(200)}`,
-            activeSection.length > 0 && `mt-${verticalScaleTW(16)}`,
-            activeSection.length > 0 && !isIOS && `mb-${verticalScaleTW(16)}`
+            activeSections.length > 0 && `mt-${verticalScaleTW(16)}`,
+            activeSections.length > 0 && !isIOS && `mb-${verticalScaleTW(16)}`
           )}
         >
           <HorizontalDivider color="border-amethystSmoke-600" />

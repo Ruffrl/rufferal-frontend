@@ -12,15 +12,24 @@ import { HorizontalDivider } from '../horizontal-divider/horizontal-divider';
 
 import { Switch } from '../switch/switch';
 
+import { useCallback } from 'react';
 import * as RNCAccordian from 'react-native-collapsible/Accordion';
 const CollapsibleAccordion = RNCAccordian.default;
 
 export const Accordian = ({
+  accordionDirty,
   activeSections,
   scrollTracker,
   sections,
+  setAccordionDirty,
   setActiveSections,
 }: AccordianProps) => {
+  const handleDirty = useCallback(() => {
+    if (!accordionDirty) {
+      setAccordionDirty(true);
+    }
+  }, [accordionDirty, setAccordionDirty]);
+
   // renders
   const renderSectionHeader = (section: AccordionSection, index: number) => {
     return (
@@ -111,7 +120,11 @@ export const Accordian = ({
       activeSections={activeSections}
       renderHeader={(content, index) => renderSectionHeader(content, index)}
       renderContent={renderSectionContent}
-      onChange={setActiveSections}
+      // onChange={setActiveSections}
+      onChange={(indexes) => {
+        handleDirty();
+        setActiveSections(indexes);
+      }}
       // BLARG - import from tailwind config electricViolet[700]
       underlayColor={'#9525CB'}
       sectionContainerStyle={ruffwind`

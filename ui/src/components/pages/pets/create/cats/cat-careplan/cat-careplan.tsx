@@ -38,8 +38,10 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
   const isIOS = Platform.OS === 'ios';
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
-  const [activeSection, setActiveSection] = useState<number[]>([]);
-  const handleActiveSections = (indexes: number[]) => setActiveSection(indexes);
+  const [activeSections, setActiveSections] = useState<number[]>([]);
+  const handleActiveSections = (indexes: number[]) => setActiveSections(indexes);
+  const [accordionDirty, setAccordionDirty] = useState<boolean>(false);
+  const handleAccordionDirty = (dirty: boolean) => setAccordionDirty(dirty);
   const { scrollRef, scrollTracker, scrollTo } = useAutoScroll();
 
   let defaults: CatCarePlan | undefined;
@@ -77,47 +79,47 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
 
   useEffect(() => {
     if (harnessSection) {
-      setActiveSection([...activeSection, 0]);
+      setActiveSections([...activeSections, 0]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [harnessSection]);
   useEffect(() => {
     if (feedingSection) {
-      setActiveSection([...activeSection, 1]);
+      setActiveSections([...activeSections, 1]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feedingSection]);
   useEffect(() => {
     if (overnightSection) {
-      setActiveSection([...activeSection, 2]);
+      setActiveSections([...activeSections, 2]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [overnightSection]);
   useEffect(() => {
     if (medicalSection) {
-      setActiveSection([...activeSection, 3]);
+      setActiveSections([...activeSections, 3]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [medicalSection]);
   useEffect(() => {
     if (specialNeedsSection) {
-      setActiveSection([...activeSection, 4]);
+      setActiveSections([...activeSections, 4]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [specialNeedsSection]);
   useEffect(() => {
     if (additionalNotesSection) {
-      setActiveSection([...activeSection, 5]);
+      setActiveSections([...activeSections, 5]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [additionalNotesSection]);
   useEffect(() => {
-    if (defaults && activeSection.length === 0 && !isDirty) {
+    if (defaults && activeSections.length === 0 && !isDirty && !accordionDirty) {
       console.log('Inside default handling');
-      const indices = getDefaultSectionIndices(CAT_SECTIONS, defaults);
-      setActiveSection(indices);
+      const indexes = getDefaultSectionIndices(CAT_SECTIONS, defaults);
+      setActiveSections(indexes);
     }
-  }, [activeSection.length, defaults, isDirty]);
+  }, [accordionDirty, activeSections.length, defaults, isDirty]);
 
   const onSubmit = handleSubmit(async (data: CatCarePlan) => {
     setLoading(true);
@@ -170,10 +172,12 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
           style={ruffwind`mt-${moderateScaleTW(24)} gap-${moderateScaleTW(8)}`}
         >
           <Accordian
-            activeSections={activeSection}
+            accordionDirty={accordionDirty}
+            activeSections={activeSections}
             scrollTracker={scrollTracker}
-            setActiveSections={handleActiveSections}
             sections={generateCatCareplans(form)}
+            setAccordionDirty={handleAccordionDirty}
+            setActiveSections={handleActiveSections}
           />
         </View>
 
@@ -181,8 +185,8 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
           style={ruffwind.style(
             `gap-${moderateScaleTW(8)}`,
             isIOS ? `mt-${verticalScaleTW(161)}` : `mt-${verticalScaleTW(200)}`,
-            activeSection.length > 0 && `mt-${verticalScaleTW(16)}`,
-            activeSection.length > 0 && !isIOS && `mb-${verticalScaleTW(16)}`
+            activeSections.length > 0 && `mt-${verticalScaleTW(16)}`,
+            activeSections.length > 0 && !isIOS && `mb-${verticalScaleTW(16)}`
           )}
         >
           <HorizontalDivider color="border-amethystSmoke-600" />
