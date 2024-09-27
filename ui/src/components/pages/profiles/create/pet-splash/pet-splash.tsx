@@ -37,7 +37,10 @@ const PetSplashSheet = ({ navigation }: PageNavigationProps) => {
   return (
     <View>
       <View style={ruffwind`gap-3`}>
-        <H2 text={<>Arf-mazing!{`\n`}Build your pet profile</>} />
+        <H2
+          align="text-center"
+          text={<>Arf-mazing!{`\n`}Build your pet profile</>}
+        />
         <Text
           style={ruffwind`font-body text-center text-b3 text-balticSea-950`}
         >

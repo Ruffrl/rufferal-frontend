@@ -214,6 +214,19 @@ module.exports = {
           900: '#5D5260',
           950: '#3E3540',
         },
+        whisper: {
+          50: '#FDFAFF', // PRIMARY
+          100: '#F5E8FF',
+          200: '#EDD5FF',
+          300: '#DFB4FE',
+          400: '#CC84FC',
+          500: '#B855F7',
+          600: '#A533EA',
+          700: '#8F22CE',
+          800: '#7921A8',
+          900: '#631C87',
+          950: '#440764',
+        },
       },
       fontFamily: {
         body: ['Inter Regular'], // 400
@@ -227,6 +240,7 @@ module.exports = {
       },
       fontSize: {
         b1: [`${moderateScale(10)}px`, `${moderateScale(14)}px`],
+        b1Small: [`${moderateScale(10)}px`, `${moderateScale(12.1)}px`],
         b2: [`${moderateScale(12)}px`, `${moderateScale(16)}px`],
         b3: [`${moderateScale(14)}px`, `${moderateScale(20)}px`],
         b4: [`${moderateScale(16)}px`, `${moderateScale(24)}px`],

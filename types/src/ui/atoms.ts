@@ -143,6 +143,7 @@ export interface FieldSelectProps<Option> extends DropdownProps<Option> {
 export interface FullTextProps {
   align?: string;
   text: string | JSX.Element;
+  textColor?: string;
 }
 
 export interface HorizontalDividerProps {
