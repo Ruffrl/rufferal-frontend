@@ -1,7 +1,7 @@
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { ruffwind } from '@rufferal/tailwind';
 import { BottomsheetProps } from '@rufferal/types';
-import React, { PropsWithChildren, useCallback, useRef } from 'react';
+import { PropsWithChildren, useRef } from 'react';
 
 export const Bottomsheet = ({
   animateOnMount = true,
@@ -13,16 +13,16 @@ export const Bottomsheet = ({
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
 
-  // callbacks
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
+  // // callbacks
+  // const handleSheetChanges = useCallback((index: number) => {
+  //   console.log('handleSheetChanges', index);
+  // }, []);
 
   // renders
   return (
     <BottomSheet
       ref={bottomSheetRef}
-      onChange={handleSheetChanges}
+      // onChange={handleSheetChanges}
       snapPoints={snapPoints}
       backgroundStyle={ruffwind.style(backgroundColor)}
       handleStyle={ruffwind`h-[30px] justify-end p-0 mb-2.5`}

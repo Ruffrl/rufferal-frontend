@@ -98,10 +98,10 @@ export const PhotoModal = ({
     pickerModalRef.current?.dismiss();
     handleModalDismiss();
   }, [handleModalDismiss]);
-  // BLARG:TODO: determine best way to replace or remove this
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
+  // // BLARG:TODO: determine best way to replace or remove this
+  // const handleSheetChanges = useCallback((index: number) => {
+  //   console.log('handleSheetChanges', index);
+  // }, []);
 
   // BLARG:TODO: how can I remove this?
   useEffect(() => {
@@ -234,7 +234,7 @@ export const PhotoModal = ({
         detached={true}
         index={1}
         name="Photo Gallery or Camera"
-        onChange={handleSheetChanges}
+        // onChange={handleSheetChanges}
         ref={pickerModalRef}
         snapPoints={snapPoints}
         style={ruffwind`m-2.5`}
