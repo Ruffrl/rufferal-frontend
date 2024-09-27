@@ -86,7 +86,7 @@ export const PhotoModal = ({
     if (photo?.uri) {
       onChange(photo.uri);
     }
-    setCameraView(false)
+    setCameraView(false);
     handleDismissModalPress();
   };
 
@@ -111,7 +111,7 @@ export const PhotoModal = ({
   }, [handlePresentModalPress, modalPresent]);
 
   /* STYLES */
-  const cameraPaddingX = `px-${moderateScaleTW(16)}`
+  const cameraPaddingX = `px-${moderateScaleTW(16)}`;
   let cameraPaddingY = `py-${verticalScaleTW(16)}`;
   switch (Platform.OS) {
     case 'android':
@@ -148,15 +148,20 @@ export const PhotoModal = ({
           style={ruffwind.style(
             `flex-1 bg-black`,
             cameraPaddingX,
-            cameraPaddingY,
+            cameraPaddingY
           )}
         >
           {permission?.granted ? (
             <View style={ruffwind`flex-1`}>
-              <View style={ruffwind.style(`bg-black flex-row justify-between`, `pb-${moderateScaleTW(4)}`)}>
+              <View
+                style={ruffwind.style(
+                  `bg-black flex-row justify-between`,
+                  `pb-${moderateScaleTW(4)}`
+                )}
+              >
                 <Pressable
                   style={ruffwind`flex-1 items-start`}
-                  onPress={() => setCameraView(false)}
+                  onPress={toggleCameraFacing}
                 >
                   <Image
                     style={ruffwind.style(
@@ -169,7 +174,7 @@ export const PhotoModal = ({
                 </Pressable>
                 <Pressable
                   style={ruffwind`flex-1 items-end`}
-                  onPress={toggleCameraFacing}
+                  onPress={() => setCameraView(false)}
                 >
                   <Image
                     style={ruffwind.style(
@@ -186,7 +191,9 @@ export const PhotoModal = ({
                 facing={facing}
                 ref={cameraRef}
               />
-              <View style={ruffwind.style(`bg-black`, `pt-${moderateScaleTW(4)}`)}>
+              <View
+                style={ruffwind.style(`bg-black`, `pt-${moderateScaleTW(4)}`)}
+              >
                 <Pressable
                   style={ruffwind`flex-1 items-center`}
                   onPress={takePhoto}
