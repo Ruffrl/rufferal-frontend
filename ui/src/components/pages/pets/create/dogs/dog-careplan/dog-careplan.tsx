@@ -158,7 +158,9 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
       <ScrollFeatureTemplate
         backNavigation={() => navigation.navigate('Dog Personality')}
         forwardNavigation={onSubmit}
-        forwardText="Complete"
+        forwardText={
+          defaults && Object.keys(defaults)?.length > 0 ? 'Update' : 'Complete'
+        }
         scrollRef={scrollRef}
       >
         <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
@@ -197,7 +199,15 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
         >
           <HorizontalDivider color="border-amethystSmoke-600" />
           {error && <FieldHelper text={error} align={'text-center'} />}
-          <Button text="Complete" onPress={onSubmit} loading={loading} />
+          <Button
+            text={
+              defaults && Object.keys(defaults)?.length > 0
+                ? 'Update'
+                : 'Complete'
+            }
+            onPress={onSubmit}
+            loading={loading}
+          />
           <Button
             text="Cancel"
             type="transparent"

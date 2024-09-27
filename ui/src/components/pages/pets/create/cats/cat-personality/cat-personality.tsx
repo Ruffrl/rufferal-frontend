@@ -88,7 +88,9 @@ export const CatPersonality = observer(
       <ScrollFeatureTemplate
         backNavigation={() => navigation.navigate('Cat Avatar')}
         forwardNavigation={() => navigation.navigate('Cat Careplan')}
-        forwardText="Skip"
+        forwardText={
+          defaults && Object.keys(defaults)?.length > 0 ? 'Next' : 'Skip'
+        }
         scrollRef={scrollRef}
       >
         <FormProvider {...form}>
@@ -314,7 +316,15 @@ export const CatPersonality = observer(
           >
             <HorizontalDivider color="border-amethystSmoke-600" />
             {error && <FieldHelper text={error} align={'text-center'} />}
-            <Button text="Next" onPress={onSubmit} loading={loading} />
+            <Button
+              text={
+                defaults && Object.keys(defaults)?.length > 0
+                  ? 'Update'
+                  : 'Next'
+              }
+              onPress={onSubmit}
+              loading={loading}
+            />
             <Button
               text="Cancel"
               type="transparent"

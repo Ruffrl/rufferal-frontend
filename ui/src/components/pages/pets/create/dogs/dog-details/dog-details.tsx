@@ -105,6 +105,10 @@ export const DogDetails = observer(({ navigation }: PageNavigationProps) => {
     <ScrollFeatureTemplate
       backNavigation={() => navigation.navigate('Manage Pets')}
       scrollRef={scrollRef}
+      forwardNavigation={
+        defaults?.name ? () => navigation.navigate('Dog Avatar') : undefined
+      }
+      forwardText={defaults?.name && 'Next'}
     >
       <FormProvider {...form}>
         <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
@@ -267,7 +271,11 @@ export const DogDetails = observer(({ navigation }: PageNavigationProps) => {
         >
           <HorizontalDivider color="border-amethystSmoke-600" />
           {error && <FieldHelper text={error} align={'text-center'} />}
-          <Button text="Next" onPress={onSubmit} loading={loading} />
+          <Button
+            text={defaults?.name ? 'Update' : 'Next'}
+            onPress={onSubmit}
+            loading={loading}
+          />
           <Button
             text="Cancel"
             type="transparent"

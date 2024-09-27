@@ -39,7 +39,8 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const [activeSections, setActiveSections] = useState<number[]>([]);
-  const handleActiveSections = (indexes: number[]) => setActiveSections(indexes);
+  const handleActiveSections = (indexes: number[]) =>
+    setActiveSections(indexes);
   const [accordionDirty, setAccordionDirty] = useState<boolean>(false);
   const handleAccordionDirty = (dirty: boolean) => setAccordionDirty(dirty);
   const { scrollRef, scrollTracker, scrollTo } = useAutoScroll();
@@ -114,7 +115,12 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [additionalNotesSection]);
   useEffect(() => {
-    if (defaults && activeSections.length === 0 && !isDirty && !accordionDirty) {
+    if (
+      defaults &&
+      activeSections.length === 0 &&
+      !isDirty &&
+      !accordionDirty
+    ) {
       console.log('Inside default handling');
       const indexes = getDefaultSectionIndices(CAT_SECTIONS, defaults);
       setActiveSections(indexes);
@@ -152,7 +158,9 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
       <ScrollFeatureTemplate
         backNavigation={() => navigation.navigate('Cat Personality')}
         forwardNavigation={onSubmit}
-        forwardText="Complete"
+        forwardText={
+          defaults && Object.keys(defaults)?.length > 0 ? 'Update' : 'Complete'
+        }
         scrollRef={scrollRef}
       >
         <View style={ruffwind`mt-${moderateScaleTW(24)}`}>
@@ -191,7 +199,15 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
         >
           <HorizontalDivider color="border-amethystSmoke-600" />
           {error && <FieldHelper text={error} align={'text-center'} />}
-          <Button text="Complete" onPress={onSubmit} loading={loading} />
+          <Button
+            text={
+              defaults && Object.keys(defaults)?.length > 0
+                ? 'Update'
+                : 'Complete'
+            }
+            onPress={onSubmit}
+            loading={loading}
+          />
           <Button
             text="Cancel"
             type="transparent"
