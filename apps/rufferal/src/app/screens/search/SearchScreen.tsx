@@ -1,10 +1,6 @@
-import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { PageNavigationProps } from '@rufferal/types';
 import { Search } from '@rufferal/ui';
 
-export const SearchScreen = ({
-  navigation,
-}: {
-  navigation: NavigationProp<ParamListBase>;
-}) => {
-  return <Search />;
+export const SearchScreen = ({ navigation }: PageNavigationProps) => {
+  return <Search navigation={navigation} />;
 };

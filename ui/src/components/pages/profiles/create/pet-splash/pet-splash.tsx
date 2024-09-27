@@ -1,13 +1,11 @@
+import { ruffwind } from '@rufferal/tailwind';
+import { PageNavigationProps } from '@rufferal/types';
+import { verticalScale, verticalScaleTW } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { Platform, Text, View } from 'react-native';
 
-import { ruffwind } from '@rufferal/tailwind';
-import { verticalScale, verticalScaleTW } from '@rufferal/utils';
 import { Bottomsheet, Button, H2 } from '../../../../atoms';
 import { SplashTemplate } from '../../../../templates';
-import { PageNavigationProps } from '../../..';
-
-// interface PetSplashProps extends PageNavigationProps {}
 
 export const PetSplash = ({ navigation }: PageNavigationProps) => {
   const isIOS = Platform.OS === 'ios';

@@ -22,6 +22,7 @@ export const Screens = observer(() => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {/* ⬇️⬇️⬇️ CURRENT DEVELOPMENT PAGE ⬇️⬇️⬇️ */}
+        <Stack.Screen name="Search" component={SearchScreen} />
         {/* ⬆️⬆️⬆️ CURRENT DEVELOPMENT PAGE ⬆️⬆️⬆️ */}
 
         <Stack.Screen
@@ -37,7 +38,7 @@ export const Screens = observer(() => {
         <Stack.Screen name="Dog Avatar" component={DogAvatarScreen} />
         <Stack.Screen name="Dog Personality" component={DogPersonalityScreen} />
         <Stack.Screen name="Dog Careplan" component={DogCareplanScreen} />
-        <Stack.Screen name="Search" component={SearchScreen} />
+        {/* <Stack.Screen name="Search" component={SearchScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
