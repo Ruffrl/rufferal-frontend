@@ -1,7 +1,6 @@
 import { ruffwind } from '@rufferal/tailwind';
 import { AccordianProps, AccordionSection } from '@rufferal/types';
 import {
-  areNumberArraysEqualNoOrder,
   GLOBAL_ICON_SIZE,
   GLOBAL_ICON_SIZE_MEDIUM_SMALL,
   moderateScaleTW,
@@ -13,55 +12,15 @@ import { HorizontalDivider } from '../horizontal-divider/horizontal-divider';
 
 import { Switch } from '../switch/switch';
 
-import { useCallback, useEffect, useState } from 'react';
 import * as RNCAccordian from 'react-native-collapsible/Accordion';
 const CollapsibleAccordion = RNCAccordian.default;
 
 export const Accordian = ({
   activeSections,
+  scrollTracker,
   sections,
   setActiveSections,
-  scrollTracker,
 }: AccordianProps) => {
-  const [toggleSections, setToggleSections] = useState<number[]>([]);
-
-  /* CALLBACKS */
-  const handleActiveSections = useCallback(
-    (indexes: number[]) => {
-      setActiveSections(indexes);
-    },
-    [setActiveSections]
-  );
-  const toggleSection = useCallback((index: number) => {
-    setToggleSections((prev) => {
-      // Check if the section is already in the array
-      if (prev.includes(index)) {
-        // If it is, remove it
-        return prev.filter((s) => s !== index);
-      } else {
-        // If it isn't, add it
-        return [...prev, index];
-      }
-    });
-  }, []);
-  console.log('AFTER? toggleSections', toggleSections);
-
-  useEffect(() => {
-    const checkEqual = areNumberArraysEqualNoOrder(
-      activeSections,
-      toggleSections
-    );
-
-    if (toggleSections.length > 0 && !checkEqual) {
-      console.log('activeSections', activeSections);
-      console.log('toggleSections', toggleSections);
-      const newIndices = Array.from(
-        new Set([...activeSections, ...toggleSections])
-      );
-      handleActiveSections(newIndices);
-    }
-  }, [activeSections, handleActiveSections, toggleSections]);
-
   // renders
   const renderSectionHeader = (section: AccordionSection, index: number) => {
     return (
@@ -99,10 +58,7 @@ export const Accordian = ({
                     <Switch
                       value={value}
                       onBlur={onBlur}
-                      onChange={(value) => {
-                        onChange(value);
-                        toggleSection(index);
-                      }}
+                      onChange={onChange}
                       handleChange={section.switch.handleChange}
                     />
                   ) : (
@@ -155,7 +111,7 @@ export const Accordian = ({
       activeSections={activeSections}
       renderHeader={(content, index) => renderSectionHeader(content, index)}
       renderContent={renderSectionContent}
-      onChange={handleActiveSections}
+      onChange={setActiveSections}
       // BLARG - import from tailwind config electricViolet[700]
       underlayColor={'#9525CB'}
       sectionContainerStyle={ruffwind`

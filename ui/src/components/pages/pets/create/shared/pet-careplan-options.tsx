@@ -6,11 +6,33 @@ import {
   FieldOption,
   OtherOption,
 } from '@rufferal/types';
+import { titleCaseToCamelCase } from '@rufferal/utils';
 import { Controller, UseFormReturn } from 'react-hook-form';
 import { Text } from 'react-native';
 import { InputArea, RadioGroup, Select } from '../../../../molecules';
 
 /****************** SHARED ******************/
+export const getDefaultSectionIndices = (
+  sections: Array<{ title: string }>, // Array of objects with a title property
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  defaults: Record<string, any> // Object representing defaults with flexible structure
+): Array<number> => {
+  // Returns an array of section indices
+  const defaultKeys = Object.keys(defaults); // Get keys from defaults object
+  const sectionIndices: Array<number> = []; // Array to hold section indices
+
+  sections.forEach((section, index) => {
+    // Iterate over each section
+    const key = titleCaseToCamelCase(section.title) || ''; // Convert section title to camelCase
+    if (defaultKeys.includes(key)) {
+      // Check if the camelCase key exists in defaults
+      sectionIndices.push(index); // Push the index if it exists
+    }
+  });
+
+  return sectionIndices; // Return the array with section indices
+};
+
 export const OTHER_OPTION: OtherOption = {
   label: 'Other (see Special Instructions Below)',
   component: (
@@ -107,6 +129,26 @@ export const HARNESS_OPTIONS: FieldOption[] = [
   },
 ];
 
+export const CAT_SECTIONS = [
+  {
+    title: 'Harness',
+  },
+  {
+    title: 'Feeding',
+  },
+  {
+    title: 'Overnight',
+  },
+  {
+    title: 'Medical',
+  },
+  {
+    title: 'Special needs',
+  },
+  {
+    title: 'Additional notes',
+  },
+];
 export const generateCatCareplans = (
   form: UseFormReturn<CatCarePlan>
 ): AccordionSection[] => {
@@ -423,6 +465,26 @@ export const HOUSETRAINING_OPTIONS: FieldOption[] = [
   },
 ];
 
+export const DOG_SECTIONS = [
+  {
+    title: 'House Training',
+  },
+  {
+    title: 'Feeding',
+  },
+  {
+    title: 'Overnight',
+  },
+  {
+    title: 'Medical',
+  },
+  {
+    title: 'Special needs',
+  },
+  {
+    title: 'Additional notes',
+  },
+];
 export const generateDogCareplans = (
   form: UseFormReturn<DogCarePlan>
 ): AccordionSection[] => {

@@ -25,7 +25,11 @@ import {
   ProgressBar,
 } from '../../../../../atoms';
 import { ScrollFeatureTemplate } from '../../../../../templates';
-import { generateCatCareplans } from '../../shared/pet-careplan-options';
+import {
+  CAT_SECTIONS,
+  generateCatCareplans,
+  getDefaultSectionIndices,
+} from '../../shared/pet-careplan-options';
 import { catCareplanSchema } from '../../shared/pet-profile-forms';
 import { SecondaryFormHeader } from '../../shared/secondary-form-header/secondary-form-header';
 
@@ -53,7 +57,7 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
   const {
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = form;
 
   useEffect(() => {
@@ -107,6 +111,13 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [additionalNotesSection]);
+  useEffect(() => {
+    if (defaults && activeSection.length === 0 && !isDirty) {
+      console.log('Inside default handling');
+      const indices = getDefaultSectionIndices(CAT_SECTIONS, defaults);
+      setActiveSection(indices);
+    }
+  }, [activeSection.length, defaults, isDirty]);
 
   const onSubmit = handleSubmit(async (data: CatCarePlan) => {
     setLoading(true);
@@ -161,7 +172,7 @@ export const CatCareplan = observer(({ navigation }: PageNavigationProps) => {
           <Accordian
             activeSections={activeSection}
             scrollTracker={scrollTracker}
-            setActiveSections={(indexes) => handleActiveSections(indexes)}
+            setActiveSections={handleActiveSections}
             sections={generateCatCareplans(form)}
           />
         </View>

@@ -20,10 +20,10 @@ import {
 } from '..';
 
 export interface AccordianProps {
-  sections: AccordionSection[];
   activeSections: number[];
+  scrollTracker: (component: React.ReactNode, inputKey: string) => JSX.Element;
+  sections: AccordionSection[];
   setActiveSections: (indexes: number[]) => void;
-  scrollTracker: (component: React.ReactNode, inputKey: string) => JSX.Element
 }
 
 export interface AccordionSection {

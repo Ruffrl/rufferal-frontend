@@ -25,7 +25,7 @@ import {
   ProgressBar,
 } from '../../../../../atoms';
 import { ScrollFeatureTemplate } from '../../../../../templates';
-import { generateDogCareplans } from '../../shared/pet-careplan-options';
+import { DOG_SECTIONS, generateDogCareplans, getDefaultSectionIndices } from '../../shared/pet-careplan-options';
 import { dogCareplanSchema } from '../../shared/pet-profile-forms';
 import { SecondaryFormHeader } from '../../shared/secondary-form-header/secondary-form-header';
 
@@ -53,15 +53,8 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
   const {
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = form;
-
-  const houseTrainingSection = watch('houseTraining.activated');
-  const feedingSection = watch('feeding.activated');
-  const overnightSection = watch('overnight.activated');
-  const medicalSection = watch('medical.activated');
-  const specialNeedsSection = watch('specialNeeds.activated');
-  const additionalNotesSection = watch('additionalNotes.activated');
 
   useEffect(() => {
     const firstErrorField = Object.keys(errors)[0] as DogCareplanField;
@@ -70,6 +63,14 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
       scrollTo([`${firstErrorField}.activated`]);
     }
   }, [errors, scrollTo]);
+  
+  const houseTrainingSection = watch('houseTraining.activated');
+  const feedingSection = watch('feeding.activated');
+  const overnightSection = watch('overnight.activated');
+  const medicalSection = watch('medical.activated');
+  const specialNeedsSection = watch('specialNeeds.activated');
+  const additionalNotesSection = watch('additionalNotes.activated');
+
 
   useEffect(() => {
     if (houseTrainingSection) {
@@ -107,6 +108,13 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [additionalNotesSection]);
+  useEffect(() => {
+    if (defaults && activeSection.length === 0 && !isDirty) {
+      console.log('Inside default handling');
+      const indices = getDefaultSectionIndices(DOG_SECTIONS, defaults);
+      setActiveSection(indices);
+    }
+  }, [activeSection.length, defaults, isDirty]);
 
   const onSubmit = handleSubmit(async (data: DogCarePlan) => {
     setLoading(true);
