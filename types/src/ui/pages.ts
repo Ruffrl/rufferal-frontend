@@ -11,12 +11,15 @@ export type ScreenProps = {
   'Cat Careplan': undefined;
   'Cat Details': undefined;
   'Cat Personality': undefined;
-  'Create Pets Onboarding': undefined;
+  'Pet Splash': undefined;
   'Dog Avatar': undefined;
   'Dog Careplan': undefined;
   'Dog Details': undefined;
   'Dog Personality': undefined;
   'Manage Pets': undefined;
   Search: undefined;
+  'Search Filters': undefined;
+  'Search Results': undefined;
+  'Profile Splash': undefined;
   // Profile: { userId: string };
 };

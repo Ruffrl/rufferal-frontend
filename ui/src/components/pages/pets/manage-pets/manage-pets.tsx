@@ -14,9 +14,7 @@ export const ManagePets = observer(({ navigation }: PageNavigationProps) => {
   const pets = observablePetStore.activePets();
 
   return (
-    <FeatureTemplate
-      backNavigation={() => navigation.navigate('Create Pets Onboarding')}
-    >
+    <FeatureTemplate backNavigation={() => navigation.navigate('Pet Splash')}>
       <View style={ruffwind`pt-6 gap-6`}>
         <H3 text="Pet profiles" />
         {pets.length > 0 ? (
