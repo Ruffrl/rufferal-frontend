@@ -31,7 +31,11 @@ export const Accordian = ({
   }, [accordionDirty, setAccordionDirty]);
 
   // renders
-  const renderSectionHeader = (section: AccordionSection, index: number) => {
+  const renderSectionHeader = (
+    section: AccordionSection,
+    index: number,
+    isActive: boolean
+  ) => {
     return (
       <View
         style={ruffwind`
@@ -79,15 +83,27 @@ export const Accordian = ({
             )}
           </>
         )}
-        <Image
-          style={ruffwind.style(
-            GLOBAL_ICON_SIZE_MEDIUM_SMALL,
-            'items-center justify-center'
-          )}
-          source={require('@rufferal/assets/src/icons/chevron-down.png')}
-          // BLARG -import from tailwind config
-          tintColor={'#2B242E'}
-        />
+        {isActive ? (
+          <Image
+            style={ruffwind.style(
+              GLOBAL_ICON_SIZE_MEDIUM_SMALL,
+              'items-center justify-center'
+            )}
+            source={require('@rufferal/assets/src/icons/chevron-up.png')}
+            // BLARG -import from tailwind config
+            tintColor={'#2B242E'}
+          />
+        ) : (
+          <Image
+            style={ruffwind.style(
+              GLOBAL_ICON_SIZE_MEDIUM_SMALL,
+              'items-center justify-center'
+            )}
+            source={require('@rufferal/assets/src/icons/chevron-down.png')}
+            // BLARG -import from tailwind config
+            tintColor={'#2B242E'}
+          />
+        )}
       </View>
     );
   };
@@ -118,7 +134,9 @@ export const Accordian = ({
       expandMultiple
       sections={sections}
       activeSections={activeSections}
-      renderHeader={(content, index) => renderSectionHeader(content, index)}
+      renderHeader={(content, index, isActive) =>
+        renderSectionHeader(content, index, isActive)
+      }
       renderContent={renderSectionContent}
       // onChange={setActiveSections}
       onChange={(indexes) => {
