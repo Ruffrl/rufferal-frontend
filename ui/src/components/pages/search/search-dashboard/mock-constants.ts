@@ -1,6 +1,12 @@
-import { Item, RufferalItem } from './search-dashboard';
+import { Caretaker } from "../../../organisms";
 
-export const MOCK_PET_OWNERS: RufferalItem[] = [
+export type PetOwner = {
+  id: string;
+  avatar: string;
+};
+
+
+export const MOCK_PET_OWNERS: PetOwner[] = [
   {
     id: '1',
     avatar: require('@rufferal/assets/src/images/mocks/asian-teenager-s-close-up-portrait-isolated-blue-studio/asian-teenager-s-close-up-portrait-isolated-blue-studio.jpg'),
@@ -99,7 +105,7 @@ export const MOCK_PET_OWNERS: RufferalItem[] = [
   //   { id: '27', avatar: require('@rufferal/') },
 ];
 
-export const MOCK_DATA: Item[] = [
+export const MOCK_CARETAKERS: Caretaker[] = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
     forename: 'Paris',
