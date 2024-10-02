@@ -16,7 +16,7 @@ import {
   ProfileSplashScreen,
   SearchDashboardScreen,
   SearchFiltersScreen,
-  SearchResultsScreen
+  SearchResultsScreen,
 } from '.';
 
 const Stack = createNativeStackNavigator<ScreenProps>();
@@ -26,7 +26,7 @@ export const Screens = observer(() => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {/* ⬇️⬇️⬇️ CURRENT DEVELOPMENT PAGE ⬇️⬇️⬇️ */}
-        {/* <Stack.Screen name="Search" component={SearchDashboardScreen} /> */}
+        <Stack.Screen name="Search" component={SearchDashboardScreen} />
         {/* ⬆️⬆️⬆️ CURRENT DEVELOPMENT PAGE ⬆️⬆️⬆️ */}
 
         <Stack.Screen name="Pet Splash" component={PetSplashScreen} />
@@ -39,7 +39,7 @@ export const Screens = observer(() => {
         <Stack.Screen name="Dog Avatar" component={DogAvatarScreen} />
         <Stack.Screen name="Dog Personality" component={DogPersonalityScreen} />
         <Stack.Screen name="Dog Careplan" component={DogCareplanScreen} />
-        <Stack.Screen name="Search" component={SearchDashboardScreen} />
+        {/* <Stack.Screen name="Search" component={SearchDashboardScreen} /> */}
         <Stack.Screen name="Search Filters" component={SearchFiltersScreen} />
         <Stack.Screen name="Search Results" component={SearchResultsScreen} />
         <Stack.Screen name="Profile Splash" component={ProfileSplashScreen} />
