@@ -52,7 +52,7 @@ export const CatAvatar = observer(({ navigation }: PageNavigationProps) => {
 
       try {
         console.log('BLARG:TODO - handle backend submission', data);
-        navigation.navigate('Manage Pets');
+        navigation.navigate('Pets Dashboard');
       } catch (err) {
         setError(String(err));
       } finally {
@@ -104,14 +104,18 @@ export const CatAvatar = observer(({ navigation }: PageNavigationProps) => {
               )}
             >
               {error && <FieldHelper text={error} align={'text-center'} />}
-              <Button text={defaults?.uri ? 'Update' : 'Next'} onPress={onSubmit} loading={loading} />
+              <Button
+                text={defaults?.uri ? 'Update' : 'Next'}
+                onPress={onSubmit}
+                loading={loading}
+              />
               <Button
                 text="Cancel"
                 type="transparent"
                 size="standard-short"
                 onPress={() => {
                   observablePetStore.setEditing({ id: undefined });
-                  navigation.navigate('Manage Pets');
+                  navigation.navigate('Pets Dashboard');
                 }}
                 loading={loading}
               />

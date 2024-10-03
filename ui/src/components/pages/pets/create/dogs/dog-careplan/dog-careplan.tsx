@@ -137,14 +137,14 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
       }
       observablePetStore.setEditing({ id: undefined });
       setLoading(false);
-      navigation.navigate('Manage Pets');
+      navigation.navigate('Pets Dashboard');
     } else {
       // Handle form submission
       setError('');
 
       try {
         console.log('BLARG:TODO - handle backend submission', data);
-        navigation.navigate('Manage Pets');
+        navigation.navigate('Pets Dashboard');
       } catch (err) {
         setError(String(err));
       } finally {
@@ -214,7 +214,7 @@ export const DogCareplan = observer(({ navigation }: PageNavigationProps) => {
             size="standard-short"
             onPress={() => {
               observablePetStore.setEditing({ id: undefined });
-              navigation.navigate('Manage Pets');
+              navigation.navigate('Pets Dashboard');
             }}
             loading={loading}
           />

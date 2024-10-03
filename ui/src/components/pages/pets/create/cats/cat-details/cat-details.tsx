@@ -99,7 +99,7 @@ export const CatDetails = observer(({ navigation }: PageNavigationProps) => {
 
   return (
     <ScrollFeatureTemplate
-      backNavigation={() => navigation.navigate('Manage Pets')}
+      backNavigation={() => navigation.navigate('Pets Dashboard')}
       scrollRef={scrollRef}
       forwardNavigation={
         defaults?.name ? () => navigation.navigate('Cat Avatar') : undefined
@@ -279,7 +279,7 @@ export const CatDetails = observer(({ navigation }: PageNavigationProps) => {
             size="standard-short"
             onPress={() => {
               observablePetStore.setEditing({ id: undefined });
-              navigation.navigate('Manage Pets');
+              navigation.navigate('Pets Dashboard');
             }}
             loading={loading}
           />

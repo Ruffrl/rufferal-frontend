@@ -49,9 +49,9 @@ const ProfileSplashSheet = ({ navigation }: PageNavigationProps) => {
         </Text>
       </View>
       <View style={ruffwind`mt-[45px] gap-2`}>
-        <Button onPress={() => navigation.navigate('Manage Pets')} />
+        <Button onPress={() => navigation.navigate('Pets Dashboard')} />
         <Button
-          onPress={() => navigation.navigate('Search')}
+          onPress={() => navigation.navigate('Search Dashboard')}
           text="Skip for now"
           type="transparent"
           size="standard-short"
