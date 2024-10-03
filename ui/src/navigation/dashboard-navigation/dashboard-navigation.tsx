@@ -3,10 +3,7 @@ import { PageNavigationProps } from '@rufferal/types';
 import { GLOBAL_ICON_SIZE_LARGE, moderateScaleTW } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { observer } from 'mobx-react-lite';
-import { Text, View } from 'react-native';
-
-// <View style={ruffwind``}></View>
-// style={ruffwind``}
+import { Pressable, Text, View } from 'react-native';
 
 export const DashboardNavigation = observer(
   ({ navigation }: PageNavigationProps) => {
@@ -23,7 +20,10 @@ export const DashboardNavigation = observer(
             border-t-${moderateScaleTW(1)}
           `}
       >
-        <View style={ruffwind`items-center h-${moderateScaleTW(46)}`}>
+        <Pressable
+          style={ruffwind`items-center h-${moderateScaleTW(46)}`}
+          onPress={() => navigation.navigate('Search Dashboard')}
+        >
           <View style={ruffwind`p-${moderateScaleTW(5)}`}>
             <Image
               style={ruffwind.style(
@@ -39,8 +39,11 @@ export const DashboardNavigation = observer(
           >
             Search
           </Text>
-        </View>
-        <View style={ruffwind`items-center h-${moderateScaleTW(46)}`}>
+        </Pressable>
+        <Pressable
+          style={ruffwind`items-center h-${moderateScaleTW(46)}`}
+          onPress={() => navigation.navigate('Bookings Dashboard')}
+        >
           <View style={ruffwind`p-${moderateScaleTW(5)}`}>
             <Image
               style={ruffwind.style(
@@ -56,8 +59,11 @@ export const DashboardNavigation = observer(
           >
             Bookings
           </Text>
-        </View>
-        <View style={ruffwind`items-center h-${moderateScaleTW(46)}`}>
+        </Pressable>
+        <Pressable
+          style={ruffwind`items-center h-${moderateScaleTW(46)}`}
+          onPress={() => navigation.navigate('Messages Dashboard')}
+        >
           <View style={ruffwind`p-${moderateScaleTW(5)}`}>
             <Image
               style={ruffwind.style(
@@ -73,8 +79,11 @@ export const DashboardNavigation = observer(
           >
             Messages
           </Text>
-        </View>
-        <View style={ruffwind`items-center h-${moderateScaleTW(46)}`}>
+        </Pressable>
+        <Pressable
+          style={ruffwind`items-center h-${moderateScaleTW(46)}`}
+          onPress={() => navigation.navigate('Account Dashboard')}
+        >
           <View style={ruffwind`p-${moderateScaleTW(5)}`}>
             <Image
               style={ruffwind.style(
@@ -90,7 +99,7 @@ export const DashboardNavigation = observer(
           >
             Account
           </Text>
-        </View>
+        </Pressable>
       </View>
     );
   }

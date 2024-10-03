@@ -1,10 +1,15 @@
 import { ruffwind } from '@rufferal/tailwind';
-import { createImageSize, moderateScaleTW } from '@rufferal/utils';
+import {
+  createImageSize,
+  GLOBAL_ICON_SIZE_MEDIUM,
+  moderateScaleTW,
+  starRatingDisplay,
+  surnameLetter,
+} from '@rufferal/utils';
 import { Image } from 'expo-image';
-import { Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 
-// <View style={ruffwind``}></View>
-// style={ruffwind``}
+import { LayeredAvatars } from '../../molecules';
 
 export type Caretaker = {
   id: string;
@@ -18,51 +23,138 @@ export type Caretaker = {
   avatar: string;
 };
 
-export const CaretakerSearchItem = ({ caretaker }: { caretaker: Caretaker }) => (
-  <View key={caretaker.id} style={ruffwind`bg-pink-500 mx-${moderateScaleTW(20)}`}>
-    <View
-      style={ruffwind`
-        bg-yellow-500
-        h-${moderateScaleTW(100)}
-        w-${moderateScaleTW(160)}
-      `}
-    >
-      <Image
-        style={ruffwind.style(
-          createImageSize(34),
-          `items-center justify-center rounded-${moderateScaleTW(4)}`
-        )}
-        source={caretaker.avatar}
-      />
+export const CaretakerSearchItem = ({
+  caretaker,
+  index,
+  itemCount,
+}: {
+  caretaker: Caretaker;
+  index: number;
+  itemCount: number;
+}) => (
+  <Pressable
+    style={ruffwind.style(
+      // `h-[145px] w-[160px]`,
+      itemCount - 1 === index || itemCount - 2 === index
+        ? `mb-0`
+        : `mb-${moderateScaleTW(8)}`
+    )}
+    onPress={() => console.log('MAIN BUTTON')}
+  >
+    <View style={ruffwind`gap-${moderateScaleTW(4)}`}>
+      {/* CARETAKER AVATAR */}
+      <View style={ruffwind``}>
+        <Image
+          style={ruffwind.style(
+            createImageSize(100, 160),
+            `items-center justify-center rounded-${moderateScaleTW(4)}`
+          )}
+          source={caretaker.avatar}
+        />
+        <View
+          style={ruffwind`
+            absolute
+            bg-balticSea-950
+            items-center
+            justify-center
+            opacity-85
+            bottom-${moderateScaleTW(4)}
+            h-${moderateScaleTW(20)}
+            px-${moderateScaleTW(8)}
+            right-${moderateScaleTW(4)}
+          `}
+        >
+          <Text style={ruffwind`font-body text-b1Medium text-white`}>
+            from{` `}
+            <Text style={ruffwind`font-bodyBold text-white text-b1Medium`}>
+              ${caretaker.minimumBookingCost}
+            </Text>
+          </Text>
+        </View>
+      </View>
+      {/* CARETAKER DETAILS */}
+      <View style={ruffwind`mb-${moderateScaleTW(8)}`}>
+        {/* NAME */}
+        <Text style={ruffwind`font-bodyBold text-b2 text-balticSea-950`}>
+          {caretaker.forename} {surnameLetter(caretaker.surname)}
+        </Text>
+        {/* SECONDARY */}
+        <View style={ruffwind`flex-row justify-between items-center`}>
+          {/* STAR RATING */}
+          <View style={ruffwind`flex-row items-center`}>
+            <View style={ruffwind`flex-1 items-center justify-center`}>
+              <Image
+                style={ruffwind.style(
+                  createImageSize(10),
+                  `items-center justify-center`
+                )}
+                source={require('@rufferal/assets/src/icons/star.png')}
+                tintColor={'#695C6F'}
+              />
+            </View>
+            <Text
+              style={ruffwind`font-body text-b1Small text-saltBox-700 ml-${moderateScaleTW(
+                2
+              )}`}
+            >
+              {starRatingDisplay(caretaker.starRating)}
+            </Text>
+          </View>
+          {/* RUFFERALS */}
+          <View style={ruffwind`flex-row items-center`}>
+            <LayeredAvatars imageUrls={caretaker.rufferalSampling} />
+            <Text
+              style={ruffwind`font-body text-b1Small text-saltBox-700 pl-${moderateScaleTW(
+                2
+              )}`}
+            >
+              {caretaker.rufferalCount} booked nearby
+            </Text>
+          </View>
+        </View>
+      </View>
     </View>
-    <Text style={ruffwind`bg-blue-400`}>{caretaker.forename}</Text>
-    <Text style={ruffwind`bg-blue-400`}>{caretaker.surname}</Text>
-    <Text style={ruffwind`bg-blue-400`}>{caretaker.starRating}</Text>
-    <View style={ruffwind``}>
-      {caretaker.rufferalCount > 0 && caretaker.rufferalSampling.length > 0 ? (
-        <View style={ruffwind``}>
-          {caretaker.rufferalSampling.map((imageUrl, index) => (
-            <Image
-              key={index}
-              style={[
-                ruffwind.style(
-                  createImageSize(17.42),
-                  `items-center justify-center rounded-full`,
-                  `absolute left-${moderateScaleTW(
-                    10 * caretaker.rufferalSampling.length - 1 - index
-                  )}`
-                ),
-                { zIndex: caretaker.rufferalSampling.length - index },
-              ]}
-              source={imageUrl}
-            />
-          ))}
-        </View>
-      ) : (
-        <View style={ruffwind``}>
-          <Text style={ruffwind`bg-blue-400`}>Be the first to book!</Text>
-        </View>
+    {/* FAVORITES BUTTON */}
+    <Pressable
+      style={ruffwind.style(
+        `
+        absolute
+        items-center
+        justify-center
+        opacity-85
+        rounded-full
+        h-${moderateScaleTW(24)}
+        p-${moderateScaleTW(5.25)}
+        right-${moderateScaleTW(4)}
+        top-${moderateScaleTW(4)}
+        w-${moderateScaleTW(24)}
+      `,
+        // BLARG:TODO: When we have a fillable heart - remove this and only use bg-balticSea-950
+        caretaker.isFavorite ? `bg-electricViolet-700` : `bg-balticSea-950`
       )}
-    </View>
-  </View>
+      onPress={() => console.log('LAYERED BUTTON')}
+    >
+      {caretaker.isFavorite ? (
+        <Image
+          style={ruffwind.style(
+            GLOBAL_ICON_SIZE_MEDIUM,
+            `items-center justify-center`
+          )}
+          // BLARG:TODO: When we have a fillable heart - remove this and use the commented out source
+          source={require('@rufferal/assets/src/icons/heart-open.png')}
+          // source={require('@rufferal/assets/src/icons/heart-filled.png')}
+          tintColor={'#EFD6FE'}
+        />
+      ) : (
+        <Image
+          style={ruffwind.style(
+            GLOBAL_ICON_SIZE_MEDIUM,
+            `items-center justify-center`
+          )}
+          source={require('@rufferal/assets/src/icons/heart-open.png')}
+          tintColor={'#EFD6FE'}
+        />
+      )}
+    </Pressable>
+  </Pressable>
 );

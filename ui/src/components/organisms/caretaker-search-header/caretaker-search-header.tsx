@@ -10,17 +10,14 @@ import { Pressable, Text, View } from 'react-native';
 
 import { H2 } from '../../atoms';
 
-// <View style={ruffwind``}></View>
-// style={ruffwind``}
-
 export const CaretakerSearchHeader = ({ navigation }: PageNavigationProps) => (
   <View style={ruffwind`flex-1 bg-electricViolet-100`}>
     <View
       style={ruffwind`
         gap-${moderateScaleTW(4)}
-        mt-${moderateScaleTW(34)}
+        pt-${moderateScaleTW(34)}
         px-${moderateScaleTW(20)}
-        mb-${moderateScaleTW(10)}
+        pb-${moderateScaleTW(10)}
         `}
     >
       {/* HEADER */}
@@ -81,9 +78,7 @@ export const CaretakerSearchHeader = ({ navigation }: PageNavigationProps) => (
       {/* FILTERS HEADER */}
       <View
         style={ruffwind`
-          justify-center
-          h-${moderateScaleTW(23)}
-          mb-${moderateScaleTW(8)}
+          justify-center h-${moderateScaleTW(23)} mb-${moderateScaleTW(8)}
         `}
       >
         <Text style={ruffwind`font-bodyBold text-b3 text-balticSea-950`}>
@@ -253,11 +248,12 @@ export const CaretakerSearchHeader = ({ navigation }: PageNavigationProps) => (
     {/* RESULTS HEADER */}
     <View
       style={ruffwind`
-          justify-center
-          h-${moderateScaleTW(23)}
-          mb-${moderateScaleTW(8)}
-          mx-${moderateScaleTW(20)}
-        `}
+        bg-whisper-50
+        justify-center
+        h-${moderateScaleTW(23)}
+        pb-${moderateScaleTW(8)}
+        px-${moderateScaleTW(20)}
+      `}
     >
       <Text style={ruffwind`font-bodyBold text-b3 text-balticSea-950`}>
         Caretakers near you

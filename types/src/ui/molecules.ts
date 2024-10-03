@@ -6,6 +6,12 @@ import {
   ToggleProps,
 } from '..';
 
+export interface CheckToggleProps extends ToggleProps {
+  disabled?: boolean;
+  errorMessage?: string;
+  label: string;
+}
+
 export interface InputAreaProps extends InputProps {
   maxCharacters?: number;
 }
@@ -30,10 +36,9 @@ export interface InputSliderProps extends SingleSliderProps {
   sliderLabels?: [string, string];
 }
 
-export interface CheckToggleProps extends ToggleProps {
-  disabled?: boolean;
-  errorMessage?: string;
-  label: string;
+export interface LayeredAvatarsProps {
+  imageUrls: string[];
+  max?: number;
 }
 
 export type OtherOption = {

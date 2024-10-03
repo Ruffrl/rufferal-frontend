@@ -1,10 +1,9 @@
-import { Caretaker } from "../../../organisms";
+import { Caretaker } from '../../../organisms';
 
 export type PetOwner = {
   id: string;
   avatar: string;
 };
-
 
 export const MOCK_PET_OWNERS: PetOwner[] = [
   {

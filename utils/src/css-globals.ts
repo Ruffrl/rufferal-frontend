@@ -5,10 +5,19 @@ import { moderateScaleTW } from './dimensions';
 export const GLOBAL_X_PADDING = 16;
 export const GLOBAL_Y_PADDING = 16;
 
-export const createImageSize = (size: number) => tw`
-  h-${moderateScaleTW(size)} 
-  w-${moderateScaleTW(size)} 
-`;
+export const createImageSize = (height: number, width?: number) => {
+  if (width) {
+    return tw`
+    h-${moderateScaleTW(height)} 
+    w-${moderateScaleTW(width)} 
+    `;
+  } else {
+    return tw`
+    h-${moderateScaleTW(height)} 
+    w-${moderateScaleTW(height)} 
+    `;
+  }
+};
 
 export const GLOBAL_MIN_PRESS_SIZE = tw`
   h-${moderateScaleTW(48)} 

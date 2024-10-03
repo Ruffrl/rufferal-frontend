@@ -15,5 +15,6 @@ export { InputArea } from './input-area/input-area';
 export { InputPhoto } from './input-photo/input-photo';
 export { InputSlider } from './input-slider/input-slider';
 export { Input } from './input/input';
+export { LayeredAvatars } from './layered-avatars/layered-avatars';
 export { RadioGroup } from './radio-group/radio-group';
 export { Select } from './select/select';

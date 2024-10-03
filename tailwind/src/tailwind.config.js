@@ -241,6 +241,7 @@ module.exports = {
       fontSize: {
         b1: [`${moderateScale(10)}px`, `${moderateScale(14)}px`],
         b1Small: [`${moderateScale(10)}px`, `${moderateScale(12.1)}px`],
+        b1Medium: [`${moderateScale(10)}px`, `${moderateScale(16)}px`],
         b2: [`${moderateScale(12)}px`, `${moderateScale(16)}px`],
         b3: [`${moderateScale(14)}px`, `${moderateScale(20)}px`],
         b4: [`${moderateScale(16)}px`, `${moderateScale(24)}px`],
