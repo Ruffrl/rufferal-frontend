@@ -3,22 +3,24 @@ import { PageNavigationProps } from '@rufferal/types';
 import { GLOBAL_ICON_SIZE_LARGE, moderateScaleTW } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { observer } from 'mobx-react-lite';
-import { Pressable, Text, View } from 'react-native';
+import { Platform, Pressable, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const DashboardNavigation = observer(
   ({ navigation }: PageNavigationProps) => {
+    const insets = useSafeAreaInsets();
+    
     return (
       <View
-        style={ruffwind`
+        style={ruffwind.style(`
             bg-electricViolet-50
             border-t-electricViolet-600
             flex-row
             items-end
             justify-evenly
-            pb-${moderateScaleTW(20)}
             pt-${moderateScaleTW(8)}
             border-t-${moderateScaleTW(1)}
-          `}
+          `, Platform.OS === 'ios' ? `pb-${moderateScaleTW(insets.bottom)}` : `pb-${moderateScaleTW(20)}`)}
       >
         <Pressable
           style={ruffwind`items-center h-${moderateScaleTW(46)}`}

@@ -8,7 +8,6 @@ import {
 } from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { Pressable, Text, View } from 'react-native';
-
 import { LayeredAvatars } from '../../molecules';
 
 export type Caretaker = {
@@ -25,20 +24,15 @@ export type Caretaker = {
 
 export const CaretakerSearchItem = ({
   caretaker,
-  index,
-  itemCount,
 }: {
   caretaker: Caretaker;
-  index: number;
-  itemCount: number;
 }) => (
   <Pressable
-    style={ruffwind.style(
-      // `h-[145px] w-[160px]`,
-      itemCount - 1 === index || itemCount - 2 === index
-        ? `mb-0`
-        : `mb-${moderateScaleTW(8)}`
-    )}
+    style={ruffwind`
+      h-${moderateScaleTW(145)}
+      mb-${moderateScaleTW(8)}
+      w-${moderateScaleTW(160)}
+    `}
     onPress={() => console.log('MAIN BUTTON')}
   >
     <View style={ruffwind`gap-${moderateScaleTW(4)}`}>
@@ -78,30 +72,27 @@ export const CaretakerSearchItem = ({
         <Text style={ruffwind`font-bodyBold text-b2 text-balticSea-950`}>
           {caretaker.forename} {surnameLetter(caretaker.surname)}
         </Text>
-        {/* SECONDARY */}
-        <View style={ruffwind`flex-row justify-between items-center`}>
+        <View style={ruffwind`flex-row justify-between`}>
           {/* STAR RATING */}
           <View style={ruffwind`flex-row items-center`}>
-            <View style={ruffwind`flex-1 items-center justify-center`}>
-              <Image
-                style={ruffwind.style(
-                  createImageSize(10),
-                  `items-center justify-center`
-                )}
-                source={require('@rufferal/assets/src/icons/star.png')}
-                tintColor={'#695C6F'}
-              />
-            </View>
+            <Image
+              style={ruffwind.style(
+                createImageSize(10),
+                `items-center justify-center`
+              )}
+              source={require('@rufferal/assets/src/icons/star.png')}
+              tintColor={'#695C6F'}
+            />
             <Text
-              style={ruffwind`font-body text-b1Small text-saltBox-700 ml-${moderateScaleTW(
-                2
-              )}`}
+              style={ruffwind`
+                font-body text-b1Small text-saltBox-700 ml-${moderateScaleTW(2)}
+              `}
             >
               {starRatingDisplay(caretaker.starRating)}
             </Text>
           </View>
           {/* RUFFERALS */}
-          <View style={ruffwind`flex-row items-center`}>
+          <View style={ruffwind`flex-row items-center justify-end`}>
             <LayeredAvatars imageUrls={caretaker.rufferalSampling} />
             <Text
               style={ruffwind`font-body text-b1Small text-saltBox-700 pl-${moderateScaleTW(

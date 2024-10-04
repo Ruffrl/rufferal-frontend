@@ -5,7 +5,7 @@ import { Image } from 'expo-image';
 import { View } from 'react-native';
 
 export const LayeredAvatars = ({ imageUrls, max = 3 }: LayeredAvatarsProps) => {
-  // Limit the images to a maximum of 3
+  // Limit the images to a maximum amount
   const limitedImages = imageUrls.slice(0, max);
 
   return (
@@ -15,9 +15,11 @@ export const LayeredAvatars = ({ imageUrls, max = 3 }: LayeredAvatarsProps) => {
           key={index}
           source={url}
           style={[
-            ruffwind`rounded-full h-${moderateScaleTW(
-              17.42
-            )} w-${moderateScaleTW(17.42)}`,
+            ruffwind`
+              rounded-full
+              h-${moderateScaleTW(17.42)}
+              w-${moderateScaleTW(17.42)}
+            `,
             index > 0 && { marginLeft: -9.42 }, // Overlap by 9.42px for subsequent images
           ]}
         />
