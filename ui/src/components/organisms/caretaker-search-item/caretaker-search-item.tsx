@@ -116,9 +116,9 @@ export const CaretakerSearchItem = ({
     </View>
     {/* FAVORITES BUTTON */}
     <Pressable
-      style={ruffwind.style(
-        `
+      style={ruffwind`
         absolute
+        bg-balticSea-950
         items-center
         justify-center
         opacity-85
@@ -128,10 +128,7 @@ export const CaretakerSearchItem = ({
         right-${moderateScaleTW(4)}
         top-${moderateScaleTW(4)}
         w-${moderateScaleTW(24)}
-      `,
-        // BLARG:TODO: When we have a fillable heart - remove this and only use bg-balticSea-950
-        caretaker.isFavorite ? `bg-electricViolet-700` : `bg-balticSea-950`
-      )}
+      `}
       onPress={() => console.log('LAYERED BUTTON')}
     >
       {caretaker.isFavorite ? (
@@ -140,9 +137,7 @@ export const CaretakerSearchItem = ({
             GLOBAL_ICON_SIZE_MEDIUM,
             `items-center justify-center`
           )}
-          // BLARG:TODO: When we have a fillable heart - remove this and use the commented out source
-          source={require('@rufferal/assets/src/icons/heart-open.png')}
-          // source={require('@rufferal/assets/src/icons/heart-filled.png')}
+          source={require('@rufferal/assets/src/icons/heart-filled.png')}
           tintColor={'#EFD6FE'}
         />
       ) : (

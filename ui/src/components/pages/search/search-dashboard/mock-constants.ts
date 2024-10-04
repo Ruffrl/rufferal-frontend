@@ -132,13 +132,13 @@ export const MOCK_CARETAKERS: Caretaker[] = [
       require('@rufferal/assets/src/images/mocks/portrait-smiling-woman-outdoors-with-beanie/portrait-smiling-woman-outdoors-with-beanie.jpg'),
     ],
     minimumBookingCost: 18,
-    isFavorite: false,
+    isFavorite: true,
     avatar: require('@rufferal/assets/src/images/mocks/search-mock-2.png'),
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
     forename: 'Austin',
-    surname: 'Biggs',
+    surname: 'Bones',
     starRating: 4.6,
     rufferalCount: 9,
     rufferalSampling: [
@@ -147,7 +147,7 @@ export const MOCK_CARETAKERS: Caretaker[] = [
       require('@rufferal/assets/src/images/mocks/smiley-woman-adventure-nature/smiley-woman-adventure-nature.jpg'),
     ],
     minimumBookingCost: 40,
-    isFavorite: false,
+    isFavorite: true,
     avatar: require('@rufferal/assets/src/images/mocks/search-mock-3.png'),
   },
   {
