@@ -6,6 +6,21 @@ export const capitalize = (string?: string): string | undefined => {
   ); // Capitalize the first letter and concatenate with the rest of the string
 };
 
+export const starRatingDisplay = (rating: number): string => {
+  // Ensure the rating is within the range of 0 to 5 and has one decimal place
+  return Math.min(Math.max(rating, 0), 5).toFixed(1);
+};
+
+export const surnameLetter = (input: string): string => {
+  // Check if the input string is empty
+  if (input.length === 0) {
+    return ''; // Return an empty string if the input is empty
+  }
+
+  // Capitalize the first letter and return it
+  return input.charAt(0).toUpperCase() + '.'; // Return the first letter capitalized followed by a period
+};
+
 export const titleCase = (string?: string): string | undefined => {
   // If string is provided, process it; otherwise, return undefined
   return (

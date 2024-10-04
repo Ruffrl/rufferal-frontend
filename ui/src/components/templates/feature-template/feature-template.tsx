@@ -1,15 +1,10 @@
 import { ruffwind } from '@rufferal/tailwind';
+import { FeatureTemplateProps } from '@rufferal/types';
 import { horizontalScaleTW, verticalScaleTW } from '@rufferal/utils';
 import { PropsWithChildren } from 'react';
 import { Platform, SafeAreaView, View } from 'react-native';
-import { FeatureNavigation } from '../../organisms';
 
-export interface FeatureTemplateProps {
-  backNavigation?: () => void;
-  bgColor?: string;
-  paddingX?: string;
-  forwardNavigation?: () => void;
-}
+import { FeatureNavigation } from '../../organisms';
 
 export const FeatureTemplate = ({
   backNavigation,

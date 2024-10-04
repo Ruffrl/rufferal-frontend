@@ -10,4 +10,8 @@
  *
  */
 
+export type { Caretaker } from './caretaker-search-item/caretaker-search-item';
+
+export { CaretakerSearchHeader } from './caretaker-search-header/caretaker-search-header';
+export { CaretakerSearchItem } from './caretaker-search-item/caretaker-search-item';
 export { FeatureNavigation } from './feature-navigation/feature-navigation';
