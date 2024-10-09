@@ -16,7 +16,7 @@ export const InputArea = ({
   label,
   maxCharacters = 250,
   onChange,
-  size = 'standard',
+  size = 'default',
   ...inputProps
 }: InputAreaProps) => {
   let state: FieldState = 'default';

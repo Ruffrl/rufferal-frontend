@@ -12,13 +12,13 @@ export const FieldInput = ({
   onChange,
   onSubmit,
   placeholder,
-  size = 'standard',
+  size = 'default',
   state = 'default',
   value,
   ...inputProps
 }: FieldInputProps) => {
   const isMobile = Platform.OS === 'ios' || Platform.OS === 'android';
-  
+
   let width = `w-full`;
   switch (size) {
     case 'small':

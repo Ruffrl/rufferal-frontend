@@ -21,7 +21,7 @@ export const Button = ({
   loading,
   onPress,
   rounded = true,
-  size = 'standard',
+  size = 'default',
   state = 'default',
   text = 'Continue',
   iconRight,
@@ -38,14 +38,14 @@ export const Button = ({
   let loadingColor = 'white';
 
   switch (size) {
-    case 'standard-short':
+    case 'medium':
       height = `h-${moderateScaleTW(36)}`;
       fontStyles = 'font-bodyBold text-b3';
       break;
     case 'small':
       width = `w-${horizontalScaleTW(150)}`;
       break;
-    case 'small-short':
+    case 'extra-small':
       width = `w-${horizontalScaleTW(150)}`;
       height = `h-${moderateScaleTW(36)}`;
       fontStyles = 'font-bodyBold text-b3';

@@ -1,6 +1,10 @@
 import { ruffwind } from '@rufferal/tailwind';
 import { FieldInputProps } from '@rufferal/types';
-import { GLOBAL_ICON_SIZE_SMALL, horizontalScaleTW, moderateScaleTW } from '@rufferal/utils';
+import {
+  GLOBAL_ICON_SIZE_SMALL,
+  horizontalScaleTW,
+  moderateScaleTW,
+} from '@rufferal/utils';
 import { Image } from 'expo-image';
 import { Platform, TextInput, View } from 'react-native';
 
@@ -8,7 +12,7 @@ export const FieldInputArea = ({
   onChange,
   onSubmit,
   placeholder,
-  size = 'standard',
+  size = 'default',
   state = 'default',
   value,
   ...inputProps

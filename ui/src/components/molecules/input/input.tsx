@@ -8,7 +8,7 @@ export const Input = ({
   disabled = false,
   errorMessage,
   label,
-  size = 'standard',
+  size = 'default',
   ...inputProps
 }: InputProps) => {
   let state: FieldState = 'default';

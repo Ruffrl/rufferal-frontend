@@ -10,7 +10,7 @@ export const Select = ({
   errorMessage,
   label,
   other,
-  size = 'standard',
+  size = 'default',
   ...selectProps
 }: SelectProps) => {
   let state: FieldState = 'default';
@@ -23,7 +23,7 @@ export const Select = ({
 
   // Handle optional "Other" option
   if (other && Object.keys(other).length > 0) {
-    const filteredOthers = data.filter(item => item.id !== 'other');
+    const filteredOthers = data.filter((item) => item.id !== 'other');
     filteredOthers.push({
       id: 'other',
       label: other.label,

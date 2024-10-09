@@ -54,7 +54,7 @@ const ProfileSplashSheet = ({ navigation }: PageNavigationProps) => {
           onPress={() => navigation.navigate('Search Dashboard')}
           text="Skip for now"
           type="transparent"
-          size="standard-short"
+          size="medium"
           rounded={false}
         />
       </View>
