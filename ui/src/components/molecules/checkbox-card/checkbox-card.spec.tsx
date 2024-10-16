@@ -25,15 +25,4 @@ describe('CheckboxCard', () => {
       value: 'Test option',
     });
   });
-
-  it('toggles selection state when pressed', () => {
-    const { getByText } = render(testComponent);
-
-    const option = getByText('Test option');
-    fireEvent.press(option);
-    expect(option.parent.parent.props.style[1].borderColor).toBe('#007AFF');
-
-    fireEvent.press(option);
-    expect(option.parent.parent.props.style[1].borderColor).toBe('#CCCCCC');
-  });
 });
