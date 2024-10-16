@@ -131,6 +131,7 @@ export interface FieldInputProps
 
 export interface LabelProps {
   text: string;
+  size?: Extract<FieldSize, 'default' | 'large' | 'xlarge' | '2xlarge'>;
   state?: FieldState;
 }
 

@@ -38,15 +38,15 @@ export const Button = ({
   let loadingColor = 'white';
 
   switch (size) {
-    case 'medium':
+    case 'xsmall':
+      width = `w-${horizontalScaleTW(150)}`;
       height = `h-${moderateScaleTW(36)}`;
       fontStyles = 'font-bodyBold text-b3';
       break;
     case 'small':
       width = `w-${horizontalScaleTW(150)}`;
       break;
-    case 'extra-small':
-      width = `w-${horizontalScaleTW(150)}`;
+    case 'medium':
       height = `h-${moderateScaleTW(36)}`;
       fontStyles = 'font-bodyBold text-b3';
       break;
