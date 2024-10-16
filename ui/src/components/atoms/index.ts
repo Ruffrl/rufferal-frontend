@@ -16,6 +16,7 @@ export { Accordian } from './accordian/accordian';
 export { Bottomsheet } from './bottomsheet/bottomsheet';
 export { Button } from './button/button';
 export { CheckLabel } from './check-label/check-label';
+export { CheckboxCardOption } from './checkbox-card-option/checkbox-card-option';
 export { FieldCharacterCount } from './field-character-count/field-character-count';
 export { FieldHelper } from './field-helper/field-helper';
 export { FieldInputArea } from './field-input-area/field-input-area';

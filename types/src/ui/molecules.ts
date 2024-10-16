@@ -6,6 +6,29 @@ import {
   ToggleProps,
 } from '..';
 
+export interface CheckboxCardProps {
+  containerDirection?: string;
+  containerGap?: string;
+  defaultColumnCount?: number;
+  optionDirection?: string;
+  optionGap?: string;
+  optionHeight?: string;
+  optionSelectedBackground?: string;
+  optionSelectedBorder?: string;
+  optionText?: string;
+  optionUnselectedBackground?: string;
+  optionUnselectedBorder?: string;
+}
+
+export interface CheckboxCardOptionProps
+  extends Omit<CheckboxCardProps, 'containerDirection' | 'containerGap'> {
+  heightStyle?: string;
+  icon?: JSX.Element;
+  label: string;
+  onPress: (option: FieldOption) => void;
+  selected?: boolean;
+}
+
 export interface CheckToggleProps extends ToggleProps {
   disabled?: boolean;
   errorMessage?: string;
