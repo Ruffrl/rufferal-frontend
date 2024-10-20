@@ -1,10 +1,29 @@
 # Upcoming TODOs
 
+## Development ease
+
+- [X] Create some [common snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_create-your-own-snippets)
+  - Start with below
+    ```javascript
+    // Snippet #1
+    <View style={ruffwind``}></View>
+    // Snippet #2
+    style={ruffwind``}
+    ```
+  - Note: This updated in `~/Library/Application Support/Code/User/snippets/typescriptreact.json`
+- [ ] Personal side quest: what happened with script generation of Week 43?
+  - [ ] Personal side quest: when should it generate?
+- [ ] Personal side quest: when should it generate
+- [ ] Personal side quest: fix tasks from duplicating
+- [ ] Personal side quest: fix typography
+
 ## Finish framing and styles on SearchFilters page
 
-- [ ] Put in mock time of day (either radio placeholder or input)
+- [x] Put in mock time of day (either radio placeholder or input)
+- [x] Radio group - handle flex direction
 - [ ] Add styles for search button and clear filters link
 - [ ] Test bottomsheet for date (create a simple button to open bottomsheet just ot make sure things are copasetic)
+- [ ] Test input opens keyboard on dashboard and filters page
 
 ## Setup on other computer
 
@@ -45,19 +64,19 @@
 
 - [ ] Test different maps
 - [ ] Build protoype with behaviors
-- [ ] Zoom in
-- [ ] See visible circle range
-- [ ] Handle grouping caretakers by section to protect privacy
-- [ ] What is the physical radius we need to adhere to?
-- [ ] Handle selecting a price on map, opens caretaker profile in modal
-- [ ] Modal can slide up for more infor
-- [ ] Modal is scrollable
-- [ ] Handle how multiple prices stacked in a map are still visible
-- [ ] How can we prevent them from fully stacking? Or... if we stack.. can we open some sort of secondary screen? Or if we stack and click on a stack - can all results in a stack appear in the results bottomsheet? (last option seems smallest level of lift and easiest accessibility)
-- [ ] Ideation:
-- [ ] if a stack has <= 3, display all three prices next to each other
-- [ ] if a stack has > 3, display "from $XX (3+)"
-- [ ] if they click on that, it opens all results in that stack in the results modal as list instead of a single profile with a header that lets you know your in the stack and can take you back to your previous view/search/etc
+  - [ ] Zoom in
+  - [ ] See visible circle range
+  - [ ] Handle grouping caretakers by section to protect privacy
+  - [ ] What is the physical radius we need to adhere to?
+  - [ ] Handle selecting a price on map, opens caretaker profile in modal
+  - [ ] Modal can slide up for more information
+  - [ ] Modal is scrollable
+  - [ ] Handle how multiple prices stacked in a map are still visible
+  - [ ] How can we prevent them from fully stacking? Or... if we stack.. can we open some sort of secondary screen? Or if we stack and click on a stack - can all results in a stack appear in the results bottomsheet? (last option seems smallest level of lift and easiest accessibility)
+  - [ ] Ideation:
+    - [ ] if a stack has <= 3, display all three prices next to each other
+    - [ ] if a stack has > 3, display "from $XX (3+)"
+    - [ ] if they click on that, it opens all results in that stack in the results modal as list instead of a single profile with a header that lets you know your in the stack and can take you back to your previous view/search/etc
 
 ## Form and API work
 
