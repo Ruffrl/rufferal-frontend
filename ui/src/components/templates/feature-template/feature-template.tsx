@@ -25,6 +25,7 @@ export const FeatureTemplate = ({
 
   return (
     <SafeAreaView style={ruffwind.style(`flex-1`, bgColor)}>
+      {/* <StatusBar backgroundColor={'#F6E8FF'} barStyle="light-content" /> */}
       <View style={ruffwind.style(`flex-1`, paddingX, paddingY)}>
         {backNavigation && (
           <FeatureNavigation
