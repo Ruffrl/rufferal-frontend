@@ -276,7 +276,7 @@ export const CatDetails = observer(({ navigation }: PageNavigationProps) => {
           <Button
             text="Cancel"
             type="transparent"
-            size="standard-short"
+            size="medium"
             onPress={() => {
               observablePetStore.setEditing({ id: undefined });
               navigation.navigate('Pets Dashboard');

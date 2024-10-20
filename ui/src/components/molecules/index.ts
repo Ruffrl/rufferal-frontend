@@ -11,6 +11,7 @@
  */
 
 export { CheckToggle } from './check-toggle/check-toggle';
+export { CheckboxCard } from './checkbox-card/checkbox-card';
 export { InputArea } from './input-area/input-area';
 export { InputPhoto } from './input-photo/input-photo';
 export { InputSlider } from './input-slider/input-slider';

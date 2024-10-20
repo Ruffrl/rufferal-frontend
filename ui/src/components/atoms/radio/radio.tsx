@@ -26,7 +26,8 @@ export const Radio = ({ item, onPress, selected = false }: RadioProps) => {
 
   return (
     <Pressable
-      style={ruffwind`flex-row flex-1 gap-1 items-center`}
+      // BLARG:TODO: investigate if safe to remove flex-1
+      style={ruffwind`flex-row gap-1 items-center`}
       onPress={() => onPress(item)}
       id={item.id}
     >

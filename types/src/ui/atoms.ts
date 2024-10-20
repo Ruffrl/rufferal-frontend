@@ -131,6 +131,7 @@ export interface FieldInputProps
 
 export interface LabelProps {
   text: string;
+  size?: Extract<FieldSize, 'default' | 'large' | 'xlarge' | '2xlarge'>;
   state?: FieldState;
 }
 
@@ -152,6 +153,16 @@ export interface HorizontalDividerProps {
 
 export interface ItemProps extends PressableProps {
   height?: string;
+}
+
+export interface LinkButtonProps extends PressableProps {
+  containerStyles?: string;
+  iconLeft?: React.JSX.Element;
+  iconRight?: React.JSX.Element;
+  state?: FieldState;
+  text?: string;
+  textStyles?: string;
+  underlineStyles?: string;
 }
 
 export interface ProgressBarProps {

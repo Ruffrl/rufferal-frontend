@@ -20,6 +20,7 @@ export const SearchDashboard = observer(
           Platform.OS === 'ios' && `pt-${moderateScaleTW(insets.top)}`
         )}
       >
+        {/* BLARG:TODO: update from tailwind config */}
         <StatusBar backgroundColor={'#F6E8FF'} barStyle="light-content" />
         {/* HEADER + FILTERS + ALL RESULTS */}
         <FlatList

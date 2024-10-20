@@ -28,7 +28,7 @@ export const FieldSelect = ({
   onChange,
   placeholder = 'Select...',
   searchField,
-  size = 'standard',
+  size = 'default',
   state = 'default',
   valueField,
   value,

@@ -3,8 +3,21 @@ import { LabelProps } from '@rufferal/types';
 import { capitalize } from '@rufferal/utils';
 import { Text } from 'react-native';
 
-export const FieldLabel = ({ text, state }: LabelProps) => {
+export const FieldLabel = ({ text, size = 'default', state }: LabelProps) => {
+  let textSize = 'text-b1';
   let textStyle = `text-balticSea-950`;
+
+  switch (size) {
+    case 'large':
+      textSize = `text-b2`;
+      break;
+    case 'xlarge':
+      textSize = `text-b3`;
+      break;
+    case '2xlarge':
+      textSize = `text-b4`;
+      break;
+  }
   switch (state) {
     case 'errored':
       textStyle = `text-red-600`;
@@ -15,7 +28,7 @@ export const FieldLabel = ({ text, state }: LabelProps) => {
   }
 
   return (
-    <Text style={ruffwind.style(`font-bodySemibold text-b1`, textStyle)}>
+    <Text style={ruffwind.style(`font-bodySemibold`, textSize, textStyle)}>
       {capitalize(text)}
     </Text>
   );

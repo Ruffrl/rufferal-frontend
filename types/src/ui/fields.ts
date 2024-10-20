@@ -1,4 +1,13 @@
-export type FieldSize = 'standard' | 'standard-short' | 'small' | 'small-short';
+export type FieldSize =
+  | 'xxsmall'
+  | 'xsmall'
+  | 'small'
+  | 'medium'
+  | 'default'
+  | 'large'
+  | 'xlarge'
+  | '2xlarge'
+  | '3xlarge';
 
 export type FieldState = 'default' | 'errored' | 'disabled';
 
