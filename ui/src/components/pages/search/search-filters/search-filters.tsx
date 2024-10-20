@@ -10,9 +10,32 @@ import { observer } from 'mobx-react-lite';
 import { Text, View } from 'react-native';
 
 import { useState } from 'react';
-import { FieldLabel } from '../../../atoms';
-import { CheckboxCard } from '../../../molecules';
+import { FieldInput, FieldLabel, Switch } from '../../../atoms';
+import { CheckboxCard, RadioGroup } from '../../../molecules';
 import { FeatureTemplate } from '../../../templates';
+
+const TIME_OF_DAY_OPTIONS: FieldOption[] = [
+  {
+    id: 'tod-morning',
+    label: 'Morning',
+    value: 'morning',
+  },
+  {
+    id: 'tod-midday',
+    label: 'Mid-day',
+    value: 'midday',
+  },
+  {
+    id: 'tod-afternoon',
+    label: 'Afternoon',
+    value: 'afternoon',
+  },
+  {
+    id: 'tod-evening',
+    label: 'Evening',
+    value: 'evening',
+  },
+];
 
 export const SearchFilters = observer(({ navigation }: PageNavigationProps) => {
   const [isDog, setIsDog] = useState(true);
@@ -227,12 +250,58 @@ export const SearchFilters = observer(({ navigation }: PageNavigationProps) => {
               {renderCareHelperText()}
             </CheckboxCard>
           </View>
-          <View style={ruffwind`gap-${moderateScaleTW(8)}`}>
+          <View style={ruffwind`gap-${moderateScaleTW(4)}`}>
             <FieldLabel size="large" text="Dates" />
-            
+            <FieldInput
+              onChange={() => console.log('BLARG add date')}
+              onSubmit={() => null}
+              value=""
+            />
+            <View
+              style={ruffwind`
+                flex-row
+                items-center
+                gap-${moderateScaleTW(4)}
+              `}
+            >
+              <Image
+                style={ruffwind.style(createImageSize(12))}
+                source={require('@rufferal/assets/src/icons/rotate.png')}
+              />
+              <Text
+                style={ruffwind`font-bodySemibold text-b1 text-saltBox-700`}
+              >
+                Recurring weekly
+              </Text>
+              <Switch
+                value={false}
+                onBlur={() => null}
+                onChange={() => console.log('BLARG add toggle handling')}
+                handleChange={() => console.log('BLARG add toggle handling')}
+              />
+            </View>
           </View>
-          <Text>Preferred time of day</Text>
-          <Text>Search in San Antonio</Text>
+          <View style={ruffwind``}>
+            <RadioGroup
+              containerDirection={`flex-row`}
+              data={TIME_OF_DAY_OPTIONS}
+              label="Preferred time of day"
+              labelSize="large"
+              onBlur={() => null}
+              onChange={() =>
+                console.log('BLARG add checkbox and time of day handling')
+              }
+              value={null}
+            />
+          </View>
+          <View style={ruffwind``}>
+            <FieldLabel size="large" text="Search in {location}" />
+            <FieldInput
+              onChange={() => console.log('BLARG add location search')}
+              onSubmit={() => null}
+              value=""
+            />
+          </View>
         </View>
         <View style={ruffwind``}>
           <Text>Clear all</Text>

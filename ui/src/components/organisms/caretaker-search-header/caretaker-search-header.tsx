@@ -36,7 +36,7 @@ export const CaretakerSearchHeader = ({ navigation }: PageNavigationProps) => (
             in{` `}
           </Text>
           <Text style={ruffwind`font-bodySemibold text-b2 text-balticSea-950`}>
-            San Antonio, TX
+            {'{'}location{'}'}
           </Text>
         </View>
         <View

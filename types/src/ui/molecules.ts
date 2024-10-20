@@ -2,6 +2,7 @@ import {
   FieldInputProps,
   FieldOption,
   FieldSelectProps,
+  FieldSize,
   SingleSliderProps,
   ToggleProps,
 } from '..';
@@ -76,10 +77,13 @@ export interface PhotoModalProps {
 }
 
 export interface RadioGroupProps {
+  containerDirection?: string;
+  containerGap?: string;
   data: FieldOption[];
   disabled?: boolean;
   errorMessage?: string;
   label?: string;
+  labelSize?: Extract<FieldSize, 'default' | 'large' | 'xlarge' | '2xlarge'>;
   onBlur?: () => void;
   onChange: (item: FieldOption) => void;
   value?: FieldOption | null;
