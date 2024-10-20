@@ -155,6 +155,16 @@ export interface ItemProps extends PressableProps {
   height?: string;
 }
 
+export interface LinkButtonProps extends PressableProps {
+  containerStyles?: string;
+  iconLeft?: React.JSX.Element;
+  iconRight?: React.JSX.Element;
+  state?: FieldState;
+  text?: string;
+  textStyles?: string;
+  underlineStyles?: string;
+}
+
 export interface ProgressBarProps {
   step: number;
   total: number;

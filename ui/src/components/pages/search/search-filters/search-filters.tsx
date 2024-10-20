@@ -10,7 +10,13 @@ import { observer } from 'mobx-react-lite';
 import { Text, View } from 'react-native';
 
 import { useState } from 'react';
-import { FieldInput, FieldLabel, Switch } from '../../../atoms';
+import {
+  Button,
+  FieldInput,
+  FieldLabel,
+  LinkButton,
+  Switch,
+} from '../../../atoms';
 import { CheckboxCard, RadioGroup } from '../../../molecules';
 import { FeatureTemplate } from '../../../templates';
 
@@ -40,12 +46,14 @@ const TIME_OF_DAY_OPTIONS: FieldOption[] = [
 export const SearchFilters = observer(({ navigation }: PageNavigationProps) => {
   const [isDog, setIsDog] = useState(true);
   const [isCat, setIsCat] = useState(false);
-  const [isDogWalking, setIsDogWalking] = useState(false);
+  const [isDogWalking, setIsDogWalking] = useState(true);
   const [isCatHarness, setIsCatHarness] = useState(false);
   const [isPlayDate, setIsPlayDate] = useState(false);
   const [isFeeding, setIsFeeding] = useState(false);
   const [isOvernight, setIsOvernight] = useState(false);
-  const [selectedCareOptions, setSelectedCareOptions] = useState<string[]>([]);
+  const [selectedCareOptions, setSelectedCareOptions] = useState<string[]>([
+    'isDogWalking',
+  ]);
 
   const handleDog = (option: FieldOption) => {
     setIsDog((prev) => !prev);
@@ -88,7 +96,7 @@ export const SearchFilters = observer(({ navigation }: PageNavigationProps) => {
   };
 
   const determineExerciseOption = () => {
-    if (isCat && isDog) {
+    if ((isCat && isDog) || (!isCat && !isDog)) {
       return undefined;
     } else if (isCat) {
       return (
@@ -121,8 +129,16 @@ export const SearchFilters = observer(({ navigation }: PageNavigationProps) => {
     }
   };
 
+  const renderHelperText = (text: string) => (
+    <View style={ruffwind`h-${moderateScaleTW(40)} justify-center w-full`}>
+      <Text style={ruffwind`font-body text-b2 text-balticSea-950`}>{text}</Text>
+    </View>
+  );
+
   const renderCareHelperText = () => {
     const helperTexts: Record<string, string> = {
+      noSelection:
+        'To generate better search results, please select at least one care type',
       isDogWalking: 'A 30- or 60-minute walk in your neighborhood.',
       isCatHarness:
         'A 30-minute harness walk in your home, backyard or neighborhood.',
@@ -134,24 +150,12 @@ export const SearchFilters = observer(({ navigation }: PageNavigationProps) => {
         'Overnight pet sitting, including feeding and play time. Walking must be scheduled separately.',
     };
 
-    // Show helper text for the most recent option in the selectedCareOptions array
-    if (selectedCareOptions.length > 0) {
-      const lastSelectedOption =
-        selectedCareOptions[selectedCareOptions.length - 1];
-      return (
-        <View style={ruffwind`h-${moderateScaleTW(40)} justify-center w-full`}>
-          <Text style={ruffwind`font-body text-b2 text-balticSea-950`}>
-            {helperTexts[lastSelectedOption]}
-          </Text>
-        </View>
-      );
-    }
+    const displayText =
+      selectedCareOptions.length > 0
+        ? helperTexts[selectedCareOptions[selectedCareOptions.length - 1]]
+        : helperTexts.noSelection;
 
-    return (
-      <View
-        style={ruffwind`h-${moderateScaleTW(40)} items-center w-full`}
-      ></View>
-    ); // If no option is selected, return null (no helper text)
+    return renderHelperText(displayText);
   };
 
   return (
@@ -283,7 +287,7 @@ export const SearchFilters = observer(({ navigation }: PageNavigationProps) => {
           </View>
           <View style={ruffwind``}>
             <RadioGroup
-              containerDirection={`flex-row`}
+              containerGap={`gap-${moderateScaleTW(4)}`}
               data={TIME_OF_DAY_OPTIONS}
               label="Preferred time of day"
               labelSize="large"
@@ -291,6 +295,8 @@ export const SearchFilters = observer(({ navigation }: PageNavigationProps) => {
               onChange={() =>
                 console.log('BLARG add checkbox and time of day handling')
               }
+              optionsDirection={`flex-row`}
+              optionsYPadding={`py-${moderateScaleTW(7)}`}
               value={null}
             />
           </View>
@@ -303,9 +309,16 @@ export const SearchFilters = observer(({ navigation }: PageNavigationProps) => {
             />
           </View>
         </View>
-        <View style={ruffwind``}>
-          <Text>Clear all</Text>
-          <Text>Search</Text>
+        <View style={ruffwind`flex-row justify-between items-center`}>
+          <LinkButton
+            text="Clear all"
+            onPress={() => console.log('BLARG add clear all behavior')}
+          />
+          <Button
+            text="Search"
+            size="xsmall"
+            onPress={() => console.log('BLARG add submit behavior')}
+          />
         </View>
       </View>
     </FeatureTemplate>

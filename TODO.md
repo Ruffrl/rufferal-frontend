@@ -21,7 +21,7 @@
 
 - [x] Put in mock time of day (either radio placeholder or input)
 - [x] Radio group - handle flex direction
-- [ ] Add styles for search button and clear filters link
+- [x] Add styles for search button and clear filters link
 - [ ] Test bottomsheet for date (create a simple button to open bottomsheet just ot make sure things are copasetic)
 - [ ] Test input opens keyboard on dashboard and filters page
 

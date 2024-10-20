@@ -13,7 +13,7 @@ export const FeatureTemplate = ({
   paddingX = `px-${horizontalScaleTW(20)}`,
   forwardNavigation,
 }: PropsWithChildren<FeatureTemplateProps>) => {
-  let paddingY = `pt-${verticalScaleTW(32)}`;
+  let paddingY = `pt-${verticalScaleTW(32)} pb-${verticalScaleTW(16)}`;
   switch (Platform.OS) {
     case 'android':
       paddingY = `pt-${verticalScaleTW(48)}`;

@@ -77,7 +77,6 @@ export interface PhotoModalProps {
 }
 
 export interface RadioGroupProps {
-  containerDirection?: string;
   containerGap?: string;
   data: FieldOption[];
   disabled?: boolean;
@@ -86,6 +85,9 @@ export interface RadioGroupProps {
   labelSize?: Extract<FieldSize, 'default' | 'large' | 'xlarge' | '2xlarge'>;
   onBlur?: () => void;
   onChange: (item: FieldOption) => void;
+  optionsDirection?: string;
+  optionsGap?: string;
+  optionsYPadding?: string;
   value?: FieldOption | null;
 }
 

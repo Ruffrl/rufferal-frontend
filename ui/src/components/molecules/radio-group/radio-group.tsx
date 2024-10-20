@@ -5,7 +5,6 @@ import { View } from 'react-native';
 import { FieldHelper, FieldLabel, Radio } from '../../atoms';
 
 export const RadioGroup = ({
-  containerDirection = `flex-column`,
   containerGap = `gap-${moderateScaleTW(8)}`,
   data,
   disabled,
@@ -13,6 +12,9 @@ export const RadioGroup = ({
   label,
   labelSize,
   onChange,
+  optionsDirection = `flex-column`,
+  optionsGap = `gap-${moderateScaleTW(8)}`,
+  optionsYPadding,
   value,
 }: RadioGroupProps) => {
   let state: FieldState = 'default';
@@ -30,9 +32,9 @@ export const RadioGroup = ({
   };
 
   return (
-    <View style={ruffwind`gap-${moderateScaleTW(8)}`}>
+    <View style={ruffwind.style(containerGap)}>
       {label && <FieldLabel text={label} state={state} size={labelSize} />}
-      <View style={ruffwind.style(containerDirection, containerGap)}>
+      <View style={ruffwind.style(optionsDirection, optionsGap, optionsYPadding)}>
         {data.map((item) => {
           return (
             <Radio

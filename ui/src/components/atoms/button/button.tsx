@@ -9,7 +9,6 @@ import {
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 
 const BUTTON_STYLES = ruffwind`
-  w-full
   justify-center 
   items-center 
 `;

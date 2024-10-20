@@ -27,6 +27,7 @@ export { H2 } from './h2/h2';
 export { H3 } from './h3/h3';
 export { HorizontalDivider } from './horizontal-divider/horizontal-divider';
 export { Item } from './item/item';
+export { LinkButton } from './link-button/link-button';
 export { ProgressBar } from './progress-bar/progress-bar';
 export { Radio } from './radio/radio';
 export { RangeSlider } from './range-slider/range-slider';
